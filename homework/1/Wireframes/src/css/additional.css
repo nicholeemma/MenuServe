@@ -1,4 +1,6 @@
-
+/*Reference: 
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_fade
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2*/
 .general-container{
     margin: 0 auto;
     
@@ -7,33 +9,27 @@
 .container-pic{
     overflow-y: scroll;
     height: 80%;
-    scrollbar-face-color: #889B9F !important;
-scrollbar-shadow-color: rgb(25, 181, 212) !important;
-scrollbar-highlight-color: #C3D6DA !important;
-scrollbar-3dlight-color: #3D5054 !important;
-scrollbar-darkshadow-color: rgb(11, 22, 24) !important;
-scrollbar-track-color: rgb(23, 181, 216)!important;
-scrollbar-arrow-color: rgb(238, 21, 43)!important;
+    
 }
 .single-container-pic{
-    padding: 5px 10px 5px 0px;
-    width: 32%;
-    height: 25%;
+    
+    width: 100%;
+    height: 100%;
     
 }
 .display-pic{
     
     width: 100%;
     height: 100%;
-    
-    display: block;
+    z-index: 0;
+    display: auto;
 }
 .overlay {
     width: 100%;
     height: 100%;
-    position:relative;
-    display: block;
-    
+    z-index: 1;
+    display: inline-block;
+    position: relative;
     top: 0;
     bottom: 0;
     left: 0;
@@ -46,6 +42,8 @@ scrollbar-arrow-color: rgb(238, 21, 43)!important;
   .single-container-pic:hover .overlay{
     opacity: 0.6
 }
+
+
 
 .show-price{
   color: white;
@@ -62,7 +60,7 @@ input[type=text] {
     
     color: grey  !important;
   }
-  .menu-page-header{
+.menu-page-header{
     
     color: white;
     font-size: 30px;
@@ -71,3 +69,29 @@ input[type=text] {
   a:hover {
     text-shadow: 0.6px 0.6px 1.5px #bdbdbd;
   }
+
+  /* width */
+::-webkit-scrollbar {
+    width: 20px;
+    
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #4db6ac; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #4db6ac;
+    opacity: 0.6; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4db6ac; 
+  }
+
+ 
