@@ -1,0 +1,73 @@
+
+.general-container{
+    margin: 0 auto;
+    
+    width: 90%;
+}
+.container-pic{
+    overflow-y: scroll;
+    height: 80%;
+    scrollbar-face-color: #889B9F !important;
+scrollbar-shadow-color: rgb(25, 181, 212) !important;
+scrollbar-highlight-color: #C3D6DA !important;
+scrollbar-3dlight-color: #3D5054 !important;
+scrollbar-darkshadow-color: rgb(11, 22, 24) !important;
+scrollbar-track-color: rgb(23, 181, 216)!important;
+scrollbar-arrow-color: rgb(238, 21, 43)!important;
+}
+.single-container-pic{
+    padding: 5px 10px 5px 0px;
+    width: 32%;
+    height: 25%;
+    
+}
+.display-pic{
+    
+    width: 100%;
+    height: 100%;
+    
+    display: block;
+}
+.overlay {
+    width: 100%;
+    height: 100%;
+    position:relative;
+    display: block;
+    
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    opacity: 0;
+    transition: .5s ease;
+    background-color: rgb(161, 173, 177);
+  }
+  .single-container-pic:hover .overlay{
+    opacity: 0.6
+}
+
+.show-price{
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+input[type=text] {
+    
+    color: grey  !important;
+  }
+  .menu-page-header{
+    
+    color: white;
+    font-size: 30px;
+    text-align: center;
+  }
+  a:hover {
+    text-shadow: 0.6px 0.6px 1.5px #bdbdbd;
+  }
