@@ -18,6 +18,14 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2*
     height: 100%;
     
 }
+.single-container-pic-order{
+    
+    width: 20%;
+    height: 30%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    
+}
 .display-pic{
     
     width: 100%;
@@ -36,7 +44,7 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2*
     left: 0;
     right: 0;
     
-    opacity: 0;
+    opacity: 100%;
     transition: .5s ease;
     background-color: rgb(161, 173, 177);
   }
