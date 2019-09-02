@@ -1,0 +1,5 @@
+name of cuisine
+registration/login
+order- status ???? default ordered  ??/customer pending / completed
+manager-menu classification
+external file
