@@ -10,7 +10,7 @@ I will just show the function in the static HTML page.)
 - **Feedback-Student**: Feedback from a classmate, Yue Yin. Suggestions are based on the first version of web pages
  - **Feedback-TA**: Feedback from TA Steven. Suggestions are based on wireframe diagrams.
 
-## Desciptions of web pages:
+## Descriptions of web pages:
 - **General page**: for generalizing other related websites, can be a template for this web application
 - **Menu**: This is the page which customers first come across. Ideally, customers can search the name of cuisine in the search bar, select needed classification of cuisine in the middle. If the customer clicks the "frequently ordered", the below section will present the cuisine of frequenly ordered pictures.(Have not realized yet) When the customer's mouse moves over the picture of cuisine, it will show its price and name. At the right side, customers can click button to register or log in. We also get a card to show the news. Customer can click to play the audio, enjoy the background music when browsering the menu.
 - **Order**: This is the page when the customer has logged in. Ideally, the presentation section can be ordered by price, popularity and rank. If the customer clicks the picture, the right side will show the name of that cuisine, customer can click to increase or decrease the number of cuisine. Click "order" or "save" to proceed orders.
