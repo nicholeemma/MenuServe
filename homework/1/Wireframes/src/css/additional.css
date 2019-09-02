@@ -1,6 +1,71 @@
 /*Reference: 
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_fade
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2*/
+#frequentlyordered{
+  color: #4db6ac; font-size: 18px;
+}
+#welcomeheadline{
+  background-color:#ee6e73;padding-bottom: 10px; padding-top: 10px;
+}
+.classification_menu
+{
+  padding-left: 10px;
+}
+#menu_right_col{
+  padding-top: 1.8%;
+}
+#whatordered{
+  color: #4db6ac; font-size: 18px;
+}
+#orderedby{
+  color: #4db6ac; font-size: 18px; 
+}
+#orderedform{
+  color: grey;margin-right: 3%;
+}
+.search-bar-management{
+  width: 90%;
+}
+.audio{width: 100%;}
+#orderedcuisine{
+  overflow-y: scroll;
+  height: 45%; margin-bottom: 5%; margin-top:5%;
+}
+.record-table{
+  overflow-y: scroll; margin-bottom: 5%;
+}
+#table-margin-top{
+  margin-top:3%;
+}
+
+.select-drop-down-box{
+  display:table; width: 30%; float:right; height: 5%;
+  color: gray; margin-left: 2%;
+}
+.select-management{
+  display:table;  height: 5%; margin-top: 5%;color: grey;
+}
+#headlineofmanagement{
+  color: #4db6ac; font-size: 24px;text-align: center;
+}
+#logout{
+  float: right; margin-right: 5%;margin-top: 0.5%;
+}
+#loginfo{
+  color: #4db6ac; font-size: 18px; 
+}
+#management-main-btn{
+  width:70%; margin-bottom: 5%;
+}
+#registrationbtn{
+  width: 100%;
+}
+#card_news{
+  margin-left: 4%; margin-top:10%; opacity:0.75;
+}
+#card_p_style{
+  color: #fff; font-style: italic
+}
 .general-container{
     margin: 0 auto;
     

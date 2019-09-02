@@ -10,31 +10,31 @@
     <body>
         <header class="menu-page-header">
         
-                <div class="grid-example col s12" style="background-color:#ee6e73;padding-bottom: 10px; padding-top: 10px">
+                <div class="grid-example col s12" id="welcomeheadline">
                     Welcome to the Moonlight Restaurant
-                    <a class="waves-effect waves-light btn" style="float: right; margin-right: 5%;margin-top: 0.5%">Log Out</a>
+                    <a class="waves-effect waves-light btn" id="logout">Log Out</a>
                 </div>
         
         </header>
         
     
         <div class="general-container">
-            <p style="color: #4db6ac; font-size: 24px;text-align: center">
+            <p id="headlineofmanagement">
                 <b>
                 Records of Menu
               </b>
               </p>
 
-          <div class="row" style="margin-top:3%">
+          <div class="row" id="table-margin-top">
             <div class="col s4">
-                <form style="width: 90%">
+                <form class="search-bar-management">
                     <input type="text" name="search" value="Search cuisine here" >
         
                 </form>
             </div>
             <div class="col s2">
             <form>
-                <select style="display:table;  height: 5%; margin-top: 5%;color: grey">
+                <select class="select-management">
                       <option >Burger</option>
                       <option >Salad</option>
                       <option >Slide</option>
@@ -45,7 +45,7 @@
             </div>
             <div class="col s2">
             <form>
-                <select style="display:table;  height: 5%;margin-top: 5%;color: grey">
+                <select class="select-management">
                      <option >Store-A</option>
                      <option >Store-B</option>
                      <option >Store-C</option>
@@ -54,12 +54,12 @@
             </form>
             </div>
             <div class="col s4">
-                <p name="loginfo" style="color: #4db6ac; font-size: 18px; ">
+                <p id="loginfo">
                     Hi, Nichole. Start to edit menu now.
                    </p>
             </div>
         </div>
-            <div style="overflow-y: scroll; margin-bottom: 5%">
+            <div class="record-table">
         <table class="striped" >
             <thead>
               <tr>
@@ -131,7 +131,7 @@
                   </tr>
             </tbody>
           </table>
-          <div align="center" style="margin-top:3%">
+          <div align="center" id="table-margin-top">
           <a class="waves-effect waves-light btn" style="margin-right: 5%" >Save</a>
           <a class="waves-effect waves-light btn" >Add</a>
           </div>
@@ -151,7 +151,7 @@
                 <div class="footer-copyright">
                   
                   <div class="general-container">
-                  <a class="grey-text text-lighten-4" style="text-align:center" href="#!">© 2019 Jiayue Yang Copyright </a>
+                  <a class="grey-text text-lighten-4"  href="#!">© 2019 Jiayue Yang Copyright </a>
                   </div>
                 </div>
               </footer>

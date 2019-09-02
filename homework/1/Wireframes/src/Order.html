@@ -10,9 +10,9 @@
     <body>
         <header class="menu-page-header">
         
-                <div class="grid-example col s12" style="background-color:#ee6e73;padding-bottom: 10px; padding-top: 10px">
+                <div class="grid-example col s12" id="welcomeheadline">
                     Welcome to the Moonlight Restaurant
-                    <a class="waves-effect waves-light btn" style="float: right; margin-right: 5%;margin-top: 0.5%">Log Out</a>
+                    <a class="waves-effect waves-light btn" id="logout">Log Out</a>
                 </div>
         
         </header>
@@ -26,7 +26,7 @@
             <br>
             <div class="row">
                     <div class="col s7">
-                            <a href="" style="color: #4db6ac; font-size: 18px;float: right; margin-top: 2%">
+                            <a href="" id="frequentlyordered">
                                     <b>Frequently Ordered</b>
                                 </a>
                             
@@ -35,23 +35,23 @@
                             <input type="text" name="search" value="Search cuisine here" >
                             
                         </form>
-                        <form style="float:right; width: 30%; margin-left: 3%">
-                                <select style="display:table;  height: 5%;">
+                        <form   >
+                                <select  class="select-drop-down-box">
                                         <option >Price</option>
                                         <option >Popular</option>
                                         <option >Rank</option>
                                         
                                 </select>
                         </form>
-                        <form>
-                                <select style="display:table; width: 30%; float:right; height: 5%;">
+                        <form  >
+                                <select class="select-drop-down-box">
                                         <option >Increase</option>
                                         <option >Decrease</option>
                                         
                                         
                                 </select>
                         </form>
-                        <a href="" style="color: #4db6ac; font-size: 18px; ">
+                        <a href="" id="orderedby">
                                 <b>Ordered by</b>
                         </a>
                         <br>
@@ -157,7 +157,7 @@
         
             </div>
                     <div class="col s2" >
-                            <form action="#" style="padding-left: 10px">
+                            <form action="#" class="classification_menu">
                                 <p>
                                 <label>
                                     
@@ -204,18 +204,17 @@
                             
                        
                     </div>
-                    <div class="col s3" style="padding-top: 1.8%">
+                    <div class="col s3" id="menu_right_col">
                         <P >
-                            <a style="color: #4db6ac; font-size: 18px;">
+                            <a id="whatordered">
                         <b>
                             What I have ordered
                         </b>
                             </a>
                         </P>
                            
-                            <div name="orderedcuisine" style="overflow-y: scroll;
-                            height: 45%; margin-bottom: 5%; margin-top:5%">
-                                <form action="" method="" style="color: grey;margin-right: 3%">
+                            <div id="orderedcuisine">
+                                <form action="" method="" id="orderedform">
                                     Burger <input type="number" name="points" min="1" max="10" />
                             
                                     Salad <input type="number" name="points" min="1" max="10" />
@@ -232,7 +231,7 @@
                             <br>
                             <br>
                             
-                            <audio controls autoplay muted loop style="width: 100%">
+                            <audio controls autoplay muted loop class="audio">
                                     <!--Music source: https://www.fesliyanstudios.com/royalty-free-music/downloads-c/peaceful-and-relaxing-music/22-->
                                         <source src="Music/background_music1.mp3" type="audio/mpeg">
                                         <source src="Music/background_music2.mp3" type="audio/mpeg">
@@ -272,7 +271,7 @@
                 <div class="footer-copyright">
                   
                   <div class="general-container">
-                  <a class="grey-text text-lighten-4" style="text-align:center" href="#!">© 2019 Jiayue Yang Copyright </a>
+                  <a class="grey-text text-lighten-4"  href="#!">© 2019 Jiayue Yang Copyright </a>
                   </div>
                 </div>
               </footer>
