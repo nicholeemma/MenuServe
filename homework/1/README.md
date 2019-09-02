@@ -1,4 +1,4 @@
-### Name: Jiayue Yang Course:17637 Web Application
+### Name: Jiayue Yang   Course: 17637 Web Application
 ## Description of files:
 - **Wireframe_Diagram_1Ed**: Pictures of wireframe diagrams
 - **Wireframe_Diagram_Revised**: Pictures of wireframe diagrams revised based on the feedback from TA Steven
