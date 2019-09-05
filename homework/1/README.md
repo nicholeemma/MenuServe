@@ -22,6 +22,7 @@ I will just show the function in the static HTML page.)
 ## References for this Assignment:
 For most external CSS styles: 
 https://materializecss.com
+
 For implementing how to show price when mouse over the picture:
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_fade
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2
