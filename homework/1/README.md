@@ -19,5 +19,13 @@ I will just show the function in the static HTML page.)
 - **Manager-Menu**: Manager can edit menu here. Ideally, each "update" will present a new window to further edit or delete.
 - **Manager-Employee**: Manager can edit information of employees here. Ideally, each "update" will present a new window to further edit or delete. 
 
+## References for this Assignment:
+For most external CSS styles: 
+https://materializecss.com
+For implementing how to show price when mouse over the picture:
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_fade
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2
+http://www.divcss5.com/shili/s587.shtml
+
 
 
