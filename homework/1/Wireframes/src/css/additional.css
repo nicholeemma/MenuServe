@@ -191,7 +191,7 @@ input[type=text] {
   a:hover {
     text-shadow: 0.6px 0.6px 1.5px #bdbdbd;
   }
-
+/* For scroll bar style*/
   /* width */
 ::-webkit-scrollbar {
     width: 20px;
