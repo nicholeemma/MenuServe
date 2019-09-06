@@ -1,69 +1,115 @@
 <html>
     <head>
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        
         <link type="text/css" rel="stylesheet" href="css/style.css"  />
+        <script type="text/javascript" src="functions.js"></script>
     </head>
     <header class="head-caculator">
-        Caculator
+        HW2
     </header>
 
-    <div class="row">
-        <div class="col s8">
-            <textarea class="show">test</textarea>
-            <br>
-            <div class="col s2">
-                <button class="button-num"> 
+    <table>
+            <tr> 
+                    <td colspan="4" id="headOfCal">
+                       <p> Caculator</p>
+                </td> 
+            </tr>
+        <tr> 
+            <td colspan="4">
+                <textarea class="show" id="show_result">
+            </textarea>
+        </td> 
+    </tr>
+        
+            
+            
+           <tr>
+               <td>
+                <button class="button-num" onclick="click_7()"> 
                     7
                 </button>
-                <button class="button-num"> 
-                    4
+            </td>
+            <td>
+                <button class="button-num" onclick="click_7()"> 
+                    8
                 </button>
-                <button class="button-num"> 
-                    1
+            </td>
+            <td>
+                <button class="button-num" onclick="click_7()"> 
+                    9
                 </button>
-            </div>
-            <div class="col s2">
-                    <button class="button-num"> 
-                        8
+            </td>
+            <td>
+                    <button class="button-ch" onclick="click_7()"> 
+                        +
                     </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button-num"> 
+                        4
+                    </button>
+                </td>
+                <td>
                     <button class="button-num"> 
                         5
                     </button>
-                    <button class="button-num"> 
-                        2
-                    </button>
-                    <button class="button-num"> 
-                        0
-                    </button>
-            </div>
-            <div class="col s2">
-                    <button class="button-num"> 
-                        9
-                    </button>
+                </td>
+                <td>
                     <button class="button-num"> 
                         6
                     </button>
-                    <button class="button-num"> 
-                        3
-                    </button>
-                    <button class="button-ch"> 
-                        =
-                    </button>
-            </div>
-            <div class="col s2">
-                    <button class="button-ch"> 
-                        +
-                    </button>
+                </td>
+                <td>
                     <button class="button-ch"> 
                         -
                     </button>
-                    <button class="button-ch"> 
-                        *
+                </td>
+                </tr>
+            <tr>
+                <td>
+                    <button class="button-num"> 
+                        1
                     </button>
-                    <button class="button-ch"> 
-                        /
+                </td>
+                <td>
+                    <button class="button-num"> 
+                        2
                     </button>
-            </div>
+                </td>
+                <td>
+                    <button class="button-num"> 
+                        3
+                    </button>
+                </td>
+                <td>
+                    <button class="button-ch"> 
+                        ×
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    
+                </td>
+                <td>
+                    <button class="button-num"> 
+                        0
+                    </button>
+                </td>
+                <td>
+                    <button class="button-ch"> 
+                        =
+                    </button>
+                </td>
+                <td>
+                    <button class="button-ch"> 
+                        ➗
+                    </button>
+                </td>
+            </tr>
+        </table>
         </div>
     </div>
 
