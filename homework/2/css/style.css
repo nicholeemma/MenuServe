@@ -2,10 +2,37 @@
 {
 
 }
-.button-num
-{
+.show{
+    width:500px;
+    height: 100px;
+    border-radius: 25px;
+    background-color: blanchedalmond;
+    color: black;
+    font-size: 50px;
+    margin-bottom: 10%;
+    margin-left: 5%;
 
 }
+.button-num
+{
+width: 100px;
+height: 100px;
+color: black;
+background-color: bisque;
+margin-bottom: 10%;
+border-radius: 25px;
+
+}
+.button-num:hover{
+    background-color:plum;
+}
 .button-ch{
-    
+    width: 100px;
+    height: 100px;
+    color: black;
+    margin-bottom: 10%;
+    border-radius: 25px;
+}
+.button-ch:hover{
+    background-color: aquamarine;
 }
