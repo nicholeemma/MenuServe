@@ -4,3 +4,7 @@ and push your commit to your bare repository on GitHub.
 
 Add any general notes or instructions for the TAs to this README file.
 The TAs will read this file before evaluating your work.
+
+##Choose GET method
+According to the simple function of calculation for this webpage, nothing sensitive, I choose to use GET method. It is less secure than POST. But GET can be cached, which is a good feature for calculation.
+Reference: https://www.diffen.com/difference/GET-vs-POST-HTTP-Requests

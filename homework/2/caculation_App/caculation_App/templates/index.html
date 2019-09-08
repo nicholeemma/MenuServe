@@ -1,14 +1,14 @@
 {% block content %}
 <html>
     <head>
+            {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"  />
         
-        <link type="text/css" rel="stylesheet" href="css/style.css"  />
-        <script type="text/javascript" src="functions.js"></script>
     </head>
     <header class="head-caculator">
         HW2
     </header>
-<form method="POST" action=".">{% csrf_token %}
+<form method="POST" action="/">{% csrf_token %}
     <table>
             <tr> 
                     <td colspan="4" id="headOfCal">
@@ -17,8 +17,8 @@
             </tr>
         <tr> 
             <td colspan="4">
-                <textarea class="show" id="show_result" >
-            </textarea>
+                    <input type="text" name="textbox" class="show" value="{{show}}" readonly>
+                
         </td> 
     </tr>
         
@@ -26,66 +26,66 @@
             
            <tr>
                <td>
-                <button class="button-num" onclick="click_7()"> 
+                <button class="button-num" name="button7"> 
                     7
                 </button>
             </td>
             <td>
-                <button class="button-num" onclick="click_7()"> 
+                <button class="button-num" name="button8"> 
                     8
                 </button>
             </td>
             <td>
-                <button class="button-num" onclick="click_7()"> 
+                <button class="button-num" name="button9"> 
                     9
                 </button>
             </td>
             <td>
-                    <button class="button-ch" onclick="click_7()"> 
+                    <button class="button-ch" name="buttonplus"> 
                         +
                     </button>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <button class="button-num"> 
+                    <button class="button-num" name="button4"> 
                         4
                     </button>
                 </td>
                 <td>
-                    <button class="button-num"> 
+                    <button class="button-num" name="button5"> 
                         5
                     </button>
                 </td>
                 <td>
-                    <button class="button-num"> 
+                    <button class="button-num" name="button6"> 
                         6
                     </button>
                 </td>
                 <td>
-                    <button class="button-ch"> 
+                    <button class="button-ch" name="buttonminus"> 
                         -
                     </button>
                 </td>
                 </tr>
             <tr>
                 <td>
-                    <button class="button-num"> 
+                    <button class="button-num" name="button1"> 
                         1
                     </button>
                 </td>
                 <td>
-                    <button class="button-num"> 
+                    <button class="button-num" name="button2"> 
                         2
                     </button>
                 </td>
                 <td>
-                    <button class="button-num"> 
+                    <button class="button-num" name="button3"> 
                         3
                     </button>
                 </td>
                 <td>
-                    <button class="button-ch"> 
+                    <button class="button-ch" name="buttonmultiply"> 
                         ×
                     </button>
                 </td>
@@ -95,17 +95,17 @@
                     
                 </td>
                 <td>
-                    <button class="button-num"> 
+                    <button class="button-num" name="button0">  
                         0
                     </button>
                 </td>
                 <td>
-                    <button class="button-ch"> 
+                    <button class="button-ch" name="buttonequal"> 
                         =
                     </button>
                 </td>
                 <td>
-                    <button class="button-ch"> 
+                    <button class="button-ch" name="buttondivide"> 
                         ➗
                     </button>
                 </td>
