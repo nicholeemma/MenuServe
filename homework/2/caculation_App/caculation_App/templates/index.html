@@ -1,3 +1,4 @@
+{% block content %}
 <html>
     <head>
         
@@ -7,7 +8,7 @@
     <header class="head-caculator">
         HW2
     </header>
-
+<form method="POST" action=".">{% csrf_token %}
     <table>
             <tr> 
                     <td colspan="4" id="headOfCal">
@@ -16,7 +17,7 @@
             </tr>
         <tr> 
             <td colspan="4">
-                <textarea class="show" id="show_result">
+                <textarea class="show" id="show_result" >
             </textarea>
         </td> 
     </tr>
@@ -110,7 +111,9 @@
                 </td>
             </tr>
         </table>
+    </form>
         </div>
     </div>
 
 </html>
+{% endblock %}
