@@ -1,6 +1,11 @@
 {% block content %}
+<!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <title>
+            Calculator
+        </title>
             {% load static %}
         <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"  />
         
@@ -8,84 +13,85 @@
     <header class="head-caculator">
         HW2
     </header>
-<form method="POST" action="/">{% csrf_token %}
+    <body>
+<form method="get" action="/">{% csrf_token %}
     <table>
             <tr> 
                     <td colspan="4" id="headOfCal">
                        <p> Caculator</p>
-                </td> 
+                    </td> 
             </tr>
         <tr> 
             <td colspan="4">
                     <input type="text" name="textbox" class="show" value="{{show}}" readonly>
                 
-        </td> 
-    </tr>
+            </td> 
+        </tr>
         
             
             
            <tr>
                <td>
-                <button class="button-num" name="button7"> 
+                <button class="button-num" name="number" value="7"> 
                     7
                 </button>
             </td>
             <td>
-                <button class="button-num" name="button8"> 
+                <button class="button-num" name="number" value="8"> 
                     8
                 </button>
             </td>
             <td>
-                <button class="button-num" name="button9"> 
+                <button class="button-num" name="number" value="9"> 
                     9
                 </button>
             </td>
             <td>
-                    <button class="button-ch" name="buttonplus"> 
+                    <button class="button-ch" name="operator" value="&plus;"> 
                         +
                     </button>
-                </td>
+            </td>
             </tr>
             <tr>
                 <td>
-                    <button class="button-num" name="button4"> 
+                    <button class="button-num" name="number" value="4"> 
                         4
                     </button>
                 </td>
                 <td>
-                    <button class="button-num" name="button5"> 
+                    <button class="button-num" name="number" value="5"> 
                         5
                     </button>
                 </td>
                 <td>
-                    <button class="button-num" name="button6"> 
+                    <button class="button-num" name="number" value="6"> 
                         6
                     </button>
                 </td>
                 <td>
-                    <button class="button-ch" name="buttonminus"> 
+                    <button class="button-ch" name="operator" value="​&minus;"> 
                         -
                     </button>
                 </td>
                 </tr>
             <tr>
                 <td>
-                    <button class="button-num" name="button1"> 
+                    <button class="button-num" name="number" value="1"> 
                         1
                     </button>
                 </td>
                 <td>
-                    <button class="button-num" name="button2"> 
+                    <button class="button-num" name="number" value="2"> 
                         2
                     </button>
                 </td>
                 <td>
-                    <button class="button-num" name="button3"> 
+                    <button class="button-num" name="number" value="3"> 
                         3
                     </button>
                 </td>
                 <td>
-                    <button class="button-ch" name="buttonmultiply"> 
+                    <button class="button-ch" name="operator" value="​&times;"> 
                         ×
                     </button>
                 </td>
@@ -95,25 +101,24 @@
                     
                 </td>
                 <td>
-                    <button class="button-num" name="button0">  
+                    <button class="button-num" name="number" value="0">  
                         0
                     </button>
                 </td>
                 <td>
-                    <button class="button-ch" name="buttonequal"> 
+                    <button class="button-ch" name="operator" value="​&equals;"> 
                         =
                     </button>
                 </td>
                 <td>
-                    <button class="button-ch" name="buttondivide"> 
+                    <button class="button-ch" name="operator" value="&divide;"> 
                         ➗
                     </button>
                 </td>
             </tr>
         </table>
     </form>
-        </div>
-    </div>
+</body>
+     
 
 </html>
-{% endblock %}
