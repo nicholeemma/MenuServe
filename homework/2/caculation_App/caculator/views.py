@@ -53,30 +53,39 @@ def caculate(request):
             elif request.POST.get('first_number')!='0' and request.POST.get('second_number') =='' and request.POST.get('first_operator') == '' and request.POST.get('second_operator') == '':
             
                 content['first_operator'] = request.POST.get('operator')
+                content['first_number'] = request.POST.get('first_number')
                 content['show']=request.POST.get('first_number')
             elif request.POST.get('first_number')!='0' and request.POST.get('second_number') =='' and request.POST.get('first_operator') != '' and request.POST.get('second_operator') == '':
             
                 content['first_operator'] = request.POST.get('operator')
+                content['first_number'] = request.POST.get('first_number')
                 content['show']=request.POST.get('first_number')
             elif request.POST.get('first_number')!='0' and request.POST.get('second_number') !='' and request.POST.get('first_operator') != '' and request.POST.get('second_operator') == '':
-            
+                content['first_operator'] = request.POST.get('first_operator')
+                content['first_number'] = request.POST.get('first_number')
                 content['second_operator'] = request.POST.get('operator')
-                if request.POST.get('first_operator')!='=':
+                if request.POST.get('operator')!='=':
                     if request.POST.get('first_operator').strip('\u200b') =='+': 
-                        content['show']=request.POST.get('first_number')+request.POST.get('second_operator')
+                        content['show']=str(request.POST.get('first_number')+request.POST.get('second_operator'))
                         content['first_number']=request.POST.get('first_number')+request.POST.get('second_operator')
+                        content['first_operator'] = request.POST.get('operator')
+                        content['second_operator'] = ''
+                        content['second_number'] = ''
                     elif request.POST.get('first_operator').strip('\u200b') =='-':
-                        content['show']=request.POST.get('first_number')-request.POST.get('second_operator')
+                        content['show']=str(request.POST.get('first_number')-request.POST.get('second_operator'))
                         content['first_number']=request.POST.get('first_number')-request.POST.get('second_operator')
-                        
+                        content['second_operator'] = ''
+                        content['second_number'] = ''
                     elif request.POST.get('first_operator').strip('\u200b') =='*':
-                        content['show']=request.POST.get('first_number')*request.POST.get('second_operator')
+                        content['show']=str(request.POST.get('first_number')*request.POST.get('second_operator'))
                         content['first_number']=request.POST.get('first_number')*request.POST.get('second_operator')
-                        
+                        content['second_operator'] = ''
+                        content['second_number'] = ''
                     elif request.POST.get('first_operator').strip('\u200b') =='÷':
-                        content['show']=(int)(request.POST.get('first_number')/request.POST.get('second_operator'))
+                        content['show']=str((int)(request.POST.get('first_number')/request.POST.get('second_operator')))
                         content['first_number']=(int)(request.POST.get('first_number')/request.POST.get('second_operator'))
-                        
+                        content['second_operator'] = ''
+                        content['second_number'] = ''
                 else:
                     if request.POST.get('first_operator').strip('\u200b') =='+': 
                         
@@ -92,11 +101,11 @@ def caculate(request):
                         content['show']=(int)(request.POST.get('first_number')+request.POST.get('second_operator'))
 
                 # clear        
-                content['first_operator'] = ''
-                content['second_operator'] = ''
+                    content['first_operator'] = ''
+                    content['second_operator'] = ''
                 
-                content['first_number'] = '0'
-                content['second_number'] = ''
+                    content['first_number'] = '0'
+                    content['second_number'] = ''
             
     return render(request, "index.html", content)
 
