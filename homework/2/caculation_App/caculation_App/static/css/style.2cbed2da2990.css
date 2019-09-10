@@ -58,7 +58,7 @@ border-radius: 25px;
 footer{
     background-color: #F5F5DC;
     color: #6495ED;
-    font-size: 15px;
-    margin-top: 10%;
+    font-size: 40px;
+    margin-top: 10%
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
