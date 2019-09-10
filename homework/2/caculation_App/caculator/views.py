@@ -36,7 +36,7 @@ def caculate(request):
                 content['first_number'] = str(request.POST.get('first_number'))+str(request.POST.get('number'))
                 content['show'] = str(request.POST.get('first_number'))+str(request.POST.get('number'))
             #update second number
-            elif request.POST.get('first_number')!='0' and request.POST.get('second_number') =='' and request.POST.get('first_operator') != '' and request.POST.get('second_operator') == '':
+            elif request.POST.get('second_number') =='' and request.POST.get('first_operator') != '' and request.POST.get('second_operator') == '':
                 content['first_number'] = request.POST.get('first_number')
                 content['first_operator'] = request.POST.get('first_operator')
                 # deal with the condition of "/0"  
@@ -46,7 +46,7 @@ def caculate(request):
                     content['second_number'] = request.POST.get('number')
                     content['show'] = request.POST.get('number')
             #update second number if it is not one digit
-            elif request.POST.get('first_number')!='0' and request.POST.get('second_number') !='' and request.POST.get('first_operator') != '' and request.POST.get('second_operator') == '':
+            elif request.POST.get('second_number') !='' and request.POST.get('first_operator') != '' and request.POST.get('second_operator') == '':
                 content['second_number'] = str(request.POST.get('second_number'))+str(request.POST.get('number'))
                 content['first_number'] = request.POST.get('first_number')
                 content['first_operator'] = request.POST.get('first_operator')
@@ -57,7 +57,7 @@ def caculate(request):
             if request.POST.get('first_number')=='0' and request.POST.get('second_number') =='' and request.POST.get('first_operator') == '' and request.POST.get('second_operator') == '':
                  # if first operator entered is =, just igore it, will not update it to the first operator
                 if request.POST.get('operator').strip('\u200b')!='=':
-
+                    content['first_number'] = request.POST.get('first_number')
                     content['first_operator'] = request.POST.get('operator')
                     content['show']=request.POST.get('first_number')
             #update first operator,
@@ -71,7 +71,7 @@ def caculate(request):
                     content['first_number'] = request.POST.get('first_number')
                     content['show']=request.POST.get('first_number')
             #update first operator
-            elif request.POST.get('first_number')!='0' and request.POST.get('second_number') =='' and request.POST.get('first_operator') != '' and request.POST.get('second_operator') == '':
+            elif request.POST.get('second_number') =='' and request.POST.get('first_operator') != '' and request.POST.get('second_operator') == '':
                 if request.POST.get('operator').strip('\u200b')=='=':
                     content['first_number'] = request.POST.get('first_number')
                     content['show']=request.POST.get('first_number')
@@ -80,7 +80,7 @@ def caculate(request):
                     content['first_number'] = request.POST.get('first_number')
                     content['show']=request.POST.get('first_number')
             #update second operator and do calculation
-            elif request.POST.get('first_number')!='0' and request.POST.get('second_number') !='' and request.POST.get('first_operator') != '' and request.POST.get('second_operator') == '':
+            elif request.POST.get('second_number') !='' and request.POST.get('first_operator') != '' and request.POST.get('second_operator') == '':
                 content['first_operator'] = request.POST.get('first_operator')
                 content['first_number'] = request.POST.get('first_number')
                 content['second_number'] = request.POST.get('second_number')

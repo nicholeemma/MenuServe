@@ -4,8 +4,8 @@ text-align: center;
 font-size:30px;
 }
 .head-caculator{
-    background-color: blue;
-    color: antiquewhite;
+    background-color: #F5F5DC;
+    color: #6495ED;
     font-size: 40px;
     text-align: center;
 }
@@ -21,7 +21,7 @@ font-size:30px;
     
     border-width: 2px;
     border-style: outset;
-    border-color: buttonface;
+    
     border-image: initial;
     padding-right: 20px;
     text-align: right;
@@ -54,4 +54,11 @@ border-radius: 25px;
 }
 .button-ch:hover{
     background-color: aquamarine;
+}
+footer{
+    background-color: #F5F5DC;
+    color: #6495ED;
+    font-size: 40px;
+    margin-top: 10%
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
