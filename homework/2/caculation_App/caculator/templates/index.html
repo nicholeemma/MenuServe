@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
     <head>
         <meta charset="UTF-8">
         <title>
@@ -10,10 +10,11 @@
         <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" charset="utf-8"  />
         
     </head>
-    <header class="head-caculator">
-        HW2
-    </header>
+    
     <body>
+    	<header class="head-caculator">
+        HW2
+    	</header>
         <form method="post" action="/">
     {% csrf_token %}
     <input type="hidden" name="first_number" value="{{first_number}}">
