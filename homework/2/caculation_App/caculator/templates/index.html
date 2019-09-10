@@ -14,13 +14,14 @@
         HW2
     </header>
     <body>
-        <form method="post" action="">
+        <form method="post" action="/">
     {% csrf_token %}
+    <input type="hidden" name="first_number" value="{{first_number}}">
+    <input type="hidden" name="second_number" value="{{second_number}}">
+    <input type="hidden" name="first_operator" value="{{first_operator}}">
+    <input type="hidden" name="second_operator" value="{{second_operator}}">
     <table>
-            <input type="hidden" name="first_number" value="{{first_number}}">
-            <input type="hidden" name="second_number" value="{{second_number}}">
-            <input type="hidden" name="first_operator" value="{{first_operator}}">
-            <input type="hidden" name="second_operator" value="{{second_operator}}">
+            
             <tr> 
                     <td colspan="4" id="headOfCal">
                        <p> Caculator</p>
