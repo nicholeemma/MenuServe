@@ -3,6 +3,6 @@ from .models import Menu, Store, Employee, Manager, Order
 
 def index(request):
     content={}
-    return render(request,content)
+    return render(request,"Menu.html",content)
 
 # Create your views here.
