@@ -1,10 +1,17 @@
-<html>
+<!DOCTYPE html>
+    <html lang="en-US">
     <head>
+            <meta charset="UTF-8">
+            <title>
+                Manager-Store
+            </title>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/additional.css"  />
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen"/>
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/additional.css' %}" charset="utf-8"  />
     </head>
     
     <body>
@@ -25,10 +32,10 @@
               </b>
               </p>
 
-          <div class="row" id="table-margin-top">
+          <div class="row" class="table-margin-top">
             <div class="col s4">
                 <form class="search-bar-management">
-                    <input type="text" name="search" value="Search cuisine here" >
+                    <input class="table-margin-top" type="text" name="search" value="Search cuisine here" >
         
                 </form>
             </div>
@@ -64,6 +71,7 @@
             <thead>
               <tr>
                   <th>No.</th>
+                  <th>id_for_dish</th>
                   <th>Name of Cuisine</th>
                   <th>Classification</th>
                   <th>Price</th>
@@ -76,17 +84,19 @@
             <tbody>
               <tr>
                 <td>0001</td>
+                <td>abc</td>
                 <td>Burger</td>
                 <td>Burger-a</td>
                 <td>$12</td>
                 <td>150g Bacon, egg and sauce</td>
                
-                <td>
+                
                     <a class="waves-effect waves-light btn" >Update</a>
                 </td>
               </tr>
               <tr>
                 <td>0002</td>
+                <td>abc</td>
                 <td>Salad</td>
                 <td>Salad-a</td>
                 <td>$10</td>
@@ -98,6 +108,7 @@
               </tr>
               <tr>
                 <td>0003</td>
+                <td>abc</td>
                 <td>Seafood</td>
                 <td>Seafood-b</td>
                 <td>$50</td>
@@ -109,6 +120,7 @@
               </tr>
               <tr>
                   <td>0004</td>
+                  <td>abc</td>
                   <td>Seafood</td>
                   <td>Seafood-c</td>
                   <td>$20</td>
@@ -120,6 +132,7 @@
                 </tr>
                 <tr>
                     <td>0004</td>
+                    <td>abc</td>
                     <td>Slide</td>
                     <td>Slide-a</td>
                     <td>$8</td>
@@ -131,7 +144,7 @@
                   </tr>
             </tbody>
           </table>
-          <div align="center" id="table-margin-top">
+          <div class="table-margin-top">
           <a class="waves-effect waves-light btn" style="margin-right: 5%" >Save</a>
           <a class="waves-effect waves-light btn" >Add</a>
           </div>

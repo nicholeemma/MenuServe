@@ -34,7 +34,7 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2*
 .record-table{
   overflow-y: scroll; margin-bottom: 5%;
 }
-#table-margin-top{
+.table-margin-top{
   margin-top:3%;
 }
 
@@ -45,7 +45,7 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2*
 .select-management{
   display:table;  height: 5%; margin-top: 5%;color: grey;
 }
-#headlineofmanagement{
+.headlineofmanagement{
   color: #4db6ac; font-size: 24px;text-align: center;
 }
 #logout{
@@ -54,7 +54,16 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2*
 #loginfo{
   color: #4db6ac; font-size: 18px; 
 }
-#management-main-btn{
+#management-main-btn1{
+  width:70%; margin-bottom: 5%;
+}
+#management-main-btn2{
+  width:70%; margin-bottom: 5%;
+}
+#management-main-btn3{
+  width:70%; margin-bottom: 5%;
+}
+#management-main-btn4{
   width:70%; margin-bottom: 5%;
 }
 #registrationbtn{

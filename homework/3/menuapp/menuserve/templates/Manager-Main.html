@@ -1,10 +1,17 @@
-<html>
+<!DOCTYPE html>
+    <html lang="en-US">
     <head>
+            <meta charset="UTF-8">
+            <title>
+                Manager-Main
+            </title>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/additional.css"  />
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen"/>
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/additional.css' %}" charset="utf-8"  />
     </head>
     
     <body>
@@ -20,7 +27,7 @@
     
         <div class="general-container">
         
-            <p  id="headlineofmanagement">
+            <p  class="headlineofmanagement">
                 <b>
                 Welcome, Manager
                 </b>
@@ -35,25 +42,25 @@
                              
                         </select>
                     </form>
-                    <p  id="headlineofmanagement">
+                    <p  class="headlineofmanagement">
                         <b>
                         Today's sales
                         </b>
                     </p>
-                    <img src="Pictures/line-chart.jpg">
+                    <img src="Pictures/line-chart.jpg" alt="line-chart">
                 </div>
 
                 <div class="col s5">
-                    <p  id="headlineofmanagement">
+                    <p  class="headlineofmanagement">
                         <b>
                         Management Section
                         </b>
                     </p>
-                      <div align="center">
-                    <a class="waves-effect waves-light btn" id="management-main-btn" href="Manager-Menu.html">Menu</a>
-                    <a class="waves-effect waves-light btn" id="management-main-btn" href="Manager-Employee.html">Employee</a>
-                    <a class="waves-effect waves-light btn" id="management-main-btn">Store</a>
-                    <a class="waves-effect waves-light btn" id="management-main-btn">Manager</a>
+                      <div>
+                    <a class="waves-effect waves-light btn" id="management-main-btn1" href="Manager-Menu.html">Menu</a>
+                    <a class="waves-effect waves-light btn" id="management-main-btn2" href="Manager-Employee.html">Employee</a>
+                    <a class="waves-effect waves-light btn" id="management-main-btn3">Store</a>
+                    <a class="waves-effect waves-light btn" id="management-main-btn4">Manager</a>
                       </div>
                 </div>
 

@@ -32,6 +32,11 @@ def manageorders(request):
                                   status=status, time=time,amount=amount,store=store)
             an_order.save() #saving the todo 
             return redirect("/")
+        if "OrderDelete" in request.POST: #checking if there is a request to delete a todo
+            checkedlist = request.POST["checkedbox"] #checked todos to be deleted
+            for order_id in checkedlist:
+                delete_order = Order.objects.get(id=int(order_id)) #getting todo id
+                delete_order.delete() #deleting todo
 #     if "register" in request.POST:
 #         return HttpResponseRedirect("/Order")
     return render(request,"Submitted-Order.html",content)
