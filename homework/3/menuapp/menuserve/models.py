@@ -32,6 +32,10 @@ class Order(models.Model):
     time = models.DateField(default = timezone.now().strftime("%d/%m/%y"))
     amount = models.IntegerField()
     store = models.ForeignKey(Store,on_delete=models.CASCADE)
+    class Meta:
+        ordering = ["-time"]
+    def __str__(self):
+        return self.name_of_cuisine
 
 class Employee(models.Model):
     name = models.CharField(max_length=20)

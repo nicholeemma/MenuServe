@@ -14,6 +14,27 @@ def home(request):
 #     if "register" in request.POST:
 #         return HttpResponseRedirect("/Order")
     return render(request,"Order.html",content)
+
+def manageorders(request):
+    content={}
+    orders = Order.objects.all()
+    if request.method == "POST": #checking if the request method is a POST
+        if "OrderAdd" in request.POST: #checking if there is a request to add a todo
+            desk_no = request.POST["desk_no"] #title
+            name_of_cuisine = request.POST["name_of_cuisine"] #date
+            status = request.POST["status"] #category
+            
+            time = request.POST["time"] #date
+            amount = request.POST["amount"]
+            store = request.POST["amount"]
+            #content = title + " -- " + date + " " + category #content
+            an_order = Order(desk_no=desk_no, name_of_cuisine=name_of_cuisine, 
+                                  status=status, time=time,amount=amount,store=store)
+            an_order.save() #saving the todo 
+            return redirect("/")
+#     if "register" in request.POST:
+#         return HttpResponseRedirect("/Order")
+    return render(request,"Submitted-Order.html",content)
     
 
 # Create your views here.

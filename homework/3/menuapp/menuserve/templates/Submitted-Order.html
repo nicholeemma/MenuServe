@@ -1,18 +1,27 @@
-<html>
+<!DOCTYPE html>
+    <html lang="en-US">
     <head>
+            <meta charset="UTF-8">
+            <title>
+                Submitted Order
+            </title>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/additional.css"  />
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen"/>
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/additional.css' %}" charset="utf-8"  />
     </head>
     
     <body>
         <header class="menu-page-header">
         
                 <div class="grid-example col s12" id="welcomeheadline">
+                        <form method="post" action="/">
                     Welcome to the Moonlight Restaurant
-                    <a class="waves-effect waves-light btn" id="logout">Log Out</a>
+                    <a href="{% url 'index' %}" class="waves-effect waves-light btn" id="logout">Log Out</a>
+                    </form>
                 </div>
         
         </header>
@@ -71,6 +80,34 @@
             </thead>
     
             <tbody>
+                <form action="#" method="POST">
+                    <tr>
+                            <td>0001</td>
+                            {% csrf_token %}
+                            <td>
+                                    <input type="text" id="desk_no" class="taskName" name="desk_no" required>
+                            </td>
+                            {% csrf_token %}
+                            <td>
+                                    <input type="text" id="name_of_cuisine" class="taskName" name="name_of_cuisine" required>
+                            </td>
+                            {% csrf_token %}
+                            <td>
+                                    <input type="text" id="amount" class="taskName" name="amount" required>
+                            </td>
+                            {% csrf_token %}
+                            <td>
+                                    <input type="text" id="status" class="taskName" name="status" required>
+                            </td>
+                            {% csrf_token %}
+                            <td>
+                                <input type="text" id="time" class="taskName" name="time" required>
+                            </td>
+                            <td>
+                                    <button class="OrderAdd" name="OrderAdd" type="submit"><i class="fa fa-plus icon"></i>Add</button>
+                            </td>
+                          </tr>
+                        </form>
               <tr>
                 <td>0001</td>
                 <td>16</td>

@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from menuserve.views import index
 from menuserve.views import home
+from menuserve.views import manageorders
 from django.conf.urls import url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -26,4 +27,5 @@ urlpatterns = [
     path('',index,name="index"),
     # url(r'^Menu/', index),
     url(r'^Order/',home,name="Order"),
+    url(r'^Submitted-Order/',manageorders,name="manageorder"),
 ]

@@ -69,7 +69,8 @@
                         <div class="container-pic">
                                
                                 <div class="single-container-pic-order" style="float: right">
-                                        <img class="display-pic-order" src="Pictures/Steak1.jpg"  alt="Steak1" />
+                                        {% load static %}
+                                        <img class="display-pic-order" src="{% static 'Pictures/Steak1.jpg' %}"  alt="Steak1" />
                                         <div class="overlay">
                                             <div class="show-price-order">
                                                 Price: 25$
@@ -80,7 +81,8 @@
                                 </div>
 
                                 <div class="single-container-pic-order" style="float: right">
-                                            <img class="display-pic-order" src="Pictures/Seafood1.jpg"  alt="Steak1" />
+                                        {% load static %}
+                                            <img class="display-pic-order" src="{% static 'Pictures/Seafood1.jpg' %}"   alt="Steak1" />
                                             <div class="overlay">
                                                     <div class="show-price-order">
                                                             Price: 10$
@@ -90,7 +92,8 @@
                                             </div>
                                 </div>
                                 <div class="single-container-pic-order">
-                                        <img class="display-pic-order" src="Pictures/Seafood3.jpg"  alt="Steak1" />
+                                        {% load static %}
+                                        <img class="display-pic-order" src="{% static 'Pictures/Seafood3.jpg' %}"  alt="Steak1" />
                                         <div class="overlay">
                                                 <div class="show-price-order">
                                                         Price: 20$
@@ -102,7 +105,8 @@
                                 </div>
 
                                 <div class="single-container-pic-order" style="float: right">
-                                            <img class="display-pic-order" src="Pictures/Seafood2.jpg"  alt="Steak1" />
+                                        {% load static %}
+                                            <img class="display-pic-order" src="{% static 'Pictures/Seafood2.jpg' %}"  alt="Steak1" />
                                             <div class="overlay">
                                                     <div class="show-price-order">Price: 16$
                                                             <br>
@@ -112,7 +116,8 @@
                                 </div>
                             
                                 <div class="single-container-pic-order" style="float: right">
-                                        <img class="display-pic-order" src="Pictures/Steak3.jpg"  alt="Steak1" />
+                                        {% load static %}
+                                        <img class="display-pic-order" src="{% static 'Pictures/Steak3.jpg' %}"  alt="Steak1" />
                                         <div class="overlay">
                                                 <div class="show-price-order">Price: 14$
                                                         <br>
@@ -122,7 +127,8 @@
                                 </div>
 
                                 <div class="single-container-pic-order">
-                                            <img class="display-pic-order" src="Pictures/Salad1.jpg"  alt="Steak1" />
+                                        {% load static %}
+                                            <img class="display-pic-order" src="{% static 'Pictures/Salad1.jpg' %}"  alt="Steak1" />
                                             <div class="overlay">
                                                 <div class="show-price-order">
                                                     Price: 25$
@@ -132,7 +138,8 @@
                                             </div>
                                 </div>
                                 <div class="single-container-pic-order" style="float: right">
-                                        <img class="display-pic-order" src="Pictures/Salad2.jpg"  alt="Steak1" />
+                                        {% load static %}
+                                        <img class="display-pic-order" src="{% static 'Pictures/Salad2.jpg' %}"  alt="Steak1" />
                                         <div class="overlay">
                                             <div class="show-price-order">
                                                 Price: 25$
@@ -142,7 +149,8 @@
                                         </div>
                                 </div>
                                 <div class="single-container-pic-order" style="float: right">
-                                        <img class="display-pic-order" src="Pictures/Steak2.jpg"  alt="Steak1" />
+                                        {% load static %}
+                                        <img class="display-pic-order" src="{% static 'Pictures/Steak2.jpg' %}"  alt="Steak1" />
                                         <div class="overlay">
                                             <div class="show-price-order">
                                                 Price: 25$
@@ -152,7 +160,8 @@
                                         </div>
                             </div>
                             <div class="single-container-pic-order">
-                                    <img class="display-pic-order" src="Pictures/Salad3.jpg"  alt="Steak1" />
+                                    {% load static %}
+                                    <img class="display-pic-order" src="{% static 'Pictures/Salad3.jpg' %}"  alt="Steak1" />
                                     <div class="overlay">
                                         <div class="show-price-order">
                                             Price: 25$
@@ -237,7 +246,7 @@
                             </div>
                             
                             <a class="waves-effect waves-light btn" style="float: right">Save</a>
-                            <a class="waves-effect waves-light btn">Order</a>
+                            <a href="{% url 'manageorder' %}" class="waves-effect waves-light btn">Order</a>
                             <br>
                             <br>
                             
