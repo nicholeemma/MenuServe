@@ -43,6 +43,7 @@
                         <br>
                         <div class="container-pic">
                             <div class="single-container-pic" >
+                                    {% load static %}
                                 <img class="display-pic"  src="{% static 'Pictures/Steak1.jpg' %}"  alt="Steak1" />
                                 <div class="overlay">
                                     <div class="show-price">
@@ -53,6 +54,7 @@
                                 </div>
                             </div>
                             <div class="single-container-pic"  > 
+                                    {% load static %}
                                 <img class="display-pic" src="{% static 'Pictures/Seafood1.jpg' %}"  alt="Seafood1" />
                         
                                 <div class="overlay">
@@ -65,7 +67,7 @@
                             </div>
                         
                             <div class="single-container-pic">
-                        
+                                    {% load static %}
                                 <img class="display-pic" src="{% static 'Pictures/Seafood2.jpg' %}"  alt="Seafood2" />
                                 <div class="overlay">
                                     <div class="show-price">
@@ -77,7 +79,7 @@
                                 </div>
                                 </div>
                             <div class="single-container-pic">
-                        
+                                    {% load static %}
                                 <img class="display-pic" src="{% static 'Pictures/Steak3.jpg' %}"  alt="Steak3" />
                                 <div class="overlay">
                                     <div class="show-price">Price: 16$
@@ -87,7 +89,7 @@
                                 </div>
                             </div>
                             <div class="single-container-pic">
-                       
+                                    {% load static %}
                                 <img class="display-pic" src="{% static 'Pictures/Salad3.jpg' %}"  alt="Salad3" />
                                 <div class="overlay">
                                     <div class="show-price">Price: 14$
@@ -149,9 +151,11 @@
                        
                     </div>
                     <div class="col s3" id="menu_right_col">
-                            <a class="waves-effect waves-light btn" id="registrationbtn">
+                            <form method="post" action="/">
+                            <a href="{% url 'Order' %}" class="waves-effect waves-light btn" id="registrationbtn" value ="register">
                                 Registration&nbsp;/&nbsp;Log in
                             </a>
+                            </form>
                             <br><br>
                             
 
@@ -178,8 +182,10 @@
                             <br>
                             
                             <audio controls autoplay muted loop class="audio">
+                                    {% load static %}
                                 <!--Music source: https://www.fesliyanstudios.com/royalty-free-music/downloads-c/peaceful-and-relaxing-music/22-->
                                     <source src="{% static 'Music/background_music1.mp3' %}" type="audio/mpeg">
+                                        {% load static %}
                                     <source src="{% static 'Music/background_music2.mp3' %}" type="audio/mpeg">
                                   Your browser does not support the audio element.
                             </audio>

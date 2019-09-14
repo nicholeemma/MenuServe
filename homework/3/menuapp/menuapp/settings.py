@@ -121,3 +121,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(os.path.dirname(__file__),'static')
+STATICFILES_DIRS = (
+   # ('css',os.path.join(STATIC_ROOT,'css').replace('\\','/') ),
+   # ('js',os.path.join(STATIC_ROOT,'js').replace('\\','/') ),
+    ('Pictures',os.path.join(STATIC_ROOT,'Pictures').replace('\\','/') ),
+    ('Music',os.path.join(STATIC_ROOT,'Music').replace('\\','/') ),
+)

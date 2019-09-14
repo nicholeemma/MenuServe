@@ -16,8 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from menuserve.views import index
+from menuserve.views import home
 from django.conf.urls import url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+from django.contrib import staticfiles
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',index),
+    path('',index,name="index"),
+    # url(r'^Menu/', index),
+    url(r'^Order/',home,name="Order"),
 ]
