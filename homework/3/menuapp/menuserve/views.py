@@ -40,6 +40,44 @@ def manageorders(request):
 #     if "register" in request.POST:
 #         return HttpResponseRedirect("/Order")
     return render(request,"Submitted-Order.html",content)
-    
 
+def managermain(request):
+    content={}
+#     if "register" in request.POST:
+#         return HttpResponseRedirect("/Order")
+    return render(request,"Manager-Main.html",content)
+    
+def managerstore(request):
+    content={}
+#     if "register" in request.POST:
+#         return HttpResponseRedirect("/Order")
+    stores = Store.objects.all()
+    if request.method == "POST": #checking if the request method is a POST
+        if "StoreAdd" in request.POST: #checking if there is a request to add a todo
+            location = request.POST["location"] #title
+            name = request.POST["name"] #date
+            
+            #content = title + " -- " + date + " " + category #content
+            a_store = Store(name=name, location=location)
+            a_store.save() #saving the todo 
+            return redirect("/")
+    return render(request,"Manager-Store.html",content)
+    
+def managermanager(request):
+    content={}
+#     if "register" in request.POST:
+#         return HttpResponseRedirect("/Order")
+    return render(request,"Manager-Manager.html",content)
+
+def manageremployee(request):
+    content={}
+#     if "register" in request.POST:
+#         return HttpResponseRedirect("/Order")
+    return render(request,"Manager-Employee.html",content)
+
+def managermenu(request):
+    content={}
+#     if "register" in request.POST:
+#         return HttpResponseRedirect("/Order")
+    return render(request,"Manager-Menu.html",content)
 # Create your views here.

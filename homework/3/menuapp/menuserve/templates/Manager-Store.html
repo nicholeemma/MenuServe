@@ -69,11 +69,24 @@
                   <th>Store No.</th>
                   <th>Name</th>
                   <th>Location</th>
-                  
+                  <th>Action</th>
               </tr>
             </thead>
     
             <tbody>
+                <form action="#" method="POST">
+              <tr>
+                  <td>
+                      {% csrf_token %}
+                      <input type="text" id="status" class="taskName" name="name" required>
+              </td>
+              <td>
+                  {% csrf_token %}
+                  <input type="text" id="status" class="taskName" name="location" required>
+              </td>
+              <td><button class="StoreAdd" name="StoreAdd" type="submit"><i class="fa fa-plus icon"></i>Add</button></td>
+              </tr>
+              </form>
               <tr>
                 <td>0001</td>
                 <td>Nichole</td>
