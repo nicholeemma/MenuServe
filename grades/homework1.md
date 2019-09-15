@@ -2,10 +2,7 @@
 
 Commit graded: 8e99ac2960828a7235f9a1fc44235189dd0a1f55
 
-### MenuServe design process (15/20)
-
--5, Evidence of design iteration is missing from your submission. After receiving feedback, you should have revised your design and submitted the edited wireframes alongside the originals. Plus, I couldn't find some of the corresponding feedbacks based on your original wireframes. For example, one student gave you feedback "In the page of menu, the current two buttons to register and log in are not clear. Replacing them with one button "registration/login", but I didn't find such buttons in your original wireframes.
-
+### MenuServe design process (20/20)
 ### Demonstrates basic familiarity with HTML and CSS
 #### Completeness: Solution meets basic specification (19/20)
 
@@ -31,7 +28,7 @@ Commit graded: 8e99ac2960828a7235f9a1fc44235189dd0a1f55
 -0, Ideally `src` folder should not be put into `wireframes` folder. They are separate and should be in the same level.
 
 ---
-#### Total score (59/70)
+#### Total score (64/70)
 ---
 Graded by: Yilin Liu (yilinl2@andrew.cmu.edu, yilinl2)
 
