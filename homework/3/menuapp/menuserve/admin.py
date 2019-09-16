@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from . import models
 class StoreAdmin(admin.ModelAdmin):
-    list_display = ("location",  "name")
+    list_display = ("location",  "name","store_manager")
 # class CategoryAdmin(admin.ModelAdmin):
 #     list_display = ("name",)
 # admin.site.register(models.TodoList, TodoListAdmin)
@@ -12,7 +12,7 @@ class MenuAdmin(admin.ModelAdmin):
     list_display = ("name_of_cuisine",  "id_for_dish","price","classification","description")
 
 class ManagerAdmin(admin.ModelAdmin):
-    list_display = ("name",  "m_store")
+    list_display = ("name","gender")
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ("desk_no",  "name_of_cuisine","status","time","amount","store")

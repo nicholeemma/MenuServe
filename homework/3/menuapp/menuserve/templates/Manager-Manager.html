@@ -68,12 +68,64 @@
               <tr>
                   <th>Manager No.</th>
                   <th>Name</th>
-                  <th>m_store</th>
+                  <th>Gender</th>
+                  <th>Action</th>
+                  <th>Action</th>
+                  
                   
               </tr>
             </thead>
     
             <tbody>
+                <form action="#" method="POST">
+                    <tr>
+                        <td>Default ID</td>
+                        <td>
+                            {% csrf_token %}
+                            <input type="text" id="status" class="taskName" name="name" required>
+                    </td>
+                    <td>
+                        {% csrf_token %}
+                        <input type="text" id="status" class="taskName" name="gender" required>
+                    </td>
+                    <td colspan="2">
+                        <button class="waves-effect waves-light btn" name="ManagerAdd" type="submit">
+                            Add New Manager
+                          </button>
+                         
+                      </td>
+                    </tr>
+                    
+                    </form>
+                    {% for manager in managers %}
+                    <tr>
+                          <form action="#" method="POST">
+                      <td>{{manager.id}}</td>
+                      <td> <input type="text" name="input_managername" value="{{manager.name}}">{{manager.name}}</td>
+                      <td><input type="text" name="input_managergender" value="{{manager.gender}}">{{manager.name}}</td>
+                         
+                      <td>
+                                  {% csrf_token %}
+                          <button class="waves-effect waves-light btn" name = "ManagerUpdate" id="{{ manager.id }}" value="{{ manager.id }}" type="submit">Update</button>
+                      </td>
+      
+                      </form>
+                      <td>
+                              <form action="#" method="POST">
+                                      {% csrf_token %}
+                                      <button class="waves-effect waves-light btn" name = "ManagerDelete" id="{{ manager.id }}" value="{{ manager.id }}" type="submit">Delete</button>
+                                                                      <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
+                      </form>
+                      </td>
+         
+                                  
+                                                                  <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
+                
+                     </td>
+                     
+                          
+                    </tr>
+                    {% endfor %}
               <tr>
                 <td>0001</td>
                 <td>Nichole</td>

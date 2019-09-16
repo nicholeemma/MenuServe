@@ -47,14 +47,7 @@
             </form>
             </div>
             <div class="col s2">
-            <form>
-                <select class="select-management">
-                     <option >Store-A</option>
-                     <option >Store-B</option>
-                     <option >Store-C</option>
-                     <option >Store-D</option>
-                </select>
-            </form>
+            
             </div>
             <div class="col s4">
                 <p id="loginfo">
@@ -66,9 +59,11 @@
         <table class="striped" >
             <thead>
               <tr>
-                  <th>Store No.</th>
+                  <th>ID</th>
                   <th>Name</th>
                   <th>Location</th>
+                  <th>Manager</th>
+                  <th>Action</th>
                   <th>Action</th>
               </tr>
             </thead>
@@ -76,6 +71,7 @@
             <tbody>
                 <form action="#" method="POST">
               <tr>
+                  <td>Default ID</td>
                   <td>
                       {% csrf_token %}
                       <input type="text" id="status" class="taskName" name="name" required>
@@ -84,60 +80,66 @@
                   {% csrf_token %}
                   <input type="text" id="status" class="taskName" name="location" required>
               </td>
-              <td><button class="StoreAdd" name="StoreAdd" type="submit"><i class="fa fa-plus icon"></i>Add</button></td>
+              <td>
+                    {% csrf_token %}
+                <select id="manager" class="select-management" name="manager_select" style = " visibility: visible;">
+                    <option class="disabled" value="">Choose a manager</option>
+                    {% for manager in managers %}
+                        <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
+                    {% endfor %}
+                    </select>
+           
+              </td>
+              <td colspan="2">
+                  <button class="waves-effect waves-light btn" name="StoreAdd" type="submit">
+                      Add New Store
+                    </button>
+                   
+                </td>
               </tr>
               </form>
+             
+              {% for store in stores %}
               <tr>
-                <td>0001</td>
-                <td>Nichole</td>
-                <td>Female</td>
-                
-              
-                    <a class="waves-effect waves-light btn" >Update</a>
-                </td>
-              </tr>
-              <tr>
-                <td>0002</td>
-                <td>Jess</td>
-                <td>Male</td>
-               
-               
-                    <a class="waves-effect waves-light btn" >Update</a>
-                </td>
-              </tr>
-              <tr>
-                <td>0003</td>
-                <td>Helen</td>
-                <td>Female</td>
-                
-                
-                    <a class="waves-effect waves-light btn" >Update</a>
-                </td>
-              </tr>
-              <tr>
-                  <td>0004</td>
-                  <td>David</td>
-                  <td>Male</td>
-                  
-               
-                      <a class="waves-effect waves-light btn" >Update</a>
-                  </td>
-                </tr>
-                <tr>
-                    <td>0005</td>
-                    <td>Simon</td>
-                    <td>Male</td>
+                    <form action="#" method="POST">
+                <td>{{store.id}}</td>
+                <td> <input type="text" name="input_storename" value="{{store.name}}">{{store.name}}</td>
+                <td><input type="text" name="input_storelocation" value="{{store.location}}">{{store.location}}</td>
+                <td>{% csrf_token %}
+                        <select id="manager" class="select-management" name="manager_select" >
+                            <option class="disabled" value="">Choose a manager</option>
+                            {% for manager in managers %}
+                                <option class="" value="{{ manager.name }}" name="{{ manager.name }}"></option>
+                            {% endfor %}
+                            </select>{{ store.store_manager.name }}</td>
                    
-                  
-                        <a class="waves-effect waves-light btn" >Update</a>
-                    </td>
-                  </tr>
+                <td>
+                            {% csrf_token %}
+                    <button class="waves-effect waves-light btn" name = "StoreUpdate" id="{{ store.id }}" value="{{ store.id }}" type="submit">Update</button>
+                </td>
+
+                </form>
+                <td>
+                        <form action="#" method="POST">
+                                {% csrf_token %}
+                                <button class="waves-effect waves-light btn" name = "StoreDelete" id="{{ store.id }}" value="{{ store.id }}" type="submit">Delete</button>
+                                                                <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
+                </form>
+                </td>
+   
+                            
+                                                            <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
+          
+               </td>
+               
+                    
+              </tr>
+              {% endfor %}
+             
+                
             </tbody>
           </table>
-          <div  class="table-margin-top">
-              <a class="waves-effect waves-light btn" style="margin-right: 5%" >Save</a>
-              <a class="waves-effect waves-light btn" >Add</a>
-              </div>
+         
           </div>
             
            

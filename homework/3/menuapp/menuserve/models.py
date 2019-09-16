@@ -14,15 +14,19 @@ class Menu(models.Model):
     classification = models.CharField(max_length=10)
     description = models.CharField(max_length=100)
 
+class Manager(models.Model):
+
+    name = models.CharField(max_length=20)
+    gender = models.CharField(max_length=20,default='male')
+
 class Store(models.Model):
        
     location = models.CharField(max_length=100)
     name = models.CharField(max_length=10)
+    store_manager = models.ForeignKey(Manager,on_delete=models.CASCADE)
 
-class Manager(models.Model):
 
-    name = models.CharField(max_length=20)
-    m_store = models.ForeignKey(Store,on_delete=models.CASCADE)
+    
 
 class Order(models.Model):
 
