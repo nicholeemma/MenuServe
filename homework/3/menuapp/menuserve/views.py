@@ -9,6 +9,7 @@ def index(request):
     
     return render(request,"Menu.html",content)
 
+
 def home(request):
     store_=""
     desk_=""
@@ -39,6 +40,7 @@ def home(request):
                 price = Menu.objects.get(id = menu_id).price
                 store = Store.objects.get(name=str(store_))
                 time = "2019-09-17"
+                
                 #content = title + " -- " + date + " " + category #content
                 an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine, time=time,
                                     status=status, amount=amount, store=store ,price=price)

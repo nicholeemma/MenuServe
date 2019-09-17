@@ -381,13 +381,14 @@ What you have ordered
     <td><form action="#" method="POST">
             {% csrf_token %}
             <button class="waves-effect waves-light btn" name = "DeleteOrder" id="{{ order.id }}" value="{{ order.id }}" type="submit">Delete</button>
+           
         </form>
         </td>
 
 </tr>
 {% endfor %}
 </table>
-         
+        
           <a href="{% url 'manageorder' %}" class="waves-effect waves-light btn">Order</a>
           
  </div>
