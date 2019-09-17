@@ -68,9 +68,10 @@
               <tr>
                   <th>Employee No.</th>
                   <th>Name</th>
-                  <th>Store</th>
                   <th>Manager</th>
-                  
+                  <th>Store</th>
+                  <th>Action</th>
+                  <th>Action</th>
               </tr>
             </thead>
     
@@ -86,7 +87,7 @@
                     <td>
                           {% csrf_token %}
                       <select id="manager" class="select-management" name="manager_select" >
-                          <option class="disabled" value="">Choose a manager</option>
+                          <option class="disabled" value="">Choose an employee</option>
                           {% for manager in managers %}
                               <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
                           {% endfor %}
@@ -105,12 +106,48 @@
                   </td>
                     <td colspan="2">
                         <button class="waves-effect waves-light btn" name="EmployeeAdd" type="submit">
-                            Add New Store
+                            Add New employee
                           </button>
                          
                       </td>
                     </tr>
                     </form>
+
+
+                    <form action="#" method="POST">
+                        <tr>
+                            
+                  
+                        <td colspan="2">
+                              {% csrf_token %}
+                          <select id="manager" class="select-management" name="employee_select" >
+                              <option class="disabled" value="">Choose an employee</option>
+                              {% for employee in employees %}
+                                  <option class="" value="{{ employee.name }}" name="{{ employee.name }}">{{ employee.name }}</option>
+                              {% endfor %}
+                              </select>
+                     
+                        </td>
+                        <td colspan="2">
+                            {% csrf_token %}
+                        <select id="store" class="select-management" name="store_select">
+                            <option class="disabled" value="">Choose a store</option>
+                            {% for store in stores %}
+                                <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                            {% endfor %}
+                            </select>
+                   
+                      </td>
+                        <td colspan="2">
+                            <button class="waves-effect waves-light btn" name="EmployeeAddStore" type="submit">
+                                Add Employee to Store
+                              </button>
+                             
+                          </td>
+                        </tr>
+                        </form>
+
+
 
                     {% for employee in employees %}
               <tr>
@@ -126,14 +163,17 @@
                             {% endfor %}
                             </select>{{ employee.manager.name }}</td>
                    
-                <td>
+               
                     <td>{% csrf_token %}
+                        <!--
                         <select id="store" class="select-management" name="store_select" >
                             <option class="disabled" value="">Choose a store</option>
                             {% for store in stores %}
                                 <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
                             {% endfor %}
-                            </select>{{ employee.e_store.name }}</td>
+                            </select>
+                            {{show}}-->
+                          </td>
                    
                 <td>
                             {% csrf_token %}
@@ -153,52 +193,22 @@
    
                             
                       
-              <tr>
-                <td>0001</td>
-                <td>Nichole</td>
-                <td>Female</td>
-                
-                    <a class="waves-effect waves-light btn" >Update</a>
-                </td>
-              </tr>
-              <tr>
-                <td>0002</td>
-                <td>Jess</td>
-                <td>Male</td>
               
-                    <a class="waves-effect waves-light btn" >Update</a>
-                </td>
-              </tr>
-              <tr>
-                <td>0003</td>
-                <td>Helen</td>
-                <td>Female</td>
-               
-                    <a class="waves-effect waves-light btn" >Update</a>
-                </td>
-              </tr>
-              <tr>
-                  <td>0004</td>
-                  <td>David</td>
-                  <td>Male</td>
-               
-                      <a class="waves-effect waves-light btn" >Update</a>
-                  </td>
-                </tr>
-                <tr>
-                    <td>0005</td>
-                    <td>Simon</td>
-                    <td>Male</td>
-                   
-                        <a class="waves-effect waves-light btn" >Update</a>
-                    </td>
-                  </tr>
+              
             </tbody>
           </table>
-          <div class="table-margin-top">
-              <a class="waves-effect waves-light btn" style="margin-right: 5%" >Save</a>
-              <a class="waves-effect waves-light btn" >Add</a>
-              </div>
+          <div>
+              <P> Relations between employees and stores</P>
+          {% for employee in employees %}
+          <br>
+          {{employee.name}} :
+          {%  for s in employee.e_store.all %}
+          {{s.name}} ,
+          {% endfor %}
+          <br>
+          {% endfor%}
+        </div>
+         
           </div>
             
            

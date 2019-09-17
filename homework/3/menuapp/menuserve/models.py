@@ -43,7 +43,7 @@ class Order(models.Model):
 
 class Employee(models.Model):
     name = models.CharField(max_length=20)
-    e_store = models.ForeignKey(Store,on_delete=models.CASCADE)
+    e_store = models.ManyToManyField(Store)
     manager = models.ForeignKey(Manager,on_delete=models.CASCADE)
 
 

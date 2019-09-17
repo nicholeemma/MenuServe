@@ -18,8 +18,11 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ("desk_no",  "name_of_cuisine","status","time","amount","store")
 
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ("name",  "e_store","manager")
-
+    list_display = ("name",  "e_store_","manager_")
+    def e_store_(self, obj):
+        return "\n".join([s.name for s in obj.e_store.all()])
+    def manager_(self, obj):
+        return str(obj.manager.name)
 admin.site.register(models.Store, StoreAdmin)
 admin.site.register(models.Menu, MenuAdmin)
 admin.site.register(models.Manager, ManagerAdmin)
