@@ -52,7 +52,11 @@
             <div class="col s4">
                 <p id="loginfo">
                     Hi, Nichole. Start to manage employees now.
-                   </p>
+                </p>
+                 {% csrf_token %}
+                <p class="error_msg">{{show}}</p>
+                    
+                  
             </div>
         </div>
             <div class="record-table">
@@ -109,7 +113,7 @@
                         <select id="manager" class="select-management" name="manager_select" >
                             <option class="disabled" value="">Choose a manager</option>
                             {% for manager in managers %}
-                                <option class="" value="{{ manager.name }}" name="{{ manager.name }}"></option>
+                                <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
                             {% endfor %}
                             </select>{{ store.store_manager.name }}</td>
                    
@@ -130,7 +134,7 @@
                             
                                                             <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
           
-               </td>
+               
                
                     
               </tr>

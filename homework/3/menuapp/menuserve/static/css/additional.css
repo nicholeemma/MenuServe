@@ -1,6 +1,10 @@
 /*Reference: 
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_fade
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2*/
+.error_msg{
+  color: red;
+  font-size: 30px;
+}
 #frequentlyordered{
   color: #4db6ac; font-size: 18px;
 }

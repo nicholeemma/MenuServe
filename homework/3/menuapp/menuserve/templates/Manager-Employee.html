@@ -68,12 +68,91 @@
               <tr>
                   <th>Employee No.</th>
                   <th>Name</th>
+                  <th>Store</th>
                   <th>Manager</th>
                   
               </tr>
             </thead>
     
             <tbody>
+                <form action="#" method="POST">
+                    <tr>
+                        <td>Default ID</td>
+                        <td>
+                            {% csrf_token %}
+                            <input type="text" id="status" class="taskName" name="name" required>
+                    </td>
+              
+                    <td>
+                          {% csrf_token %}
+                      <select id="manager" class="select-management" name="manager_select" >
+                          <option class="disabled" value="">Choose a manager</option>
+                          {% for manager in managers %}
+                              <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
+                          {% endfor %}
+                          </select>
+                 
+                    </td>
+                    <td>
+                        {% csrf_token %}
+                    <select id="store" class="select-management" name="store_select">
+                        <option class="disabled" value="">Choose a store</option>
+                        {% for store in stores %}
+                            <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                        {% endfor %}
+                        </select>
+               
+                  </td>
+                    <td colspan="2">
+                        <button class="waves-effect waves-light btn" name="EmployeeAdd" type="submit">
+                            Add New Store
+                          </button>
+                         
+                      </td>
+                    </tr>
+                    </form>
+
+                    {% for employee in employees %}
+              <tr>
+                    <form action="#" method="POST">
+                <td>{{employee.id}}</td>
+                <td> <input type="text" name="input_employeename" value="{{employee.name}}">{{employee.name}}</td>
+                
+                <td>{% csrf_token %}
+                        <select id="manager" class="select-management" name="manager_select" >
+                            <option class="disabled" value="">Choose a manager</option>
+                            {% for manager in managers %}
+                                <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
+                            {% endfor %}
+                            </select>{{ employee.manager.name }}</td>
+                   
+                <td>
+                    <td>{% csrf_token %}
+                        <select id="store" class="select-management" name="store_select" >
+                            <option class="disabled" value="">Choose a store</option>
+                            {% for store in stores %}
+                                <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                            {% endfor %}
+                            </select>{{ employee.e_store.name }}</td>
+                   
+                <td>
+                            {% csrf_token %}
+                    <button class="waves-effect waves-light btn" name = "EmployeeUpdate" id="{{ employee.id }}" value="{{ employee.id }}" type="submit">Update</button>
+                </td>
+
+                </form>
+                <td>
+                        <form action="#" method="POST">
+                                {% csrf_token %}
+                                <button class="waves-effect waves-light btn" name = "EmployeeDelete" id="{{ employee.id }}" value="{{ employee.id }}" type="submit">Delete</button>
+                                                                <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
+                </form>
+                </td>
+              </tr>
+              {% endfor %}
+   
+                            
+                      
               <tr>
                 <td>0001</td>
                 <td>Nichole</td>

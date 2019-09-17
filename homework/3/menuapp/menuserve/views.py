@@ -49,39 +49,45 @@ def managermain(request):
     
 def managerstore(request):
     content={}
+    content["show"]=""
 #     if "register" in request.POST:
 #         return HttpResponseRedirect("/Order")
-    stores = Store.objects.all()
-    managers = Manager.objects.all()
-    if request.method == "POST": #checking if the request method is a POST
-        if "StoreAdd" in request.POST: #checking if there is a request to add a todo
-            location = request.POST["location"] #title
-            name = request.POST["name"] #date
-            manager_name = request.POST["manager_select"]
-            manager = Manager.objects.get(name=str(manager_name))
-            #content = title + " -- " + date + " " + category #content
-            a_store = Store(name=name, location=location,store_manager=manager)
-            a_store.save() #saving the todo 
-            return redirect("/Manager-Store/")
-        if "StoreDelete" in request.POST: #checking if there is a request to delete a todo
-            d_store_id = request.POST["StoreDelete"] #checked todos to be deleted
-            # for todo_id in checkedlist:
-            d_store = Store.objects.get(id=d_store_id) #getting todo id
-            d_store.delete()
-            return redirect("/Manager-Store/")
-        if "StoreUpdate" in request.POST: #checking if there is a request to delete a todo
-            u_store_id = request.POST["StoreUpdate"]
-            u_store_location = request.POST["input_storelocation"] #checked todos to be deleted
-            # for todo_id in checkedlist:
-            u_store_name = request.POST["input_storename"]
-            u_store_manager = request.POST["manager_select"]
-            u_store = Store.objects.get(id=u_store_id)
-            u_store.location = str(u_store_location)
-            u_store.name = str(u_store_name)
-            u_store.store_manager  = Manager.objects.get(name=str(u_store_manager))
-             #getting todo id
-            u_store.save()
-            return redirect("/Manager-Store/")
+    try:
+        stores = Store.objects.all()
+        managers = Manager.objects.all()
+        if request.method == "POST": #checking if the request method is a POST
+            if "StoreAdd" in request.POST: #checking if there is a request to add a todo
+                location = request.POST["location"] #title
+                name = request.POST["name"] #date
+                manager_name = request.POST["manager_select"]
+                manager = Manager.objects.get(name=str(manager_name))
+                #content = title + " -- " + date + " " + category #content
+                a_store = Store(name=name, location=location,store_manager=manager)
+                a_store.save() #saving the todo 
+                return redirect("/Manager-Store/")
+            if "StoreDelete" in request.POST: #checking if there is a request to delete a todo
+                d_store_id = request.POST["StoreDelete"] #checked todos to be deleted
+                # for todo_id in checkedlist:
+                d_store = Store.objects.get(id=d_store_id) #getting todo id
+                d_store.delete()
+                return redirect("/Manager-Store/")
+            if "StoreUpdate" in request.POST: #checking if there is a request to delete a todo
+                u_store_id = request.POST["StoreUpdate"]
+                u_store_location = request.POST["input_storelocation"] #checked todos to be deleted
+                # for todo_id in checkedlist:
+                u_store_name = request.POST["input_storename"]
+                u_store_manager = request.POST["manager_select"]
+                u_store = Store.objects.get(id=u_store_id)
+                u_store.location = str(u_store_location)
+                u_store.name = str(u_store_name)
+                u_store.store_manager  = Manager.objects.get(name=str(u_store_manager))
+                #getting todo id
+                u_store.save()
+                return redirect("/Manager-Store/")
+    except:
+        content["show"]="Error! check your input"
+        error_message = content["show"]
+        return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
     return render(request,"Manager-Store.html",{"stores":stores,"managers":managers})
     
 def managermanager(request):
@@ -120,9 +126,54 @@ def manageremployee(request):
     content={}
 #     if "register" in request.POST:
 #         return HttpResponseRedirect("/Order")
+    
+    content["show"]=""
+#     if "register" in request.POST:
+#         return HttpResponseRedirect("/Order")
+    try:
+        stores = Store.objects.all()
+        managers = Manager.objects.all()
+        employees = Employee.objects.all()
+        if request.method == "POST": #checking if the request method is a POST
+            if "EmployeeAdd" in request.POST: #checking if there is a request to add a todo
+                 #title
+                name = request.POST["name"] #date
+                manager_name = request.POST["manager_select"]
+                manager = Manager.objects.get(name=str(manager_name))
+                store_name = request.POST["store_select"]
+                store = Store.objects.get(name=str(store_name))
+                #content = title + " -- " + date + " " + category #content
+                a_employee = Employee(name=name, e_store=store,manager=manager)
+                a_employee.save() #saving the todo 
+                return redirect("/Manager-Employee/")
+            if "EmployeeDelete" in request.POST: #checking if there is a request to delete a todo
+                d_Employee_id = request.POST["EmployeeDelete"] #checked todos to be deleted
+                # for todo_id in checkedlist:
+                d_Employee = Employee.objects.get(id=d_Employee_id) #getting todo id
+                d_Employee.delete()
+                return redirect("/Manager-Employee/")
+            if "EmployeeUpdate" in request.POST: #checking if there is a request to delete a todo
+                u_employee_id = request.POST["EmployeeUpdate"]
+                 #checked todos to be deleted
+                # for todo_id in checkedlist:
+                u_employee_name = request.POST["input_employeename"]
+                u_employee_manager = request.POST["manager_select"]
+                u_employee = Employee.objects.get(id=u_employee_id)
+                u_employee_store = request.POST["store_select"]
+                u_employee.name = str(u_employee_name)
+                u_employee.manager  = Manager.objects.get(name=str(u_employee_manager))
+                u_employee.e_store  = Store.objects.get(name=str(u_employee_store))
+                #getting todo id
+                u_employee.save()
+                return redirect("/Manager-Employee/")
+    except:
+        content["show"]="Error! check your input"
+        error_message = content["show"]
+        return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show":error_message,"employees":employees}) 
+    return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"employees":employees})
 
 
-    return render(request,"Manager-Employee.html",content)
+    
 
 def managermenu(request):
     content={}
