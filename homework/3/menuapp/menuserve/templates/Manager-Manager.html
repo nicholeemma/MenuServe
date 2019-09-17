@@ -58,8 +58,10 @@
             </div>
             <div class="col s4">
                 <p id="loginfo">
-                    Hi, Nichole. Start to manage employees now.
+                    Hi, Nichole. Start to manage  managers now.
                    </p>
+                   {% csrf_token %}
+                <p class="error_msg">{{show}}</p>
             </div>
         </div>
             <div class="record-table">
@@ -102,7 +104,7 @@
                           <form action="#" method="POST">
                       <td>{{manager.id}}</td>
                       <td> <input type="text" name="input_managername" value="{{manager.name}}">{{manager.name}}</td>
-                      <td><input type="text" name="input_managergender" value="{{manager.gender}}">{{manager.name}}</td>
+                      <td><input type="text" name="input_managergender" value="{{manager.gender}}">{{manager.gender}}</td>
                          
                       <td>
                                   {% csrf_token %}
@@ -126,56 +128,11 @@
                           
                     </tr>
                     {% endfor %}
-              <tr>
-                <td>0001</td>
-                <td>Nichole</td>
-                <td>Female</td>
-                
               
-                    <a class="waves-effect waves-light btn" >Update</a>
-                </td>
-              </tr>
-              <tr>
-                <td>0002</td>
-                <td>Jess</td>
-                <td>Male</td>
-               
-               
-                    <a class="waves-effect waves-light btn" >Update</a>
-                </td>
-              </tr>
-              <tr>
-                <td>0003</td>
-                <td>Helen</td>
-                <td>Female</td>
-                
-                
-                    <a class="waves-effect waves-light btn" >Update</a>
-                </td>
-              </tr>
-              <tr>
-                  <td>0004</td>
-                  <td>David</td>
-                  <td>Male</td>
-                  
-               
-                      <a class="waves-effect waves-light btn" >Update</a>
-                  </td>
-                </tr>
-                <tr>
-                    <td>0005</td>
-                    <td>Simon</td>
-                    <td>Male</td>
-                   
-                  
-                        <a class="waves-effect waves-light btn" >Update</a>
-                    </td>
-                  </tr>
             </tbody>
           </table>
           <div  class="table-margin-top">
-              <a class="waves-effect waves-light btn" style="margin-right: 5%" >Save</a>
-              <a class="waves-effect waves-light btn" >Add</a>
+   
               </div>
           </div>
             

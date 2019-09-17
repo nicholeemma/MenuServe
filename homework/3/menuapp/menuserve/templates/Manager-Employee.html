@@ -87,7 +87,7 @@
                     <td>
                           {% csrf_token %}
                       <select id="manager" class="select-management" name="manager_select" >
-                          <option class="disabled" value="">Choose an employee</option>
+                          <option class="disabled" value="">Choose a manager</option>
                           {% for manager in managers %}
                               <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
                           {% endfor %}
@@ -198,7 +198,7 @@
             </tbody>
           </table>
           <div>
-              <P> Relations between employees and stores</P>
+              <P> <b>Relations between employees and stores</b></P>
           {% for employee in employees %}
           <br>
           {{employee.name}} :

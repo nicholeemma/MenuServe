@@ -18,16 +18,17 @@
         <header class="menu-page-header">
         
                 <div class="grid-example col s12" id="welcomeheadline">
-                    Welcome to the Moonlight Restaurant
-                    <form method="post" action="/">
+                        <form method="post" action="/">
                         
-                    <a href="{% url 'index' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a></button>
-                    </form>
+                            <a href="{% url 'index' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a></button>
+                            </form>
+                    Welcome to the Moonlight Restaurant
+                    
                 </div>
         
         </header>
         
-    
+    <!--
         <div class="general-container">
         
     
@@ -246,19 +247,21 @@
                             </div>
                             
                             <a class="waves-effect waves-light btn" style="float: right">Save</a>
-                            <a href="{% url 'manageorder' %}" class="waves-effect waves-light btn">Order</a>
+                            
                             <br>
                             <br>
                             
                             <audio controls autoplay muted loop class="audio">
-                                    <!--Music source: https://www.fesliyanstudios.com/royalty-free-music/downloads-c/peaceful-and-relaxing-music/22-->
-                                        <source src="Music/background_music1.mp3" type="audio/mpeg">
+                                    
+                                     <source src="Music/background_music1.mp3" type="audio/mpeg">
                                         <source src="Music/background_music2.mp3" type="audio/mpeg">
                                       Your browser does not support the audio element.
                             </audio>
                     </div>
-                    
-                  </div>
+                   
+                  </div>--> 
+
+            
                   
             <!-- Page Content goes here -->
             
@@ -266,6 +269,128 @@
             
 
           </div>
+          <div class="general-container">
+                {% csrf_token %}
+                <p class="error_msg">{{show}}</p>
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>
+                                  Desk_no
+                              </th>
+                              <th>
+                                  Store
+                              </th>
+                              <th>
+                                name_of_cuisine
+                              </th>
+                              
+                              <th>
+                                  price
+                              </th>
+                              <th>
+                                  description
+                              </th>
+                              <th>
+                                    amount
+                                </th>
+                                <th>
+                                    action
+                                </th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          {% for menu in menus %}<form action="#" method="POST">
+                          <tr>
+                             
+                                    <td>
+                                            {% csrf_token %}
+                                            <input type="text" id="status" class="taskName" name="desk_no" required>
+                                        </td>
+                                        <td>
+                                        {% csrf_token %}
+                                        <select id="store" class="select-management" name="store_select">
+                                            <option class="disabled" value="">Choose a store</option>
+                                            {% for store in stores %}
+                                                <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                                            {% endfor %}
+                                            </select>
+                                        </td>
+                                <td>
+                              <label value="{{menu.name_of_cuisine}}">
+                                  {{menu.name_of_cuisine}}
+                              </label>
+                                </td>
+                                <td>
+                                    <label value="{{menu.price}}">
+                                                {{menu.price}}
+                                    </label>
+                                </td>
+                                <td>
+                                        <label value="{{menu.description}}">
+                                                    {{menu.description}}
+                                        </label>
+                                </td>
+                                <td>
+                                        {% csrf_token %}
+                                        <input type="text" id="status" class="taskName" name="amount" > 
+                                </td>
+                                <td>
+                                        {% csrf_token %}
+                                        <button class="waves-effect waves-light btn" name = "OrderMenu" id="{{ menu.id }}" value="{{ menu.id }}" type="submit">Order</button>
+                                </td>
+                          </tr> </form>
+                          {% endfor %}
+                         
+                        </tbody>
+                  </table>
+              </form>
+          
+What you have ordered
+<table><thead>
+    <tr>
+        <th>name of cusine</th>
+        <th>amount</th>
+        <th>price</th>
+        <th>time</th>
+        <th>store</th>
+        <th>desk</th>
+        <th>Action</th>
+    </tr>
+</thead>
+{% for order in orders %}
+<tr>
+    <td>
+        {{order.name_of_cuisine}}
+    </td>
+    <td>
+        {{order.amount}}
+    </td>
+    <td>
+        {{order.price}}
+    </td>
+    <td>
+        {{order.time}}
+    </td>
+    <td>
+            {{order.store.name}}
+    </td>
+    <td>
+            {{order.desk_no}}
+    </td>
+    <td><form action="#" method="POST">
+            {% csrf_token %}
+            <button class="waves-effect waves-light btn" name = "DeleteOrder" id="{{ order.id }}" value="{{ order.id }}" type="submit">Delete</button>
+        </form>
+        </td>
+
+</tr>
+{% endfor %}
+</table>
+         
+          <a href="{% url 'manageorder' %}" class="waves-effect waves-light btn">Order</a>
+          
+ </div>
           <footer class="page-footer">
                 <div class="container">
                   <div class="row">

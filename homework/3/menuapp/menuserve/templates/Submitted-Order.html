@@ -64,6 +64,9 @@
                 <p id="loginfo" >
                     Hi, Jess. Start to manage orders now.
                    </p>
+                   {% csrf_token %}
+                <p class="error_msg">{{show}}</p>
+                    
             </div>
         </div>
             <div class="record-table">
@@ -75,97 +78,69 @@
                   <th>Name of Cuisine</th>
                   <th>Amount</th>
                   <th>Status</th>
-                  <th>Time</th>
+                  
+                  <th>Price</th>
+                  <th>Store</th>
+                  <th>Action</th>
                   <th>Action</th>
               </tr>
             </thead>
     
             <tbody>
-                <form action="#" method="POST">
+                <form action="#" method="POST">{% for order in orders %}
                     <tr>
-                            <td>0001</td>
-                            {% csrf_token %}
-                            <td>
-                                    <input type="text" id="desk_no" class="taskName" name="desk_no" required>
-                            </td>
-                            {% csrf_token %}
-                            <td>
-                                    <input type="text" id="name_of_cuisine" class="taskName" name="name_of_cuisine" required>
-                            </td>
-                            {% csrf_token %}
-                            <td>
-                                    <input type="text" id="amount" class="taskName" name="amount" required>
-                            </td>
-                            {% csrf_token %}
-                            <td>
-                                    <input type="text" id="status" class="taskName" name="status" required>
-                            </td>
-                            {% csrf_token %}
-                            <td>
-                                <input type="text" id="time" class="taskName" name="time" required>
-                            </td>
-                            <td>
-                                    <button class="OrderAdd" name="OrderAdd" type="submit"><i class="fa fa-plus icon"></i>Add</button>
-                                    <button class="OrderDelete" name="OrderDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();"></i>Delete Tasks</button>
                             
-                                </td>
+              
+                    <form action="#" method="POST">
+                <td>{{order.id}}</td>
+                <td> <input type="text" name="input_desk_no" value="{{order.desk_no}}">{{order.desk_no}}</td>
+                <td >
+                    {% csrf_token %}
+                        <select id="menu" class="select-management" name="cuisine_select" >
+                            <option class="disabled" value="">Choose a cuisine</option>
+                            {% for menu in menus %}
+                                <option class="" value="{{ menu.name_of_cuisine }}" name="{{ menu.name_of_cuisine }}">{{ menu.name_of_cuisine }}</option>
+                            {% endfor %}
+                        </select>{{ order.name_of_cuisine }}
+                </td>
+                <td> <input type="text" name="input_amount" value="{{order.amount}}">{{order.amount}}</td>
+                <td> <input type="text" name="input_status" value="{{order.status}}">{{order.status}}</td>
+                <!--<td> <input type="text" name="input_time" value="{{order.time}}">{{order.time}}</td>-->
+                <td> <input type="text" name="input_price" value="{{order.price}}">{{order.price}}</td>
+                
+                <td>{% csrf_token %}
+                        <select id="store" class="select-management" name="store_select" >
+                            <option class="disabled" value="">Choose a store</option>
+                            {% for store in stores %}
+                                <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                            {% endfor %}
+                        </select>{{ order.store.name }}
+                </td>
+                   
+                <td>
+                            {% csrf_token %}
+                    <button class="waves-effect waves-light btn" name = "OrderUpdate" id="{{ order.id }}" value="{{ order.id }}" type="submit">Update</button>
+                </td>
+                <td>
+                        {% csrf_token %}
+                <button class="waves-effect waves-light btn" name = "DeleteUpdate" id="{{ order.id }}" value="{{ order.id }}" type="submit">Delete</button>
+            </td>
+                </form>
+                
+   
+                            
+                                                            <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
+          
+               
+               
+                  
+              </tr>{% endfor %}  
+              
                           </tr>
                         </form>
-              <tr>
-                <td>0001</td>
-                <td>16</td>
-                <td>Burger</td>
-                <td>2</td>
-                <td>Completed</td>
-                <td>18:00 30/08/2019</td>
-                <td>
-                    <a class="waves-effect waves-light btn" >Update</a>
-                </td>
-              </tr>
-              <tr>
-                <td>0002</td>
-                <td>10</td>
-                <td>Salad-a</td>
-                <td>1</td>
-                <td>Pending</td>
-                <td>18:20 30/08/2019</td>
-                <td>
-                    <a class="waves-effect waves-light btn" >Update</a>
-                </td>
-              </tr>
-              <tr>
-                <td>0003</td>
-                <td>08</td>
-                <td>Seafood-b</td>
-                <td>4</td>
-                <td>Pending</td>
-                <td>18:25 30/08/2019</td>
-                <td>
-                    <a class="waves-effect waves-light btn" >Update</a>
-                </td>
-              </tr>
-              <tr>
-                  <td>0004</td>
-                  <td>04</td>
-                  <td>Seafood-c</td>
-                  <td>4</td>
-                  <td>Completed</td>
-                  <td>18:29 30/08/2019</td>
-                  <td>
-                      <a class="waves-effect waves-light btn" >Update</a>
-                  </td>
-                </tr>
-                <tr>
-                    <td>0005</td>
-                    <td>09</td>
-                    <td>Slide-a</td>
-                    <td>1</td>
-                    <td>Pending</td>
-                    <td>18:45 30/08/2019</td>
-                    <td>
-                        <a class="waves-effect waves-light btn" >Update</a>
-                    </td>
-                  </tr>
+             
+              
+                 
             </tbody>
           </table>
           </div>

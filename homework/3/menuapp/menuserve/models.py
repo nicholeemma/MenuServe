@@ -3,6 +3,7 @@
 
 from django.db import models
 from django.utils import timezone
+import datetime
 # Code reference: https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c
 
 
@@ -32,9 +33,10 @@ class Order(models.Model):
 
     desk_no = models.CharField(max_length=4)
     name_of_cuisine = models.CharField(max_length=30)
-    status = models.CharField(max_length=10)
-    time = models.DateField(default = timezone.now().strftime("%d/%m/%y"))
+    status = models.CharField(max_length=10,default='pending')
+    time = models.DateField(default = datetime.datetime.now().strftime("%Y-%m-%d %H:%I:%S"))
     amount = models.IntegerField()
+    price = models.IntegerField()
     store = models.ForeignKey(Store,on_delete=models.CASCADE)
     class Meta:
         ordering = ["-time"]
