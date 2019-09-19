@@ -44,7 +44,7 @@
             </div>
             <div class="col s2">
             <form >
-                <select class="select-management">
+                <select class="select-management" required>
                       <option >Completed</option>
                       <option >Pending</option>
                 </select>
@@ -52,7 +52,7 @@
             </div>
             <div class="col s2">
             <form >
-                <select class="select-management">
+                <select class="select-management" required>
                      <option >Store-A</option>
                      <option >Store-B</option>
                      <option >Store-C</option>
@@ -96,7 +96,7 @@
                 <td> <input type="text" name="input_desk_no" value="{{order.desk_no}}">{{order.desk_no}}</td>
                 <td >
                     {% csrf_token %}
-                        <select id="menu" class="select-management" name="cuisine_select" >
+                        <select id="menu" class="select-management" name="cuisine_select" required>
                             <option class="disabled" value="">Choose a cuisine</option>
                             {% for menu in menus %}
                                 <option class="" value="{{ menu.name_of_cuisine }}" name="{{ menu.name_of_cuisine }}">{{ menu.name_of_cuisine }}</option>
@@ -109,7 +109,7 @@
                 <td> <input type="text" name="input_price" value="{{order.price}}">{{order.price}}</td>
                 
                 <td>{% csrf_token %}
-                        <select id="store" class="select-management" name="store_select" >
+                        <select id="store" class="select-management" name="store_select" required>
                             <option class="disabled" value="">Choose a store</option>
                             {% for store in stores %}
                                 <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
