@@ -21,45 +21,56 @@ def home(request):
     desk_=""
     content={}
     error_message=""
-    try:
+    
         
         
-        orders = Order.objects.all()
-        menus = Menu.objects.all()
-        stores = Store.objects.all()
-        if request.method == "POST": #checking if the request method is a POST
-            #checking if there is a request to delete an order
-            if "DeleteOrder" in request.POST:
+    orders = Order.objects.all()
+    menus = Menu.objects.all()
+    stores = Store.objects.all()
+    if request.method == "POST": #checking if the request method is a POST
+        #checking if there is a request to delete an order
+        if "DeleteOrder" in request.POST:
+            try:
                 d_order = request.POST["DeleteOrder"]
                 
                 delete_order = Order.objects.get(id=int(d_order)) 
                 delete_order.delete()
-            #checking if there is a request to add an order
-            if "OrderMenu" in request.POST: 
-                
-               
-                status = "pending"
-                menu_id = request.POST["OrderMenu"]
-                #time = request.POST["time"] #date
-                amount = request.POST["amount"]
-                store_ = request.POST["store_select"]
-                desk_ = request.POST["desk_no"]
-                name_of_cuisine = Menu.objects.get(id = menu_id).name_of_cuisine
-                price = Menu.objects.get(id = menu_id).price
-                store = Store.objects.get(name=str(store_))
-                time = "2019-09-21"
-                
-               
-                an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine, time=time,
-                                    status=status, amount=amount, store=store ,price=price)
-                an_order.save() #saving 
-                return redirect("/Order/")
+            except:
+                content["show"]="What you deleted does not exist"
+                error_message = content["show"]
+                return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+
+        #checking if there is a request to add an order
+        if "OrderMenu" in request.POST: 
+            
+            
+            status = "pending"
+            menu_id = request.POST["OrderMenu"]
+            #time = request.POST["time"] #date
+            try:
+                amount = int(request.POST["amount"])
+            except:
+                content["show"]="Amount must be integer"
+                error_message = content["show"]
+                return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+            store_ = request.POST["store_select"]
+            desk_ = request.POST["desk_no"]
+            name_of_cuisine = Menu.objects.get(id = menu_id).name_of_cuisine
+            price = Menu.objects.get(id = menu_id).price
+            store = Store.objects.get(name=str(store_))
+            time = "2019-09-21"
+            
+            
+            an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine, time=time,
+                                status=status, amount=amount, store=store ,price=price)
+            an_order.save() #saving 
+            return redirect("/Order/")
 
             
-    except:
-        content["show"]="Error! check your input"
-        error_message = content["show"]
-        return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+    
+        # content["show"]="Error! check your input"
+        # error_message = content["show"]
+        # return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
 
 
     
