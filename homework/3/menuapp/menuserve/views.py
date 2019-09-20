@@ -218,37 +218,44 @@ def managermanager(request):
     # for display error message 
     content["show"]=""
 
-    try:
-        managers = Manager.objects.all()
-        if request.method == "POST": #checking if the request method is a POST
-            if "ManagerAdd" in request.POST: #checking if there is a request to add a todo
-                gender = request.POST["gender"] #title
-                name = request.POST["name"] #date
-                
-                #content = title + " -- " + date + " " + category #content
-                a_manager = Manager(name=name, gender=gender)
-                a_manager.save() #saving the todo 
-                return redirect("/Manager-Manager/")
-            if "ManagerDelete" in request.POST: #checking if there is a request to delete a todo
-                d_manager_id = request.POST["ManagerDelete"] #checked todos to be deleted
-                # for todo_id in checkedlist:
+    
+    managers = Manager.objects.all()
+    if request.method == "POST": #checking if the request method is a POST
+        if "ManagerAdd" in request.POST: #checking if there is a request to add a todo
+            gender = request.POST["gender"] #title
+            name = request.POST["name"] #date
+            
+            #content = title + " -- " + date + " " + category #content
+            a_manager = Manager(name=name, gender=gender)
+            a_manager.save() #saving the todo 
+            return redirect("/Manager-Manager/")
+        if "ManagerDelete" in request.POST: #checking if there is a request to delete a todo
+            d_manager_id = request.POST["ManagerDelete"] #checked todos to be deleted
+            try:
                 d_manager = Manager.objects.get(id=d_manager_id) #getting todo id
-                d_manager.delete()
-                return redirect("/Manager-Manager/")
-            if "ManagerUpdate" in request.POST: #checking if there is a request to delete a todo
-                u_manager_id = request.POST["ManagerUpdate"]
-                u_manager_gender = request.POST["input_managergender"] #checked todos to be deleted
-                # for todo_id in checkedlist:
-                u_manager_name = request.POST["input_managername"]
+            except:
+                content["show"]="Manager does not exist"
+                error_message = content["show"]
+                return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message}) 
+            d_manager.delete()
+            return redirect("/Manager-Manager/")
+        if "ManagerUpdate" in request.POST: #checking if there is a request to delete a todo
+            u_manager_id = request.POST["ManagerUpdate"]
+            u_manager_gender = request.POST["input_managergender"] #checked todos to be deleted
+            # for todo_id in checkedlist:
+            u_manager_name = request.POST["input_managername"]
+            try:
                 u_manager = Manager.objects.get(id=u_manager_id)
-                u_manager.location = str(u_manager_gender)
-                u_manager.name = str(u_manager_name)  #getting todo id
-                u_manager.save()
-                return redirect("/Manager-Manager/")
-    except:
-        content["show"]="Error! check your input"
-        error_message = content["show"]
-        return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message}) 
+            except:
+                content["show"]="Manager does not exist"
+                error_message = content["show"]
+                return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message}) 
+            u_manager.location = str(u_manager_gender)
+            u_manager.name = str(u_manager_name)  #getting todo id
+            u_manager.save()
+            return redirect("/Manager-Manager/")
+
+    
     return render(request,"Manager-Manager.html",{"managers":managers})
 
 def manageremployee(request):
