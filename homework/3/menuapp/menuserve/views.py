@@ -207,8 +207,7 @@ def managerstore(request):
             #getting todo id
             u_store.save()
             return redirect("/Manager-Store/")
-except:
-    
+
     return render(request,"Manager-Store.html",{"stores":stores,"managers":managers})
     
 def managermanager(request):
