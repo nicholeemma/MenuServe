@@ -160,42 +160,55 @@ def managerstore(request):
     # for display error message 
     content["show"]=""
 
-    try:
-        stores = Store.objects.all()
-        managers = Manager.objects.all()
-        if request.method == "POST": #checking if the request method is a POST
-            if "StoreAdd" in request.POST: #checking if there is a request to add a todo
-                location = request.POST["location"] #title
-                name = request.POST["name"] #date
-                manager_name = request.POST["manager_select"]
+    
+    stores = Store.objects.all()
+    managers = Manager.objects.all()
+    if request.method == "POST": #checking if the request method is a POST
+        if "StoreAdd" in request.POST: #checking if there is a request to add a todo
+            location = request.POST["location"] #title
+            name = request.POST["name"] #date
+            manager_name = request.POST["manager_select"]
+            try:
                 manager = Manager.objects.get(name=str(manager_name))
-                #content = title + " -- " + date + " " + category #content
-                a_store = Store(name=name, location=location,store_manager=manager)
-                a_store.save() #saving the todo 
-                return redirect("/Manager-Store/")
-            if "StoreDelete" in request.POST: #checking if there is a request to delete a todo
-                d_store_id = request.POST["StoreDelete"] #checked todos to be deleted
-                # for todo_id in checkedlist:
+            except:
+                content["show"]="Manager does not exist"
+                error_message = content["show"]
+                return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
+            #content = title + " -- " + date + " " + category #content
+            a_store = Store(name=name, location=location,store_manager=manager)
+            a_store.save() #saving the todo 
+            return redirect("/Manager-Store/")
+        if "StoreDelete" in request.POST: #checking if there is a request to delete a todo
+            d_store_id = request.POST["StoreDelete"] #checked todos to be deleted
+            # for todo_id in checkedlist:
+            try:
                 d_store = Store.objects.get(id=d_store_id) #getting todo id
-                d_store.delete()
-                return redirect("/Manager-Store/")
-            if "StoreUpdate" in request.POST: #checking if there is a request to delete a todo
-                u_store_id = request.POST["StoreUpdate"]
-                u_store_location = request.POST["input_storelocation"] #checked todos to be deleted
-                # for todo_id in checkedlist:
-                u_store_name = request.POST["input_storename"]
-                u_store_manager = request.POST["manager_select"]
-                u_store = Store.objects.get(id=u_store_id)
-                u_store.location = str(u_store_location)
-                u_store.name = str(u_store_name)
+            except:
+                content["show"]="Manager does not exist"
+                error_message = content["show"]
+                return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
+            d_store.delete()
+            return redirect("/Manager-Store/")
+        if "StoreUpdate" in request.POST: #checking if there is a request to delete a todo
+            u_store_id = request.POST["StoreUpdate"]
+            u_store_location = request.POST["input_storelocation"] #checked todos to be deleted
+            # for todo_id in checkedlist:
+            u_store_name = request.POST["input_storename"]
+            u_store_manager = request.POST["manager_select"]
+            u_store = Store.objects.get(id=u_store_id)
+            u_store.location = str(u_store_location)
+            u_store.name = str(u_store_name)
+            try:
                 u_store.store_manager  = Manager.objects.get(name=str(u_store_manager))
-                #getting todo id
-                u_store.save()
-                return redirect("/Manager-Store/")
-    except:
-        content["show"]="Error! check your input"
-        error_message = content["show"]
-        return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
+            except:
+                content["show"]="Manager does not exist"
+                error_message = content["show"]
+                return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
+            #getting todo id
+            u_store.save()
+            return redirect("/Manager-Store/")
+except:
+    
     return render(request,"Manager-Store.html",{"stores":stores,"managers":managers})
     
 def managermanager(request):

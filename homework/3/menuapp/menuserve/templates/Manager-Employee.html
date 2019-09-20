@@ -60,6 +60,8 @@
                 <p id="loginfo">
                     Hi, Nichole. Start to manage employees now.
                    </p>
+                   {% csrf_token %}
+                   <p class="error_msg">{{show}}</p>
             </div>
         </div>
             <div class="record-table">
