@@ -20,12 +20,11 @@
                 <div class="grid-example col s12" id="welcomeheadline">
                         <form method="post" action="/">
                         
-                            <a href="{% url 'index' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a></button>
-                            </form>
+                            <a href="{% url 'index' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a>
+                        </form>
                     Welcome to the Moonlight Restaurant
                     
                 </div>
-        
         </header>
         
     <!--
@@ -268,7 +267,7 @@
             
             
 
-          </div>
+          <!--</div>-->
           <div class="general-container">
                 {% csrf_token %}
                 <p class="error_msg">{{show}}</p>
@@ -300,51 +299,53 @@
                           </tr>
                           </thead>
                           <tbody>
-                          {% for menu in menus %}<form action="#" method="POST">
+                          {% for menu in menus %}
                           <tr>
+                              <form action="#" method="POST">
                              
-                                    <td>
+                                        <td>
                                             {% csrf_token %}
-                                            <input type="text" id="status" class="taskName" name="desk_no" required>
+                                            <input type="text"  class="taskName" name="desk_no" required>
                                         </td>
                                         <td>
                                         {% csrf_token %}
-                                        <select id="store" class="select-management" name="store_select">
+                                        <select id="store" class="select-management" name="store_select" required>
                                             <option class="disabled" value="">Choose a store</option>
                                             {% for store in stores %}
-                                                <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                                                <option class="" value="{{ store.name }}" id="{{ store.name }}">{{ store.name }}</option>
                                             {% endfor %}
                                             </select>
                                         </td>
                                 <td>
-                              <label value="{{menu.name_of_cuisine}}">
+                              <label >
                                   {{menu.name_of_cuisine}}
                               </label>
                                 </td>
                                 <td>
-                                    <label value="{{menu.price}}">
+                                    <label >
                                                 {{menu.price}}
                                     </label>
                                 </td>
                                 <td>
-                                        <label value="{{menu.description}}">
+                                        <label>
                                                     {{menu.description}}
                                         </label>
                                 </td>
                                 <td>
                                         {% csrf_token %}
-                                        <input type="text" id="status" class="taskName" name="amount" > 
+                                        <input type="text"  class="taskName" name="amount" > 
                                 </td>
                                 <td>
                                         {% csrf_token %}
                                         <button class="waves-effect waves-light btn" name = "OrderMenu" id="{{ menu.id }}" value="{{ menu.id }}" type="submit">Order</button>
                                 </td>
-                          </tr> </form>
+                            </form>
+                          </tr> 
                           {% endfor %}
                          
                         </tbody>
                   </table>
-              </form>
+              
           
 What you have ordered
 <table><thead>
@@ -358,6 +359,7 @@ What you have ordered
         <th>Action</th>
     </tr>
 </thead>
+
 {% for order in orders %}
 <tr>
     <td>

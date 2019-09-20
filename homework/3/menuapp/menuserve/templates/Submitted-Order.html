@@ -106,7 +106,7 @@
                 <td> <input type="text" name="input_amount" value="{{order.amount}}">{{order.amount}}</td>
                 <td> <input type="text" name="input_status" value="{{order.status}}">{{order.status}}</td>
                 <!--<td> <input type="text" name="input_time" value="{{order.time}}">{{order.time}}</td>-->
-                <td> <input type="text" name="input_price" value="{{order.price}}">{{order.price}}</td>
+                <td> {{order.price}}</td>
                 
                 <td>{% csrf_token %}
                         <select id="store" class="select-management" name="store_select" required>

@@ -56,8 +56,13 @@ def home(request):
             store_ = request.POST["store_select"]
             desk_ = request.POST["desk_no"]
             name_of_cuisine = Menu.objects.get(id = menu_id).name_of_cuisine
-            price = Menu.objects.get(id = menu_id).price
-            store = Store.objects.get(name=str(store_))
+            price = Menu.objects.get(id = menu_id).price * amount
+            try:
+                store = Store.objects.get(name=str(store_))
+            except:
+                content["show"]="Store does not exist"
+                error_message = content["show"]
+                return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
             time = "2019-09-21"
             
             
@@ -81,55 +86,64 @@ def manageorders(request):
     Function for sumbit-order page
     '''
     content={}
-    try:
-        orders = Order.objects.all()
-        menus = Menu.objects.all()
-        stores = Store.objects.all()
-        if request.method == "POST": #checking if the request method is a POST
-            if "OrderAdd" in request.POST: #checking if there is a request to add a todo
-                desk_no = request.POST["desk_no"] 
-                name_of_cuisine = request.POST["name_of_cuisine"] 
-                status = request.POST["status"] 
-                
-                time = request.POST["time"] #date
-                amount = request.POST["amount"]
-                store = Store.objects.get(name='Store-A')
-                
-                an_order = Order(desk_no=desk_no, name_of_cuisine=name_of_cuisine, 
-                                    status=status, time=time,amount=amount,store=store)
-                an_order.save() #saving the todo 
-                return redirect("/")
-            if "OrderUpdate" in request.POST: #checking if there is a request to delete a todo
-                u_id = request.POST["OrderUpdate"]
-                u_input_desk_no = request.POST["input_desk_no"]
-                u_cuisine_select = request.POST["cuisine_select"] 
-                
-                u_input_amount = request.POST["input_amount"]
-                u_input_status = request.POST["input_status"]
-                #u_input_time = request.POST["input_time"]
-                u_input_status = request.POST["input_price"]
-                u_input_store = request.POST["store_select"]
+    
+    orders = Order.objects.all()
+    menus = Menu.objects.all()
+    stores = Store.objects.all()
+    if request.method == "POST": #checking if the request method is a POST
+        
+        if "OrderUpdate" in request.POST: #checking if there is a request to delete a todo
+            u_id = request.POST["OrderUpdate"]
+            u_input_desk_no = request.POST["input_desk_no"]
+            u_cuisine_select = request.POST["cuisine_select"] 
+            
+            u_input_amount = request.POST["input_amount"]
+            u_input_status = request.POST["input_status"]
+            #u_input_time = request.POST["input_time"]
+            
+            u_input_store = request.POST["store_select"]
+            try:
                 u_order = Order.objects.get(id = u_id)
-                u_order.desk_no = str(u_input_desk_no)
-                u_order.name_of_cuisine = str(u_cuisine_select)
-                u_order.amount = str(u_input_amount)
-                u_order.status = u_input_status
-                #u_order.time = u_input_time
+            except:
+                content["show"]="order does not exist"
+                error_message = content["show"]
+                return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message})
+            u_order.desk_no = str(u_input_desk_no)
+            u_order.name_of_cuisine = str(u_cuisine_select)
+            try:
+                u_order.amount = int(u_input_amount)
+            except:
+                content["show"]="amount should be integer"
+                error_message = content["show"]
+                return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+            try:
+                u_order.price = int(int(Menu.objects.get(name_of_cuisine = u_cuisine_select).price)*int(u_input_amount))
+            except:
+                content["show"]="menu does not exist"
+                error_message = content["show"]
+                return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message})
+            u_order.status = u_input_status
+            #u_order.time = u_input_time
+            try:
                 u_order.store = Store.objects.get(name = str(u_input_store ))
-                    
-                u_order.save()
-                return redirect("/Submitted-Order/")
-            if "DeleteUpdate" in request.POST: #checking if there is a request to delete a todo
-                d_order = request.POST["DeleteUpdate"] #checked todos to be deleted
-                
-                delete_order = Order.objects.get(id=int(d_order)) #getting todo id
-                delete_order.delete() #deleting todo
-                return redirect("/Submitted-Order/")
-    except:
-        content["show"]="Error! check your input"
-        error_message = content["show"]
-        return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+            except:
+                content["show"]="Store does not exist"
+                error_message = content["show"]
+                return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
 
+            u_order.save()
+            return redirect("/Submitted-Order/")
+        if "DeleteUpdate" in request.POST: #checking if there is a request to delete a todo
+            d_order = request.POST["DeleteUpdate"] #checked todos to be deleted
+            try:
+                delete_order = Order.objects.get(id=int(d_order)) #getting todo id
+            except:
+                content["show"]="Order does not exist"
+                error_message = content["show"]
+                return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+
+            delete_order.delete() #deleting todo
+            return redirect("/Submitted-Order/")
 
     return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus})
 
@@ -321,40 +335,59 @@ def managermenu(request):
     content["show"]=""
     error_message=""
     menus = Menu.objects.all()
-    try:
-        if request.method == "POST": #checking if the request method is a POST
-            if "MenuAdd" in request.POST: #checking if there is a request to add a todo
-                id_for_dish = request.POST["id_for_dish"] #title
-                name_of_cuisine = request.POST["name_of_cuisine"] #date
-                price = request.POST['price']
-                category = request.POST['menu_select']
-                description = request.POST['description']
-                a_menu = Menu(id_for_dish=id_for_dish, name_of_cuisine=name_of_cuisine,price=price,classification=category,description=description)
-                a_menu.save() #saving the todo 
-                return redirect("/Manager-Menu/")
-            if "MenuDelete" in request.POST: #checking if there is a request to delete a todo
-                d_Menu_id = request.POST["MenuDelete"] #checked todos to be deleted
+    
+    if request.method == "POST": #checking if the request method is a POST
+        if "MenuAdd" in request.POST: #checking if there is a request to add a todo
+            id_for_dish = request.POST["id_for_dish"] #title
+            name_of_cuisine = request.POST["name_of_cuisine"] #date
+            try:
+                price = int(request.POST['price'])
+            except:
+                content["show"]="price must be integer"
+                error_message = content["show"]
+                return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
+            category = request.POST['menu_select']
+            description = request.POST['description']
+            a_menu = Menu(id_for_dish=id_for_dish, name_of_cuisine=name_of_cuisine,price=price,classification=category,description=description)
+            a_menu.save() #saving the todo 
+            return redirect("/Manager-Menu/")
+        if "MenuDelete" in request.POST: #checking if there is a request to delete a todo
+            d_Menu_id = request.POST["MenuDelete"]
+            try: 
                 d_menu = Menu.objects.get(id=d_Menu_id) 
-                d_menu.delete()
-                return redirect("/Manager-Menu/")
-            if "MenuUpdate" in request.POST: #checking if there is a request to update
-                u_Menu_id = request.POST["MenuUpdate"]
-                u_Menu_id_dish = request.POST["input_menuid_for_dish"] 
-                u_menu_name = request.POST["input_menuname_of_cuisine"]
-                u_category = request.POST['menu_select']
-                u_description = request.POST['input_menudescription']
-                u_price = request.POST['input_menuprice']
+            except:
+                content["show"]="menu does not exist"
+                error_message = content["show"]
+                return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
+            d_menu.delete()
+            return redirect("/Manager-Menu/")
+        if "MenuUpdate" in request.POST: #checking if there is a request to update
+            u_Menu_id = request.POST["MenuUpdate"]
+            u_Menu_id_dish = request.POST["input_menuid_for_dish"] 
+            u_menu_name = request.POST["input_menuname_of_cuisine"]
+            u_category = request.POST['menu_select']
+            u_description = request.POST['input_menudescription']
+            
+            try:
+                u_price = int(request.POST['input_menuprice'])
+            except:
+                content["show"]="price must be integer"
+                error_message = content["show"]
+                return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
+            try:
                 u_menu = Menu.objects.get(id=u_Menu_id)
-                u_menu.id_for_dish = str(u_Menu_id_dish)
-                u_menu.name_of_cuisine = str(u_menu_name)
-                u_menu.classification = str(u_category)
-                u_menu.description = str(u_description) 
-                u_menu.price = str(u_price)  
-                u_menu.save()
-                return redirect("/Manager-Menu/")
-    except:
-        content["show"]="Error! check your input"
-        error_message = content["show"]
-        return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
+            except:
+                content["show"]="menu does not exist"
+                error_message = content["show"]
+                return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
+            u_menu.id_for_dish = str(u_Menu_id_dish)
+            u_menu.name_of_cuisine = str(u_menu_name)
+            u_menu.classification = str(u_category)
+            u_menu.description = str(u_description) 
+            u_menu.price = str(u_price)  
+            u_menu.save()
+            return redirect("/Manager-Menu/")
+
+    
     return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
 
