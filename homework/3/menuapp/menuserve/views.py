@@ -63,10 +63,10 @@ def home(request):
                 content["show"]="Store does not exist"
                 error_message = content["show"]
                 return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
-            time = "2019-09-21"
+            #time = "2019-09-21"
             
-            
-            an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine, time=time,
+           # time=time,
+            an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine, 
                                 status=status, amount=amount, store=store ,price=price)
             an_order.save() #saving 
             return redirect("/Order/")
@@ -351,6 +351,20 @@ def manageremployee(request):
                 
             except:
                 content["show_error"]="store or manager does not exist"
+                error_message = content["show_error"]
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
+            
+           
+            u_employee.save()
+        if "EmployeeRemoveStore" in request.POST:
+            u_employee_store = request.POST["store_select"]
+            u_employee_name = request.POST["employee_select"]
+            try:
+                u_employee = Employee.objects.get(name=u_employee_name)
+                u_employee.e_store.remove(Store.objects.get(name=str(u_employee_store)))
+                
+            except:
+                content["show_error"]="This store is not assigned to employee before"
                 error_message = content["show_error"]
                 return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
             

@@ -350,6 +350,7 @@
 What you have ordered
 <table><thead>
     <tr>
+        <th>Order ID</th>
         <th>name of cusine</th>
         <th>amount</th>
         <th>price</th>
@@ -363,6 +364,9 @@ What you have ordered
 {% for order in orders %}
 <tr>
     <td>
+        {{order.id}}
+    </td>
+    <td>
         {{order.name_of_cuisine}}
     </td>
     <td>
@@ -371,10 +375,11 @@ What you have ordered
     <td>
         {{order.price}}
     </td>
-    <!--<td>
+    <!--
+    <td>
         {{order.time}}
-    </td>-->
-    
+    </td>
+    -->
     <td>
             {{order.store.name}}
     </td>

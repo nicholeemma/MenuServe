@@ -61,7 +61,7 @@
                     Hi, Nichole. Start to manage employees now.
                    </p>
                    {% csrf_token %}
-                   <p class="error_msg">{{show}}</p>
+                   <p class="error_msg">{{show_error}}</p>
             </div>
         </div>
             <div class="record-table">
@@ -148,7 +148,40 @@
                           </td>
                         </tr>
                         </form>
+              
 
+                        <form action="#" method="POST">
+                                <tr>
+                                    
+                          
+                                <td colspan="2">
+                                      {% csrf_token %}
+                                  <select id="manager" class="select-management" name="employee_select" required>
+                                      <option class="disabled" value="">Choose an employee</option>
+                                      {% for employee in employees %}
+                                          <option class="" value="{{ employee.name }}" name="{{ employee.name }}">{{ employee.name }}</option>
+                                      {% endfor %}
+                                      </select>
+                             
+                                </td>
+                                <td colspan="2">
+                                    {% csrf_token %}
+                                <select id="store" class="select-management" name="store_select" required>
+                                    <option class="disabled" value="">Choose a store</option>
+                                    {% for store in stores %}
+                                        <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                                    {% endfor %}
+                                    </select>
+                           
+                              </td>
+                                <td colspan="2">
+                                    <button class="waves-effect waves-light btn" name="EmployeeRemoveStore" type="submit">
+                                        Remove Employee from a Store
+                                      </button>
+                                     
+                                  </td>
+                                </tr>
+                                </form>
 
 
                     {% for employee in employees %}
