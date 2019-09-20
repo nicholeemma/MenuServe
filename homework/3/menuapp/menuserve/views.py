@@ -63,10 +63,10 @@ def home(request):
                 content["show"]="Store does not exist"
                 error_message = content["show"]
                 return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
-            #time = "2019-09-21"
+            time = "2019-09-21"
             
-           # time=time,
-            an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine, 
+           # 
+            an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine, time=time,
                                 status=status, amount=amount, store=store ,price=price)
             an_order.save() #saving 
             return redirect("/Order/")
@@ -333,11 +333,7 @@ def manageremployee(request):
                 return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
             
            
-            for s in u_employee.e_store.all():
-                store_message.append(s.name+" ")
             
-            content["show"]=store_message
-            store_message=content["show"]
             #getting todo id
             #getting todo id
             u_employee.save()
@@ -354,8 +350,13 @@ def manageremployee(request):
                 error_message = content["show_error"]
                 return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
             
-           
+            for s in u_employee.e_store.all():
+                store_message+=s.name+" "
+            
+            content["show"]=store_message
+            store_message=content["show"]
             u_employee.save()
+
         if "EmployeeRemoveStore" in request.POST:
             u_employee_store = request.POST["store_select"]
             u_employee_name = request.POST["employee_select"]
