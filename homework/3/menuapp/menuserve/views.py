@@ -246,82 +246,97 @@ def manageremployee(request):
 
     # for display error message 
     content["show"]=""
+    content["show_error"]=""
     store_message=""
 
-    try:
-        stores = Store.objects.all()
-        managers = Manager.objects.all()
-        employees = Employee.objects.all()
-        if request.method == "POST": #checking if the request method is a POST
-            if "EmployeeAdd" in request.POST: #checking if there is a request to add a todo
-                 #title
-                name = request.POST["name"] #date
-                manager_name = request.POST["manager_select"]
+    
+    stores = Store.objects.all()
+    managers = Manager.objects.all()
+    employees = Employee.objects.all()
+    if request.method == "POST": #checking if the request method is a POST
+        if "EmployeeAdd" in request.POST: #checking if there is a request to add a todo
+                #title
+            name = request.POST["name"] #date
+            manager_name = request.POST["manager_select"]
+            try:
                 manager = Manager.objects.get(name=str(manager_name))
-                store_name = request.POST["store_select"]
+            except:                
+                content["show"]="manager does not exist"
+                error_message = content["show"]
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show":error_message,"employees":employees}) 
+            
+            store_name = request.POST["store_select"]
+            try:
                 store = Store.objects.get(name=str(store_name))
-                #content = title + " -- " + date + " " + category #content
-                # flst = FollowerList.objects.create(follower=user)
-                # flst.followed.add(user)
-                a_employee = Employee.objects.create(name=name,manager=manager)
-                a_employee.e_store.add(store)
-                a_employee.save() #saving the todo 
-                for s in a_employee.e_store.all():
-                    store_message+=str(s.name)
+            except:
                 
-                content["show"]=store_message
-                
-                #getting todo id
-                return redirect("/Manager-Employee/")
-            if "EmployeeDelete" in request.POST: #checking if there is a request to delete a todo
-                d_Employee_id = request.POST["EmployeeDelete"] #checked todos to be deleted
-                # for todo_id in checkedlist:
-                d_Employee = Employee.objects.get(id=d_Employee_id) #getting todo id
-                d_Employee.delete()
-                return redirect("/Manager-Employee/")
-            if "EmployeeUpdate" in request.POST: #checking if there is a request to delete a todo
-                u_employee_id = request.POST["EmployeeUpdate"]
-                 #checked todos to be deleted
-                # for todo_id in checkedlist:
-                u_employee_name = request.POST["input_employeename"]
-                u_employee_manager = request.POST["manager_select"]
+                content["show_error"]="Store does not exist"
+                error_message = content["show_error"]
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees}) 
+            a_employee = Employee.objects.create(name=name,manager=manager)
+            a_employee.e_store.add(store)
+            a_employee.save() #saving the todo 
+            for s in a_employee.e_store.all():
+                store_message+=str(s.name)
+            
+            content["show"]=store_message
+            
+            #getting todo id
+            return redirect("/Manager-Employee/")
+        if "EmployeeDelete" in request.POST: #checking if there is a request to delete a todo
+            d_Employee_id = request.POST["EmployeeDelete"] #checked todos to be deleted
+            try:
+                d_Employee = Employee.objects.get(id=d_Employee_id)
+            except:
+                content["show_error"]="Store does not exist"
+                error_message = content["show_error"]
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
+            d_Employee.delete()
+            return redirect("/Manager-Employee/")
+        if "EmployeeUpdate" in request.POST: 
+            u_employee_id = request.POST["EmployeeUpdate"]
+            u_employee_name = request.POST["input_employeename"]
+            u_employee_manager = request.POST["manager_select"]
+            try:
                 u_employee = Employee.objects.get(id=u_employee_id)
-                #u_employee_store = request.POST["store_select"]
-                u_employee.name = str(u_employee_name)
+            except:
+                content["show_error"]="Employee does not exist"
+                error_message = content["show_error"]
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
+            
+            
+            u_employee.name = str(u_employee_name)
+            try:
                 u_employee.manager  = Manager.objects.get(name=str(u_employee_manager))
-                #u_employee.e_store.add(Store.objects.get(name=str(u_employee_store)))
-                
-                # for s in u_employee.e_store.all():
-                #     store_message.append(s.name+" ")
-                
-                # content["show"]=store_message
-                # store_message=content["show"]
-                for s in u_employee.e_store.all():
-                    store_message.append(s.name+" ")
-                
-                content["show"]=store_message
-                store_message=content["show"]
-                #getting todo id
-                #getting todo id
-                u_employee.save()
-                return redirect("/Manager-Employee/")
-            if "EmployeeAddStore" in request.POST:
-                u_employee_store = request.POST["store_select"]
-                u_employee_name = request.POST["employee_select"]
+            except:
+                content["show_error"]="manager does not exist"
+                error_message = content["show_error"]
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
+            
+           
+            for s in u_employee.e_store.all():
+                store_message.append(s.name+" ")
+            
+            content["show"]=store_message
+            store_message=content["show"]
+            #getting todo id
+            #getting todo id
+            u_employee.save()
+            return redirect("/Manager-Employee/")
+        if "EmployeeAddStore" in request.POST:
+            u_employee_store = request.POST["store_select"]
+            u_employee_name = request.POST["employee_select"]
+            try:
                 u_employee = Employee.objects.get(name=u_employee_name)
                 u_employee.e_store.add(Store.objects.get(name=str(u_employee_store)))
-                u_employee.save()
-                for s in u_employee.e_store.all():
-                    store_message.append(s.name+" ")
                 
-                content["show"]=store_message
-                
-                #getting todo id
-                return redirect("/Manager-Employee/")
-    except:
-        content["show"]="Error! check your input"
-        error_message = content["show"]
-        return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show":error_message,"employees":employees}) 
+            except:
+                content["show_error"]="store or manager does not exist"
+                error_message = content["show_error"]
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
+            
+           
+            u_employee.save()
     return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"employees":employees, "show":store_message})
 
 
