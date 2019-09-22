@@ -55,6 +55,11 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2*
 #logout{
   float: right; margin-right: 5%;margin-top: 0.5%;
 }
+#main1{
+ 
+    float: right; margin-right: 5%;margin-top: 0.5%;
+  
+}
 #loginfo{
   color: #4db6ac; font-size: 18px; 
 }
