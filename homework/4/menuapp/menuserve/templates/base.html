@@ -29,7 +29,12 @@
         
     
         <div class="general-container">
-        
+                <p  class="headlineofmanagement">
+                        <b>
+                        {% block welcome%}
+                        {% endblock%}
+                        </b>
+                    </p>
             {% block content %}
             {% endblock %}
         

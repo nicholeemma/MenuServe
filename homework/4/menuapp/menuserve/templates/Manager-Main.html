@@ -1,37 +1,17 @@
-<!DOCTYPE html>
-    <html lang="en-US">
-    <head>
-            <meta charset="UTF-8">
-            <title>
-                Manager-Main
-            </title>
-        <!--Import Google Icon Font-->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        {% load static %}
-        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen"/>
-        {% load static %}
-        <link type="text/css" rel="stylesheet" href="{% static 'css/additional.css' %}" charset="utf-8"  />
-    </head>
-    
-    <body>
-        <header class="menu-page-header">
+{% extends 'base.html' %} 
+{% load static %}
         
-                <div class="grid-example col s12" id="welcomeheadline">
-                    Welcome to the Moonlight Restaurant
-                    <a href="{% url 'index' %}" class="waves-effect waves-light btn" id="logout">Log Out</a>
-                </div>
+{%block headerbutton%}
+        <form method="post" action="/">
+                        
+            <a href="{% url 'index' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a>
+        </form>
+{% endblock %}
         
-        </header>
-        
-    
-        <div class="general-container">
-        
-            <p  class="headlineofmanagement">
-                <b>
-                Welcome, Manager
-                </b>
-            </p>
+{%block welcome%}
+Welcome, Manager
+{% endblock %}
+      {%block content%}
             <div class="row" id="table-margin-top">
                 <div class="col s7">
                     <form style="float:right">
@@ -63,28 +43,6 @@
                         <a href="{% url 'managermanager' %}" class="waves-effect waves-light btn" id="management-main-btn4">Manager</a>
                       </div>
                 </div>
-
-                
+          </div>
         
-            
-            
-           
-                  
-            
-            
-            
-            
-
-          </div>
-          </div>
-          <footer class="page-footer">
-                
-              <div class="footer-copyright">
-                
-                <div class="general-container">
-                <a class="grey-text text-lighten-4" style="text-align:center" href="#!">© 2019 Jiayue Yang Copyright </a>
-                </div>
-              </div>
-            </footer>
-        </body>
-</html>
+         {% endblock%}
