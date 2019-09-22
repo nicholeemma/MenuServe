@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+    <html lang="en-US">
+    <head>
+            <meta charset="UTF-8">
+            <title>
+                Manager-Employee
+            </title>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen"/>
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/additional.css' %}" charset="utf-8"  />
+    </head>
+    
+    <body>
+        <header class="menu-page-header">
+        
+                <div class="grid-example col s12" id="welcomeheadline">
+                    Welcome to the Moonlight Restaurant
+                    <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="logout">Log Out</a>
+                </div>
+        
+        </header>
+        
+    
+        <div class="general-container">
+          <p class="headlineofmanagement">
+            <b>
+            Records of Employees
+          </b>
+          </p>
+          <div class="row" class="table-margin-top">
+            <div class="col s4">
+                <form class="search-bar-management">
+                    <input type="text" name="search" value="Search employee here" >
+        
+                </form>
+            </div>
+            <div class="col s2">
+            <form>
+                <select class="select-management">
+                      <option >Increase</option>
+                      <option >Decrease</option>
+                </select>
+            </form>
+            </div>
+            <div class="col s2">
+            <form>
+                <select class="select-management">
+                     <option >Store-A</option>
+                     <option >Store-B</option>
+                     <option >Store-C</option>
+                     <option >Store-D</option>
+                </select>
+            </form>
+            </div>
+            <div class="col s4">
+                <p id="loginfo">
+                    Hi, Nichole. Start to manage employees now.
+                   </p>
+                   {% csrf_token %}
+                   <p class="error_msg">{{show_error}}</p>
+            </div>
+        </div>
+            <div class="record-table">
+        <table class="striped" >
+            <thead>
+              <tr>
+                  <th>Employee No.</th>
+                  <th>Name</th>
+                  <th>Manager</th>
+                  <th>Store</th>
+                  <th>Action</th>
+                  <th>Action</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+                <form action="#" method="POST">
+                    <tr>
+                        <td>Default ID</td>
+                        <td>
+                            {% csrf_token %}
+                            <input type="text" id="status" class="taskName" name="name" required>
+                    </td>
+              
+                    <td>
+                          {% csrf_token %}
+                      <select id="manager" class="select-management" name="manager_select" required>
+                          <option class="disabled" value="">Choose a manager</option>
+                          {% for manager in managers %}
+                              <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
+                          {% endfor %}
+                          </select>
+                 
+                    </td>
+                    <td>
+                        {% csrf_token %}
+                    <select id="store" class="select-management" name="store_select" required>
+                        <option class="disabled" value="">Choose a store</option>
+                        {% for store in stores %}
+                            <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                        {% endfor %}
+                        </select>
+               
+                  </td>
+                    <td colspan="2">
+                        <button class="waves-effect waves-light btn" name="EmployeeAdd" type="submit">
+                            Add New employee
+                          </button>
+                         
+                      </td>
+                    </tr>
+                    </form>
+
+
+                    <form action="#" method="POST">
+                        <tr>
+                            
+                  
+                        <td colspan="2">
+                              {% csrf_token %}
+                          <select id="manager" class="select-management" name="employee_select" required>
+                              <option class="disabled" value="">Choose an employee</option>
+                              {% for employee in employees %}
+                                  <option class="" value="{{ employee.name }}" name="{{ employee.name }}">{{ employee.name }}</option>
+                              {% endfor %}
+                              </select>
+                     
+                        </td>
+                        <td colspan="2">
+                            {% csrf_token %}
+                        <select id="store" class="select-management" name="store_select" required>
+                            <option class="disabled" value="">Choose a store</option>
+                            {% for store in stores %}
+                                <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                            {% endfor %}
+                            </select>
+                   
+                      </td>
+                        <td colspan="2">
+                            <button class="waves-effect waves-light btn" name="EmployeeAddStore" type="submit">
+                                Add Employee to Store
+                              </button>
+                             
+                          </td>
+                        </tr>
+                        </form>
+              
+
+                        <form action="#" method="POST">
+                                <tr>
+                                    
+                          
+                                <td colspan="2">
+                                      {% csrf_token %}
+                                  <select id="manager" class="select-management" name="employee_select" required>
+                                      <option class="disabled" value="">Choose an employee</option>
+                                      {% for employee in employees %}
+                                          <option class="" value="{{ employee.name }}" name="{{ employee.name }}">{{ employee.name }}</option>
+                                      {% endfor %}
+                                      </select>
+                             
+                                </td>
+                                <td colspan="2">
+                                    {% csrf_token %}
+                                <select id="store" class="select-management" name="store_select" required>
+                                    <option class="disabled" value="">Choose a store</option>
+                                    {% for store in stores %}
+                                        <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                                    {% endfor %}
+                                    </select>
+                           
+                              </td>
+                                <td colspan="2">
+                                    <button class="waves-effect waves-light btn" name="EmployeeRemoveStore" type="submit">
+                                        Remove Employee from a Store
+                                      </button>
+                                     
+                                  </td>
+                                </tr>
+                                </form>
+
+
+                    {% for employee in employees %}
+              <tr>
+                    <form action="#" method="POST">
+                <td>{{employee.id}}</td>
+                <td> <input type="text" name="input_employeename" value="{{employee.name}}">{{employee.name}}</td>
+                
+                <td>{% csrf_token %}
+                        <select id="manager" class="select-management" name="manager_select" >
+                            <option class="disabled" value="">Choose a manager</option>
+                            {% for manager in managers %}
+                                <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
+                            {% endfor %}
+                            </select>{{ employee.manager.name }}</td>
+                   
+               
+                    <td>
+                        
+                          </td>
+                   
+                <td>
+                            {% csrf_token %}
+                    <button class="waves-effect waves-light btn" name = "EmployeeUpdate" id="{{ employee.id }}" value="{{ employee.id }}" type="submit">Update</button>
+                </td>
+
+                </form>
+                <td>
+                        <form action="#" method="POST">
+                                {% csrf_token %}
+                                <button class="waves-effect waves-light btn" name = "EmployeeDelete" id="{{ employee.id }}" value="{{ employee.id }}" type="submit">Delete</button>
+                                                                <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
+                </form>
+                </td>
+              </tr>
+              {% endfor %}
+   
+                            
+                      
+              
+              
+            </tbody>
+          </table>
+          <div>
+              <P> <b>Relations between employees and stores</b></P>
+          {% for employee in employees %}
+          <br>
+          {{employee.name}} :
+          {%  for s in employee.e_store.all %}
+          {{s.name}} ,
+          {% endfor %}
+          <br>
+          {% endfor%}
+        </div>
+         
+          </div>
+            
+           
+                  
+            
+            
+            
+            
+
+          </div>
+          <footer class="page-footer">
+                
+                <div class="footer-copyright">
+                  
+                  <div class="general-container">
+                  <a class="grey-text text-lighten-4" style="text-align:center" href="#!">© 2019 Jiayue Yang Copyright </a>
+                  </div>
+                </div>
+              </footer>
+        </body>
+</html>

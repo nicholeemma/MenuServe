@@ -1,0 +1,174 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block content %}
+    
+<br>
+<div class="row">
+        <div class="col s7">
+            <form>
+                <input type="text" name="search" value="Search cuisine here">
+            </form>
+            <a href="" id="frequentlyordered">
+                <b>Frequently Ordered</b>
+            </a>
+            <br>
+            <br>
+            <div class="container-pic">
+                <div class="single-container-pic" >
+                       
+                    <img class="display-pic"  src="{% static 'Pictures/Steak1.jpg' %}"  alt="Steak1" />
+                    <div class="overlay">
+                        <div class="show-price">
+                            Price: 25$
+                            <br>
+                            Filet Migon and Chips
+                        </div>
+                    </div>
+                </div>
+                <div class="single-container-pic"  > 
+                      
+                    <img class="display-pic" src="{% static 'Pictures/Seafood1.jpg' %}"  alt="Seafood1" />
+            
+                    <div class="overlay">
+                        <div class="show-price">
+                            Price: 10$
+                            <br>
+                            Macaroni with octopus
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="single-container-pic">
+                      
+                    <img class="display-pic" src="{% static 'Pictures/Seafood2.jpg' %}"  alt="Seafood2" />
+                    <div class="overlay">
+                        <div class="show-price">
+                            Price: 20$
+                        
+                            <br>
+                            Irish seafood paella
+                        </div>
+                    </div>
+                    </div>
+                <div class="single-container-pic">
+                      
+                    <img class="display-pic" src="{% static 'Pictures/Steak3.jpg' %}"  alt="Steak3" />
+                    <div class="overlay">
+                        <div class="show-price">Price: 16$
+                        <br>
+                        Sirloin steak
+                        </div>
+                    </div>
+                </div>
+                <div class="single-container-pic">
+                      
+                    <img class="display-pic" src="{% static 'Pictures/Salad3.jpg' %}"  alt="Salad3" />
+                    <div class="overlay">
+                        <div class="show-price">Price: 14$
+                            <br>
+                            Best chopped salad
+                        </div>
+                    </div>
+                </div>
+      
+            </div>
+
+</div>
+        <div class="col s2" >
+                <form action="#" class="classification_menu">
+                    <p>
+                    <label>
+                        
+                        <input type="checkbox" />
+                        <span>Appetizer</span>
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                        <input type="checkbox" checked="checked"/>
+                        <span>Seafood</span>
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                        
+                        <input type="checkbox">
+                        <span>Slides </span>
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                        
+                        <input type="checkbox" checked="checked"/>
+                        <span>Steak</span>
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                        
+                        <input type="checkbox" />
+                        <span>Soup</span>
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                        
+                        <input type="checkbox" checked="checked"/>
+                        <span>Salad</span>
+                    </label>
+                    </p>
+                        
+                </form>
+                
+           
+        </div>
+        <div class="col s3" id="menu_right_col">
+                <form method="post" action="/">
+                <a href="{% url 'Order' %}" class="waves-effect waves-light btn" id="registrationbtn" >
+                    Registration&nbsp;/&nbsp;Log in
+                </a>
+                </form>
+                <br><br>
+                
+
+                <div class="row">
+                        
+                    <div class="card red lighten-1" id="card_news">
+                        <div class="card-content white-text">
+                              <span class="card-title" >News</span>
+                              <p id="card_p_style">
+                                We have special cuisine today!!
+                                <br>
+                                Try it for free!!
+                                <br>
+                                Buy two burgers get one for free!
+                              </p>
+                        </div>
+                        <div class="card-action">
+                              <a href="#">Know More</a>
+                              <a href="#">Order </a>
+                        </div>
+                         
+                    </div>
+                </div>
+                <br>
+                
+                <audio controls autoplay muted loop class="audio">
+                        {% load static %}
+                    <!--Music source: https://www.fesliyanstudios.com/royalty-free-music/downloads-c/peaceful-and-relaxing-music/22-->
+                        <source src="{% static 'Music/background_music1.mp3' %}" type="audio/mpeg">
+                            {% load static %}
+                        <source src="{% static 'Music/background_music2.mp3' %}" type="audio/mpeg">
+                      Your browser does not support the audio element.
+                </audio>
+        </div>
+        
+      </div>
+      
+<!-- Page Content goes here -->
+
+
+
+
+</div>
+{% endblock %}

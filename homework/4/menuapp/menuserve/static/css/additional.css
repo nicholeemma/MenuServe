@@ -1,0 +1,252 @@
+/*Reference: 
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_fade
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2*/
+.error_msg{
+  color: red;
+  font-size: 30px;
+}
+#frequentlyordered{
+  color: #4db6ac; font-size: 18px;
+}
+#welcomeheadline{
+  background-color:#ee6e73;padding-bottom: 10px; padding-top: 10px;
+}
+.classification_menu
+{
+  padding-left: 10px;
+}
+#menu_right_col{
+  padding-top: 1.8%;
+}
+#whatordered{
+  color: #4db6ac; font-size: 18px;
+}
+#orderedby{
+  color: #4db6ac; font-size: 18px; 
+}
+#orderedform{
+  color: grey;margin-right: 3%;
+}
+.search-bar-management{
+  width: 90%;
+}
+.audio{width: 100%;}
+#orderedcuisine{
+  overflow-y: scroll;
+  height: 45%; margin-bottom: 5%; margin-top:5%;
+}
+.record-table{
+  overflow-y: scroll; margin-bottom: 5%;
+}
+.table-margin-top{
+  margin-top:3%;
+}
+
+.select-drop-down-box{
+  display:table; width: 30%; float:right; height: 5%;
+  color: gray; margin-left: 2%;
+}
+.select-management{
+  display:table;  height: 5%; margin-top: 5%;color: grey;
+}
+.headlineofmanagement{
+  color: #4db6ac; font-size: 24px;text-align: center;
+}
+#logout{
+  float: right; margin-right: 5%;margin-top: 0.5%;
+}
+#loginfo{
+  color: #4db6ac; font-size: 18px; 
+}
+#management-main-btn1{
+  width:70%; margin-bottom: 5%;
+}
+#management-main-btn2{
+  width:70%; margin-bottom: 5%;
+}
+#management-main-btn3{
+  width:70%; margin-bottom: 5%;
+}
+#management-main-btn4{
+  width:70%; margin-bottom: 5%;
+}
+#registrationbtn{
+  width: 100%;
+}
+#card_news{
+  margin-left: 4%; margin-top:10%; opacity:0.75;
+}
+#card_p_style{
+  color: #fff; font-style: italic
+}
+.general-container{
+    margin: 0 auto;
+    
+    width: 90%;
+}
+.container-pic{
+    overflow-y: scroll;
+    height: 1000px;
+    
+    
+}
+.single-container-pic{
+    
+    width: 100%;
+    
+    height: 500px;
+    position: relative;
+    
+    
+}
+.single-container-pic-order{
+    
+    width: 30%;
+    height: 25%;
+    margin-right: 3.3%;
+    margin-bottom: 2%;
+    position: relative;
+    
+    
+}
+.display-pic{
+    
+    width: 100%;
+    height: 500px;
+    
+    z-index: 1;
+    display: auto;
+    position: absolute;
+}
+.display-pic-order{
+    
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: auto;
+  position: absolute;
+}
+/*Reference :How to realize the accumulation of pictures
+http://www.divcss5.com/shili/s587.shtml
+*/
+.overlay {
+    width: 100%;
+    height: 100%;
+    
+    z-index: 2;
+    visibility: hidden;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    opacity: 0.9;
+    transition: .5s ease;
+    background-color: rgb(161, 173, 177);
+  }
+  .overlay-over {
+    width: 30%;
+    height: 30%;
+    z-index: 1;
+    display: inline-block;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    opacity: 100%;
+    transition: .5s ease;
+    background-color: rgb(161, 173, 177);
+  }
+  .single-container-pic:hover .overlay{
+    visibility: visible;
+  }
+  .single-container-pic-order:hover .overlay{
+    visibility: visible;
+  }
+ 
+
+
+
+.show-price{
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.show-price-order{
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+input[type=text] {
+    
+    color: grey  !important;
+  }
+.menu-page-header{
+    
+    color: white;
+    font-size: 30px;
+    text-align: center;
+  }
+  a:hover {
+    text-shadow: 0.6px 0.6px 1.5px #bdbdbd;
+  }
+/* For scroll bar style*/
+  /* width */
+::-webkit-scrollbar {
+    width: 20px;
+    
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #4db6ac; 
+    border-radius: 5px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #4db6ac;
+    opacity: 0.6; 
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4db6ac; 
+  }
+
+  button{
+    position: relative;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  z-index: 1;
+  -webkit-transition: .3s ease-out;
+  transition: .3s ease-out;
+  background-color: rgba(255, 255, 255, 0.45);
+  }
+ 
+
+ 

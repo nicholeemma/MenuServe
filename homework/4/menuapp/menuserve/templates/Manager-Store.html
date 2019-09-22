@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+    <html lang="en-US">
+    <head>
+            <meta charset="UTF-8">
+            <title>
+                Manager-Store
+            </title>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen"/>
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/additional.css' %}" charset="utf-8"  />
+    </head>
+    
+    <body>
+        <header class="menu-page-header">
+        
+                <div class="grid-example col s12" id="welcomeheadline">
+                    Welcome to the Moonlight Restaurant
+                    <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="logout">Log Out</a>
+                </div>
+        
+        </header>
+        
+    
+        <div class="general-container">
+          <p id="headlineofmanagement">
+            <b>
+            Records of Stores
+          </b>
+          </p>
+          <div class="row" class="table-margin-top">
+            <div class="col s4">
+                <form class="search-bar-management">
+                    <input type="text" name="search" value="Search store here" >
+        
+                </form>
+            </div>
+            <div class="col s2">
+            <form>
+                <select class="select-management">
+                      <option >Increase</option>
+                      <option >Decrease</option>
+                </select>
+            </form>
+            </div>
+            <div class="col s2">
+            
+            </div>
+            <div class="col s4">
+                <p id="loginfo">
+                    Hi, Nichole. Start to manage employees now.
+                </p>
+                 {% csrf_token %}
+                <p class="error_msg">{{show}}</p>
+                    
+                  
+            </div>
+        </div>
+            <div class="record-table">
+        <table class="striped" >
+            <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Location</th>
+                  <th>Manager</th>
+                  <th>Action</th>
+                  <th>Action</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+                <form action="#" method="POST">
+              <tr>
+                  <td>Default ID</td>
+                  <td>
+                      {% csrf_token %}
+                      <input type="text" id="status" class="taskName" name="name" required>
+              </td>
+              <td>
+                  {% csrf_token %}
+                  <input type="text" id="status" class="taskName" name="location" required>
+              </td>
+              <td>
+                    {% csrf_token %}
+                <select id="manager" class="select-management" name="manager_select" style = " visibility: visible;">
+                    <option class="disabled" value="">Choose a manager</option>
+                    {% for manager in managers %}
+                        <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
+                    {% endfor %}
+                    </select>
+           
+              </td>
+              <td colspan="2">
+                  <button class="waves-effect waves-light btn" name="StoreAdd" type="submit">
+                      Add New Store
+                    </button>
+                   
+                </td>
+              </tr>
+              </form>
+             
+              {% for store in stores %}
+              <tr>
+                    <form action="#" method="POST">
+                <td>{{store.id}}</td>
+                <td> <input type="text" name="input_storename" value="{{store.name}}">{{store.name}}</td>
+                <td><input type="text" name="input_storelocation" value="{{store.location}}">{{store.location}}</td>
+                <td>{% csrf_token %}
+                        <select id="manager" class="select-management" name="manager_select" >
+                            <option class="disabled" value="">Choose a manager</option>
+                            {% for manager in managers %}
+                                <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
+                            {% endfor %}
+                            </select>{{ store.store_manager.name }}</td>
+                   
+                <td>
+                            {% csrf_token %}
+                    <button class="waves-effect waves-light btn" name = "StoreUpdate" id="{{ store.id }}" value="{{ store.id }}" type="submit">Update</button>
+                </td>
+
+                </form>
+                <td>
+                        <form action="#" method="POST">
+                                {% csrf_token %}
+                                <button class="waves-effect waves-light btn" name = "StoreDelete" id="{{ store.id }}" value="{{ store.id }}" type="submit">Delete</button>
+                                                                <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
+                </form>
+                </td>
+   
+                            
+                                                            <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
+          
+               
+               
+                    
+              </tr>
+              {% endfor %}
+             
+                
+            </tbody>
+          </table>
+         
+          </div>
+            
+           
+                  
+            
+            
+            
+            
+
+          </div>
+          <footer class="page-footer">
+                
+                <div class="footer-copyright">
+                  
+                  <div class="general-container">
+                  <a class="grey-text text-lighten-4" style="text-align:center" href="#!">© 2019 Jiayue Yang Copyright </a>
+                  </div>
+                </div>
+              </footer>
+        </body>
+</html>
