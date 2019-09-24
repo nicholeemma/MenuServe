@@ -399,6 +399,7 @@ def managermenu(request):
             fs = FileSystemStorage()
             filename = fs.save(myfile.name, myfile)
             uploaded_file_url = fs.url(filename)
+            content["picture"]=uploaded_file_url[1:]
 
             id_for_dish = request.POST["id_for_dish"] 
             name_of_cuisine = request.POST["name_of_cuisine"] 

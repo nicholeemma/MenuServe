@@ -148,10 +148,11 @@
                             <td><input type="text" name="input_menudescription" value="{{menu.description}}">{{menu.description}}</td>
                 
                             <td>
-                                {% if uploaded_file_url %}
-                                <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-                              {% endif %}
-                              {{menu.picture}}
+                                
+                              
+                              <img class="menu_pic" src = "{{menu.picture}}" style="width: 80px; height:80px;">
+                              <p>location: {{menu.picture}}</p>
+                              
                             </td>
 
                 <td>

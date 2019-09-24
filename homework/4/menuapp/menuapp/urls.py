@@ -21,8 +21,14 @@ from menuserve.views import manageorders
 from menuserve.views import (managermain,manageremployee,managerstore,managermenu,managermanager)
 from django.conf.urls import url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
+from django.conf.urls.static import static
+from django.conf import settings
 from django.contrib import staticfiles
+from django.views.static import serve
+
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name="index"),
@@ -34,4 +40,8 @@ urlpatterns = [
     url(r'^Manager-Store/',managerstore,name="managerstore"),
     url(r'^Manager-Menu/',managermenu,name="managermenu"),
     url(r'^Manager-Manager/',managermanager,name="managermanager"),
+   #s url(r'^media/(?P<path>.*)$', serve, {"document_root":settings.MEDIA_URL}),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
