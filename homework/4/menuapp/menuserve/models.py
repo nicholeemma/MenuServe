@@ -14,6 +14,7 @@ class Menu(models.Model):
     price = models.IntegerField()
     classification = models.CharField(max_length=10)
     description = models.CharField(max_length=100)
+    picture = models.FileField(upload_to='documents/')
 
 class Manager(models.Model):
 

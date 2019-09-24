@@ -385,18 +385,23 @@ def managermenu(request):
     error_message=""
     menus = Menu.objects.all()
     
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        return render(request, 'Manager-Menu.html', {
-        'uploaded_file_url': uploaded_file_url})
-    return render(request, 'Manager-Menu.html')
-    if request.method == "POST": #checking if the request method is a POST
-        if "MenuAdd" in request.POST: #checking if there is a request to add a todo
-            id_for_dish = request.POST["id_for_dish"] #title
-            name_of_cuisine = request.POST["name_of_cuisine"] #date
+    # if request.method == 'POST' and request.FILES['myfile']:
+    #     myfile = request.FILES['myfile']
+    #     fs = FileSystemStorage()
+    #     filename = fs.save(myfile.name, myfile)
+    #     uploaded_file_url = fs.url(filename)
+    #     return render(request, 'Manager-Menu.html', {
+    #     'uploaded_file_url': uploaded_file_url})
+   
+    if request.method == "POST": 
+        if "MenuAdd" in request.POST: 
+            myfile = request.FILES['myfile']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            uploaded_file_url = fs.url(filename)
+
+            id_for_dish = request.POST["id_for_dish"] 
+            name_of_cuisine = request.POST["name_of_cuisine"] 
             try:
                 price = int(request.POST['price'])
             except:
@@ -405,7 +410,7 @@ def managermenu(request):
                 return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
             category = request.POST['menu_select']
             description = request.POST['description']
-            a_menu = Menu(id_for_dish=id_for_dish, name_of_cuisine=name_of_cuisine,price=price,classification=category,description=description)
+            a_menu = Menu(picture=uploaded_file_url, id_for_dish=id_for_dish, name_of_cuisine=name_of_cuisine,price=price,classification=category,description=description)
             a_menu.save() #saving the todo 
             return redirect("/Manager-Menu/")
         if "MenuDelete" in request.POST: #checking if there is a request to delete a todo

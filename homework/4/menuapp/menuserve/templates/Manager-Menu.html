@@ -60,14 +60,16 @@
                   <th>Classification</th>
                   <th>Price</th>
                   <th>Description</th>
-                  
+                  <th>
+                      Picture
+                  </th>
                   <th colspan="2">Action</th>
                   
               </tr>
             </thead>
     
             <tbody>
-                    <form action="#" method="POST">
+                    <form action="#" method="POST" enctype="multipart/form-data">
                             <tr>
                                 <td>Default ID</td>
                                 <td>
@@ -93,6 +95,7 @@
                                         </select>
                                    
                                 </td>
+                            
                             <td>
                                  
                                     {% csrf_token %}
@@ -102,6 +105,16 @@
                                     {% csrf_token %}
                                     <input type="text" id="status" class="taskName" name="description" required>
                                 </td>
+                                
+                               
+                                <td>
+                                    
+                                        {% csrf_token %}
+                                        <input type="file" name="myfile">
+                                       
+                                     
+                                    
+                                </td>-->
                             <td colspan="2">
                                 <button class="waves-effect waves-light btn" name="MenuAdd" type="submit">
                                     Add New Menu
@@ -133,7 +146,14 @@
                             </select>{{menu.classification}}</td>
                             <td> <input type="text" name="input_menuprice" value="{{menu.price}}">{{menu.price}}</td>
                             <td><input type="text" name="input_menudescription" value="{{menu.description}}">{{menu.description}}</td>
-                   
+                
+                            <td>
+                                {% if uploaded_file_url %}
+                                <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+                              {% endif %}
+                              {{menu.picture}}
+                            </td>
+
                 <td>
                             {% csrf_token %}
                     <button class="waves-effect waves-light btn" name = "MenuUpdate" id="{{ menu.id }}" value="{{ menu.id }}" type="submit">Update</button>
@@ -161,17 +181,17 @@
             </tbody>
           </table>
           
-
+<!--
           <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="file" name="myfile">
+            <input type="file" name="myfile1">
             <button type="submit">Upload</button>
           </form>
         
           {% if uploaded_file_url %}
             <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
           {% endif %}
-          
+          -->
 
           </div>
             
