@@ -14,17 +14,23 @@
             <br>
             <br>
             <div class="container-pic">
+                    {% for menu in menus %}
                 <div class="single-container-pic" >
                        
-                    <img class="display-pic"  src="{% static 'Pictures/Steak1.jpg' %}"  alt="Steak1" />
+                    <img class="display-pic"  src = "{{menu.picture}}"  alt="{{menu.name_of_cuisine}}" />
                     <div class="overlay">
                         <div class="show-price">
-                            Price: 25$
+                            Price: {{menu.price}}
+                                                
                             <br>
-                            Filet Migon and Chips
+                            {{menu.name_of_cuisine}}
                         </div>
                     </div>
                 </div>
+                {% endfor%}
+            </div>
+
+            <!--
                 <div class="single-container-pic"  > 
                       
                     <img class="display-pic" src="{% static 'Pictures/Seafood1.jpg' %}"  alt="Seafood1" />
@@ -71,7 +77,7 @@
                     </div>
                 </div>
       
-            </div>
+            </div>-->
 
 </div>
         <div class="col s2" >

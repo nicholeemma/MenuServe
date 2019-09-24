@@ -6,11 +6,11 @@ def index(request):
     '''
     Function for main page
     '''
-    content={}
-    # if "register" in request.POST:
-    #     return HttpResponseRedirect("/Order")
     
-    return render(request,"Menu.html",content)
+    menus = Menu.objects.all()
+    
+    
+    return render(request,"Menu.html",{"menus":menus})
 
 
 def home(request):
