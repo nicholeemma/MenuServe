@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import render,HttpResponseRedirect,HttpResponse
-from .models import Menu, Store, Employee, Manager, Order
-
+from .models import Menu, Store, Employee, Manager, Order,Document
+from django.core.files.storage import FileSystemStorage
 def index(request):
     '''
     Function for main page
@@ -385,6 +385,14 @@ def managermenu(request):
     error_message=""
     menus = Menu.objects.all()
     
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'Manager-Menu.html', {
+        'uploaded_file_url': uploaded_file_url})
+    return render(request, 'Manager-Menu.html')
     if request.method == "POST": #checking if the request method is a POST
         if "MenuAdd" in request.POST: #checking if there is a request to add a todo
             id_for_dish = request.POST["id_for_dish"] #title
