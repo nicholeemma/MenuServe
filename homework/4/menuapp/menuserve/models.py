@@ -1,6 +1,6 @@
 
 # The order of classes matters, the below class will be based on the above ones
-
+from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 import datetime
@@ -50,5 +50,8 @@ class Employee(models.Model):
     manager = models.ForeignKey(Manager,on_delete=models.CASCADE)
 
 
-
+class Document(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
 
