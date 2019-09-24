@@ -1,17 +1,21 @@
 {% extends 'base.html' %} 
+
 {% load static %}
                 
         {%block headerbutton%}
                 <form method="post" action="/">
-                                
-                    <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a>
+                    <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="logout" >
+                        Log Out
+                    </a>
                 </form>
         {% endblock %}
                 
         {%block welcome%}
-        Records of Menus
+                Records of Menus
         {% endblock %}
-              {%block content%}   
+
+
+        {%block content%}   
 
           <div class="row" class="table-margin-top">
             <div class="col s4">
@@ -50,7 +54,9 @@
                    </p>
             </div>
         </div>
-            <div class="record-table">
+
+
+    <div class="record-table">
         <table class="striped" >
             <thead>
               <tr>
@@ -71,137 +77,135 @@
             <tbody>
                     <form action="#" method="POST" enctype="multipart/form-data">
                             <tr>
-                                <td>Default ID</td>
+                                <td>
+                                    Default ID
+                                </td>
+
                                 <td>
                                     {% csrf_token %}
                                     <input type="text" id="status" class="taskName" name="id_for_dish" required>
-                            </td>
-                            <td>
+                                </td>
+
+                                <td>
                                 {% csrf_token %}
                                 <input type="text" id="status" class="taskName" name="name_of_cuisine" required>
-                            </td>
-                            <td>
+                                </td>
+
+                                <td>
                                     {% csrf_token %}
                                     <select id="menu" class="select-management" name="menu_select"  >
                                         <option class="disabled" value="">Choose a category</option>
-                                   
-                                            <option class="" value="Seafood" name="Seafood">Seafood</option>
-                                            <option class="" value="Appetizer" name="Appetizer">Appetizer</option>
-                                            <option class="" value="Slide" name="Slide">Slide</option>
-                                            <option class="" value="Steak" name="Steak">Steak</option>
-                                            <option class="" value="Soup" name="Soup">Soup</option>
-                                            <option class="" value="Salad" name="Salad">Salad</option>
-                                            <option class="" value="Burger" name="Burger">Burger</option>
-                                        </select>
+                                        <option class="" value="Seafood" name="Seafood">Seafood</option>
+                                        <option class="" value="Appetizer" name="Appetizer">Appetizer</option>
+                                        <option class="" value="Slide" name="Slide">Slide</option>
+                                        <option class="" value="Steak" name="Steak">Steak</option>
+                                        <option class="" value="Soup" name="Soup">Soup</option>
+                                        <option class="" value="Salad" name="Salad">Salad</option>
+                                        <option class="" value="Burger" name="Burger">Burger</option>
+                                    </select>
                                    
                                 </td>
                             
-                            <td>
-                                 
+                                <td>
                                     {% csrf_token %}
                                     <input type="text" id="status" class="taskName" name="price" required>
-                            </td>
-                            <td>
+                                </td>
+
+                                <td>
                                     {% csrf_token %}
                                     <input type="text" id="status" class="taskName" name="description" required>
                                 </td>
                                 
                                
                                 <td>
-                                    
-                                        {% csrf_token %}
-                                        
-                                        <input type="file" name="myfile">
-                                      
-                                     
-                                    
+                                     {% csrf_token %}
+                                    <input type="file" name="myfile">
                                 </td>
-                            <td colspan="2">
-                                <button class="waves-effect waves-light btn" name="MenuAdd" type="submit">
-                                    Add New Menu
-                                  </button>
-                                 
-                              </td>
+
+                                <td colspan="2">
+                                    <button class="waves-effect waves-light btn" name="MenuAdd" type="submit">
+                                        Add New Menu
+                                    </button>
+                                </td>
                             </tr>
-                            </form>
+                    </form>
 
 
-                            {% for menu in menus %}
+            {% for menu in menus %}
               <tr>
                     <form action="#" method="POST" enctype="multipart/form-data">
-                <td>{{menu.id}}</td>
-                <td> <input type="text" name="input_menuid_for_dish" value="{{menu.id_for_dish}}">{{menu.id_for_dish}}</td>
-                <td><input type="text" name="input_menuname_of_cuisine" value="{{menu.name_of_cuisine}}">{{menu.name_of_cuisine}}</td>
-                <td>{% csrf_token %}
+                    <td>
+                        {{menu.id}}
+                    </td>
+
+                    <td> 
+                        <input type="text" name="input_menuid_for_dish" value="{{menu.id_for_dish}}">
+                            {{menu.id_for_dish}}
+                    </td>
+
+                    <td>
+                        <input type="text" name="input_menuname_of_cuisine" value="{{menu.name_of_cuisine}}">
+                            {{menu.name_of_cuisine}}
+                    </td>
+
+                    <td>{% csrf_token %}
                         
                         <select id="menu" class="select-management" name="menu_select" style = " visibility: visible;">
+
                             <option class="disabled" value="">Choose a category</option>
-                       
-                                <option class="" value="Seafood" name="Seafood">Seafood</option>
-                                <option class="" value="Appetizer" name="Appetizer">Appetizer</option>
-                                <option class="" value="Slide" name="Slide">Slide</option>
-                                <option class="" value="Steak" name="Steak">Steak</option>
-                                <option class="" value="Soup" name="Soup">Soup</option>
-                                <option class="" value="Salad" name="Salad">Salad</option>
+                            <option class="" value="Seafood" name="Seafood">Seafood</option>
+                            <option class="" value="Appetizer" name="Appetizer">Appetizer</option>
+                            <option class="" value="Slide" name="Slide">Slide</option>
+                            <option class="" value="Steak" name="Steak">Steak</option>
+                            <option class="" value="Soup" name="Soup">Soup</option>
+                            <option class="" value="Salad" name="Salad">Salad</option>
                             
-                            </select>{{menu.classification}}</td>
-                            <td> <input type="text" name="input_menuprice" value="{{menu.price}}">{{menu.price}}</td>
-                            <td><input type="text" name="input_menudescription" value="{{menu.description}}">{{menu.description}}</td>
+                        </select>{{menu.classification}}
+                    </td>
+                            
+                    <td> 
+                        <input type="text" name="input_menuprice" value="{{menu.price}}">
+                            {{menu.price}}
+                    </td>
+                            
+                    <td>
+                        <input type="text" name="input_menudescription" value="{{menu.description}}">
+                            {{menu.description}}
+                    </td>
                 
-                            <td>
-                                
-                              
-                              <img class="menu_pic" src = "{{menu.picture}}" style="width: 80px; height:80px;">
-                              <p>location: {{menu.picture}}</p>
+                    <td>
+                        <img class="menu_pic" src = "{{menu.picture}}" style="width: 80px; height:80px;">
+                        <p>
+                            location: {{menu.picture}}
+                        </p>
                               {% csrf_token %}
-                                        
-                                        <input type="file" name="myfileupdate">
-                            </td>
+                            <input type="file" name="myfileupdate">
+                    </td>
 
-                <td>
+                    <td>
                             {% csrf_token %}
-                    <button class="waves-effect waves-light btn" name = "MenuUpdate" id="{{ menu.id }}" value="{{ menu.id }}" type="submit">Update</button>
-                </td>
+                        <button class="waves-effect waves-light btn" name = "MenuUpdate" id="{{ menu.id }}" value="{{ menu.id }}" type="submit">
+                            Update
+                        </button>
+                    </td>
 
-                </form>
-                <td>
+                    </form>
+
+                    <td>
                         <form action="#" method="POST">
                                 {% csrf_token %}
-                                <button class="waves-effect waves-light btn" name = "MenuDelete" id="{{ menu.id }}" value="{{ menu.id }}" type="submit">Delete</button>
-                                                                <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
-                </form>
-                </td>
-   
-                            
-                                                            <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
-          
-               
-               
-                    
-              </tr>
-              {% endfor %}
+                            <button class="waves-effect waves-light btn" name = "MenuDelete" id="{{ menu.id }}" value="{{ menu.id }}" type="submit">
+                                Delete
+                            </button>
+                                                             
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
        
-                 
             </tbody>
-          </table>
-          
-<!--
-          <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="myfile1">
-            <button type="submit">Upload</button>
-          </form>
-        
-          {% if uploaded_file_url %}
-            <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-          {% endif %}
-          -->
-
-          </div>
-            
-           
-                  
-            
-          {% endblock%}  
+        </table>
+    </div>
+ {% endblock%}  
             
             

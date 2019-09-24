@@ -32,6 +32,9 @@
               <thead>
                   <tr>
                       <th>
+                          Cuisine_ID
+                      </th>
+                      <th>
                           Desk_no
                       </th>
                       <th>
@@ -59,7 +62,9 @@
                   {% for menu in menus %}
                   <tr>
                       <form action="#" method="POST">
-                     
+                                <td>
+                                    {{menu.id}}
+                                </td>
                                 <td>
                                     {% csrf_token %}
                                     <input type="text"  class="taskName" name="desk_no" required>
@@ -105,57 +110,82 @@
       
   
 What you have ordered
-<table><thead>
-<tr>
-<th>Order ID</th>
-<th>name of cusine</th>
-<th>amount</th>
-<th>price</th>
+<table>
+    <thead>
+
+        <tr>
+
+            <th>Order ID</th>
+
+            <th>name of cusine</th>
+
+            <th>amount</th>
+
+            <th>price</th>
 <!--<th>time</th>-->
-<th>store</th>
-<th>desk</th>
-<th>Action</th>
-</tr>
-</thead>
+            <th>store</th>
+
+            <th>desk</th>
+
+            <th>Action</th>
+
+        </tr>
+    </thead>
 
 {% for order in orders %}
-<tr>
-<td>
-{{order.id}}
-</td>
-<td>
-{{order.name_of_cuisine}}
-</td>
-<td>
-{{order.amount}}
-</td>
-<td>
-{{order.price}}
-</td>
+        <tr>
+
+            <td>
+
+                {{order.id}}
+
+            </td>
+
+            <td>
+
+                {{order.name_of_cuisine}}
+
+            </td>
+
+            <td>
+
+                {{order.amount}}
+
+            </td>
+
+            <td>
+
+                {{order.price}}
+
+            </td>
 <!--
 <td>
 {{order.time}}
 </td>
 -->
-<td>
-    {{order.store.name}}
-</td>
+            <td>
+                {{order.store.name}}
+            </td>
 
-<td>
-    {{order.desk_no}}
-</td>
-<td><form action="#" method="POST">
+            <td>
+                {{order.desk_no}}
+            </td>
+
+            <td>
+                <form action="#" method="POST">
     {% csrf_token %}
-    <button class="waves-effect waves-light btn" name = "DeleteOrder" id="{{ order.id }}" value="{{ order.id }}" type="submit">Delete</button>
+                    <button class="waves-effect waves-light btn" name = "DeleteOrder" id="{{ order.id }}" value="{{ order.id }}" type="submit">
+                        Delete
+                    </button>
    
-</form>
-</td>
+                </form>
+            </td>
 
-</tr>
-{% endfor %}
+            </tr>
+            {% endfor %}
 </table>
 
-  <a href="{% url 'manageorder' %}" class="waves-effect waves-light btn">Order</a>
+            <a href="{% url 'manageorder' %}" class="waves-effect waves-light btn">Order</a>
   
 </div>
 {% endblock%}
@@ -202,99 +232,10 @@ What you have ordered
                     -->
 
 <!--
-                                <div class="single-container-pic-order" style="float: right">
-                                        {% load static %}
-                                            <img class="display-pic-order" src="{% static 'Pictures/Seafood1.jpg' %}"   alt="Steak1" />
-                                            <div class="overlay">
-                                                    <div class="show-price-order">
-                                                            Price: 10$
-                                                            <br>
-                                                            Macaroni with octopus
-                                                        </div>
-                                            </div>
-                                </div>
-                                <div class="single-container-pic-order">
-                                        {% load static %}
-                                        <img class="display-pic-order" src="{% static 'Pictures/Seafood3.jpg' %}"  alt="Steak1" />
-                                        <div class="overlay">
-                                                <div class="show-price-order">
-                                                        Price: 20$
-                                                    
-                                                        <br>
-                                                        Irish seafood paella
-                                                    </div>
-                                        </div>
-                                </div>
-
-                                <div class="single-container-pic-order" style="float: right">
-                                        {% load static %}
-                                            <img class="display-pic-order" src="{% static 'Pictures/Seafood2.jpg' %}"  alt="Steak1" />
-                                            <div class="overlay">
-                                                    <div class="show-price-order">Price: 16$
-                                                            <br>
-                                                            Sirloin steak
-                                                            </div>
-                                            </div>
-                                </div>
+                             
                             
-                                <div class="single-container-pic-order" style="float: right">
-                                        {% load static %}
-                                        <img class="display-pic-order" src="{% static 'Pictures/Steak3.jpg' %}"  alt="Steak1" />
-                                        <div class="overlay">
-                                                <div class="show-price-order">Price: 14$
-                                                        <br>
-                                                        Best chopped salad
-                                                    </div>
-                                        </div>
-                                </div>
-
-                                <div class="single-container-pic-order">
-                                        {% load static %}
-                                            <img class="display-pic-order" src="{% static 'Pictures/Salad1.jpg' %}"  alt="Steak1" />
-                                            <div class="overlay">
-                                                <div class="show-price-order">
-                                                    Price: 25$
-                                                    <br>
-                                                    Filet Migon and Chips
-                                                </div>
-                                            </div>
-                                </div>
-                                <div class="single-container-pic-order" style="float: right">
-                                        {% load static %}
-                                        <img class="display-pic-order" src="{% static 'Pictures/Salad2.jpg' %}"  alt="Steak1" />
-                                        <div class="overlay">
-                                            <div class="show-price-order">
-                                                Price: 25$
-                                                <br>
-                                                Filet Migon and Chips
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="single-container-pic-order" style="float: right">
-                                        {% load static %}
-                                        <img class="display-pic-order" src="{% static 'Pictures/Steak2.jpg' %}"  alt="Steak1" />
-                                        <div class="overlay">
-                                            <div class="show-price-order">
-                                                Price: 25$
-                                                <br>
-                                                Filet Migon and Chips
-                                            </div>
-                                        </div>
-                            </div>
-                            <div class="single-container-pic-order">
-                                    {% load static %}
-                                    <img class="display-pic-order" src="{% static 'Pictures/Salad3.jpg' %}"  alt="Steak1" />
-                                    <div class="overlay">
-                                        <div class="show-price-order">
-                                            Price: 25$
-                                            <br>
-                                            Filet Migon and Chips
-                                        </div>
-                                    </div>
-                            </div>
-                          
-                  
-                        </div>
+                             
+                                      
         
             </div>
                     <div class="col s2" >

@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% load static %}
+{% extends 'base.html' %} 
+{% load static %}
 
 {% block content %}
     
@@ -29,57 +30,9 @@
                 </div>
                 {% endfor%}
             </div>
+        </div>
 
-            <!--
-                <div class="single-container-pic"  > 
-                      
-                    <img class="display-pic" src="{% static 'Pictures/Seafood1.jpg' %}"  alt="Seafood1" />
-            
-                    <div class="overlay">
-                        <div class="show-price">
-                            Price: 10$
-                            <br>
-                            Macaroni with octopus
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="single-container-pic">
-                      
-                    <img class="display-pic" src="{% static 'Pictures/Seafood2.jpg' %}"  alt="Seafood2" />
-                    <div class="overlay">
-                        <div class="show-price">
-                            Price: 20$
-                        
-                            <br>
-                            Irish seafood paella
-                        </div>
-                    </div>
-                    </div>
-                <div class="single-container-pic">
-                      
-                    <img class="display-pic" src="{% static 'Pictures/Steak3.jpg' %}"  alt="Steak3" />
-                    <div class="overlay">
-                        <div class="show-price">Price: 16$
-                        <br>
-                        Sirloin steak
-                        </div>
-                    </div>
-                </div>
-                <div class="single-container-pic">
-                      
-                    <img class="display-pic" src="{% static 'Pictures/Salad3.jpg' %}"  alt="Salad3" />
-                    <div class="overlay">
-                        <div class="show-price">Price: 14$
-                            <br>
-                            Best chopped salad
-                        </div>
-                    </div>
-                </div>
-      
-            </div>-->
 
-</div>
         <div class="col s2" >
                 <form action="#" class="classification_menu">
                     <p>
@@ -161,7 +114,7 @@
                 
                 <audio controls autoplay muted loop class="audio">
                         {% load static %}
-                    <!--Music source: https://www.fesliyanstudios.com/royalty-free-music/downloads-c/peaceful-and-relaxing-music/22-->
+                  
                         <source src="{% static 'Music/background_music1.mp3' %}" type="audio/mpeg">
                             {% load static %}
                         <source src="{% static 'Music/background_music2.mp3' %}" type="audio/mpeg">
@@ -171,7 +124,7 @@
         
       </div>
       
-<!-- Page Content goes here -->
+
 
 
 
