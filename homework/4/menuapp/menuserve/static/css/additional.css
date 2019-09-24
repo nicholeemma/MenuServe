@@ -5,6 +5,9 @@ img .menu_pic{
   width: 10%;
   height: 10%;
 }
+.waves-effect waves-light btn input{
+  opacity: 0;
+}
 .error_msg{
   color: red;
   font-size: 30px;
@@ -193,7 +196,7 @@ http://www.divcss5.com/shili/s587.shtml
 }
 .show-price-order{
   color: white;
-  font-size: 12px;
+  font-size: 20px;
   position: absolute;
   top: 50%;
   left: 50%;

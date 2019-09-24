@@ -399,7 +399,7 @@ def managermenu(request):
             fs = FileSystemStorage()
             filename = fs.save(myfile.name, myfile)
             uploaded_file_url = fs.url(filename)
-            content["picture"]=uploaded_file_url[1:]
+            
 
             id_for_dish = request.POST["id_for_dish"] 
             name_of_cuisine = request.POST["name_of_cuisine"] 
@@ -425,6 +425,11 @@ def managermenu(request):
             d_menu.delete()
             return redirect("/Manager-Menu/")
         if "MenuUpdate" in request.POST: #checking if there is a request to update
+            myfile = request.FILES['myfileupdate']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            uploaded_file_url = fs.url(filename)
+
             u_Menu_id = request.POST["MenuUpdate"]
             u_Menu_id_dish = request.POST["input_menuid_for_dish"] 
             u_menu_name = request.POST["input_menuname_of_cuisine"]
@@ -448,6 +453,7 @@ def managermenu(request):
             u_menu.classification = str(u_category)
             u_menu.description = str(u_description) 
             u_menu.price = str(u_price)  
+            u_menu.picture = uploaded_file_url
             u_menu.save()
             return redirect("/Manager-Menu/")
 

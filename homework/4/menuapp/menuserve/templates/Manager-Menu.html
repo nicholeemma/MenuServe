@@ -110,11 +110,12 @@
                                 <td>
                                     
                                         {% csrf_token %}
+                                        
                                         <input type="file" name="myfile">
-                                       
+                                      
                                      
                                     
-                                </td>-->
+                                </td>
                             <td colspan="2">
                                 <button class="waves-effect waves-light btn" name="MenuAdd" type="submit">
                                     Add New Menu
@@ -127,7 +128,7 @@
 
                             {% for menu in menus %}
               <tr>
-                    <form action="#" method="POST">
+                    <form action="#" method="POST" enctype="multipart/form-data">
                 <td>{{menu.id}}</td>
                 <td> <input type="text" name="input_menuid_for_dish" value="{{menu.id_for_dish}}">{{menu.id_for_dish}}</td>
                 <td><input type="text" name="input_menuname_of_cuisine" value="{{menu.name_of_cuisine}}">{{menu.name_of_cuisine}}</td>
@@ -152,7 +153,9 @@
                               
                               <img class="menu_pic" src = "{{menu.picture}}" style="width: 80px; height:80px;">
                               <p>location: {{menu.picture}}</p>
-                              
+                              {% csrf_token %}
+                                        
+                                        <input type="file" name="myfileupdate">
                             </td>
 
                 <td>

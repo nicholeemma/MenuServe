@@ -9,6 +9,24 @@
 
         {% block content %}
         {% csrf_token %}
+        
+                        <div class="container-pic">
+                                {% for menu in menus %}
+                                <div class="single-container-pic-order" style="float: right">
+                                        {% load static %}
+                                        <img class="display-pic-order" src = "{{menu.picture}}"  alt="{{menu.name_of_cuisine}}">
+                             
+                                        <div class="overlay">
+                                            <div class="show-price-order">
+                                                Price: {{menu.price}}
+                                                <br>
+                                                {{menu.name_of_cuisine}}
+                                            </div>
+                                        </div> 
+                                </div>{% endfor%}
+                        </div>
+                               
+                                <br>
         <p class="error_msg">{{show}}</p>
           <table>
               <thead>
@@ -180,20 +198,10 @@ What you have ordered
                         </a>
                         <br>
                         <br>
-                        <div class="container-pic">
-                               
-                                <div class="single-container-pic-order" style="float: right">
-                                        {% load static %}
-                                        <img class="display-pic-order" src="{% static 'Pictures/Steak1.jpg' %}"  alt="Steak1" />
-                                        <div class="overlay">
-                                            <div class="show-price-order">
-                                                Price: 25$
-                                                <br>
-                                                Filet Migon and Chips
-                                            </div>
-                                        </div>
-                                </div>
 
+                    -->
+
+<!--
                                 <div class="single-container-pic-order" style="float: right">
                                         {% load static %}
                                             <img class="display-pic-order" src="{% static 'Pictures/Seafood1.jpg' %}"   alt="Steak1" />
