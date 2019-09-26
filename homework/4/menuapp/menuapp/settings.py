@@ -25,7 +25,7 @@ SECRET_KEY = '8ngt-^z+pp9l6nq903m7umy1yto+6fublxy2gjl$n4d2*)80fe'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.environ['WEBSITE_SITE_NAME']+'.azurewebsites.net','127.0.0.1'] if 'WEBSITE_SITE_NAME' in os.environ else []
 
 
 # Application definition
@@ -77,14 +77,25 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'default' :{
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME': os.environ['DBNAME'],
+        'HOST': os.environ['DBHOST'],
+        'USER': os.environ['DBUSER'],
+        'PASSWORD':os.environ['DBPASS'],
+        'OPTIONS':{
+            'sslmode':'require'
+        }
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
