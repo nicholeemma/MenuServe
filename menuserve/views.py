@@ -413,11 +413,12 @@ def managermenu(request):
             description = request.POST['description']
             try:
                 a_menu = Menu(picture=uploaded_file_url, id_for_dish=id_for_dish, name_of_cuisine=name_of_cuisine,price=price,classification=category,description=description)
+                a_menu.save()
             except:
                 content["show"]="Input information is not qualified"
                 error_message = content["show"]
                 return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
-            a_menu.save() #saving the todo 
+             #saving the todo 
             return redirect("/Manager-Menu/")
         if "MenuDelete" in request.POST: #checking if there is a request to delete a todo
             d_Menu_id = request.POST["MenuDelete"]
