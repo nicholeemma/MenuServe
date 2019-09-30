@@ -13,11 +13,29 @@ def index(request):
         if "search" in request.POST:
             try:
                 name = request.POST["searchcontent"]
-                menus = Menu.objects.filter(name_of_cuisine=name)
+                if name=="":
+                    menus = Menu.objects.all()
+                else:
+                    menus = Menu.objects.filter(name_of_cuisine=name)
             except:
                 content["show"]="What you deleted does not exist"
                 error_message = content["show"]
                 return render(request,"Menu.html",{"menus":menus,"show":error_message})
+        if "select" in request.POST:
+            menus = ""
+            try:
+                # getlist method is important to remember
+                checkedlist = request.POST.getlist('checkedbox')
+                #checkedlist = request.POST["checkedbox"] 
+                for checked_classification in checkedlist:
+                    
+                    menus = Menu.objects.filter(classification=checked_classification)
+                   
+            except:
+                content["show"]="What you deleted does not exist"
+                error_message = content["show"]
+                return render(request,"Menu.html",{"menus":menus,"show":error_message})
+    
     
     return render(request,"Menu.html",{"menus":menus})
 
