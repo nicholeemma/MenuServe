@@ -12,7 +12,7 @@ def index(request):
     if request.method == "POST":
         if "search" in request.POST:
             try:
-                name = request.POST["search"]
+                name = request.POST["searchcontent"]
                 menus = Menu.objects.filter(name_of_cuisine__startswith=name)
             except:
                 content["show"]="What you deleted does not exist"
