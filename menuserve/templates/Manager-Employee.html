@@ -65,36 +65,43 @@
                         <td>
                             {% csrf_token %}
                             <input type="text" id="status" class="taskName" name="name" required>
-                    </td>
+                        </td>
               
-                    <td>
+                        <td>
                           {% csrf_token %}
-                      <select id="manager" class="select-management" name="manager_select" required>
-                          <option class="disabled" value="">Choose a manager</option>
+                            <select id="manager" class="select-management" name="manager_select" required>
+                                <option class="disabled" value="">
+                                    Choose a manager
+                                </option>
                           {% for manager in managers %}
-                              <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
+                                <option class="" value="{{ manager.name }}" name="{{ manager.name }}">
+                                    {{ manager.name }}
+                                </option>
                           {% endfor %}
-                          </select>
+                            </select>
                  
-                    </td>
-                    <td>
+                        </td>
+                        <td>
                         {% csrf_token %}
-                    <select id="store" class="select-management" name="store_select" required>
-                        <option class="disabled" value="">Choose a store</option>
+                            <select id="store" class="select-management" name="store_select" required>
+                                <option class="disabled" value="">
+                                    Choose a store
+                                </option>
                         {% for store in stores %}
-                            <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                                <option class="" value="{{ store.name }}" name="{{ store.name }}">
+                                    {{ store.name }}
+                                </option>
                         {% endfor %}
-                        </select>
+                            </select>
                
-                  </td>
-                    <td colspan="2">
-                        <button class="waves-effect waves-light btn" name="EmployeeAdd" type="submit">
+                        </td>
+                        <td colspan="2">
+                            <button class="waves-effect waves-light btn" name="EmployeeAdd" type="submit">
                             Add New employee
-                          </button>
-                         
-                      </td>
+                            </button>
+                        </td>
                     </tr>
-                    </form>
+                </form>
 
 
                     <form action="#" method="POST">
@@ -103,52 +110,60 @@
                   
                         <td colspan="2">
                               {% csrf_token %}
-                          <select id="manager" class="select-management" name="employee_select" required>
-                              <option class="disabled" value="">Choose an employee</option>
+                            <select id="manager" class="select-management" name="employee_select" required>
+                                <option class="disabled" value="">
+                                    Choose an employee
+                                </option>
                               {% for employee in employees %}
-                                  <option class="" value="{{ employee.name }}" name="{{ employee.name }}">{{ employee.name }}</option>
+                                <option class="" value="{{ employee.name }}" name="{{ employee.name }}">
+                                      {{ employee.name }}
+                                </option>
                               {% endfor %}
-                              </select>
+                            </select>
                      
                         </td>
                         <td colspan="2">
                             {% csrf_token %}
-                        <select id="store" class="select-management" name="store_select" required>
-                            <option class="disabled" value="">Choose a store</option>
+                            <select id="store" class="select-management" name="store_select" required>
+                                <option class="disabled" value="">
+                                    Choose a store
+                                </option>
                             {% for store in stores %}
-                                <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                                <option class="" value="{{ store.name }}" name="{{ store.name }}">
+                                    {{ store.name }}
+                                </option>
                             {% endfor %}
                             </select>
                    
-                      </td>
+                        </td>
                         <td colspan="2">
                             <button class="waves-effect waves-light btn" name="EmployeeAddStore" type="submit">
                                 Add Employee to Store
-                              </button>
+                            </button>
                              
-                          </td>
+                        </td>
                         </tr>
-                        </form>
+                    </form>
               
 
                         <form action="#" method="POST">
-                                <tr>
+                            <tr>
                                     
                           
                                 <td colspan="2">
                                       {% csrf_token %}
-                                  <select id="manager" class="select-management" name="employee_select" required>
-                                      <option class="disabled" value="">Choose an employee</option>
+                                    <select id="manager" class="select-management" name="employee_select" required>
+                                          <option class="disabled" value="">Choose an employee</option>
                                       {% for employee in employees %}
                                           <option class="" value="{{ employee.name }}" name="{{ employee.name }}">{{ employee.name }}</option>
                                       {% endfor %}
-                                      </select>
+                                    </select>
                              
                                 </td>
                                 <td colspan="2">
                                     {% csrf_token %}
-                                <select id="store" class="select-management" name="store_select" required>
-                                    <option class="disabled" value="">Choose a store</option>
+                                    <select id="store" class="select-management" name="store_select" required>
+                                        <option class="disabled" value="">Choose a store</option>
                                     {% for store in stores %}
                                         <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
                                     {% endfor %}
@@ -158,46 +173,53 @@
                                 <td colspan="2">
                                     <button class="waves-effect waves-light btn" name="EmployeeRemoveStore" type="submit">
                                         Remove Employee from a Store
-                                      </button>
+                                    </button>
                                      
-                                  </td>
-                                </tr>
-                                </form>
+                                </td>
+                            </tr>
+                        </form>
 
 
                     {% for employee in employees %}
-              <tr>
+                <tr>
                     <form action="#" method="POST">
-                <td>{{employee.id}}</td>
-                <td> <input type="text" name="input_employeename" value="{{employee.name}}">{{employee.name}}</td>
+                        <td>{{employee.id}}</td>
+                        <td> 
+                            <input type="text" name="input_employeename" value="{{employee.name}}">
+                                {{employee.name}}
+                        </td>
                 
-                <td>{% csrf_token %}
-                        <select id="manager" class="select-management" name="manager_select" >
-                            <option class="disabled" value="">Choose a manager</option>
+                        <td>{% csrf_token %}
+                            <select id="manager" class="select-management" name="manager_select" >
+                                <option class="disabled" value="">
+                                    Choose a manager
+                                </option>
                             {% for manager in managers %}
-                                <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
+                                <option class="" value="{{ manager.name }}" name="{{ manager.name }}">
+                                    {{ manager.name }}
+                                </option>
                             {% endfor %}
-                            </select>{{ employee.manager.name }}</td>
+                            </select>
+                            {{ employee.manager.name }}
+                        </td>
                    
                
-                    <td>
                         
-                          </td>
                    
-                <td>
+                        <td>
                             {% csrf_token %}
-                    <button class="waves-effect waves-light btn" name = "EmployeeUpdate" id="{{ employee.id }}" value="{{ employee.id }}" type="submit">Update</button>
-                </td>
+                            <button class="waves-effect waves-light btn" name = "EmployeeUpdate" id="{{ employee.id }}" value="{{ employee.id }}" type="submit">Update</button>
+                        </td>
 
-                </form>
-                <td>
+                    </form>
+                    <td>
                         <form action="#" method="POST">
                                 {% csrf_token %}
-                                <button class="waves-effect waves-light btn" name = "EmployeeDelete" id="{{ employee.id }}" value="{{ employee.id }}" type="submit">Delete</button>
+                            <button class="waves-effect waves-light btn" name = "EmployeeDelete" id="{{ employee.id }}" value="{{ employee.id }}" type="submit">Delete</button>
                                                                 <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
-                </form>
-                </td>
-              </tr>
+                        </form>
+                    </td>
+                </tr>
               {% endfor %}
    
                             
@@ -207,8 +229,10 @@
             </tbody>
           </table>
         </div>
-          <div>
-              <P> <b>Relations between employees and stores</b></P>
+        <div>
+            <P> 
+                  <b>Relations between employees and stores</b>
+            </P>
           {% for employee in employees %}
           <br>
           {{employee.name}} :
