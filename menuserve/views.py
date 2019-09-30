@@ -6,9 +6,18 @@ def index(request):
     '''
     Function for main page
     '''
-    
+    content={}
+    error_message=""
     menus = Menu.objects.all()
-    
+    if request.method == "POST":
+        if "search" in request.POST:
+            try:
+                name = request.POST["search"]
+                menus = Menu.objects.filter(name_of_cuisine__startswith=name)
+            except:
+                content["show"]="What you deleted does not exist"
+                error_message = content["show"]
+                return render(request,"Menu.html",{"menus":menus,"show":error_message})
     
     return render(request,"Menu.html",{"menus":menus})
 
