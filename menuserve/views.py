@@ -6,6 +6,7 @@ def index(request):
     '''
     Function for main page
     '''
+    
     content={}
     error_message=""
     menus = Menu.objects.all()
@@ -300,6 +301,24 @@ def manageremployee(request):
     managers = Manager.objects.all()
     employees = Employee.objects.all()
     if request.method == "POST": #checking if the request method is a POST
+        if "search" in request.POST:
+            try:
+                name = request.POST["searchcontent"]
+                if name=="":
+                    employees = Employee.objects.all()
+                else:
+                    employees = Employee.objects.filter(name=name)
+            except:
+                content["show_error"]="Employee does not exist?"
+                error_message = content["show_error"]
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees}) 
+        if "store-selct" in request.POST:
+            selected_store = request.POST["selectedstore"]
+            #employees = Employee.e_store_set.filter(e_store__contains=selected_store).distinct()
+            # a = Store.objects.get(id=selected_store )
+            # employees = a.employee_set.all()
+            e = Store.objects.get(id=selected_store)
+            employees = e.employees.all()
         if "EmployeeAdd" in request.POST: #checking if there is a request to add a todo
                 #title
             name = request.POST["name"] #date
@@ -438,14 +457,8 @@ def managermenu(request):
                 return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
             category = request.POST['menu_select']
             description = request.POST['description']
-            try:
-                a_menu = Menu(picture=uploaded_file_url, id_for_dish=id_for_dish, name_of_cuisine=name_of_cuisine,price=price,classification=category,description=description)
-                a_menu.save()
-            except:
-                content["show"]="Input information is not qualified"
-                error_message = content["show"]
-                return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
-             #saving the todo 
+            a_menu = Menu(picture=uploaded_file_url, id_for_dish=id_for_dish, name_of_cuisine=name_of_cuisine,price=price,classification=category,description=description)
+            a_menu.save() #saving the todo 
             return redirect("/Manager-Menu/")
         if "MenuDelete" in request.POST: #checking if there is a request to delete a todo
             d_Menu_id = request.POST["MenuDelete"]
