@@ -6,7 +6,9 @@
 <br>
 <div class="row">
         <div class="col s7">
+                
             <form method="post" action="/">
+                {% csrf_token %}
                 <input type="text" name="searchcontent" value="Search cuisine here">
                 <button class="waves-effect waves-light btn" name="search" type="submit">
                         Search
