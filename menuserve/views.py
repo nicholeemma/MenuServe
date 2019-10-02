@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.shortcuts import render,HttpResponseRedirect,HttpResponse
 from .models import Menu, Store, Employee, Manager, Order,Document
 from django.core.files.storage import FileSystemStorage
+from django.urls import reverse
 def index(request):
     '''
     Function for main page
@@ -19,9 +20,10 @@ def index(request):
                 else:
                     menus = Menu.objects.filter(name_of_cuisine=name)
             except:
-                content["show"]="What you deleted does not exist"
+                content["show"]="something wrong with input"
                 error_message = content["show"]
-                return render(request,"Menu.html",{"menus":menus,"show":error_message})
+                return redirect(reverse("index"))
+                #return render(request,"Menu.html",{"menus":menus,"show":error_message})
         if "select" in request.POST:
             menus = ""
             try:
@@ -33,9 +35,10 @@ def index(request):
                     menus = Menu.objects.filter(classification=checked_classification)
                    
             except:
-                content["show"]="What you deleted does not exist"
+                content["show"]="something wrong with input"
                 error_message = content["show"]
-                return render(request,"Menu.html",{"menus":menus,"show":error_message})
+                return redirect(reverse("index"))
+                #return render(request,"Menu.html",{"menus":menus,"show":error_message})
     
     
     return render(request,"Menu.html",{"menus":menus})
@@ -101,7 +104,7 @@ def home(request):
                 content["show"]="Input does not comply with rules. Check your input"
                 error_message = content["show"]
                 return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
-            return redirect("/Order/")    
+            return redirect(reverse("Order"))    
     return render(request,"Order.html",{"stores":stores,"orders":orders,"menus":menus,"show":error_message})
 
 def manageorders(request):
@@ -160,7 +163,7 @@ def manageorders(request):
                 return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
 
             u_order.save()
-            return redirect("/Submitted-Order/")
+            return redirect(reverse("manageorder"))
         if "DeleteUpdate" in request.POST: #checking if there is a request to delete a todo
             d_order = request.POST["DeleteUpdate"] #checked todos to be deleted
             try:
@@ -171,7 +174,8 @@ def manageorders(request):
                 return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
 
             delete_order.delete() #deleting todo
-            return redirect("/Submitted-Order/")
+            return redirect(reverse("manageorder"))
+            #return redirect("/Submitted-Order/")
 
     return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus})
 
@@ -209,7 +213,8 @@ def managerstore(request):
                 content["show"]="Add cannot be done, check your input"
                 error_message = content["show"]
                 return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
-            return redirect("/Manager-Store/")
+            return redirect(reverse("managerstore"))
+            #return redirect("/Manager-Store/")
         if "StoreDelete" in request.POST: #checking if there is a request to delete a todo
             d_store_id = request.POST["StoreDelete"] #checked todos to be deleted
             # for todo_id in checkedlist:
@@ -220,7 +225,8 @@ def managerstore(request):
                 error_message = content["show"]
                 return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
             d_store.delete()
-            return redirect("/Manager-Store/")
+            return redirect(reverse("managerstore"))
+            #return redirect("/Manager-Store/")
         if "StoreUpdate" in request.POST: 
             try:
                 u_store_id = request.POST["StoreUpdate"]
@@ -242,7 +248,8 @@ def managerstore(request):
                 return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
             #getting todo id
             u_store.save()
-            return redirect("/Manager-Store/")
+            return redirect(reverse("managerstore"))
+            #return redirect("/Manager-Store/")
 
     return render(request,"Manager-Store.html",{"stores":stores,"managers":managers})
     
@@ -266,7 +273,8 @@ def managermanager(request):
                 content["show"]="Add cannot be done, check your input"
                 error_message = content["show"]
                 return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message}) 
-            return redirect("/Manager-Manager/")
+            return redirect(reverse("managermanager"))
+            #return redirect("/Manager-Manager/")
         if "ManagerDelete" in request.POST: #checking if there is a request to delete a todo
             d_manager_id = request.POST["ManagerDelete"] #checked todos to be deleted
             try:
@@ -276,7 +284,8 @@ def managermanager(request):
                 error_message = content["show"]
                 return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message}) 
             d_manager.delete()
-            return redirect("/Manager-Manager/")
+            return redirect(reverse("managermanager"))
+            #return redirect("/Manager-Manager/")
         if "ManagerUpdate" in request.POST: #checking if there is a request to delete a todo
             u_manager_id = request.POST["ManagerUpdate"]
             u_manager_gender = request.POST["input_managergender"] #checked todos to be deleted
@@ -291,7 +300,8 @@ def managermanager(request):
             u_manager.location = str(u_manager_gender)
             u_manager.name = str(u_manager_name)  #getting todo id
             u_manager.save()
-            return redirect("/Manager-Manager/")
+            return redirect(reverse("managermanager"))
+            #return redirect("/Manager-Manager/")
 
     
     return render(request,"Manager-Manager.html",{"managers":managers})
@@ -375,7 +385,8 @@ def manageremployee(request):
                 error_message = content["show_error"]
                 return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
             d_Employee.delete()
-            return redirect("/Manager-Employee/")
+            return redirect(reverse("manageremployee"))
+            #return redirect("/Manager-Employee/")
         if "EmployeeUpdate" in request.POST: 
             u_employee_id = request.POST["EmployeeUpdate"]
             u_employee_name = request.POST["input_employeename"]
@@ -400,7 +411,8 @@ def manageremployee(request):
                 error_message = content["show_error"]
                 return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
             u_employee.save()
-            return redirect("/Manager-Employee/")
+            return redirect(reverse("manageremployee"))
+            #return redirect("/Manager-Employee/")
         if "EmployeeAddStore" in request.POST:
             u_employee_store = request.POST["store_select"]
             u_employee_name = request.POST["employee_select"]
@@ -481,7 +493,8 @@ def managermenu(request):
                 content["show"]="the input should comply with rules, check your input"
                 error_message = content["show"]
                 return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message}) 
-            return redirect("/Manager-Menu/")
+            return redirect(reverse("managermenu"))
+            #return redirect("/Manager-Menu/")
         if "MenuDelete" in request.POST: #checking if there is a request to delete a todo
             d_Menu_id = request.POST["MenuDelete"]
             try: 
@@ -491,7 +504,8 @@ def managermenu(request):
                 error_message = content["show"]
                 return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
             d_menu.delete()
-            return redirect("/Manager-Menu/")
+            return redirect(reverse("managermenu"))
+            #return redirect("/Manager-Menu/")
         if "MenuUpdate" in request.POST: #checking if there is a request to update
             try:
                 myfile = request.FILES['myfileupdate']
@@ -527,7 +541,8 @@ def managermenu(request):
             u_menu.price = str(u_price)  
             u_menu.picture = uploaded_file_url
             u_menu.save()
-            return redirect("/Manager-Menu/")
+            return redirect(reverse("managermenu"))
+            #return redirect("/Manager-Menu/")
 
     
     return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
