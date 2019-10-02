@@ -14,27 +14,33 @@
               {%block content%} 
           <div class="row" class="table-margin-top">
             <div class="col s4">
-                <form class="search-bar-management">
-                    <input type="text" name="search" value="Search employee here" >
-        
-                </form>
+                    <form method="post" action="#">
+                            {% csrf_token %}
+                            <input type="text" name="searchcontent">
+                            <button class="waves-effect waves-light btn" name="search" type="submit">
+                                    Search
+                            </button>
+                    </form>
             </div>
-            <div class="col s2">
-            <form>
+            <div class="col s4">
+            <!-- <form>
                 <select class="select-management">
                       <option >Increase</option>
                       <option >Decrease</option>
                 </select>
             </form>
             </div>
-            <div class="col s2">
-            <form>
-                <select class="select-management">
-                     <option >Store-A</option>
-                     <option >Store-B</option>
-                     <option >Store-C</option>
-                     <option >Store-D</option>
+            <div class="col s2"> -->
+            <form action="#" method="POST">
+                    {% csrf_token %}
+                <select class="select-management" name="selectedstore">
+                    {% for store in stores%}
+                     <option value = "{{store.id}}" >{{store.name}}</option>
+                     {% endfor%}
                 </select>
+                <button class="waves-effect waves-light btn" name="select-store" type="submit">
+                        Select Store
+                </button>
             </form>
             </div>
             <div class="col s4">
@@ -90,7 +96,7 @@
                     <td colspan="2">
                         <button class="waves-effect waves-light btn" name="EmployeeAdd" type="submit">
                             Add New employee
-                          </button>
+                        </button>
                          
                       </td>
                     </tr>

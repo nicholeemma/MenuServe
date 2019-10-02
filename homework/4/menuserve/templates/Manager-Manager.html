@@ -82,38 +82,31 @@
                     </form>
                     {% for manager in managers %}
                     <tr>
-                          <form action="#" method="POST">
-                      <td>{{manager.id}}</td>
-                      <td> <input type="text" name="input_managername" value="{{manager.name}}">{{manager.name}}</td>
-                      <td><input type="text" name="input_managergender" value="{{manager.gender}}">{{manager.gender}}</td>
+                        <form action="#" method="POST">
+                            <td>{{manager.id}}</td>
+                            <td> <input type="text" name="input_managername" value="{{manager.name}}">{{manager.name}}</td>
+                            <td><input type="text" name="input_managergender" value="{{manager.gender}}">{{manager.gender}}</td>
                          
-                      <td>
+                            <td>
                                   {% csrf_token %}
-                          <button class="waves-effect waves-light btn" name = "ManagerUpdate" id="{{ manager.id }}" value="{{ manager.id }}" type="submit">Update</button>
-                      </td>
+                                <button class="waves-effect waves-light btn" name = "ManagerUpdate" id="{{ manager.id }}" value="{{ manager.id }}" type="submit">Update</button>
+                            </td>
       
-                      </form>
-                      <td>
-                              <form action="#" method="POST">
+                        </form>
+                        <td>
+                            <form action="#" method="POST">
                                       {% csrf_token %}
-                                      <button class="waves-effect waves-light btn" name = "ManagerDelete" id="{{ manager.id }}" value="{{ manager.id }}" type="submit">Delete</button>
-                                                                      <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
-                      </form>
-                      </td>
-         
-                                  
-                                                                  <!--<input type="checkbox"  name="checkedbox" id="{{ store.name }}" value="{{ store.name }}">-->
-                
-                     </td>
-                     
-                          
+                            <button class="waves-effect waves-light btn" name = "ManagerDelete" id="{{ manager.id }}" value="{{ manager.id }}" type="submit">Delete</button>
+                                                                    
+                            </form>
+                        </td> 
                     </tr>
                     {% endfor %}
               
             </tbody>
-          </table>
+        </table>
  
-          </div>
+        </div>
             
            
                   

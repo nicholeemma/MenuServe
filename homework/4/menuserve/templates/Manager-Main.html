@@ -2,8 +2,7 @@
 {% load static %}
         
 {%block headerbutton%}
-        <form method="post" action="/">
-                        
+        <form method="post" action="/">                        
             <a href="{% url 'index' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a>
         </form>
 {% endblock %}
@@ -36,13 +35,13 @@ Welcome, Manager
                         Management Section
                         </b>
                     </p>
-                      <div>
-                        <a href="{% url 'managermenu' %}"  class="waves-effect waves-light btn" id="management-main-btn1" >Menu</a>
-                        <a href="{% url 'manageremployee' %}" class="waves-effect waves-light btn" id="management-main-btn2" >Employee</a>
-                        <a href="{% url 'managerstore' %}" class="waves-effect waves-light btn" id="management-main-btn3">Store</a>
-                        <a href="{% url 'managermanager' %}" class="waves-effect waves-light btn" id="management-main-btn4">Manager</a>
-                      </div>
+                        <div>
+                            <a href="{% url 'managermenu' %}"  class="waves-effect waves-light btn" id="management-main-btn1" >Menu</a>
+                            <a href="{% url 'manageremployee' %}" class="waves-effect waves-light btn" id="management-main-btn2" >Employee</a>
+                            <a href="{% url 'managerstore' %}" class="waves-effect waves-light btn" id="management-main-btn3">Store</a>
+                            <a href="{% url 'managermanager' %}" class="waves-effect waves-light btn" id="management-main-btn4">Manager</a>
+                        </div>
                 </div>
-          </div>
+            </div>
         
          {% endblock%}

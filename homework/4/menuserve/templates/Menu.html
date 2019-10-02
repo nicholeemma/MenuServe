@@ -6,8 +6,12 @@
 <br>
 <div class="row">
         <div class="col s7">
-            <form>
-                <input type="text" name="search" value="Search cuisine here">
+            <form method="post" action="#">
+                {% csrf_token %}
+                <input type="text" name="searchcontent">
+                <button class="waves-effect waves-light btn" name="search" type="submit">
+                        Search
+                </button>
             </form>
             <a href="" id="frequentlyordered">
                 <b>Frequently Ordered</b>
@@ -34,48 +38,53 @@
 
 
         <div class="col s2" >
-                <form action="#" class="classification_menu">
+                <form method="post" action="/" class="classification_menu">
+                        {% csrf_token %}
                     <p>
                     <label>
-                        
-                        <input type="checkbox" />
+                            {% csrf_token %}
+                        <input type="checkbox" name="checkedbox" value="Appetizer"/>
                         <span>Appetizer</span>
                     </label>
                     </p>
                     <p>
                     <label>
-                        <input type="checkbox" checked="checked"/>
+                            {% csrf_token %}
+                        <input type="checkbox" name="checkedbox" value="Seafood"/>
                         <span>Seafood</span>
                     </label>
                     </p>
                     <p>
                     <label>
-                        
-                        <input type="checkbox">
+                            {% csrf_token %}
+                        <input type="checkbox" name="checkedbox" value="Slide"/>
                         <span>Slides </span>
                     </label>
                     </p>
                     <p>
                     <label>
-                        
-                        <input type="checkbox" checked="checked"/>
+                            {% csrf_token %}
+                        <input type="checkbox" name="checkedbox" value="Steak"/>
                         <span>Steak</span>
                     </label>
                     </p>
                     <p>
                     <label>
-                        
-                        <input type="checkbox" />
+                            {% csrf_token %}
+                        <input type="checkbox" name="checkedbox" value="Soup"/>
                         <span>Soup</span>
                     </label>
                     </p>
                     <p>
                     <label>
-                        
-                        <input type="checkbox" checked="checked"/>
+                            {% csrf_token %}
+                        <input type="checkbox" name="checkedbox" value="Salad"/>
                         <span>Salad</span>
                     </label>
-                    </p>
+                    </p>{% csrf_token %}
+                    <button class="waves-effect waves-light btn" name="select" type="submit">
+                        Select
+                    </button>
                         
                 </form>
                 
