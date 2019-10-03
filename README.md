@@ -4,29 +4,35 @@
 ## *Serverl things to notice*
 1. enabledhostnames:
 "menuservejiayueya.azurewebsites.net"
-
+[Click here go to my website](menuservejiayueya.azurewebsites.net)
  'NAME': os.environ['DBNAME'],
  menuserve
-    'HOST': os.environ['DBHOST'],
-     jiayueyapostgresql.postgres.database.azure.com 
-    'USER': os.environ['DBUSER'],
-    jiayueya@jiayueyapostgresql
-    'PASSWORD':os.environ['DBPASS'],
-    Sasuke?1
+
+
+'HOST': os.environ['DBHOST'],
+jiayueyapostgresql.postgres.database.azure.com 
+
+
+'USER': os.environ['DBUSER'],
+jiayueya@jiayueyapostgresql
+
+
 
 2. Because I mostly used "render", which cannot applied reverse url resoluton. I remained some orginal pratices in render. I have already applied reverse url resolution in "redirect" and the links in HTML files.
 
 3. Before professor's announcement, I have already copied branch files to master. I know it is a unnecessay step, please grade base on the hw4_deployment branch.
 
-4. As the postgres database is extremely strict with data type. There some small length of variables. If your input exceeds the length, an error will jump out.
-See more details in model.py. 
+4. As the postgres database is extremely strict with data type. There some small length of variables. If your input exceeds the length, an error message will jump out. I should have done the error catch.
+
+See more details in model.py.  
+
 id_for_dish and desk_no 's length are only 4. Please pay attention to this when entering value.
 
 5. More futher validation will be done in next assignment I think. The error message might be simple and not easy to figure out what was the problem.
 
 6. Last assignment, Enes suggested me to do the preload dropdown list. I have not figured out how to do that, I think it will use jQuery, so I will leave it to next assignment to implement.
 
-7. As it is extremely inconvenient to check results after deploying to Azure, the commit messages might be repetive. Becase I was keeping check the result after I made some changes to the code.
+7. As it is extremely inconvenient to check results after deploying to Azure, the commit messages might be repetive. Becase I was keeping checking the result after I made some changes to the code.
 
 ## *Using the webiste*
 
