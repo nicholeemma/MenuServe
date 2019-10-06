@@ -1,0 +1,142 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block content %}
+    
+<br>
+<div class="row">
+        <div class="col s7">
+            <form method="post" action="#">
+                {% csrf_token %}
+                <input type="text" name="searchcontent">
+                <button class="waves-effect waves-light btn" name="search" type="submit">
+                        Search
+                </button>
+            </form>
+            <a href="" id="frequentlyordered">
+                <b>Frequently Ordered</b>
+            </a>
+            <br>
+            <br>
+            <div class="container-pic">
+                    {% for menu in menus %}
+                <div class="single-container-pic" >
+                       
+                    <img class="display-pic"  src = "{{menu.picture}}"  alt="{{menu.name_of_cuisine}}" />
+                    <div class="overlay">
+                        <div class="show-price">
+                            Price: {{menu.price}}
+                                                
+                            <br>
+                            {{menu.name_of_cuisine}}
+                        </div>
+                    </div>
+                </div>
+                {% endfor%}
+            </div>
+        </div>
+
+
+        <div class="col s2" >
+                <form method="post" action="/" class="classification_menu">
+                        {% csrf_token %}
+                    <p>
+                    <label>
+                            {% csrf_token %}
+                        <input type="checkbox" name="checkedbox" value="Appetizer"/>
+                        <span>Appetizer</span>
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                            {% csrf_token %}
+                        <input type="checkbox" name="checkedbox" value="Seafood"/>
+                        <span>Seafood</span>
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                            {% csrf_token %}
+                        <input type="checkbox" name="checkedbox" value="Slide"/>
+                        <span>Slides </span>
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                            {% csrf_token %}
+                        <input type="checkbox" name="checkedbox" value="Steak"/>
+                        <span>Steak</span>
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                            {% csrf_token %}
+                        <input type="checkbox" name="checkedbox" value="Soup"/>
+                        <span>Soup</span>
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                            {% csrf_token %}
+                        <input type="checkbox" name="checkedbox" value="Salad"/>
+                        <span>Salad</span>
+                    </label>
+                    </p>{% csrf_token %}
+                    <button class="waves-effect waves-light btn" name="select" type="submit">
+                        Select
+                    </button>
+                        
+                </form>
+                
+           
+        </div>
+        <div class="col s3" id="menu_right_col">
+                <form method="post" action="/">
+                <a href="{% url 'Order' %}" class="waves-effect waves-light btn" id="registrationbtn" >
+                    Registration&nbsp;/&nbsp;Log in
+                </a>
+                </form>
+                <br><br>
+                
+
+                <div class="row">
+                        
+                    <div class="card red lighten-1" id="card_news">
+                        <div class="card-content white-text">
+                              <span class="card-title" >News</span>
+                              <p id="card_p_style">
+                                We have special cuisine today!!
+                                <br>
+                                Try it for free!!
+                                <br>
+                                Buy two burgers get one for free!
+                              </p>
+                        </div>
+                        <div class="card-action">
+                              <a href="#">Know More</a>
+                              <a href="#">Order </a>
+                        </div>
+                         
+                    </div>
+                </div>
+                <br>
+                
+                <audio controls autoplay muted loop class="audio">
+                        {% load static %}
+                  
+                        <source src="{% static 'Music/background_music1.mp3' %}" type="audio/mpeg">
+                            {% load static %}
+                        <source src="{% static 'Music/background_music2.mp3' %}" type="audio/mpeg">
+                      Your browser does not support the audio element.
+                </audio>
+        </div>
+        
+      </div>
+      
+
+
+
+
+
+</div>
+{% endblock %}
