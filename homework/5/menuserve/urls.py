@@ -27,10 +27,15 @@ from django.contrib import staticfiles
 from django.views.static import serve
 from django.conf.urls import  include, url
 
+# Use include() to add URLS from the catalog application and authentication system
+
+
+#Add Django site authentication urls (for login, logout, password management)
 
 
 
 urlpatterns = [
+    path('accounts/', include('django.contrib.auth.urls')),
     # path('admin/', admin.site.urls),
     # path('',index,name="index"),
     # url(r'^Menu/', index),
