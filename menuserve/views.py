@@ -161,20 +161,12 @@ def manageorders(request):
                 content["show"]="Store does not exist"
                 error_message = content["show"]
                 return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
-            try:
+            
 
-<<<<<<< HEAD
+
             u_order.save()
             return redirect(reverse("manageorder"))
-=======
-                u_order.save()
-            except:
-                content["show"]="input does not comply with rules, check input"
-                error_message = content["show"]
-                return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
-            
-            return redirect("/Submitted-Order/")
->>>>>>> 7f18a2eea1c5af5d6bf7df030f6291a7213856ec
+
         if "DeleteUpdate" in request.POST: #checking if there is a request to delete a todo
             d_order = request.POST["DeleteUpdate"] #checked todos to be deleted
             try:
@@ -257,20 +249,12 @@ def managerstore(request):
                 content["show"]="Manager does not exist"
                 error_message = content["show"]
                 return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
-<<<<<<< HEAD
+
             #getting todo id
             u_store.save()
             return redirect(reverse("managerstore"))
             #return redirect("/Manager-Store/")
-=======
-            try:
-                u_store.save()
-            except:
-                content["show"]="update cannot be done, check your input"
-                error_message = content["show"]
-                return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message})
-            return redirect("/Manager-Store/")
->>>>>>> 7f18a2eea1c5af5d6bf7df030f6291a7213856ec
+
 
     return render(request,"Manager-Store.html",{"stores":stores,"managers":managers})
     
@@ -320,19 +304,11 @@ def managermanager(request):
                 return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message}) 
             u_manager.location = str(u_manager_gender)
             u_manager.name = str(u_manager_name)  #getting todo id
-<<<<<<< HEAD
+
             u_manager.save()
             return redirect(reverse("managermanager"))
             #return redirect("/Manager-Manager/")
-=======
-            try:
-                u_manager.save()
-            except:
-                content["show"]="Check your input"
-                error_message = content["show"]
-                return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message})
-            return redirect("/Manager-Manager/")
->>>>>>> 7f18a2eea1c5af5d6bf7df030f6291a7213856ec
+
 
     
     return render(request,"Manager-Manager.html",{"managers":managers})
@@ -443,14 +419,11 @@ def manageremployee(request):
                 content["show_error"]="Employee's name is too long"
                 error_message = content["show_error"]
                 return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
-<<<<<<< HEAD
+
             u_employee.save()
             return redirect(reverse("manageremployee"))
             #return redirect("/Manager-Employee/")
-=======
-            
-            return redirect("/Manager-Employee/")
->>>>>>> 7f18a2eea1c5af5d6bf7df030f6291a7213856ec
+
         if "EmployeeAddStore" in request.POST:
             u_employee_store = request.POST["store_select"]
             u_employee_name = request.POST["employee_select"]
@@ -578,20 +551,9 @@ def managermenu(request):
             u_menu.description = str(u_description) 
             u_menu.price = str(u_price)  
             u_menu.picture = uploaded_file_url
-<<<<<<< HEAD
             u_menu.save()
             return redirect(reverse("managermenu"))
             #return redirect("/Manager-Menu/")
-=======
-            try:
-
-                u_menu.save()
-            except:
-                content["show"]="the input should comply with rules, check your input"
-                error_message = content["show"]
-                return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message}) 
-            return redirect("/Manager-Menu/")
->>>>>>> 7f18a2eea1c5af5d6bf7df030f6291a7213856ec
 
     
     return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
