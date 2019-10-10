@@ -179,7 +179,7 @@
                 
                 <td>{% csrf_token %}
                         <select id="manager" class="select-management" name="manager_select" >
-                            <option class="disabled" value="">Choose a manager</option>
+                            <option class="disabled" value="{{employee.manager.id}}" name = "{{employee.manager.id}}">{{employee.manager.name}}</option>
                             {% for manager in managers %}
                                 <option class="" value="{{ manager.id }}" name="{{ manager.id }}">{{ manager.name }}</option>
                             {% endfor %}
