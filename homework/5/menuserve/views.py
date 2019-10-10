@@ -10,7 +10,7 @@ from django.http import HttpResponse, Http404
 # Used to generate a one-time-use token to verify a user's email address
 from django.contrib.auth.tokens import default_token_generator
 from django.db import transaction
-from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeForm,EmployeeUpdateForm
+from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm
 
 # Used to send mail from within Django
 from django.core.mail import send_mail
@@ -494,29 +494,35 @@ def managermenu(request):
    
     if request.method == "POST": 
         if "MenuAdd" in request.POST: 
-            myfile = request.FILES['myfile']
-            fs = FileSystemStorage()
-            filename = fs.save(myfile.name, myfile)
-            uploaded_file_url = fs.url(filename)
-            
-
-            id_for_dish = request.POST["id_for_dish"] 
-            name_of_cuisine = request.POST["name_of_cuisine"] 
             try:
-                price = int(request.POST['price'])
+                myfile = request.FILES['myfile']
+                fs = FileSystemStorage()
+                filename = fs.save(myfile.name, myfile)
+                uploaded_file_url = fs.url(filename)
             except:
-                content["show"]="price must be integer"
-                error_message = content["show"]
-                return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
-            category = request.POST['menu_select']
-            description = request.POST['description']
-            try:
-                a_menu = Menu(picture=uploaded_file_url, id_for_dish=id_for_dish, name_of_cuisine=name_of_cuisine,price=price,classification=category,description=description)
-                a_menu.save() 
-            except:
-                content["show"]="the input should comply with rules, check your input"
+                content["show"]="Please upload correct pictures"
                 error_message = content["show"]
                 return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message}) 
+            form = MenuForm(request.POST) 
+            if form.is_valid():
+                id_for_dish = form.cleaned_data["id_for_dish"] 
+                name_of_cuisine = form.cleaned_data["name_of_cuisine"]            
+                price = form.cleaned_data['price']
+                category = form.cleaned_data['menu_select']
+                description = form.cleaned_data['description']
+
+                # myfile = request.FILES['myfile']
+                # fs = FileSystemStorage()
+                # filename = fs.save(myfile.name, myfile)
+                # uploaded_file_url = fs.url(filename)
+            else:
+                content["show"]=form.errors
+                error_message = content["show"]
+                return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
+            
+            a_menu = Menu(picture=uploaded_file_url, id_for_dish=id_for_dish, name_of_cuisine=name_of_cuisine,price=price,classification=category,description=description)
+            a_menu.save() 
+            
             return redirect(reverse("managermenu"))
             #return redirect("/Manager-Menu/")
         if "MenuDelete" in request.POST: #checking if there is a request to delete a todo
@@ -536,22 +542,24 @@ def managermenu(request):
                 fs = FileSystemStorage()
                 filename = fs.save(myfile.name, myfile)
                 uploaded_file_url = fs.url(filename)
-
-                u_Menu_id = request.POST["MenuUpdate"]
-                u_Menu_id_dish = request.POST["input_menuid_for_dish"] 
-                u_menu_name = request.POST["input_menuname_of_cuisine"]
-                u_category = request.POST['menu_select']
-                u_description = request.POST['input_menudescription']
             except:
-                content["show"]="the input should comply with rules, check your input"
+                content["show"]="Choose a correct file please"
                 error_message = content["show"]
                 return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message}) 
-            try:
-                u_price = int(request.POST['input_menuprice'])
-            except:
-                content["show"]="price must be integer"
+            form = MenuUpdateForm(request.POST) 
+            u_Menu_id = request.POST["MenuUpdate"]
+            if form.is_valid():
+                u_Menu_id = form.cleaned_data["MenuUpdate"]
+                u_Menu_id_dish = form.cleaned_data["input_menuid_for_dish"] 
+                u_menu_name = form.cleaned_data["input_menuname_of_cuisine"]
+                u_category = form.cleaned_data['menu_select']
+                u_description = form.cleaned_data['input_menudescription']
+                u_price = form.cleaned_data['input_menuprice']
+            else:
+                content["show"]=form.errors
                 error_message = content["show"]
-                return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
+                return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message}) 
+            
             try:
                 u_menu = Menu.objects.get(id=u_Menu_id)
             except:

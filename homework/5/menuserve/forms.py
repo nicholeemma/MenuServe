@@ -50,4 +50,20 @@ class EmployeeForm(forms.Form):
 class EmployeeUpdateForm(forms.Form):
     input_employeename = forms.CharField(max_length=20,required= True)
 
+class MenuForm(forms.Form):
+    name_of_cuisine = forms.CharField(max_length=30)
+    id_for_dish = forms.CharField(max_length=4)
+    price = forms.IntegerField(min_value=0, max_value=1000)
+    menu_select = forms.CharField(max_length=10)
+    description = forms.CharField(max_length=100)
+    #myfile = forms.FileField()
+
+class MenuUpdateForm(forms.Form):
+    input_menuname_of_cuisine = forms.CharField(max_length=30)
+    input_menuid_for_dish = forms.CharField(max_length=4)
+    input_menuprice = forms.IntegerField(min_value=0, max_value=1000)
+    menu_select = forms.CharField(max_length=10)
+    input_menudescription = forms.CharField(max_length=100)
+    #myfile = forms.FileField()
+
    
