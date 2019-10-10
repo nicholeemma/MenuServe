@@ -414,7 +414,7 @@ def manageremployee(request):
                 u_employee_manager = request.POST["manager_select"]
             else:
                 
-                content["show_error"]=form.error_message
+                content["show_error"]=form.errors
                 error_message = content["show_error"]
                 return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
             
@@ -425,22 +425,14 @@ def manageremployee(request):
                 content["show_error"]="Employee does not exist"
                 error_message = content["show_error"]
                 return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
-            
-            
-            
+
             try:
-                u_employee.manager  = Manager.objects.get(name=str(u_employee_manager))
+                u_employee.manager  = Manager.objects.get(id=str(u_employee_manager))
             except:
                 content["show_error"]="manager does not exist"
                 error_message = content["show_error"]
                 return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
-            try:
-                u_employee.save()
-            except:
-                content["show_error"]="Employee's name is too long"
-                error_message = content["show_error"]
-                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
-
+        
             u_employee.save()
             return redirect(reverse("manageremployee"))
             #return redirect("/Manager-Employee/")
@@ -449,8 +441,8 @@ def manageremployee(request):
             u_employee_store = request.POST["store_select"]
             u_employee_name = request.POST["employee_select"]
             try:
-                u_employee = Employee.objects.get(name=u_employee_name)
-                u_employee.e_store.add(Store.objects.get(name=str(u_employee_store)))
+                u_employee = Employee.objects.get(id=u_employee_name)
+                u_employee.e_store.add(Store.objects.get(id=str(u_employee_store)))
                 
             except:
                 content["show_error"]="store or manager does not exist"
@@ -468,8 +460,8 @@ def manageremployee(request):
             u_employee_store = request.POST["store_select"]
             u_employee_name = request.POST["employee_select"]
             try:
-                u_employee = Employee.objects.get(name=u_employee_name)
-                u_employee.e_store.remove(Store.objects.get(name=str(u_employee_store)))
+                u_employee = Employee.objects.get(id=u_employee_name)
+                u_employee.e_store.remove(Store.objects.get(id=str(u_employee_store)))
                 
             except:
                 content["show_error"]="This store is not assigned to employee before"
