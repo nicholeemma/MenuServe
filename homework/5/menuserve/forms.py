@@ -1,5 +1,5 @@
 from django import forms
-from .models import Store,Manager,Employee,Order,Menu,Document
+from .models import Store,Manager,Employee,Order,Menu,Document,Order
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
@@ -51,19 +51,23 @@ class EmployeeUpdateForm(forms.Form):
     input_employeename = forms.CharField(max_length=20,required= True)
 
 class MenuForm(forms.Form):
-    name_of_cuisine = forms.CharField(max_length=30)
-    id_for_dish = forms.CharField(max_length=4)
-    price = forms.IntegerField(min_value=0, max_value=1000)
-    menu_select = forms.CharField(max_length=10)
-    description = forms.CharField(max_length=100)
+    name_of_cuisine = forms.CharField(max_length=30,required= True)
+    id_for_dish = forms.CharField(max_length=4,required= True)
+    price = forms.IntegerField(min_value=0, max_value=1000,required= True)
+    menu_select = forms.CharField(max_length=10,required= True)
+    description = forms.CharField(max_length=100,required= True)
     #myfile = forms.FileField()
 
 class MenuUpdateForm(forms.Form):
-    input_menuname_of_cuisine = forms.CharField(max_length=30)
-    input_menuid_for_dish = forms.CharField(max_length=4)
-    input_menuprice = forms.IntegerField(min_value=0, max_value=1000)
-    menu_select = forms.CharField(max_length=10)
-    input_menudescription = forms.CharField(max_length=100)
+    input_menuname_of_cuisine = forms.CharField(max_length=30,required= True)
+    input_menuid_for_dish = forms.CharField(max_length=4,required= True)
+    input_menuprice = forms.IntegerField(min_value=0, max_value=1000,required= True)
+    menu_select = forms.CharField(max_length=10,required= True)
+    input_menudescription = forms.CharField(max_length=100,required= True)
     #myfile = forms.FileField()
+
+class OrderForm(forms.Form):
+    desk_no = forms.CharField(max_length=4,required= True)
+    amount = forms.IntegerField(min_value=1, max_value=1000,required= True)
 
    

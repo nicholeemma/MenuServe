@@ -10,7 +10,7 @@ from django.http import HttpResponse, Http404
 # Used to generate a one-time-use token to verify a user's email address
 from django.contrib.auth.tokens import default_token_generator
 from django.db import transaction
-from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm
+from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm, OrderForm
 
 # Used to send mail from within Django
 from django.core.mail import send_mail
@@ -89,18 +89,23 @@ def home(request):
             status = "pending"
             menu_id = request.POST["OrderMenu"]
             #time = request.POST["time"] #date
-            try:
-                amount = int(request.POST["amount"])
-            except:
-                content["show"]="Amount must be integer"
+
+            form = OrderForm(request.POST) 
+            if form.is_valid():
+            
+                amount = form.cleaned_data["amount"]
+                desk_ = form.cleaned_data["desk_no"]
+            else:
+                content["show"]=form.errors
                 error_message = content["show"]
                 return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+            
             store_ = request.POST["store_select"]
-            desk_ = request.POST["desk_no"]
+            
             name_of_cuisine = Menu.objects.get(id = menu_id).name_of_cuisine
             price = Menu.objects.get(id = menu_id).price * amount
             try:
-                store = Store.objects.get(name=str(store_))
+                store = Store.objects.get(id=str(store_))
             except:
                 content["show"]="Store does not exist"
                 error_message = content["show"]

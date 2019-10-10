@@ -75,7 +75,7 @@
                                 <select id="store" class="select-management" name="store_select" required>
                                     <option class="disabled" value="">Choose a store</option>
                                     {% for store in stores %}
-                                        <option class="" value="{{ store.name }}" id="{{ store.name }}">{{ store.name }}</option>
+                                        <option class="" value="{{ store.id }}" id="{{ store.id }}">{{ store.name }}</option>
                                     {% endfor %}
                                     </select>
                                 </td>
@@ -96,7 +96,7 @@
                         </td>
                         <td>
                                 {% csrf_token %}
-                                <input type="text"  class="taskName" name="amount" > 
+                                <input type="text"  class="taskName" name="amount" value="1"> 
                         </td>
                         <td>
                                 {% csrf_token %}
