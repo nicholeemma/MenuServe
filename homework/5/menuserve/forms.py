@@ -1,5 +1,5 @@
 from django import forms
-from .models import Store,Manager,Employee,Order,Menu,Document,Order
+from .models import Store,Manager,Employee,Order,Menu,Document
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
@@ -69,5 +69,10 @@ class MenuUpdateForm(forms.Form):
 class OrderForm(forms.Form):
     desk_no = forms.CharField(max_length=4,required= True)
     amount = forms.IntegerField(min_value=1, max_value=1000,required= True)
+
+class OrderUpdateForm(forms.Form):
+    input_desk_no = forms.CharField(max_length=4,required= True)
+    input_amount = forms.IntegerField(min_value=1, max_value=1000,required= True)
+    
 
    

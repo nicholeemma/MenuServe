@@ -10,7 +10,7 @@ from django.http import HttpResponse, Http404
 # Used to generate a one-time-use token to verify a user's email address
 from django.contrib.auth.tokens import default_token_generator
 from django.db import transaction
-from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm, OrderForm
+from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm, OrderForm,OrderUpdateForm
 
 # Used to send mail from within Django
 from django.core.mail import send_mail
@@ -136,10 +136,17 @@ def manageorders(request):
         
         if "OrderUpdate" in request.POST: #checking if there is a request to delete a todo
             u_id = request.POST["OrderUpdate"]
-            u_input_desk_no = request.POST["input_desk_no"]
+            form = OrderUpdateForm(request.POST) 
+            if form.is_valid():
+                u_input_desk_no = form.cleaned_data["input_desk_no"]
+                u_input_amount = form.cleaned_data["input_amount"]
+            else:
+                content["show"] = form.errors
+                error_message = content["show"]
+                return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message})
+               
             u_cuisine_select = request.POST["cuisine_select"] 
-            
-            u_input_amount = request.POST["input_amount"]
+                        
             u_input_status = request.POST["input_status"]
             #u_input_time = request.POST["input_time"]
             
@@ -150,20 +157,12 @@ def manageorders(request):
                 content["show"]="order does not exist"
                 error_message = content["show"]
                 return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message})
-            try:    
-                u_order.desk_no = str(u_input_desk_no)
-                u_order.name_of_cuisine = str(u_cuisine_select)
-                u_order.status = u_input_status
-            except:
-                content["show"]="Input exceeds the allowed length"
-                error_message = content["show"]
-                return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message})
-            try:
-                u_order.amount = int(u_input_amount)
-            except:
-                content["show"]="amount should be integer"
-                error_message = content["show"]
-                return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+              
+            u_order.desk_no = str(u_input_desk_no)
+            u_order.name_of_cuisine = str(u_cuisine_select)
+            u_order.status = u_input_status
+           
+            u_order.amount = u_input_amount
             try:
                 u_order.price = int(int(Menu.objects.get(name_of_cuisine = u_cuisine_select).price)*int(u_input_amount))
             except:
@@ -172,7 +171,7 @@ def manageorders(request):
                 return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message})               
             #u_order.time = u_input_time
             try:
-                u_order.store = Store.objects.get(name = str(u_input_store ))
+                u_order.store = Store.objects.get(id = str(u_input_store ))
             except:
                 content["show"]="Store does not exist"
                 error_message = content["show"]

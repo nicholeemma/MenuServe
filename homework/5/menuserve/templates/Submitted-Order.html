@@ -81,22 +81,25 @@
                 <td >
                     {% csrf_token %}
                         <select id="menu" class="select-management" name="cuisine_select" required>
-                            <option class="disabled" value="">Choose a cuisine</option>
+                            <option class="disabled" name="{{ order.name_of_cuisine }}" value={{order.name_of_cuisine}}>{{order.name_of_cuisine}}</option>
                             {% for menu in menus %}
                                 <option class="" value="{{ menu.name_of_cuisine }}" name="{{ menu.name_of_cuisine }}">{{ menu.name_of_cuisine }}</option>
                             {% endfor %}
                         </select>{{ order.name_of_cuisine }}
                 </td>
                 <td> <input type="text" name="input_amount" value="{{order.amount}}">{{order.amount}}</td>
-                <td> <input type="text" name="input_status" value="{{order.status}}">{{order.status}}</td>
+                <td> <select id="menu" class="select-management" name="input_status" required>
+                    <option class="disabled" value="Completed">Completed</option>
+                    <option class="" value="Pending">Pending</option>
+                </td>
                 <!--<td> <input type="text" name="input_time" value="{{order.time}}">{{order.time}}</td>-->
                 <td> {{order.price}}</td>
                 
                 <td>{% csrf_token %}
                         <select id="store" class="select-management" name="store_select" required>
-                            <option class="disabled" value="">Choose a store</option>
+                            <option class="disabled" name="{{ order.store.id }}" value={{order.store.id}}>{{order.store.name}}</option>
                             {% for store in stores %}
-                                <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                                <option class="" value="{{ store.id }}" name="{{ store.id }}">{{ store.name }}</option>
                             {% endfor %}
                         </select>{{ order.store.name }}
                 </td>
