@@ -246,11 +246,12 @@ def managerstore(request):
             #return redirect("/Manager-Store/")
         if "StoreUpdate" in request.POST: 
             form = StoreUpdateForm(request.POST)
+            u_store_id = request.POST["StoreUpdate"]
             if form.is_valid():
-                u_store_id = form.cleaned_data["StoreUpdate"]
+                
                 u_store_location = form.cleaned_data["input_storelocation"]            
                 u_store_name = form.cleaned_data["input_storename"]
-                u_store_manager = form.cleaned_data["manager_select"]
+                
                 u_store = Store.objects.get(id=u_store_id)
                 u_store.location = str(u_store_location)
                 u_store.name = str(u_store_name)
@@ -259,7 +260,8 @@ def managerstore(request):
                 error_message = content["show"]
                 return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
             try:
-                u_store.store_manager  = Manager.objects.get(name=str(u_store_manager))
+                u_store_manager = request.POST["manager_select"]
+                u_store.store_manager  = Manager.objects.get(id=str(u_store_manager))
             except:
                 content["show"]="Manager does not exist"
                 error_message = content["show"]

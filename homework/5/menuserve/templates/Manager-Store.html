@@ -92,9 +92,9 @@
                     <td><input type="text" name="input_storelocation" value="{{store.location}}">{{store.location}}</td>
                     <td>{% csrf_token %}
                         <select id="manager" class="select-management" name="manager_select" >
-                            <option class="disabled" value="">Choose a manager</option>
+                            <option class="disabled" value="{{store.store_manager.id}}" name="{{store.store_manager.id}}" >{{store.store_manager.name}}</option>
                             {% for manager in managers %}
-                            <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
+                            <option class="" value="{{ manager.id }}" name="{{ manager.id }}">{{ manager.name }}</option>
                             {% endfor %}
                         </select>
                         {{ store.store_manager.name }}
