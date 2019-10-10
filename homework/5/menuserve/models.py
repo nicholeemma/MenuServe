@@ -25,10 +25,7 @@ class Store(models.Model):
        
     location = models.CharField(max_length=100)
     name = models.CharField(max_length=10)
-    store_manager = models.ForeignKey(Manager,on_delete=models.CASCADE)
-
-
-    
+    store_manager = models.ForeignKey(Manager,on_delete=models.CASCADE)    
 
 class Order(models.Model):
 
@@ -49,7 +46,6 @@ class Employee(models.Model):
     name = models.CharField(max_length=20)
     e_store = models.ManyToManyField(Store)
     manager = models.ForeignKey(Manager,on_delete=models.CASCADE)
-
 
 class Document(models.Model):
     description = models.CharField(max_length=255, blank=True)

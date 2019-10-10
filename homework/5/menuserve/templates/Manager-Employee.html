@@ -78,7 +78,7 @@
                       <select id="manager" class="select-management" name="manager_select" required>
                           <option class="disabled" value="">Choose a manager</option>
                           {% for manager in managers %}
-                              <option class="" value="{{ manager.name }}" name="{{ manager.name }}">{{ manager.name }}</option>
+                              <option class="" value="{{ manager.id }}" name="{{ manager.id }}">{{ manager.name }}</option>
                           {% endfor %}
                           </select>
                  
@@ -88,7 +88,7 @@
                     <select id="store" class="select-management" name="store_select" required>
                         <option class="disabled" value="">Choose a store</option>
                         {% for store in stores %}
-                            <option class="" value="{{ store.name }}" name="{{ store.name }}">{{ store.name }}</option>
+                            <option class="" value="{{ store.id }}" name="{{ store.id }}">{{ store.name }}</option>
                         {% endfor %}
                         </select>
                
