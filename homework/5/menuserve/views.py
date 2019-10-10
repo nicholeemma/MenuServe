@@ -1,8 +1,19 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.shortcuts import render,HttpResponseRedirect,HttpResponse
 from .models import Menu, Store, Employee, Manager, Order,Document
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
+#Used to create and manually log in a user
+from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate
+from django.http import HttpResponse, Http404
+# Used to generate a one-time-use token to verify a user's email address
+from django.contrib.auth.tokens import default_token_generator
+from django.db import transaction
+from .forms import StoreForm,StoreUpdateForm
+
+# Used to send mail from within Django
+from django.core.mail import send_mail
 def index(request):
     '''
     Function for main page
@@ -199,21 +210,20 @@ def managerstore(request):
     stores = Store.objects.all()
     managers = Manager.objects.all()
     if request.method == "POST": #checking if the request method is a POST
-        if "StoreAdd" in request.POST: 
-            location = request.POST["location"] 
-            name = request.POST["name"] 
-            manager_name = request.POST["manager_select"]
-            try:
+        
+        if "StoreAdd" in request.POST:
+            form = StoreForm(request.POST) 
+            if form.is_valid():
+                location = form.cleaned_data["location"] 
+                name = form.cleaned_data["name"] 
+                manager_name = form.cleaned_data["manager_select"]
                 manager = Manager.objects.get(name=str(manager_name))
-            except:
-                content["show"]="Manager does not exist"
-                error_message = content["show"]
-                return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
-            try:
                 a_store = Store(name=name, location=location,store_manager=manager)
                 a_store.save() 
-            except:
-                content["show"]="Add cannot be done, check your input"
+            else:
+                #content["show"]=form.errors.get("name",None)
+                content["show"]=str(form.errors)
+                #content["show"]="Not correct"
                 error_message = content["show"]
                 return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
             return redirect(reverse("managerstore"))
@@ -231,16 +241,17 @@ def managerstore(request):
             return redirect(reverse("managerstore"))
             #return redirect("/Manager-Store/")
         if "StoreUpdate" in request.POST: 
-            try:
-                u_store_id = request.POST["StoreUpdate"]
-                u_store_location = request.POST["input_storelocation"]            
-                u_store_name = request.POST["input_storename"]
-                u_store_manager = request.POST["manager_select"]
+            form = StoreUpdateForm(request.POST)
+            if form.is_valid():
+                u_store_id = form.cleaned_data["StoreUpdate"]
+                u_store_location = form.cleaned_data["input_storelocation"]            
+                u_store_name = form.cleaned_data["input_storename"]
+                u_store_manager = form.cleaned_data["manager_select"]
                 u_store = Store.objects.get(id=u_store_id)
                 u_store.location = str(u_store_location)
                 u_store.name = str(u_store_name)
-            except:
-                content["show"]="update cannot be done, check your input"
+            else:
+                content["show"]=str(form.errors)
                 error_message = content["show"]
                 return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
             try:
@@ -557,3 +568,69 @@ def managermenu(request):
 
     
     return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message})
+
+@transaction.atomic
+def registration(request):
+    context = {}
+
+    if request.method == 'GET':
+        return render(request, '/registration/registration.html', context)
+
+    errors = []
+    context['errors'] = errors
+
+	# Checks the validity of the form data
+    if not 'username' in request.POST or not request.POST['username']:
+        errors.append('Username is required.')
+    else:
+        # Save the username in the request context to re-fill the username
+        # field in case the form has errrors
+        context['username'] = request.POST['username']
+
+
+    if len(User.objects.filter(username = request.POST['username'])) > 0:
+        errors.append('Username is already taken.')
+
+    if errors:
+        return render(request, 'registration/registration.html', context)
+
+    # Creates the new user from the valid form data
+    new_user = User.objects.create_user(username=request.POST['username'], \
+                                        password=request.POST['password'], email=request.POST['email'])
+    new_user.is_active = False
+    new_user.save()
+
+     # Generate a one-time use token and an email message body
+    token = default_token_generator.make_token(new_user)
+
+    email_body = """
+Welcome to the Simple Address Book.  Please click the link below to
+verify your email address and complete the registration of your account:
+  http://%s%s""" % (request.get_host(),
+       reverse('confirm', args=(new_user.username, token)))
+
+    send_mail(subject="Verify your email address",
+              message= email_body,
+              from_email="jiayueya@andrew.cmu.edu",
+              recipient_list=[new_user.email])
+
+    context['email'] = request.POST['email']
+
+    # Logs in the new user and redirects to his/her todo list
+   # new_user = authenticate(username=request.POST['username'], \
+    #                        password=request.POST['password'])
+   # login(request, new_user)
+    return render(request, 'registration/needs_confirmation.html', context)
+
+@transaction.atomic
+def confirm_registration(request, username, token):
+    user = get_object_or_404(User, username=username)
+
+    # Send 404 error if token is invalid
+    if not default_token_generator.check_token(user, token):
+        raise Http404
+
+    # Otherwise token was valid, activate the user.
+    user.is_active = True
+    user.save()
+    return render(request, 'registration/confirmed.html', {})

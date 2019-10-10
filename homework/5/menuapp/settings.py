@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+from django.urls import reverse
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -37,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'menuserve'
+    'menuserve',
+    
 ]
 
 MIDDLEWARE = [
@@ -50,9 +52,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ROOT_URLCONF = 'menuapp.urls'
-
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+#LOGIN_REDIRECT_URL = '/Manager-Main/'
+LOGIN_REDIRECT_URL = "managermain"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -144,3 +148,4 @@ STATIC_ROOT = os.path.join(os.path.dirname(__file__),'static')
 # media setting
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# ROOT_URLCONF = '/'
