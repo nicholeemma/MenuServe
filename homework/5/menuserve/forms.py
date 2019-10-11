@@ -3,6 +3,7 @@ from .models import Store,Manager,Employee,Order,Menu,Document
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
+
 #validation for gender, can only be female or male
 def validate_gender(value):
     list =["male","Female","female","Male","M","m","F","f"]
@@ -64,7 +65,7 @@ class MenuUpdateForm(forms.Form):
     input_menuprice = forms.IntegerField(min_value=0, max_value=1000,required= True)
     menu_select = forms.CharField(max_length=10,required= True)
     input_menudescription = forms.CharField(max_length=100,required= True)
-    #myfile = forms.FileField()
+    myfile = forms.FileField()
 
 class OrderForm(forms.Form):
     desk_no = forms.CharField(max_length=4,required= True)

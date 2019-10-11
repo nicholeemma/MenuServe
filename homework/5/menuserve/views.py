@@ -503,22 +503,27 @@ def managermenu(request):
    
     if request.method == "POST": 
         if "MenuAdd" in request.POST: 
-            try:
-                myfile = request.FILES['myfile']
-                fs = FileSystemStorage()
-                filename = fs.save(myfile.name, myfile)
-                uploaded_file_url = fs.url(filename)
-            except:
-                content["show"]="Please upload correct pictures"
-                error_message = content["show"]
-                return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message}) 
-            form = MenuForm(request.POST) 
+            # try:
+            #     myfile = request.FILES['myfile']
+            #     fs = FileSystemStorage()
+            #     filename = fs.save(myfile.name, myfile)
+            #     uploaded_file_url = fs.url(filename)
+            # except:
+            #     content["show"]="Please upload correct pictures"
+            #     error_message = content["show"]
+            #     return render(request,"Manager-Menu.html",{"menus":menus,"show":error_message}) 
+            form = MenuForm(request.POST,request.FILES) 
             if form.is_valid():
                 id_for_dish = form.cleaned_data["id_for_dish"] 
                 name_of_cuisine = form.cleaned_data["name_of_cuisine"]            
                 price = form.cleaned_data['price']
                 category = form.cleaned_data['menu_select']
                 description = form.cleaned_data['description']
+
+                myfile = request.FILES['myfile']
+                fs = FileSystemStorage()
+                filename = fs.save(myfile.name, myfile)
+                uploaded_file_url = fs.url(filename)
 
                 # myfile = request.FILES['myfile']
                 # fs = FileSystemStorage()
