@@ -605,11 +605,12 @@ def registration(request):
                 return redirect(reverse("registration"),{"errors":"name has existed"})
             else:
                 password1 = uf.cleaned_data['password1']
-                password2 = uf.cleaned_data['password2']
-                errors = []
+                password2 = uf.cleaned_data['password2']              
                 if (password2 != password1):
-                    errors.append("Two password is not the same")
-                    return redirect(reverse("registration"),{'errors':errors})
+                    content["errors"] = "Two password is not the same"
+                    error_message = content["errors"]
+                    
+                    return render(request,"registration.html",{"errors":error_message})
                 first_name = uf.cleaned_data['first_name']
                 last_name = uf.cleaned_data['last_name']
                 username = uf.cleaned_data['username']
@@ -617,7 +618,7 @@ def registration(request):
                 first_name = uf.cleaned_data['first_name']
                 last_name = uf.cleaned_data['last_name']
                 user = User.objects.create(username=username,password=password1,email=email,first_name=first_name,last_name=last_name)
-                #user = User(username=username,password=password,email=email)
+                
                 content_type = ContentType.objects.get_for_model(Order)
                 permission1 = Permission.objects.create(codename='can_add_order',
                                        name='Can add order',
@@ -630,12 +631,13 @@ def registration(request):
                 user.user_permissions.add(permission2)  
                 user.save()
                 
-                return redirect(reverse("registration_confirmation"),{'username':username,'operation':"Successfully"})
+                return redirect(reverse("Order"))
         else:
             content["errors"] = uf.errors
             error_message = content["errors"]
-            return redirect(reverse("registration"),{'errors':error_message})
-    return render(request,'registration.html')
+            # must use double qutotation
+            return render(request,"registration.html",{"errors":error_message})
+    return render(request,"registration.html")
 
 def registration_confirmation(request):
     return render(request,'registration_confirmation.html')
