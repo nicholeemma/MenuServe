@@ -73,6 +73,14 @@ class OrderForm(forms.Form):
 class OrderUpdateForm(forms.Form):
     input_desk_no = forms.CharField(max_length=4,required= True)
     input_amount = forms.IntegerField(min_value=1, max_value=1000,required= True)
-    
+
+class UserForm(forms.Form):
+    username = forms.CharField(label='user name',max_length=100,required= True)
+    password1 = forms.CharField(label='psd',widget=forms.PasswordInput(),required= True)
+    password2 = forms.CharField(label='confirm psd',widget=forms.PasswordInput(),required= True)
+    email = forms.EmailField(label='email')
+    first_name = forms.CharField(max_length=50)
+    last_name = forms.CharField(max_length=50)
+
 
    

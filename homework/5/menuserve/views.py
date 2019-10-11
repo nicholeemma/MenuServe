@@ -10,7 +10,10 @@ from django.http import HttpResponse, Http404
 # Used to generate a one-time-use token to verify a user's email address
 from django.contrib.auth.tokens import default_token_generator
 from django.db import transaction
-from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm, OrderForm,OrderUpdateForm
+from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm, OrderForm,OrderUpdateForm,UserForm
+
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
 
 # Used to send mail from within Django
 from django.core.mail import send_mail
@@ -587,66 +590,54 @@ def managermenu(request):
 
 @transaction.atomic
 def registration(request):
-    context = {}
+    content={}
+    content["errors"]=""
+    error_message=""
 
-    if request.method == 'GET':
-        return render(request, '/registration/registration.html', context)
+    if request.method == "POST":
+        uf = UserForm(request.POST)
+        if uf.is_valid():
+            
+            username = uf.cleaned_data['username']
+           
+            filterResult = User.objects.filter(username = username)
+            if len(filterResult)>0:
+                return redirect(reverse("registration"),{"errors":"name has existed"})
+            else:
+                password1 = uf.cleaned_data['password1']
+                password2 = uf.cleaned_data['password2']
+                errors = []
+                if (password2 != password1):
+                    errors.append("Two password is not the same")
+                    return redirect(reverse("registration"),{'errors':errors})
+                first_name = uf.cleaned_data['first_name']
+                last_name = uf.cleaned_data['last_name']
+                username = uf.cleaned_data['username']
+                email = uf.cleaned_data['email']
+                first_name = uf.cleaned_data['first_name']
+                last_name = uf.cleaned_data['last_name']
+                user = User.objects.create(username=username,password=password1,email=email,first_name=first_name,last_name=last_name)
+                #user = User(username=username,password=password,email=email)
+                content_type = ContentType.objects.get_for_model(Order)
+                permission1 = Permission.objects.create(codename='can_add_order',
+                                       name='Can add order',
+                                       content_type=content_type)
+                permission2 = Permission.objects.create(codename='can_delete_order',
+                                       name='Can delete order',
+                                       content_type=content_type)
+                
+                user.user_permissions.add(permission1)
+                user.user_permissions.add(permission2)  
+                user.save()
+                
+                return redirect(reverse("registration_confirmation"),{'username':username,'operation':"Successfully"})
+        else:
+            content["errors"] = uf.errors
+            error_message = content["errors"]
+            return redirect(reverse("registration"),{'errors':error_message})
+    return render(request,'registration.html')
 
-    errors = []
-    context['errors'] = errors
-
-	# Checks the validity of the form data
-    if not 'username' in request.POST or not request.POST['username']:
-        errors.append('Username is required.')
-    else:
-        # Save the username in the request context to re-fill the username
-        # field in case the form has errrors
-        context['username'] = request.POST['username']
+def registration_confirmation(request):
+    return render(request,'registration_confirmation.html')
 
 
-    if len(User.objects.filter(username = request.POST['username'])) > 0:
-        errors.append('Username is already taken.')
-
-    if errors:
-        return render(request, 'registration/registration.html', context)
-
-    # Creates the new user from the valid form data
-    new_user = User.objects.create_user(username=request.POST['username'], \
-                                        password=request.POST['password'], email=request.POST['email'])
-    new_user.is_active = False
-    new_user.save()
-
-     # Generate a one-time use token and an email message body
-    token = default_token_generator.make_token(new_user)
-
-    email_body = """
-Welcome to the Simple Address Book.  Please click the link below to
-verify your email address and complete the registration of your account:
-  http://%s%s""" % (request.get_host(),
-       reverse('confirm', args=(new_user.username, token)))
-
-    send_mail(subject="Verify your email address",
-              message= email_body,
-              from_email="jiayueya@andrew.cmu.edu",
-              recipient_list=[new_user.email])
-
-    context['email'] = request.POST['email']
-
-    # Logs in the new user and redirects to his/her todo list
-   # new_user = authenticate(username=request.POST['username'], \
-    #                        password=request.POST['password'])
-   # login(request, new_user)
-    return render(request, 'registration/needs_confirmation.html', context)
-
-@transaction.atomic
-def confirm_registration(request, username, token):
-    user = get_object_or_404(User, username=username)
-
-    # Send 404 error if token is invalid
-    if not default_token_generator.check_token(user, token):
-        raise Http404
-
-    # Otherwise token was valid, activate the user.
-    user.is_active = True
-    user.save()
-    return render(request, 'registration/confirmed.html', {})

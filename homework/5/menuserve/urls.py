@@ -18,7 +18,7 @@ from django.urls import path
 from menuserve.views import index
 from menuserve.views import home
 from menuserve.views import manageorders
-from menuserve.views import (managermain,manageremployee,managerstore,managermenu,managermanager,registration)
+from menuserve.views import (managermain,manageremployee,managerstore,managermenu,managermanager,registration,registration_confirmation)
 from django.conf.urls import url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
@@ -47,7 +47,8 @@ urlpatterns = [
     url(r'^Manager-Store/',managerstore,name="managerstore"),
     url(r'^Manager-Menu/',managermenu,name="managermenu"),
     url(r'^Manager-Manager/',managermanager,name="managermanager"),
-    url(r'^registration/registration',registration,name="registration"),
+    url(r'^registration/',registration,name="registration"),
+    url(r'^registration_confirmation/',registration_confirmation,name="registration_confirmation"),
    #s url(r'^media/(?P<path>.*)$', serve, {"document_root":settings.MEDIA_URL}),
 ]
 
