@@ -128,7 +128,7 @@ def home(request):
             return redirect(reverse("Order"))    
     return render(request,"Order.html",{"stores":stores,"orders":orders,"menus":menus,"show":error_message})
 
-@permission_required('order.can_add_order', raise_exception=True)
+@permission_required('order.can_add_order', login_url="/accounts/login")
 @login_required
 def manageorders(request):
     '''
@@ -213,7 +213,7 @@ def managermain(request):
 
     return render(request,"Manager-Main.html",content)
 
-@permission_required('menuserve.add_store', raise_exception=True)
+@permission_required('menuserve.add_store', login_url="/accounts/login")
 @login_required   
 def managerstore(request):
     content={}
@@ -284,7 +284,7 @@ def managerstore(request):
 
 
     return render(request,"Manager-Store.html",{"stores":stores,"managers":managers})
-@permission_required('menuserve.add_manager', raise_exception=True)
+@permission_required('menuserve.add_manager', login_url="/accounts/login")
 @login_required   
 def managermanager(request):
     '''
@@ -336,7 +336,7 @@ def managermanager(request):
             #return redirect("/Manager-Manager/")    
     return render(request,"Manager-Manager.html",{"managers":managers})
 
-@permission_required('menuserve.add_employee', raise_exception=True)
+@permission_required('menuserve.add_employee', login_url="/accounts/login")
 @login_required
 def manageremployee(request):
     '''
@@ -492,7 +492,7 @@ def manageremployee(request):
     return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"employees":employees, "show":store_message})
 
 
-@permission_required('menuserve.add_menu', raise_exception=True)    
+@permission_required('menuserve.add_menu', login_url="/accounts/login")    
 @login_required
 def managermenu(request):
     '''
