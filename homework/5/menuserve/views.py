@@ -5,6 +5,7 @@ from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 #Used to create and manually log in a user
 from django.contrib.auth.models import User,Group
+from django.contrib import auth
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponse, Http404
 # Used to generate a one-time-use token to verify a user's email address
@@ -697,6 +698,13 @@ def manageruser(request):
             user_.save()
 
     return render(request,"Manager-User.html",{"users":users})
+
+    
+@login_required
+def logout(request):
+    auth.logout(request)
+    redirect("/accounts/login")
+    return 
 
 
 
