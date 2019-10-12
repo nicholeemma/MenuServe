@@ -4,12 +4,14 @@ from .models import Menu, Store, Employee, Manager, Order,Document
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 #Used to create and manually log in a user
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponse, Http404
 # Used to generate a one-time-use token to verify a user's email address
 from django.contrib.auth.tokens import default_token_generator
 from django.db import transaction
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm, OrderForm,OrderUpdateForm,UserForm
 
 from django.contrib.auth.models import Permission
@@ -57,7 +59,7 @@ def index(request):
     
     return render(request,"Menu.html",{"menus":menus})
 
-
+@login_required
 def home(request):
     '''
     Function for order page
@@ -126,6 +128,8 @@ def home(request):
             return redirect(reverse("Order"))    
     return render(request,"Order.html",{"stores":stores,"orders":orders,"menus":menus,"show":error_message})
 
+@permission_required('order.can_add_order', raise_exception=True)
+@login_required
 def manageorders(request):
     '''
     Function for sumbit-order page
@@ -200,6 +204,7 @@ def manageorders(request):
 
     return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus})
 
+@login_required
 def managermain(request):
     '''
     Function for manager-main page
@@ -207,7 +212,9 @@ def managermain(request):
     content={}
 
     return render(request,"Manager-Main.html",content)
-    
+
+@permission_required('menuserve.add_store', raise_exception=True)
+@login_required   
 def managerstore(request):
     content={}
     # for display error message 
@@ -277,7 +284,8 @@ def managerstore(request):
 
 
     return render(request,"Manager-Store.html",{"stores":stores,"managers":managers})
-    
+@permission_required('menuserve.add_manager', raise_exception=True)
+@login_required   
 def managermanager(request):
     '''
     Function for manage managers'''
@@ -328,6 +336,8 @@ def managermanager(request):
             #return redirect("/Manager-Manager/")    
     return render(request,"Manager-Manager.html",{"managers":managers})
 
+@permission_required('menuserve.add_employee', raise_exception=True)
+@login_required
 def manageremployee(request):
     '''
     Functions for manage employee page
@@ -482,8 +492,8 @@ def manageremployee(request):
     return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"employees":employees, "show":store_message})
 
 
-    
-
+@permission_required('menuserve.add_menu', raise_exception=True)    
+@login_required
 def managermenu(request):
     '''
     Functions for manage menu
@@ -500,7 +510,8 @@ def managermenu(request):
     #     uploaded_file_url = fs.url(filename)
     #     return render(request, 'Manager-Menu.html', {
     #     'uploaded_file_url': uploaded_file_url})
-   
+    if not request.user.is_authenticated:
+        return redirect(reverse("manageremployee"))
     if request.method == "POST": 
         if "MenuAdd" in request.POST: 
             # try:
@@ -624,16 +635,20 @@ def registration(request):
                 last_name = uf.cleaned_data['last_name']
                 user = User.objects.create(username=username,password=password1,email=email,first_name=first_name,last_name=last_name)
                 
-                content_type = ContentType.objects.get_for_model(Order)
-                permission1 = Permission.objects.create(codename='can_add_order',
-                                       name='Can add order',
-                                       content_type=content_type)
-                permission2 = Permission.objects.create(codename='can_delete_order',
-                                       name='Can delete order',
-                                       content_type=content_type)
+                # content_type = ContentType.objects.get_for_model(Order)
+
                 
-                user.user_permissions.add(permission1)
-                user.user_permissions.add(permission2)  
+                my_group = Group.objects.get(name='Customer') 
+                my_group.user_set.add(user)
+                # permission1 = Permission.objects.create(codename='can_add_order',
+                #                        name='Can add order',
+                #                        content_type=content_type)
+                # permission2 = Permission.objects.create(codename='can_delete_order',
+                #                        name='Can delete order',
+                #                        content_type=content_type)
+                
+                # user.user_permissions.add(permission1)
+                # user.user_permissions.add(permission2)  
                 user.save()
                 
                 return redirect(reverse("Order"))
