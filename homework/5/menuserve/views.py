@@ -293,13 +293,15 @@ def managermanager(request):
     # for display error message 
     content["show"]=""   
     managers = Manager.objects.all()
+    e_group = Group.objects.get(name='Manager')
+    users = e_group.user_set.all()
     if request.method == "POST": 
         if "ManagerAdd" in request.POST: 
             form = ManagerForm(request.POST) 
             if form.is_valid():
                 gender = form.cleaned_data["gender"] 
-                name = form.cleaned_data["name"] 
-                a_manager = Manager(name=name, gender=gender)
+                name = request.POST["ManagerAdd"] 
+                a_manager = Manager(manageruser=User.objects.get(id = name), gender=gender)
                 a_manager.save() 
             else:
                 content["show"]=str(form.errors)

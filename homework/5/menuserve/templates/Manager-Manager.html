@@ -61,24 +61,24 @@
     
             <tbody>
                 <form action="#" method="POST">
+                        {% for user in users %}
                     <tr>
-                        <td>Default ID</td>
+                        <td>{{user.id}}</td>
                         <td>
-                            {% csrf_token %}
-                            <input type="text" id="status" class="taskName" name="name" required>
+                                {{user.username}}
                     </td>
                     <td>
                         {% csrf_token %}
                         <input type="text" id="status" class="taskName" name="gender" required>
                     </td>
                     <td colspan="2">
-                        <button class="waves-effect waves-light btn" name="ManagerAdd" type="submit">
+                        <button class="waves-effect waves-light btn" name="ManagerAdd" type="submit" value = "{{user.id}}">
                             Add New Manager
-                          </button>
+                        </button>
                          
                       </td>
                     </tr>
-                    
+                    {% endfor %}
                     </form>
                     {% for manager in managers %}
                     <tr>

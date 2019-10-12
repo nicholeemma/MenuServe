@@ -38,7 +38,7 @@ class StoreUpdateForm(forms.Form):
     #manager_select = forms.CharField( max_length=20,required= True)
 
 class ManagerForm(forms.Form):
-    name = forms.CharField(max_length=20,required= True)
+    #name = forms.CharField(max_length=20,required= True)
     gender = GenderField(validators=[validate_gender],required= True)  
 
 class ManagerUpdateForm(forms.Form):

@@ -12,7 +12,9 @@ class MenuAdmin(admin.ModelAdmin):
     list_display = ("name_of_cuisine",  "id_for_dish","price","classification","description")
 
 class ManagerAdmin(admin.ModelAdmin):
-    list_display = ("name","gender")
+    list_display = ("manageruser_","gender")
+    def manageruser_(self, obj):
+        return str(obj.user.username)
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ("desk_no",  "name_of_cuisine","status","time","amount","store")
