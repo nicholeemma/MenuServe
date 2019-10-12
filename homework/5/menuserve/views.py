@@ -12,8 +12,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
-from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm, OrderForm,OrderUpdateForm,UserForm
-
+from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm, OrderForm,OrderUpdateForm,UserForm
+# EmployeeForm,
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 
@@ -353,6 +353,10 @@ def manageremployee(request):
     stores = Store.objects.all()
     managers = Manager.objects.all()
     employees = Employee.objects.all()
+    #users = User.objects.filter(groups__name='Employee')
+    e_group = Group.objects.get(name='Employee')
+    users = e_group.user_set.all()
+    #users = User.objects.all()
     if request.method == "POST": #checking if the request method is a POST
         if "search" in request.POST:
             try:
@@ -375,38 +379,47 @@ def manageremployee(request):
         #     e = Store.objects.get(id=selected_store)
         #     employees = e.employees.all()
         if "EmployeeAdd" in request.POST:
-            form = EmployeeForm(request.POST) 
-            if form.is_valid():
-                name = form.cleaned_data["name"] 
+            # form = EmployeeForm(request.POST) 
+            # if form.is_valid():
+            #     name = form.cleaned_data["name"] 
                 
-            else:
-                content["show_error"] = str(form.errors)
-                error_message = content["show_error"]
-                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees}) 
-            try:
-                manager_name = request.POST["manager_select"]
-                manager = Manager.objects.get(id=str(manager_name))
-            except:                
-                content["show_error"]="Manager does not exist"
-                error_message = content["show_error"]
-                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees}) 
+            # else:
+            #     content["show_error"] = str(form.errors)
+            #     error_message = content["show_error"]
+            #     return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users",user}) 
             
+            #try:
+            useridid = request.POST["EmployeeAdd"]
+            manager_name = request.POST["manager_select"]
+            manager = Manager.objects.get(id=str(manager_name))
+        # except:                
+        #     content["show_error"]="Manager does not exist"
+        #     error_message = content["show_error"]
+        #     return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users}) 
+        
             store_name = request.POST["store_select"]
-            try:
-                store = Store.objects.get(id=str(store_name))
-            except:
-                
-                content["show_error"]="Store does not exist"
-                error_message = content["show_error"]
-                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees}) 
-            try:
-                a_employee = Employee.objects.create(name=name,manager=manager)
-                a_employee.e_store.add(store)
-                a_employee.save() 
-            except:
-                content["show_error"]="Add cannot be done, check your input"
-                error_message = content["show_error"]
-                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees}) 
+        #try:
+            store = Store.objects.get(id=str(store_name))
+        # except:
+            
+        #     content["show_error"]="Store does not exist"
+        #     error_message = content["show_error"]
+        #     return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users}) 
+        
+            #employeeuser = User.objects.get(username = str(useridid))
+        
+        #a_employee.name = employeeuser
+        # try:
+            
+            a_employee = Employee.objects.create(employeeuser = User.objects.get(username=str(useridid)),manager = manager)
+        # , name = user_
+            a_employee.e_store.add(store)
+            # a_employee.save() 
+            # except:
+            #     content["show_error"]="wrong"
+            #     error_message = content["show_error"]
+            #     return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users}) 
+            
             for s in a_employee.e_store.all():
                 store_message+=str(s.name)
             
@@ -421,7 +434,7 @@ def manageremployee(request):
             except:
                 content["show_error"]="Store does not exist"
                 error_message = content["show_error"]
-                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users})  #getting todo id
             d_Employee.delete()
             return redirect(reverse("manageremployee"))
             #return redirect("/Manager-Employee/")
@@ -435,7 +448,7 @@ def manageremployee(request):
                 
                 content["show_error"]=form.errors
                 error_message = content["show_error"]
-                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users})  #getting todo id
             
             
             try:
@@ -443,14 +456,14 @@ def manageremployee(request):
             except:
                 content["show_error"]="Employee does not exist"
                 error_message = content["show_error"]
-                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users})  #getting todo id
 
             try:
                 u_employee.manager  = Manager.objects.get(id=str(u_employee_manager))
             except:
                 content["show_error"]="manager does not exist"
                 error_message = content["show_error"]
-                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users})  #getting todo id
         
             u_employee.save()
             return redirect(reverse("manageremployee"))
@@ -466,7 +479,7 @@ def manageremployee(request):
             except:
                 content["show_error"]="store or manager does not exist"
                 error_message = content["show_error"]
-                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users})  #getting todo id
             
             for s in u_employee.e_store.all():
                 store_message+=s.name+" "
@@ -485,11 +498,11 @@ def manageremployee(request):
             except:
                 content["show_error"]="This store is not assigned to employee before"
                 error_message = content["show_error"]
-                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees})  #getting todo id
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users})  #getting todo id
             
            
             u_employee.save()
-    return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"employees":employees, "show":store_message})
+    return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"employees":employees, "show":store_message,"users":users})
 
 
 @permission_required('menuserve.add_menu', login_url="/accounts/login")    

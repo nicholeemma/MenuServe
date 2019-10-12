@@ -41,11 +41,7 @@ class Order(models.Model):
     def __str__(self):
         return self.name_of_cuisine
 
-class Employee(models.Model):
-    
-    name = models.CharField(max_length=20)
-    e_store = models.ManyToManyField(Store)
-    manager = models.ForeignKey(Manager,on_delete=models.CASCADE)
+
 
 class Document(models.Model):
     description = models.CharField(max_length=255, blank=True)
@@ -60,3 +56,11 @@ class User(models.Model):
     email = models.EmailField()
 
 
+class Employee(models.Model):
+    
+    # name = models.CharField(max_length=20)
+    employeeuser = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE)
+    e_store = models.ManyToManyField(Store)
+    manager = models.ForeignKey(Manager,on_delete=models.CASCADE)

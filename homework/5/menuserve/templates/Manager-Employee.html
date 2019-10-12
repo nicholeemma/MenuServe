@@ -66,12 +66,14 @@
     
             <tbody>
                 <form action="#" method="POST">
+                        {% for user in users %}
                     <tr>
-                        <td>Default ID</td>
+                        <td>{{user.id}}</td>
                         <td>
-                            {% csrf_token %}
-                            <input type="text" id="status" class="taskName" name="name" required>
-                    </td>
+                                {{user.username}}
+                            <!-- {% csrf_token %}
+                            <input type="text" id="status" class="taskName" name="name" required> -->
+                        </td>
               
                     <td>
                           {% csrf_token %}
@@ -94,12 +96,14 @@
                
                   </td>
                     <td colspan="2">
-                        <button class="waves-effect waves-light btn" name="EmployeeAdd" type="submit">
+                            
+                        <button class="waves-effect waves-light btn" name="EmployeeAdd" type="submit"  value = "{{ user.username }}">
                             Add New employee
                         </button>
                          
                       </td>
                     </tr>
+                    {% endfor %}
                     </form>
 
 
@@ -112,7 +116,7 @@
                           <select id="manager" class="select-management" name="employee_select" required>
                               <option class="disabled" value="">Choose an employee</option>
                               {% for employee in employees %}
-                                  <option class="" value="{{ employee.id }}" name="{{ employee.id }}">{{ employee.name }}</option>
+                                  <option class="" value="{{ employee.id }}" name="{{ employee.id }}">{{ employee.id }}</option>
                               {% endfor %}
                               </select>
                      
@@ -128,7 +132,7 @@
                    
                       </td>
                         <td colspan="2">
-                            <button class="waves-effect waves-light btn" name="EmployeeAddStore" type="submit">
+                            <button class="waves-effect waves-light btn" name="EmployeeAddStore" id="{{ employee.id }}" value="{{ employee.id }}"type="submit">
                                 Add Employee to Store
                               </button>
                              
@@ -146,7 +150,7 @@
                                   <select id="manager" class="select-management" name="employee_select" required>
                                       <option class="disabled" value="">Choose an employee</option>
                                       {% for employee in employees %}
-                                          <option class="" value="{{ employee.id }}" name="{{ employee.id }}">{{ employee.name }}</option>
+                                          <option class="" value="{{ employee.id }}" name="{{ employee.id }}">{{ employee.id }}</option>
                                       {% endfor %}
                                       </select>
                              
