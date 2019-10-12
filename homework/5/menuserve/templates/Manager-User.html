@@ -1,0 +1,94 @@
+{% extends 'base.html' %} 
+{% load static %}
+                
+        {%block headerbutton%}
+                <form method="post" action="/">
+                                
+                    <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a>
+                </form>
+        {% endblock %}
+                
+        {%block welcome%}
+        Records of Managers
+        {% endblock %}
+              {%block content%}  
+          <div class="row" class="table-margin-top">
+            <div class="col s4">
+                <form class="search-bar-management">
+                    <input type="text" name="search" value="Search user here" >
+        
+                </form>
+            </div>
+            
+            
+            <div class="col s4">
+                <p id="loginfo">
+                    Hi, Nichole. Start to manage  users now.
+                   </p>
+                   {% csrf_token %}
+                <p class="error_msg">{{show}}</p>
+            </div>
+        </div>
+            <div class="record-table">
+        <table class="striped" >
+            <thead>
+              <tr>
+                  <th>user No.</th>
+                  <th>Username</th>
+                  <th>Last Name</th>
+                  <th>First Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Action</th>
+                  
+                  
+              </tr>
+            </thead>
+    
+            <tbody>
+                
+                    {% for user in users %}
+                    <tr>
+                        <form action="#" method="POST">
+                            <td>{{user.id}}</td>
+                            <td> {{user.username}}</td>
+                            <td>{{user.first_name}}</td>
+                            <td>{{user.last_name}}</td>
+                            <td>{{user.email}}</td>
+                            <td> {% csrf_token %}
+                                <select id="user-role" class="select-management" name="role_select">
+                                   
+                                        <option class="disabled" value="{{user.groupname}}">{{user.groupname}}</option>
+                                        
+                                        <option class="" value="Employee" name="Employee">Employee</option>
+                                        <option class="" value="Manager" name="Manager">Manager</option>
+                                        <option class="" value="Customer" name="Customer">Customer</option>
+                                   
+                                </select>
+                            </td>
+                            <td>
+                                  {% csrf_token %}
+                                <button class="waves-effect waves-light btn" name = "ChangeRole" id="{{ user.id }}" value="{{ user.id }}" type="submit">ChangeRole</button>
+                            </td>
+      
+                        </form>
+                        <td>
+                            <form action="#" method="POST">
+                                      {% csrf_token %}
+                            <!-- <button class="waves-effect waves-light btn" name = "ManagerDelete" id="{{ manager.id }}" value="{{ manager.id }}" type="submit">Delete</button> -->
+                                                                    
+                            </form>
+                        </td> 
+                    </tr>
+                    {% endfor %}
+              
+            </tbody>
+        </table>
+ 
+        </div>
+            
+           
+                  
+          {% endblock %}  
+            
+            

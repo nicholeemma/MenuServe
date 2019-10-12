@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.shortcuts import render,HttpResponseRedirect,HttpResponse
-from .models import Menu, Store, Employee, Manager, Order,Document
+from .models import Menu, Store, Employee, Manager, Order,Document,User
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 #Used to create and manually log in a user
@@ -661,5 +661,27 @@ def registration(request):
 
 def registration_confirmation(request):
     return render(request,'registration_confirmation.html')
+
+
+def manageruser(request):
+    users = User.objects.all()
+    if request.method == "POST":
+        if "ChangeRole" in request.POST:
+            role = request.POST["role_select"]
+            userid = request.POST["ChangeRole"]
+            user_ = User.objects.get(id = userid)
+            user_.groups.clear()
+            my_group = Group.objects.get(name = role) 
+            my_group.user_set.add(user_)
+            #If the role changed to manager, it will be enabled all permission, including superuser and staff
+            if role=="Manager":
+                user_.is_superuser = True
+                user_.is_staff = True
+            if role=="Employee":
+                user_.is_staff = True
+            user_.save()
+
+    return render(request,"Manager-User.html",{"users":users})
+
 
 
