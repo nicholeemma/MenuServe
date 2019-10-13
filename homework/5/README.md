@@ -2,6 +2,10 @@
 ### Name: Jiayue Yang   Course: 17637 Web Application
 
 ## *Serverl things to notice*
+
+Reference:
+https://www.cnblogs.com/dreamer-fish/p/5477178.html
+https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Django/Authentication
 1. enabledhostnames:
 "menuservejiayueya.azurewebsites.net"
 [Click here go to my website](menuservejiayueya.azurewebsites.net)

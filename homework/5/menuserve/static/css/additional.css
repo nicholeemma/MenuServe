@@ -1,6 +1,12 @@
 /*Reference: 
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_fade
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2*/
+#main-container {
+  min-height: 100vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;}
+
 img .menu_pic{
   width: 10%;
   height: 10%;
