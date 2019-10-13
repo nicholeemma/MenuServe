@@ -18,6 +18,7 @@ from django.urls import path
 from menuserve.views import index
 from menuserve.views import home
 from menuserve.views import manageorders
+from django.contrib.auth import login
 from menuserve.views import (managermain,manageremployee,managerstore,managermenu,managermanager,registration,registration_confirmation,manageruser,logout)
 from django.conf.urls import url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -26,6 +27,7 @@ from django.conf import settings
 from django.contrib import staticfiles
 from django.views.static import serve
 from django.conf.urls import  include, url
+from django.contrib.auth.views import LoginView
 
 # Use include() to add URLS from the catalog application and authentication system
 
@@ -39,6 +41,8 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     # path('',index,name="index"),
     # url(r'^Menu/', index),
+    #url(r'^accounts/login/$', LoginView.as_view(), name='login'),
+    #url(r'accounts/login/$', login,name='login'),
     url(r'^accounts/logout/$', logout,name="logout"),
     url(r'^Order/',home,name="Order"),
     url(r'^Submitted-Order/',manageorders,name="manageorder"),

@@ -44,6 +44,7 @@ class Order(models.Model):
     amount = models.IntegerField()
     price = models.IntegerField()
     store = models.ForeignKey(Store,on_delete=models.CASCADE)
+    order_user = models.ForeignKey(User,on_delete=models.CASCADE)
     class Meta:
         ordering = ["-time"]
     def __str__(self):

@@ -72,7 +72,7 @@ def home(request):
     
         
         
-    orders = Order.objects.all()
+    orders = Order.objects.filter(order_user=request.user) 
     menus = Menu.objects.all()
     stores = Store.objects.all()
     if request.method == "POST": #checking if the request method is a POST
@@ -700,6 +700,7 @@ def manageruser(request):
     return render(request,"Manager-User.html",{"users":users})
 
     
+
 @login_required
 def logout(request):
     auth.logout(request)
