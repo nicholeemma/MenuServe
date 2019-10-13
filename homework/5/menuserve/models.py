@@ -4,14 +4,15 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 import datetime
+from django.contrib.auth.models import User
 # Code reference: https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c
 
-class User(models.Model):
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField()
+# class User(models.Model):
+#     username = models.CharField(max_length=50)
+#     password = models.CharField(max_length=50)
+#     first_name = models.CharField(max_length=50)
+#     last_name = models.CharField(max_length=50)
+#     email = models.EmailField()
 
 class Menu(models.Model): 
     

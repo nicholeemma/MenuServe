@@ -1,6 +1,7 @@
 from django import forms
 from .models import Store,Manager,Employee,Order,Menu,Document
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
 
@@ -75,13 +76,54 @@ class OrderUpdateForm(forms.Form):
     input_desk_no = forms.CharField(max_length=4,required= True)
     input_amount = forms.IntegerField(min_value=1, max_value=1000,required= True)
 
-class UserForm(forms.Form):
-    username = forms.CharField(label='user name',max_length=100,required= True)
-    password1 = forms.CharField(label='psd',widget=forms.PasswordInput(),required= True)
-    password2 = forms.CharField(label='confirm psd',widget=forms.PasswordInput(),required= True)
-    email = forms.EmailField(label='email')
-    first_name = forms.CharField(max_length=50)
-    last_name = forms.CharField(max_length=50)
+# class UserForm(forms.Form):
+#     username = forms.CharField(label='user name',max_length=100,required= True)
+#     password1 = forms.CharField(label='psd',widget=forms.PasswordInput(),required= True)
+#     password2 = forms.CharField(label='confirm psd',widget=forms.PasswordInput(),required= True)
+#     email = forms.EmailField(label='email')
+#     first_name = forms.CharField(max_length=50)
+#     last_name = forms.CharField(max_length=50)
+
+class SignupForm(forms.Form):
+    username = forms.CharField(max_length = 200,
+                               label = 'Username')
+    first_name = forms.CharField(max_length = 200,
+                                 label='First Name')
+    last_name = forms.CharField(max_length = 200,
+                                label = 'Last Name')
+    password = forms.CharField(max_length = 200,
+                                label='Password',
+                                widget = forms.PasswordInput())
+    confirm_password = forms.CharField(max_length = 200,
+                                label='Confirm password',
+                                widget = forms.PasswordInput())
+    email = forms.EmailField(max_length=200,
+                             label='Email',
+                             widget=forms.EmailInput())
+
+    def __init__(self, *args, **kwargs):
+        super(SignupForm, self).__init__(*args, **kwargs)
+        # self.fields['username'].error_messages = {'required': 'username required'}
+        # if you want to do it to all of them
+        for field in self.fields.values():
+            field.error_messages = {'required': '{fieldname} cannot be empty!'.format(
+                fieldname=field.label)}
+            field.widget.attrs.update({'class': 'input-text'})
+        # self.fields['username'].widget.attrs.update({'class': 'input-text'})
+
+    def clean(self):
+        cleaned_data = super(SignupForm, self).clean()
+        password = cleaned_data.get('password')
+        confirm_password = cleaned_data.get('confirm_password')
+        if password and confirm_password and password != confirm_password:
+            raise forms.ValidationError("Confirm password does not match!")
+        return cleaned_data
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username__exact=username):
+            raise forms.ValidationError("Username is already taken.")
+        return username
 
 
    

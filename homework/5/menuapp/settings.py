@@ -56,7 +56,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ROOT_URLCONF = 'menuapp.urls'
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 #LOGIN_REDIRECT_URL = '/Manager-Main/'
-LOGIN_REDIRECT_URL = "managermain"
+LOGIN_REDIRECT_URL = "Order"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

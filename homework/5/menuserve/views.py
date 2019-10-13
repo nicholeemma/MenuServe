@@ -1,19 +1,19 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.shortcuts import render,HttpResponseRedirect,HttpResponse
-from .models import Menu, Store, Employee, Manager, Order,Document,User
+from .models import Menu, Store, Employee, Manager, Order,Document
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 #Used to create and manually log in a user
 from django.contrib.auth.models import User,Group
 from django.contrib import auth
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate,logout
 from django.http import HttpResponse, Http404
 # Used to generate a one-time-use token to verify a user's email address
 from django.contrib.auth.tokens import default_token_generator
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
-from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm, OrderForm,OrderUpdateForm,UserForm
+from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm, OrderForm,OrderUpdateForm,SignupForm
 # EmployeeForm,
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
@@ -303,11 +303,19 @@ def managermanager(request):
                 gender = form.cleaned_data["gender"] 
                 name = request.POST["ManagerAdd"] 
                 a_manager = Manager(manageruser=User.objects.get(id = name), gender=gender)
-                a_manager.save() 
+                a_manager.save()
+                # try:
+                #     a_manager = Manager(manageruser=User.objects.get(id = name), gender=gender)
+                #     a_manager.save() 
+                # except:
+                #     content["show"]=str(type(User.objects.get(id = name)))
+                #     error_message = content["show"]
+                #     return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message,"users":users}) 
+
             else:
                 content["show"]=str(form.errors)
                 error_message = content["show"]
-                return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message}) 
+                return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message,"users":users}) 
             return redirect(reverse("managermanager"))
             #return redirect("/Manager-Manager/")
         if "ManagerDelete" in request.POST: #checking if there is a request to delete a todo
@@ -317,7 +325,7 @@ def managermanager(request):
             except:
                 content["show"]="Manager does not exist"
                 error_message = content["show"]
-                return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message}) 
+                return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message,"users":users}) 
             d_manager.delete()
             return redirect(reverse("managermanager"))
             #return redirect("/Manager-Manager/")
@@ -331,13 +339,13 @@ def managermanager(request):
             else:
                 content["show"]=str(form.errors)
                 error_message = content["show"]
-                return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message}) 
+                return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message,"users":users}) 
             u_manager.gender = str(u_manager_gender)
             u_manager.name = str(u_manager_name)  
             u_manager.save()
             return redirect(reverse("managermanager"))
             #return redirect("/Manager-Manager/")    
-    return render(request,"Manager-Manager.html",{"managers":managers})
+    return render(request,"Manager-Manager.html",{"managers":managers,"users":users})
 
 @permission_required('menuserve.add_employee', login_url="/accounts/login")
 @login_required
@@ -627,35 +635,44 @@ def registration(request):
     error_message=""
 
     if request.method == "POST":
-        uf = UserForm(request.POST)
-        if uf.is_valid():
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            new_user = User.objects.create_user(username=form.cleaned_data['username'],
+                                        password=form.cleaned_data['password'],
+                                        email= form.cleaned_data['email'],
+                                        first_name=form.cleaned_data['first_name'],
+                                        last_name=form.cleaned_data['last_name'])
+            new_user.save()
+            username_ = form.cleaned_data['username']
+            password_ = form.cleaned_data['password']
             
-            username = uf.cleaned_data['username']
+            
+            
+            # username = uf.cleaned_data['username']
            
-            filterResult = User.objects.filter(username = username)
-            if len(filterResult)>0:
-                return redirect(reverse("registration"),{"errors":"name has existed"})
-            else:
-                password1 = uf.cleaned_data['password1']
-                password2 = uf.cleaned_data['password2']              
-                if (password2 != password1):
-                    content["errors"] = "Two password is not the same"
-                    error_message = content["errors"]
+            # filterResult = User.objects.filter(username = username)
+            # if len(filterResult)>0:
+            #     return redirect(reverse("registration"),{"errors":"name has existed"})
+            # else:
+            #     password1 = uf.cleaned_data['password1']
+            #     password2 = uf.cleaned_data['password2']              
+            #     if (password2 != password1):
+            #         content["errors"] = "Two password is not the same"
+            #         error_message = content["errors"]
                     
-                    return render(request,"registration.html",{"errors":error_message})
-                first_name = uf.cleaned_data['first_name']
-                last_name = uf.cleaned_data['last_name']
-                username = uf.cleaned_data['username']
-                email = uf.cleaned_data['email']
-                first_name = uf.cleaned_data['first_name']
-                last_name = uf.cleaned_data['last_name']
-                user = User.objects.create(username=username,password=password1,email=email,first_name=first_name,last_name=last_name)
+            #         return render(request,"registration.html",{"errors":error_message})
+            #     first_name = uf.cleaned_data['first_name']
+            #     last_name = uf.cleaned_data['last_name']
+            #     username = uf.cleaned_data['username']
+            #     email = uf.cleaned_data['email']
+            #     first_name = uf.cleaned_data['first_name']
+            #     last_name = uf.cleaned_data['last_name']
+            #     user = User.objects.create(username=username,password=password1,email=email,first_name=first_name,last_name=last_name)
                 
                 # content_type = ContentType.objects.get_for_model(Order)
 
-                
-                my_group = Group.objects.get(name='Customer') 
-                my_group.user_set.add(user)
+            my_group = Group.objects.get(name='Customer') 
+            my_group.user_set.add(new_user)
                 # permission1 = Permission.objects.create(codename='can_add_order',
                 #                        name='Can add order',
                 #                        content_type=content_type)
@@ -665,18 +682,19 @@ def registration(request):
                 
                 # user.user_permissions.add(permission1)
                 # user.user_permissions.add(permission2)  
-                user.save()
-                
-                return redirect(reverse("Order"))
+            new_user.save()
+            user = authenticate(username=username_, password=password_)  
+            login(request, new_user)
+            return redirect(reverse("Order"))
         else:
-            content["errors"] = uf.errors
+            content["errors"] = form.errors
             error_message = content["errors"]
             # must use double qutotation
             return render(request,"registration.html",{"errors":error_message})
     return render(request,"registration.html")
 
-def registration_confirmation(request):
-    return render(request,'registration_confirmation.html')
+# def registration_confirmation(request):
+#     return render(request,'registration_confirmation.html')
 
 
 def manageruser(request):
@@ -701,11 +719,11 @@ def manageruser(request):
 
     
 
-@login_required
-def logout(request):
-    auth.logout(request)
-    redirect("/accounts/login")
-    return 
+# @login_required
+# def logout(request):
+#     auth.logout(request)
+#     redirect("/accounts/login")
+#     return 
 
 
 
