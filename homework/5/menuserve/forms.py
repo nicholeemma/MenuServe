@@ -43,14 +43,14 @@ class ManagerForm(forms.Form):
     gender = GenderField(validators=[validate_gender],required= True)  
 
 class ManagerUpdateForm(forms.Form):
-    input_managername = forms.CharField(max_length=20,required= True)
+    #input_managername = forms.CharField(max_length=20,required= True)
     input_managergender = GenderField(validators=[validate_gender],required= True) 
 
 # class EmployeeForm(forms.Form):
 #     name = forms.CharField(max_length=20,required= True)
 
-class EmployeeUpdateForm(forms.Form):
-    input_employeename = forms.CharField(max_length=20,required= True)
+#class EmployeeUpdateForm(forms.Form):
+    #input_employeename = forms.CharField(max_length=20,required= True)
 
 class MenuForm(forms.Form):
     name_of_cuisine = forms.CharField(max_length=30,required= True)

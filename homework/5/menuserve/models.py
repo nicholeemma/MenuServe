@@ -27,7 +27,9 @@ class Manager(models.Model):
 
     manageruser = models.OneToOneField(
         User,
-        on_delete=models.CASCADE)
+        on_delete=models.CASCADE,
+        primary_key=True,
+        )
     gender = models.CharField(max_length=20,default='male')
 
 class Store(models.Model):
