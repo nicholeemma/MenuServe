@@ -128,6 +128,8 @@ What you have ordered
 
             <th>desk</th>
 
+            <th>status</th>
+
             <th>Action</th>
 
         </tr>
@@ -171,7 +173,10 @@ What you have ordered
             <td>
                 {{order.desk_no}}
             </td>
-
+            
+            <td>
+                {{order.status}}
+            </td>
             <td>
                 <form action="#" method="POST">
     {% csrf_token %}

@@ -58,6 +58,7 @@
             <thead>
               <tr>
                   <th>Order No.</th>
+                  <th>CustomerID</th>
                   <th>Desk No.</th>
                   <th>Name of Cuisine</th>
                   <th>Amount</th>
@@ -77,7 +78,8 @@
               
                     <form action="#" method="POST">
                 <td>{{order.id}}</td>
-                <td> <input type="text" name="input_desk_no" value="{{order.desk_no}}">{{order.desk_no}}</td>
+                <td>{{order.order_user_id}}</td>
+                <td> <input type="text" name="input_desk_no" value="{{order.desk_no}}"></td>
                 <td >
                     {% csrf_token %}
                         <select id="menu" class="select-management" name="cuisine_select" required>
@@ -85,9 +87,9 @@
                             {% for menu in menus %}
                                 <option class="" value="{{ menu.name_of_cuisine }}" name="{{ menu.name_of_cuisine }}">{{ menu.name_of_cuisine }}</option>
                             {% endfor %}
-                        </select>{{ order.name_of_cuisine }}
+                        </select>
                 </td>
-                <td> <input type="text" name="input_amount" value="{{order.amount}}">{{order.amount}}</td>
+                <td> <input type="text" name="input_amount" value="{{order.amount}}"></td>
                 <td> <select id="menu" class="select-management" name="input_status" required>
                     <option class="disabled" value="Completed">Completed</option>
                     <option class="" value="Pending">Pending</option>
@@ -101,7 +103,7 @@
                             {% for store in stores %}
                                 <option class="" value="{{ store.id }}" name="{{ store.id }}">{{ store.name }}</option>
                             {% endfor %}
-                        </select>{{ order.store.name }}
+                        </select>
                 </td>
                    
                 <td>
