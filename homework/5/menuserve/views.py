@@ -118,14 +118,18 @@ def home(request):
                 return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
             time = "2019-09-21"
             
+             #saving 
             try:
                 an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine, time=time,
-                                    status=status, amount=amount, store=store ,price=price)
-                an_order.save() #saving 
+                                    status=status, amount=amount, store=store ,price=price,
+                                    order_user_id=request.user.id)
+                an_order.save()
+                
             except:
                 content["show"]="Input does not comply with rules. Check your input"
                 error_message = content["show"]
                 return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+
             return redirect(reverse("Order"))    
     return render(request,"Order.html",{"stores":stores,"orders":orders,"menus":menus,"show":error_message})
 
@@ -363,7 +367,7 @@ def manageremployee(request):
     employees = Employee.objects.all()
     #users = User.objects.filter(groups__name='Employee')
     e_group = Group.objects.get(name='Employee')
-    users = e_group.user_set.all().exclude(username__in = employees)
+    users = e_group.user_set.all().exclude(id__in = employees)
     #users = User.objects.all()
     if request.method == "POST": #checking if the request method is a POST
         if "search" in request.POST:
