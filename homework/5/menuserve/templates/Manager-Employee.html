@@ -80,7 +80,7 @@
                       <select id="manager" class="select-management" name="manager_select" required>
                           <option class="disabled" value="">Choose a manager</option>
                           {% for manager in managers %}
-                              <option class="" value="{{ manager.id }}" name="{{ manager.id }}">{{ manager.name }}</option>
+                          <option class="" value="{{ manager.manageruser_id }}" name="{{ manager.manageruser }}">{{ manager.manageruser }}</option>
                           {% endfor %}
                           </select>
                  
@@ -97,7 +97,7 @@
                   </td>
                     <td colspan="2">
                             
-                        <button class="waves-effect waves-light btn" name="EmployeeAdd" type="submit"  value = "{{ user.username }}">
+                        <button class="waves-effect waves-light btn" name="EmployeeAdd" type="submit"  value = "{{ user.id }}">
                             Add New employee
                         </button>
                          
@@ -116,7 +116,7 @@
                           <select id="manager" class="select-management" name="employee_select" required>
                               <option class="disabled" value="">Choose an employee</option>
                               {% for employee in employees %}
-                                  <option class="" value="{{ employee.id }}" name="{{ employee.id }}">{{ employee.id }}</option>
+                                  <option class="" value="{{ employee.id }}" name="{{ employee.id }}">{{ employee.employeeuser }}</option>
                               {% endfor %}
                               </select>
                      
@@ -150,7 +150,7 @@
                                   <select id="manager" class="select-management" name="employee_select" required>
                                       <option class="disabled" value="">Choose an employee</option>
                                       {% for employee in employees %}
-                                          <option class="" value="{{ employee.id }}" name="{{ employee.id }}">{{ employee.id }}</option>
+                                          <option class="" value="{{ employee.id }}" name="{{ employee.id }}">{{ employee.employeeuser }}</option>
                                       {% endfor %}
                                       </select>
                              
@@ -179,13 +179,13 @@
               <tr>
                     <form action="#" method="POST">
                 <td>{{employee.id}}</td>
-                <td> <input type="text" name="input_employeename" value="{{employee.name}}">{{employee.name}}</td>
+                <td> {{employee.employeeuser}}</td>
                 
                 <td>{% csrf_token %}
                         <select id="manager" class="select-management" name="manager_select" >
-                            <option class="disabled" value="{{employee.manager.id}}" name = "{{employee.manager.id}}">{{employee.manager.name}}</option>
+                            <option class="disabled" value="{{employee.manager.manageruser_id}}" name = "{{employee.manager.manageruser_id}}">{{employee.manager.manageruser}}</option>
                             {% for manager in managers %}
-                                <option class="" value="{{ manager.id }}" name="{{ manager.id }}">{{ manager.name }}</option>
+                                <option class="" value="{{ manager.manageruser_id }}" name="{{ manager.manageruser_id }}">{{ manager.manageruser }}</option>
                             {% endfor %}
                             </select>{{ employee.manager.name }}</td>
                    

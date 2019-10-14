@@ -13,8 +13,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
-from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,EmployeeUpdateForm,MenuForm,MenuUpdateForm, OrderForm,OrderUpdateForm,SignupForm
-# EmployeeForm,
+from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,MenuForm,MenuUpdateForm, OrderForm,OrderUpdateForm,SignupForm
+# EmployeeForm,EmployeeUpdateForm,
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 
@@ -232,7 +232,7 @@ def managerstore(request):
                 location = form.cleaned_data["location"] 
                 name = form.cleaned_data["name"] 
                 manager_name = form.cleaned_data["manager_select"]
-                manager = Manager.objects.get(name=str(manager_name))
+                manager = Manager.objects.get(manageruser_id=str(manager_name))
                 a_store = Store(name=name, location=location,store_manager=manager)
                 a_store.save() 
             else:
@@ -271,10 +271,11 @@ def managerstore(request):
                 error_message = content["show"]
                 return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
             try:
+                
                 u_store_manager = request.POST["manager_select"]
-                u_store.store_manager  = Manager.objects.get(id=str(u_store_manager))
+                u_store.store_manager  = Manager.objects.get(manageruser_id=str(u_store_manager))
             except:
-                content["show"]="Manager does not exist"
+                content["show"]="manager does not exist"
                 error_message = content["show"]
                 return render(request,"Manager-Store.html",{"stores":stores,"managers":managers,"show":error_message}) 
 
@@ -295,23 +296,18 @@ def managermanager(request):
     content["show"]=""   
     managers = Manager.objects.all()
     e_group = Group.objects.get(name='Manager')
-    users = e_group.user_set.all()
+    # list users who can be managers, they should be in the user list but not in the managers
+    users = e_group.user_set.all().exclude(id__in = managers)
     if request.method == "POST": 
         if "ManagerAdd" in request.POST: 
             form = ManagerForm(request.POST) 
             if form.is_valid():
                 gender = form.cleaned_data["gender"] 
                 name = request.POST["ManagerAdd"] 
-                a_manager = Manager(manageruser=User.objects.get(id = name), gender=gender)
-                a_manager.save()
-                # try:
-                #     a_manager = Manager(manageruser=User.objects.get(id = name), gender=gender)
-                #     a_manager.save() 
-                # except:
-                #     content["show"]=str(type(User.objects.get(id = name)))
-                #     error_message = content["show"]
-                #     return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message,"users":users}) 
-
+                # a_manager = Manager(manageruser=User.objects.get(id = name), gender=gender)
+                #a_manager.save()
+                a_manager = Manager.objects.create(manageruser=User.objects.get(id = name), gender=gender)
+             
             else:
                 content["show"]=str(form.errors)
                 error_message = content["show"]
@@ -321,11 +317,12 @@ def managermanager(request):
         if "ManagerDelete" in request.POST: #checking if there is a request to delete a todo
             d_manager_id = request.POST["ManagerDelete"] #checked todos to be deleted
             try:
-                d_manager = Manager.objects.get(id=d_manager_id) #getting todo id
+                d_manager = Manager.objects.get(manageruser_id=d_manager_id) #getting todo id
             except:
                 content["show"]="Manager does not exist"
                 error_message = content["show"]
-                return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message,"users":users}) 
+                return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message}) 
+                #,"users":users
             d_manager.delete()
             return redirect(reverse("managermanager"))
             #return redirect("/Manager-Manager/")
@@ -334,14 +331,14 @@ def managermanager(request):
             if form.is_valid():
                 u_manager_id = request.POST["ManagerUpdate"]
                 u_manager_gender = form.cleaned_data["input_managergender"] #checked todos to be deleted          
-                u_manager_name = form.cleaned_data["input_managername"]           
-                u_manager = Manager.objects.get(id=u_manager_id)
+                #u_manager_name = form.cleaned_data["input_managername"]           
+                u_manager = Manager.objects.get(manageruser_id=u_manager_id)
             else:
                 content["show"]=str(form.errors)
                 error_message = content["show"]
                 return render(request,"Manager-Manager.html",{"managers":managers,"show":error_message,"users":users}) 
             u_manager.gender = str(u_manager_gender)
-            u_manager.name = str(u_manager_name)  
+            #u_manager.name = str(u_manager_name)  
             u_manager.save()
             return redirect(reverse("managermanager"))
             #return redirect("/Manager-Manager/")    
@@ -366,7 +363,7 @@ def manageremployee(request):
     employees = Employee.objects.all()
     #users = User.objects.filter(groups__name='Employee')
     e_group = Group.objects.get(name='Employee')
-    users = e_group.user_set.all()
+    users = e_group.user_set.all().exclude(username__in = employees)
     #users = User.objects.all()
     if request.method == "POST": #checking if the request method is a POST
         if "search" in request.POST:
@@ -402,7 +399,7 @@ def manageremployee(request):
             #try:
             useridid = request.POST["EmployeeAdd"]
             manager_name = request.POST["manager_select"]
-            manager = Manager.objects.get(id=str(manager_name))
+            manager = Manager.objects.get(manageruser_id=str(manager_name))
         # except:                
         #     content["show_error"]="Manager does not exist"
         #     error_message = content["show_error"]
@@ -420,16 +417,18 @@ def manageremployee(request):
             #employeeuser = User.objects.get(username = str(useridid))
         
         #a_employee.name = employeeuser
-        # try:
+            try:
             
-            a_employee = Employee.objects.create(employeeuser = User.objects.get(username=str(useridid)),manager = manager)
+                a_employee = Employee.objects.create(employeeuser = User.objects.get(id=str(useridid)),manager = manager)
+            
+             
         # , name = user_
-            a_employee.e_store.add(store)
+                a_employee.e_store.add(store)
             # a_employee.save() 
-            # except:
-            #     content["show_error"]="wrong"
-            #     error_message = content["show_error"]
-            #     return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users}) 
+            except:
+                content["show_error"]="You cannot add repetitive employee"
+                error_message = content["show_error"]
+                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users}) 
             
             for s in a_employee.e_store.all():
                 store_message+=str(s.name)
@@ -451,15 +450,15 @@ def manageremployee(request):
             #return redirect("/Manager-Employee/")
         if "EmployeeUpdate" in request.POST: 
             u_employee_id = request.POST["EmployeeUpdate"]
-            form = EmployeeUpdateForm(request.POST) 
-            if form.is_valid():
-                u_employee_name = form.cleaned_data["input_employeename"]
-                u_employee_manager = request.POST["manager_select"]
-            else:
+            #form = EmployeeUpdateForm(request.POST) 
+            #if form.is_valid():
+               # u_employee_name = form.cleaned_data["input_employeename"]
+            u_employee_manager = request.POST["manager_select"]
+            #else:
                 
-                content["show_error"]=form.errors
-                error_message = content["show_error"]
-                return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users})  #getting todo id
+                # content["show_error"]=form.errors
+                # error_message = content["show_error"]
+                # return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users})  #getting todo id
             
             
             try:
@@ -470,7 +469,7 @@ def manageremployee(request):
                 return render(request,"Manager-Employee.html",{"stores":stores,"managers":managers,"show_error":error_message,"employees":employees,"users":users})  #getting todo id
 
             try:
-                u_employee.manager  = Manager.objects.get(id=str(u_employee_manager))
+                u_employee.manager  = Manager.objects.get(manageruser_id=str(u_employee_manager))
             except:
                 content["show_error"]="manager does not exist"
                 error_message = content["show_error"]
