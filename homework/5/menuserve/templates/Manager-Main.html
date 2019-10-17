@@ -36,10 +36,13 @@ Welcome, Manager
                         </b>
                     </p>
                         <div>
+                            <a href="{% url 'manageorder' %}"  class="waves-effect waves-light btn" id="management-main-btn1" >Order</a>
                             <a href="{% url 'managermenu' %}"  class="waves-effect waves-light btn" id="management-main-btn1" >Menu</a>
+                            <a href="{% url 'manageruser' %}" class="waves-effect waves-light btn" id="management-main-btn4">All Users</a>
                             <a href="{% url 'manageremployee' %}" class="waves-effect waves-light btn" id="management-main-btn2" >Employee</a>
                             <a href="{% url 'managerstore' %}" class="waves-effect waves-light btn" id="management-main-btn3">Store</a>
                             <a href="{% url 'managermanager' %}" class="waves-effect waves-light btn" id="management-main-btn4">Manager</a>
+                            
                         </div>
                 </div>
             </div>

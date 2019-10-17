@@ -58,13 +58,14 @@
                             <td> {% csrf_token %}
                                 <select id="user-role" class="select-management" name="role_select">
                                    
-                                        <option class="disabled" value="{{user.groupname}}">{{user.groupname}}</option>
+                                        <option class="disabled" value="{{user.groupname}}">{{user.groups.all}}</option>
                                         
                                         <option class="" value="Employee" name="Employee">Employee</option>
                                         <option class="" value="Manager" name="Manager">Manager</option>
                                         <option class="" value="Customer" name="Customer">Customer</option>
                                    
                                 </select>
+                                
                             </td>
                             <td>
                                   {% csrf_token %}
@@ -80,11 +81,15 @@
                             </form>
                         </td> 
                     </tr>
+                    
                     {% endfor %}
-              
+                   
             </tbody>
         </table>
- 
+        {% csrf_token %}
+        {% for e in es %}
+        {{e}}
+        {% endfor %}
         </div>
             
            

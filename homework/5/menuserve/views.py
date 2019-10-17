@@ -699,9 +699,14 @@ def registration(request):
 # def registration_confirmation(request):
 #     return render(request,'registration_confirmation.html')
 
-
+@permission_required('menuserve.add_user', login_url="/accounts/login")    
+@login_required
 def manageruser(request):
     users = User.objects.all()
+    e_groups = Group.objects.get(name = "Employee") 
+    es = e_groups.user_set.all()
+    c_group = Group.objects.get(name = "Customer") 
+    m_group = Group.objects.get(name = "Manager") 
     if request.method == "POST":
         if "ChangeRole" in request.POST:
             role = request.POST["role_select"]
@@ -717,8 +722,8 @@ def manageruser(request):
             if role=="Employee":
                 user_.is_staff = True
             user_.save()
-
-    return render(request,"Manager-User.html",{"users":users})
+            return render(request,"Manager-User.html",{"users":users},{"es":es})
+    return render(request,"Manager-User.html",{"users":users},{"es":es})
 
     
 
