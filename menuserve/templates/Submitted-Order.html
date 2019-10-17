@@ -91,8 +91,9 @@
                 </td>
                 <td> <input type="text" name="input_amount" value="{{order.amount}}"></td>
                 <td> <select id="menu" class="select-management" name="input_status" required>
-                    <option class="disabled" value="Completed">Completed</option>
+                    <option class="disabled" value="{{order.status}}">{{order.status}}</option>
                     <option class="" value="Pending">Pending</option>
+                    <option class="" value="Completed">Completed</option>
                 </td>
                 <!--<td> <input type="text" name="input_time" value="{{order.time}}">{{order.time}}</td>-->
                 <td> {{order.price}}</td>
