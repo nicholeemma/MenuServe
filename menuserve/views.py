@@ -601,7 +601,7 @@ def managermenu(request):
             form = MenuUpdateForm(request.POST) 
             u_Menu_id = request.POST["MenuUpdate"]
             if form.is_valid():
-                u_Menu_id = form.cleaned_data["MenuUpdate"]
+                #u_Menu_id = form.cleaned_data["MenuUpdate"]
                 u_Menu_id_dish = form.cleaned_data["input_menuid_for_dish"] 
                 u_menu_name = form.cleaned_data["input_menuname_of_cuisine"]
                 u_category = form.cleaned_data['menu_select']

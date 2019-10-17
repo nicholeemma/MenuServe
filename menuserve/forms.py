@@ -66,7 +66,7 @@ class MenuUpdateForm(forms.Form):
     input_menuprice = forms.IntegerField(min_value=0, max_value=1000,required= True)
     menu_select = forms.CharField(max_length=10,required= True)
     input_menudescription = forms.CharField(max_length=100,required= True)
-    myfile = forms.FileField()
+    #myfile = forms.FileField()
 
 class OrderForm(forms.Form):
     desk_no = forms.CharField(max_length=4,required= True)
