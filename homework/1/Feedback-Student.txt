@@ -1,7 +1,0 @@
-Feedback from a student named Yue Yin
-
-1. In the page of menu, listing the names of cuisine will be better
-2. In the page of menu, the current two buttons to register and log in are not clear. Replacing them with one button "registration/login"
-3. The types of order status can be reduced to pending and completed. Add a column for recording the desk number.
-4. As there are classifications of menus in the page of menus, manager-menu should have column of classification as well
-5. Make incline CSS into external files.
