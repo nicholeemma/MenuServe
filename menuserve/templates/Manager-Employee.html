@@ -4,7 +4,7 @@
         {%block headerbutton%}
                 <form method="post" action="/">
                                 
-                    <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a>
+                    <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="logout" >Main</a>
                 </form>
         {% endblock %}
                 
@@ -65,8 +65,9 @@
             </thead>
     
             <tbody>
-                <form action="#" method="POST">
-                        {% for user in users %}
+               
+                        {% for user in users %} 
+                        <form action="#" method="POST">
                     <tr>
                         <td>{{user.id}}</td>
                         <td>
@@ -77,12 +78,12 @@
               
                     <td>
                           {% csrf_token %}
-                      <select id="manager" class="select-management" name="manager_select" required>
+                        <select id="manager" class="select-management" name="manager_select" required>
                           <option class="disabled" value="">Choose a manager</option>
                           {% for manager in managers %}
                           <option class="" value="{{ manager.manageruser_id }}" name="{{ manager.manageruser }}">{{ manager.manageruser }}</option>
                           {% endfor %}
-                          </select>
+                        </select>
                  
                     </td>
                     <td>
@@ -103,8 +104,9 @@
                          
                       </td>
                     </tr>
+                 </form>
                     {% endfor %}
-                    </form>
+                   
 
 
                     <form action="#" method="POST">
@@ -221,7 +223,7 @@
               <P> <b>Relations between employees and stores</b></P>
           {% for employee in employees %}
           <br>
-          {{employee.name}} :
+          {{employee.employeeuser}} :
           {%  for s in employee.e_store.all %}
           {{s.name}} ,
           {% endfor %}

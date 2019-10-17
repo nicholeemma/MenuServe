@@ -22,13 +22,8 @@ https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Django/Authentication
 
 4. There are "search" and filter functions at pages, they are not ready to work.
 
-5. The superuser's name is ; password is 
-
-6. I created three groups in admin. One is customer, users who register will be defaultly categorized into customers. They have the permission to order. They can add orders and delelted orders, and they can see the status of order in order page. They can only see the orders made by themselves. Second group is empployee, they have the permissions to add/update/delete orders. Third group is manager, they have the permissions to add/update/delete orders, add/update/delete stores and employee and users.
+5. I created three groups in admin. One is customer, users who register will be defaultly categorized into customers. They have the permission to order. They can add orders and delelted orders, and they can see the status of order in order page. They can only see the orders made by themselves. Second group is empployee, they have the permissions to add/update/delete orders. Third group is manager, they have the permissions to add/update/delete orders, add/update/delete stores and employee and users.
  
-
-5.
-
 6. Updated the preload function of dropdown list based on suggestions from TA.
 
 

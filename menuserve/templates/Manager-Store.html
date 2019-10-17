@@ -4,7 +4,7 @@
         {%block headerbutton%}
                 <form method="post" action="/">
                                 
-                    <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a>
+                    <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="logout" >Main</a>
                 </form>
         {% endblock %}
                 
@@ -88,8 +88,8 @@
                 <tr>
                     <form action="#" method="POST">
                     <td>{{store.id}}</td>
-                    <td> <input type="text" name="input_storename" value="{{store.name}}">{{store.name}}</td>
-                    <td><input type="text" name="input_storelocation" value="{{store.location}}">{{store.location}}</td>
+                    <td> <input type="text" name="input_storename" value="{{store.name}}"></td>
+                    <td><input type="text" name="input_storelocation" value="{{store.location}}"></td>
                     <td>{% csrf_token %}
                         <select id="manager" class="select-management" name="manager_select" >
                             <option class="disabled" value="{{store.store_manager.manageruser_id}}" name="{{store.store_manager.manageruser_id}}" >{{store.store_manager.manageruser}}</option>
