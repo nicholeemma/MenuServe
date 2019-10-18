@@ -141,6 +141,7 @@ def manageorders(request):
     '''
     content={}
     orders = Order.objects.all()  
+    # if the user is manager
     if (request.user.is_superuser):
         try:
             manager_cur = Manager.objects.get(manageruser = request.user)
@@ -153,6 +154,7 @@ def manageorders(request):
         except:
             content["show"]="You are not assigned a store"
             error_message = content["show"]
+    # if the user is employee
     else:
         try:
             employee_cur = Employee.objects.get(employeeuser = request.user)
