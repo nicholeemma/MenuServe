@@ -96,14 +96,12 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 DATABASES = {
     'default' :{
         'ENGINE':'django.db.backends.postgresql',
-        # 'NAME': os.environ['DBNAME'],
-        'NAME': 'HW5MENUSERVE',
-        # 'HOST': os.environ['DBHOST'],
-        # 'USER': os.environ['DBUSER'],
-        # 'PASSWORD':os.environ['DBPASS'],
-        'HOST': 'jiayueyapostgreshw5.postgres.database.azure.com',
-        'USER': 'nichole@jiayueyapostgreshw5',
-        'PASSWORD':'Sasuke?1',
+        'NAME': os.environ['DBNAME'],
+        
+        'HOST': os.environ['DBHOST'],
+        'USER': os.environ['DBUSER'],
+        'PASSWORD':os.environ['DBPASS'],
+        
         'OPTIONS':{
             'sslmode':'require'
         }
