@@ -133,15 +133,38 @@ def home(request):
             return redirect(reverse("Order"))    
     return render(request,"Order.html",{"stores":stores,"orders":orders,"menus":menus,"show":error_message})
 
-@permission_required('order.can_add_order', login_url="/accounts/login")
+@permission_required('menuserve.add_order', login_url="/accounts/login")
 @login_required
 def manageorders(request):
     '''
     Function for sumbit-order page
     '''
     content={}
+    orders = Order.objects.all()  
+    if (request.user.is_superuser):
+        try:
+            manager_cur = Manager.objects.get(manageruser = request.user)
+            store = Store.objects.all()
+            store_list=[]
+            for s in store:
+                if manager_cur==s.store_manager:
+                    store_list.append(manager_cur)
+            orders = Order.objects.all().filter(store__in = store_list)
+        except:
+            content["show"]="You are not assigned a store"
+            error_message = content["show"]
+    else:
+        try:
+            employee_cur = Employee.objects.get(employeeuser = request.user)
+            orders = Order.objects.all().filter(store__in = employee_cur.e_store.all)
+        except:
+            content["show"]="You are not assigned a store"
+            error_message = content["show"]
+
     
-    orders = Order.objects.all()
+    # content["show"] = employee_cur.e_store.all
+    # error_message = content["show"]
+    #orders = Order.objects.all()   
     menus = Menu.objects.all()
     stores = Store.objects.all()
     if request.method == "POST": #checking if the request method is a POST
@@ -718,7 +741,7 @@ def manageruser(request):
             #If the role changed to manager, it will be enabled all permission, including superuser and staff
             if role=="Manager":
                 user_.is_superuser = True
-                user_.is_staff = True
+                # user_.is_staff = True
             if role=="Employee":
                 user_.is_staff = True
             user_.save()
