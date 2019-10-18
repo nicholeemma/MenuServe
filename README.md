@@ -3,7 +3,7 @@
 
 ## *Serverl things to notice*
 
-## I would like to use 2 grace days for this homework5.
+## I would like to use 1 grace day for this homework5.
 Reference:
 https://www.cnblogs.com/dreamer-fish/p/5477178.html
 https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Django/Authentication
@@ -47,7 +47,9 @@ https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Django/Authentication
 
 6. For the menu page, you can enter in information and add a dish. You can upload a picture, the picture itself and url will show up. The added dish will be shown up at below, meanwhile you can edit the record of dishes and delete one by one. Attention: the drag down box will be filled in as well, otherwise the page will render mistake alert in red.
 
-7. For the employee, manager, store, they are similar.
+7. How to create manager. 
+<br>First, in manager-user page, change the role of a user into manager. At manager-manager page, you will be all users in the "manager" group, enter in the gender, and click "Add". 
+Manager group and Manager class are different things.
 
 8. For the employee page, you can add a new employee or add an existing employee to another existing store. The details will be shown at below.
 

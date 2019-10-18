@@ -75,7 +75,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'menuapp.wsgi.application'
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+# PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+BASE_ROOT = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.join(BASE_DIR,'menuserve')
+
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
@@ -142,7 +146,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(__file__),'static')
+# STATIC_ROOT = os.path.join(os.path.dirname(__file__),'static')
+
 # STATICFILES_DIRS = (
 #    # ('css',os.path.join(STATIC_ROOT,'css').replace('\\','/') ),
 #    # ('js',os.path.join(STATIC_ROOT,'js').replace('\\','/') ),
