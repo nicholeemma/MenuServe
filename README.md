@@ -3,7 +3,7 @@
 
 ## *Serverl things to notice*
 
-## I would like to use 1 grace day for this homework5.
+## I would like to use 2 grace days for this homework5.
 Reference:
 https://www.cnblogs.com/dreamer-fish/p/5477178.html
 https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Django/Authentication
