@@ -28,6 +28,7 @@ from django.conf import settings
 from django.contrib import staticfiles
 from django.views.static import serve
 from django.conf.urls import  include, url
+from django.views.static import serve
 
 
 # Use include() to add URLS from the catalog application and authentication system
@@ -35,7 +36,11 @@ from django.conf.urls import  include, url
 
 #Add Django site authentication urls (for login, logout, password management)
 
-
+if not settings.DEBUG:
+    urlpatterns += [
+        url(r'^uploads/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+        url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+    ]
 
 urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
