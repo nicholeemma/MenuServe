@@ -30,7 +30,7 @@ https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Django/Authentication
 
 ## *Using the webiste*
 
-1. You can first log in with the superuser account (Name:cmuwebapps-manager, Password:WebAppsIsTheBestCourse). You are entitled to add(update/delete) menu, add(update/delete) store, add(update/delete) user, add(update/delete) employee.
+1. You can first log in with the superuser account (Name:cmuwebapps-manager, Password:WebAppsIsTheBestCourse). You are entitled to add(update/delete) menu, add(update/delete) store, add(update/delete) user, add(update/delete) employee. You can first go to manageuser page, change some roles of users, and add them to manager, employee and assign store to them. (First create manager, then store, then employee)
 
 2. In main page, you are supposed to see the pictures of menus, when the mouse moves over the pictures, the according prices will show up. The newly added pictures will be shown here as well. This is the page for visitors, who are not logged in yet.
 
@@ -44,6 +44,8 @@ https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Django/Authentication
 6. In manager-main page, there are menu, employee, manager and store buttons. Click each of them, will lead you to the according page to manage. The page is for managers.
 
 7. For the menu page, you can enter in information and add a dish. You can upload a picture, the picture itself and url will show up. The added dish will be shown up at below, meanwhile you can edit the record of dishes and delete one by one. Attention: the drag down box will be filled in as well, otherwise the page will render mistake alert in red.
+
+8. For the order page, employee or the manager will only be seen the orders made from the stores they are belong to. If the employ or the manager has not assigned a store, it will show mistakes.
 
 8. How to create managers. 
 <br>First, in manager-user page, change the role of a user into manager. At manager-manager page, you will be all users in the "manager" group, enter in the gender, and click "Add". 

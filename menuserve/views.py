@@ -149,23 +149,26 @@ def manageorders(request):
             store_list=[]
             for s in store:
                 if manager_cur==s.store_manager:
-                    store_list.append(manager_cur)
+                    store_list.append(s)
             orders = Order.objects.all().filter(store__in = store_list)
         except:
-            content["show"]="You are not assigned a store"
+            content["show"]=store_list
             error_message = content["show"]
     # if the user is employee
     else:
         try:
             employee_cur = Employee.objects.get(employeeuser = request.user)
-            orders = Order.objects.all().filter(store__in = employee_cur.e_store.all)
+            store_list=[]
+            for s in employee_cur.e_store.all():
+                store_list.append(s)
+            orders = Order.objects.all().filter(store__in =store_list)
         except:
             content["show"]="You are not assigned a store"
             error_message = content["show"]
 
     
-    # content["show"] = employee_cur.e_store.all
-    # error_message = content["show"]
+    content["show"] = ""
+    error_message = content["show"]
     #orders = Order.objects.all()   
     menus = Menu.objects.all()
     stores = Store.objects.all()
@@ -232,7 +235,7 @@ def manageorders(request):
             return redirect(reverse("manageorder"))
             #return redirect("/Submitted-Order/")
 
-    return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus})
+    return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message})
 
 @login_required
 def managermain(request):
