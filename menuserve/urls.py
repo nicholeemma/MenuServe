@@ -28,7 +28,8 @@ from django.conf import settings
 from django.contrib import staticfiles
 from django.views.static import serve
 from django.conf.urls import  include, url
-from django.views.static import serve
+from django.urls import re_path
+
 
 
 # Use include() to add URLS from the catalog application and authentication system
@@ -61,8 +62,14 @@ urlpatterns = [
 
 # if settings.DEBUG:
 #     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if not settings.DEBUG:
+#     urlpatterns += [
+#         url(r'^uploads/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+#         url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+#     ]
+
 if not settings.DEBUG:
     urlpatterns += [
-        url(r'^uploads/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
-        url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+        re_path(r'^uploads/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+        re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     ]
