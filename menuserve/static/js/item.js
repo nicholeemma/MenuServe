@@ -79,7 +79,7 @@ $(document).ready(function() {
     $(output).hide().insertAfter("#add_order").slideDown(300);
 };
 
-$content_part.on('click', 'button[data-id=comment_button]', function(event) {
+$content_part.on('click', 'button[data-id=orderMenu_button]', function(event) {
     var newOrder = {
         desk_no: $(this).siblings().filter($("input[name=desk_no]")).val(),
         // Need to process
@@ -96,11 +96,11 @@ $content_part.on('click', 'button[data-id=comment_button]', function(event) {
                 data: JSON.stringify(newComment),
             })
             .done(function(data) {
-                var output = Mustache.render(commentTemplate, data);
-                var comment_section = currentButton.parent().siblings().filter($("div[data-id=comment_part]"));
-                console.log(comment_section);
+                var output = Mustache.render(orderTemplate, data);
+                var order_section = currentButton.parent().siblings().filter($("div[data-id=comment_part]"));
+                console.log(order_section);
                 //$(output).prependTo($(this).parent());
-                $(output).hide().prependTo(comment_section).slideDown(300);
+                $(output).hide().prependTo(order_section).slideDown(300);
             })
             .fail(function() {
                 console.log("error");
