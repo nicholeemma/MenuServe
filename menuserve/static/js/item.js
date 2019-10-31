@@ -60,5 +60,58 @@ $(document).ready(function() {
            }
        }
    });
+
+   //template html code for new order
+   var orderTemplate = "" +
+   "<tr><td>{{order.id}}</td>" +
+   "<td>{{order.name_of_cuisine}}</td>" +
+   "<td>{{order.amount}}</td>" +
+   "<td>{{order.price}}</td>" +
+   "<td>{{order.store.name}}</td>" +
+   "<td>{{order.desk_no}}</td>" +
+   "<td>{{order.status}}</td></tr>" 
+/* <td>
+{{order.time}}
+</td> */
+    function addComment(data) {
+    var output = Mustache.render(commentTemplate, data);
+
+    $(output).hide().insertAfter("#add_order").slideDown(300);
+};
+
+$content_part.on('click', 'button[data-id=comment_button]', function(event) {
+    var newOrder = {
+        desk_no: $(this).siblings().filter($("input[name=desk_no]")).val(),
+        // Need to process
+        store: $(this).siblings().filter($("select[name=store_select]")).val(),
+        amount: $(this).siblings().filter($("input[name=amount]")).val(),
+    };
+
+    var currentButton = $(this);
+
+        $.ajax({
+                url: '/add_comment',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(newComment),
+            })
+            .done(function(data) {
+                var output = Mustache.render(commentTemplate, data);
+                var comment_section = currentButton.parent().siblings().filter($("div[data-id=comment_part]"));
+                console.log(comment_section);
+                //$(output).prependTo($(this).parent());
+                $(output).hide().prependTo(comment_section).slideDown(300);
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+
+
+    });
+
+  
    
 })

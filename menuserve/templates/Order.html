@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% load static %}
-        
+<script type="text/javascript" src="static/js/item.js"></script>
+	
+<script type="text/javascript" src="static/js/mustache.js"></script>  
 {%block headerbutton%}
         <form method="post" action="/">
                         
@@ -35,12 +37,12 @@
                       <th>
                           Cuisine_ID
                       </th>
-                      <th>
+                      <!-- <th>
                           Desk_no
                       </th>
                       <th>
                           Store
-                      </th>
+                      </th> -->
                       <th>
                         name_of_cuisine
                       </th>
@@ -51,12 +53,12 @@
                       <th>
                           description
                       </th>
-                      <th>
+                      <!-- <th>
                             amount
-                        </th>
-                        <th>
+                        </th> -->
+                        <!-- <th>
                             action
-                        </th>
+                        </th> -->
                   </tr>
                   </thead>
                   <tbody>
@@ -66,19 +68,7 @@
                                 <td>
                                     {{menu.id}}
                                 </td>
-                                <td>
-                                    {% csrf_token %}
-                                    <input type="text"  class="taskName" name="desk_no" required>
-                                </td>
-                                <td>
-                                {% csrf_token %}
-                                <select id="store" class="select-management" name="store_select" required>
-                                    <option class="disabled" value="">Choose a store</option>
-                                    {% for store in stores %}
-                                        <option class="" value="{{ store.id }}" id="{{ store.id }}">{{ store.name }}</option>
-                                    {% endfor %}
-                                    </select>
-                                </td>
+                                
                         <td>
                       <label >
                           {{menu.name_of_cuisine}}
@@ -94,25 +84,68 @@
                                             {{menu.description}}
                                 </label>
                         </td>
-                        <td>
-                                {% csrf_token %}
-                                <input type="text"  class="taskName" name="amount" value="1"> 
-                        </td>
-                        <td>
+                       
+                        <!-- <td>
                                 {% csrf_token %}
                                 <button class="waves-effect waves-light btn" name = "OrderMenu" id="{{ menu.id }}" value="{{ menu.id }}" type="submit">Order</button>
-                        </td>
+                        </td> -->
                     </form>
                   </tr> 
                   {% endfor %}
                  
                 </tbody>
           </table>
-      
+ORDER HERE
+<table>
+    <thead>
+        <tr>
+            <th>DESK NO</th>
+            <th>STORE</th>
+            <th>MENU</th>
+            <th>AMOUNT</th>
+        </tr>
+    </thead>
+    <tbody>
+        <form action="#" method="POST">
+        <tr>
+        <td>
+            {% csrf_token %}
+            <input type="text"  class="taskName" name="desk_no" required>
+        </td>
+        <td>
+        {% csrf_token %}
+            <select id="store" class="select-management" name="store_select" required>
+                <option class="disabled" value="">Choose a store</option>
+            {% for store in stores %}
+                <option class="" value="{{ store.id }}" id="{{ store.id }}">{{ store.name }}</option>
+            {% endfor %}
+            </select>
+        </td>  
+        <td>
+            {% csrf_token %}
+            <input type="text"  class="taskName" name="amount" value="1"> 
+        </td> 
+        <td>
+        {% csrf_token %}
+            <select id="menu" class="select-management" name="menu_select" required>
+                <option class="disabled" value="">Choose a menu</option>
+            {% for menu in menus %}
+                <option class="" value="{{ menu.id }}" id="{{ menu.id }}">{{ menu.name }}</option>
+            {% endfor %}
+            </select>
+        </td>  
+        <td>
+        {% csrf_token %}
+        <button class="waves-effect waves-light btn" name = "OrderMenu"  type="submit" data-id="orderMenu">Order</button>
+        </td>
+        </tr>
+        </form>
+    </tbody>       
+</table>     
   
 What you have ordered
 <table>
-    <thead>
+    <thead id="add_order">
 
         <tr>
 
