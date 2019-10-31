@@ -18,6 +18,9 @@ from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,MenuF
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 
+import json as spjson
+import json
+from django.http import HttpResponseRedirect
 # Used to send mail from within Django
 from django.core.mail import send_mail
 def index(request):
@@ -65,73 +68,99 @@ def home(request):
     '''
     Function for order page
     '''
-    store_=""
-    desk_=""
-    content={}
-    error_message=""
+    # store_=""
+    # desk_=""
+    # content={}
+    # error_message=""
     
         
         
-    orders = Order.objects.filter(order_user=request.user) 
-    menus = Menu.objects.all()
+    # orders = Order.objects.filter(order_user=request.user) 
+    # menus = Menu.objects.all()
+    # stores = Store.objects.all()
+    # if request.method == "POST": #checking if the request method is a POST
+    #     #checking if there is a request to delete an order
+    #     if "DeleteOrder" in request.POST:
+    #         try:
+    #             d_order = request.POST["DeleteOrder"]
+                
+    #             delete_order = Order.objects.get(id=int(d_order)) 
+    #             delete_order.delete()
+    #         except:
+    #             content["show"]="What you deleted does not exist"
+    #             error_message = content["show"]
+    #             return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+
+    #     #checking if there is a request to add an order
+    #     if "OrderMenu" in request.POST: 
+            
+            
+    #         status = "pending"
+    #         menu_id = request.POST["OrderMenu"]
+    #         #time = request.POST["time"] #date
+
+    #         form = OrderForm(request.POST) 
+    #         if form.is_valid():
+            
+    #             amount = form.cleaned_data["amount"]
+    #             desk_ = form.cleaned_data["desk_no"]
+    #         else:
+    #             content["show"]=form.errors
+    #             error_message = content["show"]
+    #             return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+            
+    #         store_ = request.POST["store_select"]
+            
+    #         name_of_cuisine = Menu.objects.get(id = menu_id).name_of_cuisine
+    #         price = Menu.objects.get(id = menu_id).price * amount
+    #         try:
+    #             store = Store.objects.get(id=str(store_))
+    #         except:
+    #             content["show"]="Store does not exist"
+    #             error_message = content["show"]
+    #             return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+    #         time = "2019-09-21"
+            
+    #          #saving 
+    #         try:
+    #             an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine, time=time,
+    #                                 status=status, amount=amount, store=store ,price=price,
+    #                                 order_user_id=request.user.id)
+    #             an_order.save()
+                
+    #         except:
+    #             content["show"]="Input does not comply with rules. Check your input"
+    #             error_message = content["show"]
+    #             return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+
+    #         return redirect(reverse("Order"))    
+    # return render(request,"Order.html",{"stores":stores,"orders":orders,"menus":menus,"show":error_message})
+    errors = []
+    data = {}
     stores = Store.objects.all()
-    if request.method == "POST": #checking if the request method is a POST
-        #checking if there is a request to delete an order
-        if "DeleteOrder" in request.POST:
-            try:
-                d_order = request.POST["DeleteOrder"]
-                
-                delete_order = Order.objects.get(id=int(d_order)) 
-                delete_order.delete()
-            except:
-                content["show"]="What you deleted does not exist"
-                error_message = content["show"]
-                return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
+    if request.method == 'POST':
+        json_data = spjson.loads(request.body)
+        print(json_data)
+    try:
+        if not 'comment' in json_data or not json_data['comment']:
+            errors.append('Comment content cant be empty')
+        else:
+            new_order = Order(content=json_data['comment'],  user=request.user)
+            new_order.save()
+            data['desk_no'] = new_order.desk_no
+            data['name_of_cuisine'] = new_order.name_of_cuisine
+            data['time'] = new_order.time
+            data['status'] = new_order.status
+            data['amount'] = new_order.amount
+            data['price'] = new_order.price
+            data['order_user_id'] = request.user.id
+            data['store'] = store
+            return HttpResponse(json.dumps(data), content_type = "application/json")
+    except KeyError:
+        HttpResponseServerError("Malformed data!") 
+    return HttpResponse(data, content_type='application/json')
 
-        #checking if there is a request to add an order
-        if "OrderMenu" in request.POST: 
-            
-            
-            status = "pending"
-            menu_id = request.POST["OrderMenu"]
-            #time = request.POST["time"] #date
 
-            form = OrderForm(request.POST) 
-            if form.is_valid():
-            
-                amount = form.cleaned_data["amount"]
-                desk_ = form.cleaned_data["desk_no"]
-            else:
-                content["show"]=form.errors
-                error_message = content["show"]
-                return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
-            
-            store_ = request.POST["store_select"]
-            
-            name_of_cuisine = Menu.objects.get(id = menu_id).name_of_cuisine
-            price = Menu.objects.get(id = menu_id).price * amount
-            try:
-                store = Store.objects.get(id=str(store_))
-            except:
-                content["show"]="Store does not exist"
-                error_message = content["show"]
-                return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
-            time = "2019-09-21"
-            
-             #saving 
-            try:
-                an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine, time=time,
-                                    status=status, amount=amount, store=store ,price=price,
-                                    order_user_id=request.user.id)
-                an_order.save()
-                
-            except:
-                content["show"]="Input does not comply with rules. Check your input"
-                error_message = content["show"]
-                return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
-
-            return redirect(reverse("Order"))    
-    return render(request,"Order.html",{"stores":stores,"orders":orders,"menus":menus,"show":error_message})
 
 @permission_required('menuserve.add_order', login_url="/accounts/login")
 @login_required
