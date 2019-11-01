@@ -63,18 +63,22 @@ $(document).ready(function() {
 
    //template html code for new order
    var orderTemplate = "" +
-   "<tr><td>{{order.id}}</td>" +
-   "<td>{{order.name_of_cuisine}}</td>" +
-   "<td>{{order.amount}}</td>" +
-   "<td>{{order.price}}</td>" +
-   "<td>{{order.store.name}}</td>" +
-   "<td>{{order.desk_no}}</td>" +
-   "<td>{{order.status}}</td></tr>" 
+"<pre >{{name_of_cuisine}}: {{amount}}"+
+              " <a><i name='remove_order' id={{id}}></i></a>"+
+              "</pre>"
+
+//    "<tr><td>{{id}}</td>" +
+   "<td>{{name_of_cuisine}}</td>" +
+   "<td>{{amount}}</td>" +
+//    "<td>{{price}}</td>" +
+   "<td>{{store}}</td>" +
+   "<td>{{desk_no}}</td>" +
+   "<td>pending</td></tr>" 
 /* <td>
 {{order.time}}
 </td> */
     function addComment(data) {
-    var output = Mustache.render(commentTemplate, data);
+    var output = Mustache.render(orderTemplate, data);
 
     $(output).hide().insertAfter("#add_order").slideDown(300);
 };
@@ -84,22 +88,22 @@ $content_part.on('click', 'button[data-id=orderMenu_button]', function(event) {
         desk_no: $(this).siblings().filter($("input[name=desk_no]")).val(),
         // Need to process
         store: $(this).siblings().filter($("select[name=store_select]")).val(),
+        name_of_cuisine: $(this).siblings().filter($("select[name=menu_select]")).val(),
         amount: $(this).siblings().filter($("input[name=amount]")).val(),
     };
 
     var currentButton = $(this);
 
         $.ajax({
-                url: '/add_comment',
+                url: '/add_order',
                 type: 'POST',
                 dataType: 'json',
-                data: JSON.stringify(newComment),
+                data: JSON.stringify(newOrder),
             })
             .done(function(data) {
                 var output = Mustache.render(orderTemplate, data);
-                var order_section = currentButton.parent().siblings().filter($("div[data-id=comment_part]"));
-                console.log(order_section);
-                //$(output).prependTo($(this).parent());
+                var order_section = currentButton.parent().siblings().filter($("div[data-id=order_part]"));
+                console.log(order_section);              
                 $(output).hide().prependTo(order_section).slideDown(300);
             })
             .fail(function() {
@@ -113,5 +117,28 @@ $content_part.on('click', 'button[data-id=orderMenu_button]', function(event) {
     });
 
   
+
+    $content_part.on('click', 'i[name=remove_order]', function(event) {
+
+        var order_to_delete = $(this).parent().parent();
+        var order_id = $(this).attr('id');
+
+        $.ajax({
+                url: '/delete_order/' + id,
+                type: 'GET',
+            })
+            .done(function() {
+        order_to_delete.slideUp(300, function() {
+                    order_to_delete.remove();
+                })
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+
+    });
    
-})
+});

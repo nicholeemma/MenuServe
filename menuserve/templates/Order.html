@@ -1,7 +1,9 @@
 {% extends 'base.html' %} {% load static %}
+<head>
 <script type="text/javascript" src="static/js/item.js"></script>
 	
 <script type="text/javascript" src="static/js/mustache.js"></script>  
+</head>
 {%block headerbutton%}
         <form method="post" action="/">
                         
@@ -106,7 +108,7 @@ ORDER HERE
         </tr>
     </thead>
     <tbody>
-        <form action="#" method="POST">
+        <form accept-charset="utf-8">
         <tr>
         <td>
             {% csrf_token %}
@@ -120,23 +122,25 @@ ORDER HERE
                 <option class="" value="{{ store.id }}" id="{{ store.id }}">{{ store.name }}</option>
             {% endfor %}
             </select>
-        </td>  
+        </td> 
+        
+        <td>
+                {% csrf_token %}
+                    <select id="menu" class="select-management" name="menu_select" required>
+                        <option class="disabled" value="">Choose a menu</option>
+                    {% for menu in menus %}
+                        <option class="" value="{{ menu.name_of_cuisine }}" id="{{ menu.id }}">{{ menu.name_of_cuisine }}</option>
+                    {% endfor %}
+                    </select>
+                </td>  
         <td>
             {% csrf_token %}
             <input type="text"  class="taskName" name="amount" value="1"> 
         </td> 
+        
         <td>
         {% csrf_token %}
-            <select id="menu" class="select-management" name="menu_select" required>
-                <option class="disabled" value="">Choose a menu</option>
-            {% for menu in menus %}
-                <option class="" value="{{ menu.id }}" id="{{ menu.id }}">{{ menu.name }}</option>
-            {% endfor %}
-            </select>
-        </td>  
-        <td>
-        {% csrf_token %}
-        <button class="waves-effect waves-light btn" name = "OrderMenu"  type="submit" data-id="orderMenu_button">Order</button>
+        <button class="waves-effect waves-light btn" name = "OrderMenu"  type="button" data-id="orderMenu_button">Order</button>
         </td>
         </tr>
         </form>
@@ -167,6 +171,12 @@ What you have ordered
 
         </tr>
     </thead>
+    <div data-id="order_part">
+            {% for order in orders %}
+            <pre class="media-body">{{order.name_of_cuisine}}: {{order.amount}} {% if order.order_user_id == request.user.id %} 
+                <a><i name="remove_order" id={{order.id}}></i></a>{% endif%}</pre>
+            {% endfor %}
+    </div>
 
 {% for order in orders %}
         <tr>

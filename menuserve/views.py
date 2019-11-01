@@ -68,16 +68,16 @@ def home(request):
     '''
     Function for order page
     '''
-    # store_=""
-    # desk_=""
-    # content={}
-    # error_message=""
+    #  store_=""
+    #  desk_=""
+    content={}
+    error_message=""
     
         
         
-    # orders = Order.objects.filter(order_user=request.user) 
-    # menus = Menu.objects.all()
-    # stores = Store.objects.all()
+    orders = Order.objects.filter(order_user=request.user) 
+    menus = Menu.objects.all()
+    stores = Store.objects.all()
     # if request.method == "POST": #checking if the request method is a POST
     #     #checking if there is a request to delete an order
     #     if "DeleteOrder" in request.POST:
@@ -133,34 +133,52 @@ def home(request):
     #             error_message = content["show"]
     #             return render(request,"Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message}) 
 
-    #         return redirect(reverse("Order"))    
-    # return render(request,"Order.html",{"stores":stores,"orders":orders,"menus":menus,"show":error_message})
+            # return redirect(reverse("Order"))    
+    return render(request,"Order.html",{"stores":stores,"orders":orders,"menus":menus,"show":error_message})
+
+@login_required
+def add_order(request):    
     errors = []
     data = {}
     stores = Store.objects.all()
     if request.method == 'POST':
         json_data = spjson.loads(request.body)
         print(json_data)
-    try:
-        if not 'comment' in json_data or not json_data['comment']:
-            errors.append('Comment content cant be empty')
-        else:
-            new_order = Order(content=json_data['comment'],  user=request.user)
-            new_order.save()
-            data['desk_no'] = new_order.desk_no
-            data['name_of_cuisine'] = new_order.name_of_cuisine
-            data['time'] = new_order.time
-            data['status'] = new_order.status
-            data['amount'] = new_order.amount
-            data['price'] = new_order.price
-            data['order_user_id'] = request.user.id
-            data['store'] = store
-            return HttpResponse(json.dumps(data), content_type = "application/json")
-    except KeyError:
-        HttpResponseServerError("Malformed data!") 
+        try:
+            if not 'desk_no' in json_data or not json_data['desk_no']:
+                errors.append('desk_no content cant be empty')
+            else:
+                time = "2019-09-21"
+                store = Store.objects.get(id=json_data['store'])
+                menu_ = Menu.objects.get(name_of_cuisine=json_data['name_of_cuisine'])
+                price = int(menu_.price) * int(json_data['amount'])
+                new_order = Order(desk_no=json_data['desk_no'], name_of_cuisine=json_data['name_of_cuisine'], 
+                                time=time,status='pending', amount=json_data['amount'], store=store ,
+                                price=price, order_user_id=request.user.id)
+                new_order.save()
+                data['order_id'] = new_order.id
+                data['desk_no'] = new_order.desk_no
+                data['name_of_cuisine'] = new_order.name_of_cuisine
+                data['time'] = "2019-09-21"
+                data['status'] = "pending"
+                data['amount'] = new_order.amount
+                data['price'] = new_order.price
+                data['order_user_id'] = request.user.id
+                data['store'] = json_data['store']
+                return HttpResponse(json.dumps(data), content_type = "application/json")
+        except KeyError:
+            HttpResponseServerError("Malformed data!") 
     return HttpResponse(data, content_type='application/json')
 
-
+@login_required
+def delete_order(request): 
+    errors = []
+    try:
+        order_to_delete = Order.objects.get(id=id, order_user_id=request.user.id)
+        order_to_delete.delete()
+    except ObjectDoesNotExist:
+        errors.append('The order did not exist.')
+    return redirect(reverse("Order")) 
 
 @permission_required('menuserve.add_order', login_url="/accounts/login")
 @login_required

@@ -19,7 +19,7 @@ from menuserve.views import index
 from menuserve.views import home
 from menuserve.views import manageorders
 from django.contrib.auth import login
-from menuserve.views import (managermain,manageremployee,managerstore,managermenu,managermanager,registration,manageruser,logout)
+from menuserve.views import (managermain,manageremployee,managerstore,managermenu,managermanager,registration,manageruser,logout,add_order,delete_order)
 # registration_confirmation,
 from django.conf.urls import url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -48,6 +48,8 @@ urlpatterns = [
     #url(r'accounts/login/$', login,name='login'),
     url(r'^accounts/logout/$', logout,name="logout"),
     url(r'^Order/',home,name="Order"),
+    url(r'^add_order/',add_order,name='add_order'),
+    url(r'^delete_order/',delete_order,name='delete_order'),
     url(r'^Submitted-Order/',manageorders,name="manageorder"),
     url(r'^Manager-Main/',managermain,name="managermain"),
     url(r'^Manager-Employee/',manageremployee,name="manageremployee"),
