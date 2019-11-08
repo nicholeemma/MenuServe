@@ -1,18 +1,18 @@
 
-$(document).ready(function() {
+ $(document).ready(function() {
 
-   var $whole_page = $("#whole_page");
-   var $content_part = $("#content_part");
-   var $post_button = $("#post_button");
-   var $post_subject = $("#post_subject");
-   var $post_text = $("#post_text");
-   var $comment_button = $("button[data-id=comment_button]");
-   var $remove_comment_button = $("i[name=remove_comment]");
-   var $comment_part = $("div[data-id=comment_part]");
+//    var $whole_page = $("#whole_page");
+    var $content_part = $("#content");
+//    var $post_button = $("#post_button");
+//    var $post_subject = $("#post_subject");
+//    var $post_text = $("#post_text");
+    var $AddOrder_button = $("button[data-id=AddOrder_button]");
+    var $remove_comment_button = $("i[name=remove_comment]");
+    var $comment_part = $("div[data-id=comment_part]");
 
-   $whole_page.hide().fadeIn('slow', function() {
-       $whole_page.show();
-   });
+//    $whole_page.hide().fadeIn('slow', function() {
+//        $whole_page.show();
+//    });
 
    //This part sets up ajax setting to use csrf token. This part of code is from Django Document.
    function getCookie(name) {
@@ -63,27 +63,37 @@ $(document).ready(function() {
 
    //template html code for new order
    var orderTemplate = "" +
-"<pre >{{name_of_cuisine}}: {{amount}}"+
-              " <a><i name='remove_order' id={{id}}></i></a>"+
-              "</pre>"
+            "<pre >{{name_of_cuisine}}: {{amount}}"+
+            "{{price}}" +
+            "{{store}}" +
+            "{{desk_no}}" +
+            "{{status}}"
+            " <a><i name='remove_order' id={{id}}></i></a>"+
+            "</pre>"
 
 //    "<tr><td>{{id}}</td>" +
-   "<td>{{name_of_cuisine}}</td>" +
-   "<td>{{amount}}</td>" +
+
+//    "<td>{{name_of_cuisine}}</td>" +
+//    "<td>{{amount}}</td>" +
+
 //    "<td>{{price}}</td>" +
-   "<td>{{store}}</td>" +
-   "<td>{{desk_no}}</td>" +
-   "<td>pending</td></tr>" 
+
+//    "<td>{{store}}</td>" +
+//    "<td>{{desk_no}}</td>" +
+//    "<td>pending</td></tr>" 
+
 /* <td>
 {{order.time}}
 </td> */
-    function addComment(data) {
-    var output = Mustache.render(orderTemplate, data);
+//     function addOrder(data) {
+//         console.log("addorder");
+//     var output = Mustache.render(orderTemplate, data);
 
-    $(output).hide().insertAfter("#add_order").slideDown(300);
-};
+//     $(output).hide().insertAfter("#add_order").slideDown(300);
+// };
 
-$content_part.on('click', 'button[data-id=orderMenu_button]', function(event) {
+$content_part.on("click", "button[data-id=AddOrder_button]", function(event) {
+    console.log("event listened!");
     var newOrder = {
         desk_no: $(this).siblings().filter($("input[name=desk_no]")).val(),
         // Need to process
@@ -91,6 +101,8 @@ $content_part.on('click', 'button[data-id=orderMenu_button]', function(event) {
         name_of_cuisine: $(this).siblings().filter($("select[name=menu_select]")).val(),
         amount: $(this).siblings().filter($("input[name=amount]")).val(),
     };
+    console.log(newOrder);
+
 
     var currentButton = $(this);
 
@@ -102,6 +114,7 @@ $content_part.on('click', 'button[data-id=orderMenu_button]', function(event) {
             })
             .done(function(data) {
                 var output = Mustache.render(orderTemplate, data);
+                console.log("event listened!");
                 var order_section = currentButton.parent().siblings().filter($("div[data-id=order_part]"));
                 console.log(order_section);              
                 $(output).hide().prependTo(order_section).slideDown(300);
@@ -124,7 +137,7 @@ $content_part.on('click', 'button[data-id=orderMenu_button]', function(event) {
         var order_id = $(this).attr('id');
 
         $.ajax({
-                url: '/delete_order/' + id,
+                url: '/delete_order/' + order_id,
                 type: 'GET',
             })
             .done(function() {
@@ -141,4 +154,4 @@ $content_part.on('click', 'button[data-id=orderMenu_button]', function(event) {
 
     });
    
-});
+ });

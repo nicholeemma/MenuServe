@@ -17,9 +17,10 @@ from .forms import StoreForm,StoreUpdateForm,ManagerForm,ManagerUpdateForm,MenuF
 # EmployeeForm,EmployeeUpdateForm,
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
-
-import json as spjson
+from django.views.decorators.csrf import csrf_protect
+from django.core.serializers.json import DjangoJSONEncoder
 import json
+import json as simplejson
 from django.http import HttpResponseRedirect
 # Used to send mail from within Django
 from django.core.mail import send_mail
@@ -76,6 +77,7 @@ def home(request):
         
         
     orders = Order.objects.filter(order_user=request.user) 
+    
     menus = Menu.objects.all()
     stores = Store.objects.all()
     # if request.method == "POST": #checking if the request method is a POST
@@ -142,7 +144,9 @@ def add_order(request):
     data = {}
     stores = Store.objects.all()
     if request.method == 'POST':
-        json_data = spjson.loads(request.body)
+        print("posthahahh")
+        # json_data = json.loads(request.body)
+        json_data = json.dumps(request)
         print(json_data)
         try:
             if not 'desk_no' in json_data or not json_data['desk_no']:
@@ -171,7 +175,7 @@ def add_order(request):
     return HttpResponse(data, content_type='application/json')
 
 @login_required
-def delete_order(request): 
+def delete_order(request,id): 
     errors = []
     try:
         order_to_delete = Order.objects.get(id=id, order_user_id=request.user.id)

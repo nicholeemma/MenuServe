@@ -1,9 +1,9 @@
 {% extends 'base.html' %} {% load static %}
-<head>
-<script type="text/javascript" src="static/js/item.js"></script>
+<!-- <head>
+<script type="text/javascript" src="{% static 'js/item.js' %}"></script>
 	
-<script type="text/javascript" src="static/js/mustache.js"></script>  
-</head>
+<script type="text/javascript" src="{% static 'js/mustache.js' %}"></script>  
+</head> -->
 {%block headerbutton%}
         <form method="post" action="/">
                         
@@ -108,7 +108,8 @@ ORDER HERE
         </tr>
     </thead>
     <tbody>
-        <form accept-charset="utf-8">
+            <div id = "content">
+        <form action="{% url 'add_order' %}" method="post" accept-charset="utf-8">
         <tr>
         <td>
             {% csrf_token %}
@@ -140,10 +141,12 @@ ORDER HERE
         
         <td>
         {% csrf_token %}
-        <button class="waves-effect waves-light btn" name = "OrderMenu"  type="button" data-id="orderMenu_button">Order</button>
+        <!-- <button type="button" class="btn btn-primary" data-id="comment_button">Comment</button> -->
+        <button type="submit" class="waves-effect waves-light btn" name = "OrderMenu" data-id="AddOrder_button">Order</button>
         </td>
         </tr>
         </form>
+        </div>
     </tbody>       
 </table>     
   
@@ -171,12 +174,20 @@ What you have ordered
 
         </tr>
     </thead>
+    
     <div data-id="order_part">
+       
             {% for order in orders %}
-            <pre class="media-body">{{order.name_of_cuisine}}: {{order.amount}} {% if order.order_user_id == request.user.id %} 
-                <a><i name="remove_order" id={{order.id}}></i></a>{% endif%}</pre>
+            <pre>
+                {{order.name_of_cuisine}}: {{order.amount}} 
+                
+                <a><i name="remove_order" id={{order.id}}></i></a>
+               
+            </pre>
             {% endfor %}
     </div>
+<!-- </div> -->
+
 
 {% for order in orders %}
         <tr>
@@ -221,13 +232,13 @@ What you have ordered
                 {{order.status}}
             </td>
             <td>
-                <form action="#" method="POST">
+                <!-- <form action="#" method="POST">
     {% csrf_token %}
                     <button class="waves-effect waves-light btn" name = "DeleteOrder" id="{{ order.id }}" value="{{ order.id }}" type="submit">
                         Delete
                     </button>
    
-                </form>
+                </form> -->
             </td>
 
             </tr>
