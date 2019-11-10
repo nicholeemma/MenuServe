@@ -220,14 +220,18 @@ def add_order(request):
     return JsonResponse(rsp)
 
 @login_required
-def delete_order(request,id): 
-    errors = []
+def delete_order(request): 
+    print(request.POST)
+    rsp = {}
+    id = int(request.POST["id"])
+    print(id)
     try:
+        rsp["id"] = id
         order_to_delete = Order.objects.get(id=id, order_user_id=request.user.id)
         order_to_delete.delete()
     except:
-        errors.append('The order did not exist.')
-    return redirect(reverse("Order")) 
+        rsp["error"]='The order did not exist.'
+    return JsonResponse(rsp)
 
 @permission_required('menuserve.add_order', login_url="/accounts/login")
 @login_required

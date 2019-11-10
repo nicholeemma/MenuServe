@@ -109,13 +109,11 @@ $('.deleteBtn').each((i, elm) =>
             });
 }
 
-
-
-
 function  deleteOrders(el){
     console.log('delete item js triggered!');
     orderId = $(el).data('id')
     data = {'id': orderId};
+    console.log(data)
     console.log('order id: ' + orderId);
     $.ajax({
         url:  '/delete_order/',
@@ -123,6 +121,7 @@ function  deleteOrders(el){
         dataType:  'json',
         data: data,
         success:  function (data) {
+            console.log("sucess deleted")
             $(el).parents()[1].remove()
         }
     });
