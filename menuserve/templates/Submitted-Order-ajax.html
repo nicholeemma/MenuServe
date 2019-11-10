@@ -1,0 +1,67 @@
+{% extends 'base.html' %} {% load static %}
+{%block headscript%}
+       <script type="text/javascript" src="{% static 'js/reload.js' %}"></script>
+       {% endblock %}
+        {%block headerbutton%}
+        <form method="post" action="/">
+           
+            <a href="{% url 'index' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a>
+            <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="logout" >Main</a>
+        </form>
+        {% endblock %}
+        
+        {% block content%}
+        {% csrf_token %}
+                <p class="error_msg">{{show}}</p>
+       
+            <p id="headlineofmanagement">
+                <b>
+                Records of Orders
+              </b>
+              </p>
+
+            <div class="record-table">
+        <table class="striped" id="order_">
+            <thead>
+              <tr>
+                  <th>Order No.</th>
+                  <th>CustomerID</th>
+                  <th>Desk No.</th>
+                  <th>Name of Cuisine</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  
+                  <th>Price</th>
+                  <th>Store</th>
+                  <th>Action</th>
+                  <th>Action</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+               {% for order in orders %}
+            <tr>
+ 
+                <td>{{order.id}}</td>
+                <td>{{order.order_user_id}}</td>
+                <td> {{order.desk_no}}</td>
+                <td >{{ order.name_of_cuisine }</td>
+                <td> {{order.amount}}</td>
+                <td> {{order.status}}</td>
+                <td> {{order.price}}</td>
+                <td>{{order.store.name}}</td>
+
+            </tr>{% endfor %}  
+      
+            </tbody>
+          </table>
+          </div>
+            
+        {% endblock%}   
+                  
+            
+            
+            
+            
+
+
