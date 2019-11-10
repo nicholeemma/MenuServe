@@ -86,29 +86,29 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
-    'default' :{
-        'ENGINE':'django.db.backends.postgresql',
-        # 'NAME': os.environ['DBNAME'],
-        'NAME': 'HW5MENUSERVE',
-        # 'HOST': os.environ['DBHOST'],
-        # 'USER': os.environ['DBUSER'],
-        # 'PASSWORD':os.environ['DBPASS'],
-        'HOST': 'jiayueyapostgreshw5.postgres.database.azure.com',
-        'USER': 'nichole@jiayueyapostgreshw5',
-        'PASSWORD':'Sasuke?1',
-        'OPTIONS':{
-            'sslmode':'require'
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default' :{
+#         'ENGINE':'django.db.backends.postgresql',
+#         # 'NAME': os.environ['DBNAME'],
+#         'NAME': 'HW5MENUSERVE',
+#         # 'HOST': os.environ['DBHOST'],
+#         # 'USER': os.environ['DBUSER'],
+#         # 'PASSWORD':os.environ['DBPASS'],
+#         'HOST': 'jiayueyapostgreshw5.postgres.database.azure.com',
+#         'USER': 'nichole@jiayueyapostgreshw5',
+#         'PASSWORD':'Sasuke?1',
+#         'OPTIONS':{
+#             'sslmode':'require'
+#         }
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

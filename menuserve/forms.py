@@ -68,20 +68,20 @@ class MenuUpdateForm(forms.Form):
     input_menudescription = forms.CharField(max_length=100,required= True)
     #myfile = forms.FileField()
 
-class OrderForm(forms.ModelForm):
-    class Meta:
-        model = Order
-        fields = [
-            'desk_no',
-            'name_of_cuisine',
-            'status',
-            'time',
-            'amount',
-            'price',
-            'store',
-            'order_user',
+class OrderForm(forms.Form):
+    # class Meta:
+    #     model = Order
+    #     fields = [
+    #         'desk_no',
+    #         'name_of_cuisine',
+    #         'status',
+    #         'time',
+    #         'amount',
+    #         'price',
+    #         'store',
+    #         'order_user',
            
-        ]
+    #     ]
     desk_no = forms.CharField(max_length=4,required= True)
     amount = forms.IntegerField(min_value=1, max_value=1000,required= True)
     menu_select = forms.CharField(max_length=30,required= True)

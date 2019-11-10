@@ -22,7 +22,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.views.decorators.csrf import csrf_protect
 from django.core.serializers.json import DjangoJSONEncoder
 import json
+import pytz
 import json as simplejson
+import datetime
 from django.http import HttpResponseRedirect
 # Used to send mail from within Django
 from django.core.mail import send_mail
@@ -176,6 +178,7 @@ def add_order(request):
     #         HttpResponseServerError("Malformed data!") 
     # return HttpResponse(data, content_type='application/json')
     rsp = dict()
+    t = datetime.datetime.now()
     form = OrderForm(request.POST)
     print(request.POST)
     # if(form.is_valid()):
@@ -192,11 +195,17 @@ def add_order(request):
     time = "2019-09-21"
 
         #saving 
-
-    an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine, time=time,
+#  time=time,
+    an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine,
                         status=status, amount=amount, store=store ,price=price,
                         order_user_id=request.user.id)
     an_order.save()
+    print(an_order.time)
+    print(t)
+    then = t + datetime.timedelta(0,-5)
+    print(then)
+    # print("time")
+    # print(str(t - an_order.time))
     # rsp['order'] = model_to_dict(an_order)
     # print(rsp['order']["desk_no"])
     # else:
@@ -336,6 +345,74 @@ def manageorders(request):
             #return redirect("/Submitted-Order/")
 
     return render(request,"Submitted-Order.html",{"orders":orders,"stores":stores,"menus":menus,"show":error_message})
+
+@permission_required('menuserve.add_order', login_url="/accounts/login")
+@login_required
+def reload_order(request):
+    # Timezone info of your timezone aware variable
+    # timezone = order.tzinfo
+
+    # Current datetime for the timezone of your variable
+    # now_in_timezone = datetime.datetime.now(timezone)
+
+    # Now you can do a fair comparison, both datetime variables have the same time zone
+    # if your_timezone_aware_variable <= now_in_timezone:
+    #     pass
+    #     pass
+    # ts = datetime.datetime.now()
+    # then = ts + datetime.timedelta(0,-5)
+    # orders = Order.objects.filter(time__gt=then)
+    orders = Order.objects.all()  
+    if len(orders) == 0:
+        pass
+    rsp = []
+    for o in orders:
+        dic ={}
+        dic["id"] = str(o.id)
+        dic["order_user"] = str(o.order_user.id)
+        print(id)
+        dic["store"] = str(o.store.name)
+        dic["desk_no"] = str(o.id)
+        dic["name_of_cuisine"] = str(o.name_of_cuisine)
+        dic["price"] = str(o.price)
+        dic["amount"] = str(o.amount)
+        dic["status"] = str(o.status)
+        print(dic)
+        rsp.append(dic)
+    return JsonResponse(rsp, safe=False)
+
+
+
+
+    # rsp = dict()
+    # form = OrderForm(request.POST)
+    # print(request.POST)
+    # # if(form.is_valid()):
+    #     # new_order = form.save()
+    # amount = int(request.POST["amount"])
+    # desk_ = request.POST["desk_no"]
+    # menu_id =request.POST["name_of_cuisine"]
+    # store_ = request.POST["store"]
+
+    # name_of_cuisine = Menu.objects.get(id = menu_id).name_of_cuisine
+    # price = Menu.objects.get(id = menu_id).price * amount
+    # status = "pending"
+    # store = Store.objects.get(id=str(store_))
+    # time = "2019-09-21"
+
+
+    # an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine,
+    #                     status=status, amount=amount, store=store ,price=price,
+    #                     order_user_id=request.user.id)
+    # an_order.save()
+    # print("time")
+    # print(an_order.time)
+
+    # rsp ={}
+    # # TRANSFER TO STR IS SOOOO IMPORTANT
+    
+ 
+
 
 @login_required
 def managermain(request):

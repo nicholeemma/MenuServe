@@ -43,7 +43,7 @@ class Order(models.Model):
     desk_no = models.CharField(max_length=4)
     name_of_cuisine = models.CharField(max_length=30)
     status = models.CharField(max_length=10,default='pending')
-    time = models.DateField(default = datetime.datetime.now().strftime("%Y-%m-%d %H:%I:%S"))
+    time = models.DateTimeField(auto_now_add=True)
     amount = models.IntegerField()
     price = models.IntegerField()
     store = models.ForeignKey(Store,on_delete=models.CASCADE)

@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% load static %}
-        
+{%block headscript%}
+       <script type="text/javascript" src="{% static 'js/reload.js' %}"></script>
+       {% endblock %}
         {%block headerbutton%}
         <form method="post" action="/">
            
