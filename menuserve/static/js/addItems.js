@@ -12,82 +12,113 @@ $.ajaxSetup({
     }
 });
 
-function addItems(val) {
+function addItems() {
     console.log('add items js triggered!')
-    console.log("this is the  id" + val)
+    console.log("this is the  id")
 
-    var url = "https://api.imjad.cn/cloudmusic/?type=song&id=" + val
-    var json_obj = JSON.parse(Get(url));
-    var musicUrl = json_obj["data"][0]["url"];
-
-    var object = document.getElementById(val);
-    var song_info = object.parentElement.textContent;
-    var name = song_info.split(',')[0];
-    var description = song_info.split(',')[1].slice(0, -3);
+  
     var data = {};
-    data['name'] = name;
-    data['description'] = description;
-    data['url'] = musicUrl;
-    console.log("data to be sent to server: " + data)
-}
+    var desk_no = document.getElementById("desk_no").value;
+    var amount = document.getElementById("amount").value;
+    console.log(desk_no);
+    console.log(amount);
+    // desk_no: $("input[name=desk_no]").val(),
+    var  storeselect=document.getElementById("store");
+              
+    var storeselectid = storeselect.options[storeselect.selectedIndex].value;
+    var  menuselect=document.getElementById("menu");
+           
+    var meuselectid = menuselect.options[menuselect.selectedIndex].value;
+
+    console.log(meuselectid, storeselectid)
+    // var store: $("select[name=store_select]").val();
+    //     name_of_cuisine: $(this).siblings().filter($("select[name=menu_select]")).val(),
+    //     amount: $(this).siblings().filter($("input[name=amount]")).val(),
+    data['desk_no'] = desk_no;
+    data['store'] = storeselectid;
+    data['name_of_cuisine'] = meuselectid;
+    data['amount'] = amount;
+    data['status'] = "pending";
+    console.log("data to be sent to server: " + data);
+
 
 $.ajax({
-    url:  location.pathname.split("/")[2] + '/addSongs',
+
+    
+
+    url:  '/add_order/',
     type:  'post',
     dataType:  'json',
     data: data,
-    success: function (response) {
-    //TODO if response only contains error -> display song cannot be added!
-    let rows =  '';
-//       Object.keys(response).forEach(function (key){
-    var id = response.music['id'];
-//Sample response :
-// {'music':
-//     {'id': 32,
-//     'name': 'Love Story',
-//     'url': 'https://m7.music.126.net/20191103112226/77adcb0833b2b86b6c02ab4bca779c53/ymusic/850b/d83b/93b2/bdecc59eb55cd9dd81ff024f987cf98e.mp3',
-//     'description': 'by: Various Artists',
-//     'lyrics': '',
-//     'liked_user': []}}
-    rows += `
-    <tr>
-        <td>
-        <div class = "to_right" onclick=playMusic(this.id) id="${musicUrl}" value="${musicUrl}" > </div>
-        </td>
-        <td>${name}</td>
-        <td>${description}</td>
-        <td>
-            <button class="btn deleteBtn" data-id="${id}">Remove</button>
-        </td>
-        <td>
-            <button class="btn likeBtn" data-id="${id}" onclick=likeSongs(this) >Like</button>
-        </td>
-    </tr>`;
-//   });
-$('#myTable > tbody').append(rows);
-$('.deleteBtn').each((i, elm) => {
-    $(elm).on("click",  (e) => {
-        deleteSongs ($(elm))
-    })
+    success: function  (response) {
+       
+        console.log(response)
+        // response = response["order"]
+        // data.orders.forEach(order => {
+        // var id = response['id'];
+
+        //YOU MUST USE DOUBLE QUOTO HERE
+        var id = response["id"];
+        console.log(id)
+        var price = response["price"];
+        console.log(price)
+        var name_of_cuisine = response["name_of_cuisine"];
+        var desk_no = response["desk_no"];
+        var status = response["status"];
+        var store = response["store"]
+    let rows = `
+            <tr>
+            <td>
+            ${id}
+            </td>
+            <td>${name_of_cuisine}
+            </td>
+            <td>${amount}
+            </td>
+            <td>
+            ${price}
+            </td>
+            <td>
+            ${store}
+            </td>
+            <td>
+            ${desk_no}
+            </td>
+            <td>
+            ${status} 
+            </td> 
+            <td>      
+            <button class="waves-effect waves-light btn deleteBtn" data-id="${id}">Remove</button>
+            </td>
+            </tr>`;
+            console.log(rows)
+
+$('#order_part').append(rows);
+$('.deleteBtn').each((i, elm) => 
+    {
+        $(elm).on("click",  (e) => 
+        {
+            deleteOrders ($(elm))
+        }         )
+    }               )
+
+}}).fail(function (xhr, status, errorThrown) {
+                alert("Sorry, there was a problem!");
+                console.log("Error: " + errorThrown);
+                console.log("Status: " + status);
+            });
 }
-)}
-});
-
-function Get(yourUrl){
-    var Httpreq = new XMLHttpRequest(); // a new request
-    Httpreq.open("GET",yourUrl,false);
-    Httpreq.send(null);
-    return Httpreq.responseText;
-}
 
 
-function  deleteSongs(el){
-    console.log('delete song js triggered!');
-    musicId  =  $(el).data('id')
-    data = {'id': musicId};
-    console.log('music id: ' + musicId);
+
+
+function  deleteOrders(el){
+    console.log('delete item js triggered!');
+    orderId = $(el).data('id')
+    data = {'id': orderId};
+    console.log('order id: ' + orderId);
     $.ajax({
-        url:  location.pathname.split("/")[2] + '/deleteSongs',
+        url:  '/delete_order/',
         type:  'post',
         dataType:  'json',
         data: data,

@@ -109,14 +109,16 @@ ORDER HERE
     </thead>
     <tbody>
             <div id = "content">
-        <form action="{% url 'add_order' %}" method="post" accept-charset="utf-8">
+                    <!-- {% url 'add_order' %} -->
+                    <!-- action="{% url 'add_order' %}" method="post" -->
+        <!-- <form  accept-charset="utf-8"> -->
         <tr>
         <td>
-            {% csrf_token %}
-            <input type="text"  class="taskName" name="desk_no" required>
+            <!-- {% csrf_token %} -->
+            <input type="text" id="desk_no" class="taskName" name="desk_no" required>
         </td>
         <td>
-        {% csrf_token %}
+        <!-- {% csrf_token %} -->
             <select id="store" class="select-management" name="store_select" required>
                 <option class="disabled" value="">Choose a store</option>
             {% for store in stores %}
@@ -126,32 +128,34 @@ ORDER HERE
         </td> 
         
         <td>
-                {% csrf_token %}
+               
                     <select id="menu" class="select-management" name="menu_select" required>
                         <option class="disabled" value="">Choose a menu</option>
                     {% for menu in menus %}
-                        <option class="" value="{{ menu.name_of_cuisine }}" id="{{ menu.id }}">{{ menu.name_of_cuisine }}</option>
+                        <option class="" value="{{ menu.id }}" id="{{ menu.id }}">{{ menu.name_of_cuisine }}</option>
                     {% endfor %}
                     </select>
                 </td>  
         <td>
-            {% csrf_token %}
-            <input type="text"  class="taskName" name="amount" value="1"> 
+            
+            <input type="text" id="amount" class="taskName" name="amount" value="1"> 
         </td> 
         
         <td>
-        {% csrf_token %}
+        
         <!-- <button type="button" class="btn btn-primary" data-id="comment_button">Comment</button> -->
-        <button type="submit" class="waves-effect waves-light btn" name = "OrderMenu" data-id="AddOrder_button">Order</button>
+        <!--  -->
+        <button type="submit" class="waves-effect waves-light btn" onclick="addItems()" name = "OrderMenu">Order</button>
         </td>
         </tr>
-        </form>
+        <!-- </form> -->
         </div>
     </tbody>       
 </table>     
   
-What you have ordered
-<table>
+What you have ordered 
+
+<table id="order_part">
     <thead id="add_order">
 
         <tr>
@@ -175,18 +179,10 @@ What you have ordered
         </tr>
     </thead>
     
-    <div data-id="order_part">
-       
-            {% for order in orders %}
-            <pre>
-                {{order.name_of_cuisine}}: {{order.amount}} 
-                
-                <a><i name="remove_order" id={{order.id}}></i></a>
-               
-            </pre>
-            {% endfor %}
-    </div>
-<!-- </div> -->
+   
+       <tbody>
+         
+
 
 
 {% for order in orders %}
@@ -231,22 +227,22 @@ What you have ordered
             <td>
                 {{order.status}}
             </td>
+            
             <td>
-                <!-- <form action="#" method="POST">
-    {% csrf_token %}
-                    <button class="waves-effect waves-light btn" name = "DeleteOrder" id="{{ order.id }}" value="{{ order.id }}" type="submit">
-                        Delete
-                    </button>
+               
+                    <button class="waves-effect waves-light btn deleteBtn" data-id="${id}">Remove</button>
    
-                </form> -->
+                
+                <!-- <i name="remove_order" id={{order.id}}></i> -->
             </td>
 
             </tr>
             {% endfor %}
+        </tbody>
 </table>
 
             <!-- <a href="{% url 'manageorder' %}" class="waves-effect waves-light btn">Order</a> -->
-  
+       
 </div>
 {% endblock%}
     <!--

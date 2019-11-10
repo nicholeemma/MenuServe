@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.shortcuts import render,HttpResponseRedirect,HttpResponse
 from .models import Menu, Store, Employee, Manager, Order,Document
 from django.core.files.storage import FileSystemStorage
+from django.http import JsonResponse
 from django.urls import reverse
+from django.forms.models import model_to_dict
 #Used to create and manually log in a user
 from django.contrib.auth.models import User,Group
 from django.contrib import auth
@@ -140,39 +142,82 @@ def home(request):
 
 @login_required
 def add_order(request):    
-    errors = []
-    data = {}
-    stores = Store.objects.all()
-    if request.method == 'POST':
-        print("posthahahh")
-        # json_data = json.loads(request.body)
-        json_data = json.dumps(request)
-        print(json_data)
-        try:
-            if not 'desk_no' in json_data or not json_data['desk_no']:
-                errors.append('desk_no content cant be empty')
-            else:
-                time = "2019-09-21"
-                store = Store.objects.get(id=json_data['store'])
-                menu_ = Menu.objects.get(name_of_cuisine=json_data['name_of_cuisine'])
-                price = int(menu_.price) * int(json_data['amount'])
-                new_order = Order(desk_no=json_data['desk_no'], name_of_cuisine=json_data['name_of_cuisine'], 
-                                time=time,status='pending', amount=json_data['amount'], store=store ,
-                                price=price, order_user_id=request.user.id)
-                new_order.save()
-                data['order_id'] = new_order.id
-                data['desk_no'] = new_order.desk_no
-                data['name_of_cuisine'] = new_order.name_of_cuisine
-                data['time'] = "2019-09-21"
-                data['status'] = "pending"
-                data['amount'] = new_order.amount
-                data['price'] = new_order.price
-                data['order_user_id'] = request.user.id
-                data['store'] = json_data['store']
-                return HttpResponse(json.dumps(data), content_type = "application/json")
-        except KeyError:
-            HttpResponseServerError("Malformed data!") 
-    return HttpResponse(data, content_type='application/json')
+    # errors = []
+    # data = {}
+    # stores = Store.objects.all()
+    # if request.method == 'POST':
+    #     print("posthahahh")
+    #     # json_data = json.loads(request.body)
+    #     json_data = json.dumps(request)
+    #     print(json_data)
+    #     try:
+    #         if not 'desk_no' in json_data or not json_data['desk_no']:
+    #             errors.append('desk_no content cant be empty')
+    #         else:
+    #             time = "2019-09-21"
+    #             store = Store.objects.get(id=json_data['store'])
+    #             menu_ = Menu.objects.get(name_of_cuisine=json_data['name_of_cuisine'])
+    #             price = int(menu_.price) * int(json_data['amount'])
+    #             new_order = Order(desk_no=json_data['desk_no'], name_of_cuisine=json_data['name_of_cuisine'], 
+    #                             time=time,status='pending', amount=json_data['amount'], store=store ,
+    #                             price=price, order_user_id=request.user.id)
+    #             new_order.save()
+    #             data['order_id'] = new_order.id
+    #             data['desk_no'] = new_order.desk_no
+    #             data['name_of_cuisine'] = new_order.name_of_cuisine
+    #             data['time'] = "2019-09-21"
+    #             data['status'] = "pending"
+    #             data['amount'] = new_order.amount
+    #             data['price'] = new_order.price
+    #             data['order_user_id'] = request.user.id
+    #             data['store'] = json_data['store']
+    #             return HttpResponse(json.dumps(data), content_type = "application/json")
+    #     except KeyError:
+    #         HttpResponseServerError("Malformed data!") 
+    # return HttpResponse(data, content_type='application/json')
+    rsp = dict()
+    form = OrderForm(request.POST)
+    print(request.POST)
+    # if(form.is_valid()):
+        # new_order = form.save()
+    amount = int(request.POST["amount"])
+    desk_ = request.POST["desk_no"]
+    menu_id =request.POST["name_of_cuisine"]
+    store_ = request.POST["store"]
+
+    name_of_cuisine = Menu.objects.get(id = menu_id).name_of_cuisine
+    price = Menu.objects.get(id = menu_id).price * amount
+    status = "pending"
+    store = Store.objects.get(id=str(store_))
+    time = "2019-09-21"
+
+        #saving 
+
+    an_order = Order(desk_no=desk_, name_of_cuisine=name_of_cuisine, time=time,
+                        status=status, amount=amount, store=store ,price=price,
+                        order_user_id=request.user.id)
+    an_order.save()
+    # rsp['order'] = model_to_dict(an_order)
+    # print(rsp['order']["desk_no"])
+    # else:
+    #     rsp['error'] = "form not valid!"
+    #     print("forms not valid!")
+    rsp ={}
+    # TRANSFER TO STR IS SOOOO IMPORTANT
+    rsp["id"] = str(an_order.id)
+    print(id)
+    rsp["store"] = str(store.name)
+    rsp["desk_no"] = desk_
+    rsp["name_of_cuisine"] = name_of_cuisine
+    rsp["price"] = price
+    rsp["amount"] = amount
+    rsp["status"] = "pending"
+    # {name_of_cuisine}: ${amount}
+    #         ${price}
+    #         ${store}
+    #         ${desk_no}
+    #         ${status} 
+    return JsonResponse(rsp)
 
 @login_required
 def delete_order(request,id): 
@@ -180,7 +225,7 @@ def delete_order(request,id):
     try:
         order_to_delete = Order.objects.get(id=id, order_user_id=request.user.id)
         order_to_delete.delete()
-    except ObjectDoesNotExist:
+    except:
         errors.append('The order did not exist.')
     return redirect(reverse("Order")) 
 
