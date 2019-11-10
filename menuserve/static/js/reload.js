@@ -21,17 +21,19 @@ function reload() {
         success: function(response){
             console.log("get latest one")
             let rows =  '';
+            console.log(response)
             for (order in response) {
-                var id = order["id"];
+                console.log(order)
+                var id = response[order]["id"];
                 console.log(id)
-                var price = order["price"];
+                var price = response[order]["price"];
                 console.log(price)
-                var name_of_cuisine =order["name_of_cuisine"];
-                var desk_no = order["desk_no"];
-                var status = order["status"];
-                var store = order["store"]
-                var order_user = order["order_user"];
-                var amount = order["amount"];
+                var name_of_cuisine =response[order]["name_of_cuisine"];
+                var desk_no = response[order]["desk_no"];
+                var status = response[order]["status"];
+                var store = response[order]["store"]
+                var order_user = response[order]["order_user"];
+                var amount = response[order]["amount"];
                 rows += `
                 <tr>               
             <td>${id}</td>

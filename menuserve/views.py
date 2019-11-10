@@ -359,22 +359,30 @@ def manageorders_ajax(request):
 @permission_required('menuserve.add_order', login_url="/accounts/login")
 @login_required
 def reload_order(request):
-    # Timezone info of your timezone aware variable
-    # timezone = order.tzinfo
-
-    # Current datetime for the timezone of your variable
-    # now_in_timezone = datetime.datetime.now(timezone)
-
+    
     # Now you can do a fair comparison, both datetime variables have the same time zone
     # if your_timezone_aware_variable <= now_in_timezone:
     #     pass
     #     pass
     # ts = datetime.datetime.now()
-    # then = ts + datetime.timedelta(0,-5)
+    
     # orders = Order.objects.filter(time__gt=then)
     orders = Order.objects.all()  
-    if len(orders) == 0:
-        pass
+    # Timezone info of your timezone aware variable
+    for order in orders:
+        timezone = order.time.tzinfo
+        break
+    print(timezone)
+    # Current datetime for the timezone of your variable
+    now_in_timezone = datetime.datetime.now(timezone)
+    print("now")
+    print(now_in_timezone)
+    then =  now_in_timezone + datetime.timedelta(0,-5)
+    print("then")
+    print(then)
+    orders = Order.objects.filter(time__gt=then)
+    # if len(orders) == 0:
+    #     pass
     rsp = []
     for o in orders:
         dic ={}
@@ -382,11 +390,12 @@ def reload_order(request):
         dic["order_user"] = str(o.order_user.id)
         print(id)
         dic["store"] = str(o.store.name)
-        dic["desk_no"] = str(o.id)
+        dic["desk_no"] = str(o.desk_no)
         dic["name_of_cuisine"] = str(o.name_of_cuisine)
         dic["price"] = str(o.price)
         dic["amount"] = str(o.amount)
         dic["status"] = str(o.status)
+        print("order received ajax")
         print(dic)
         rsp.append(dic)
     return JsonResponse(rsp, safe=False)
