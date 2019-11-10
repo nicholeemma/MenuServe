@@ -19,7 +19,7 @@ from menuserve.views import index
 from menuserve.views import home
 from menuserve.views import manageorders
 from django.contrib.auth import login
-from menuserve.views import (managermain,manageremployee,managerstore,managermenu,managermanager,registration,manageruser,logout,add_order,delete_order,reload_order)
+from menuserve.views import (managermain,manageremployee,managerstore,managermenu,managermanager,registration,manageruser,logout,add_order,delete_order,reload_order,manageorders_ajax)
 # registration_confirmation,
 from django.conf.urls import url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -51,6 +51,7 @@ urlpatterns = [
     url(r'^add_order/',add_order,name='add_order'),
     url(r'^delete_order/',delete_order,name='delete_order'),
     url(r'^Submitted-Order/',manageorders,name="manageorder"),
+    url(r'^Submitted-Order-ajax/',manageorders_ajax,name="manageorder_ajax"),
     url(r'^reload_order/',reload_order,name="reload_order"),
     url(r'^Manager-Main/',managermain,name="managermain"),
     url(r'^Manager-Employee/',manageremployee,name="manageremployee"),

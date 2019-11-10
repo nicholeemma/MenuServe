@@ -348,6 +348,16 @@ def manageorders(request):
 
 @permission_required('menuserve.add_order', login_url="/accounts/login")
 @login_required
+def manageorders_ajax(request):
+    '''
+    Function for sumbit-order page
+    '''
+    content={}
+    orders = Order.objects.all() 
+    return render(request,"Submitted-Order-ajax.html",{"orders":orders})
+
+@permission_required('menuserve.add_order', login_url="/accounts/login")
+@login_required
 def reload_order(request):
     # Timezone info of your timezone aware variable
     # timezone = order.tzinfo
