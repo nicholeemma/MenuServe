@@ -52,95 +52,95 @@ class MenuserveTestCase(TestCase):
 
 
 
-class FrontEndTest(LiveServerTestCase):
+# class FrontEndTest(LiveServerTestCase):
     
-    def setUp(self):
-        self.user = User.objects.create_user(username='jaco', email='jacob@…', password='top_secret')
-    def test_login(self):
+#     def setUp(self):
+#         self.user = User.objects.create_user(username='jaco', email='jacob@…', password='top_secret')
+#     def test_login(self):
 
-        self.driver = webdriver.Chrome()
-        self.driver.get("http://localhost:8100/accounts/login/")
-        # Test case for log in
-        time.sleep(2)
-        username = self.driver.find_element_by_id("id_username").send_keys("nichole")
-        pwd = self.driver.find_element_by_id("id_password").send_keys("123")
-        loginbutton = self.driver.find_element_by_id("loginbtn").click()
-        # Test case for ordering 
-        time.sleep(5)
-        desk_no = self.driver.find_element_by_id("desk_no").send_keys("12")
-        select_store = Select(self.driver.ﬁnd_element_by_id("store"))
-        select_store.select_by_index(1)
-        select_menu = Select(self.driver.ﬁnd_element_by_id("menu"))
-        select_menu.select_by_index(1)
-        amount = self.driver.find_element_by_id("amount").send_keys("2")
-        orderbutton = self.driver.find_element_by_id("orderbtn").click()
-        time.sleep(2)
-        mainbutton = self.driver.find_element_by_id("mainbtn").click()
-        # Test case for entering the managermain page
-        orderbutton = self.driver.find_element_by_id("management-main-menu").click()
-        # Test case for deleting a menu
-        update = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[2]/td[2]/input").send_keys("0")
-        time.sleep(1)
-        updatebtn = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[2]/td[8]/button[@id='3']").click()
-        time.sleep(2)
-        # go back to manager main page
-        mainbutton = self.driver.find_element_by_id("mainbtn").click()
-        time.sleep(2)
-        # Test case for viewing order page and update an order
-        orderbutton = self.driver.find_element_by_id("management-main-order").click()
-        time.sleep(2)
-        updatedeskno = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@id='order_']/tbody/tr[1]/td[3]/input").send_keys("8")
-        time.sleep(2)
-        # DO NOT PUT BUTTON ID HERE, BECAUSE THE ID WILL CHANGE, JUST LOCATE TO THE FIRST BUTTON
-        updatebtn = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@id='order_']/tbody/tr[1]/td[9]/button").click()
-        time.sleep(2)
-        # go back to manager main page
-        mainbutton = self.driver.find_element_by_id("mainbtn").click()
-        time.sleep(2)
-        # Test case: change role for user
-        userbutton = self.driver.find_element_by_id("management-main-user").click()
-        time.sleep(1)
-        selectrole = Select(self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[1]/td[6]/select[@id='user-role']"))
-        selectrole.select_by_index(1)
-        time.sleep(1)
-        rolebtn = self.driver.find_element_by_xpath("//body/div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[1]/td[7]/button").click()
-        time.sleep(1)
-        # go back to manager main page
-        mainbutton = self.driver.find_element_by_id("mainbtn").click()
-        # Test case: update information for a manager
-        managerbutton = self.driver.find_element_by_id("management-main-manager").click()
-        time.sleep(1)
-        genderupd = self.driver.find_element_by_xpath("//body/div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr/td[3]/input").send_keys("emale")
-        time.sleep(1)
-        upbtn = self.driver.find_element_by_xpath("//body/div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr/td[4]/button").click()
-        time.sleep(1)
-        # go back to manager main page
-        mainbutton = self.driver.find_element_by_id("mainbtn").click()
-        # Test case: create a new store
-        storebutton = self.driver.find_element_by_id("management-main-store").click()
-        time.sleep(1)
-        namestore = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[1]/td[2]/input[@id='status']").send_keys("Store-B")
-        time.sleep(1)
-        locstore = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[1]/td[3]/input[@id='status']").send_keys("pit")
-        time.sleep(1)
-        selectm = Select(self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[1]/td[4]/select[@id='manager']"))
-        selectm.select_by_index(1)
-        time.sleep(1)
-        createstore = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[1]/td[5]/button[@class='waves-effect waves-light btn']").click()
-        time.sleep(1)
-        # go back to manager main page
-        mainbutton = self.driver.find_element_by_id("mainbtn").click()
-        # Test case: Add an employee to a store
-        ebutton = self.driver.find_element_by_id("management-main-employee").click()
-        eselect = Select(self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[2]/td[1]/select[@id='manager']"))
-        eselect.select_by_index(1)
-        sselect = Select(self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[2]/td[2]/select[@id='store']"))
-        sselect.select_by_index(1)
-        btn = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[2]/td[3]/button[@class='waves-effect waves-light btn']").click
-        # go back to manager main page
-        mainbutton = self.driver.find_element_by_id("mainbtn").click()
-        # log out
-        logoutbutton = self.driver.find_element_by_id("logout").click()
+#         self.driver = webdriver.Chrome()
+#         self.driver.get("http://localhost:8100/accounts/login/")
+#         # Test case for log in
+#         time.sleep(2)
+#         username = self.driver.find_element_by_id("id_username").send_keys("nichole")
+#         pwd = self.driver.find_element_by_id("id_password").send_keys("123")
+#         loginbutton = self.driver.find_element_by_id("loginbtn").click()
+#         # Test case for ordering 
+#         time.sleep(5)
+#         desk_no = self.driver.find_element_by_id("desk_no").send_keys("12")
+#         select_store = Select(self.driver.ﬁnd_element_by_id("store"))
+#         select_store.select_by_index(1)
+#         select_menu = Select(self.driver.ﬁnd_element_by_id("menu"))
+#         select_menu.select_by_index(1)
+#         amount = self.driver.find_element_by_id("amount").send_keys("2")
+#         orderbutton = self.driver.find_element_by_id("orderbtn").click()
+#         time.sleep(2)
+#         mainbutton = self.driver.find_element_by_id("mainbtn").click()
+#         # Test case for entering the managermain page
+#         orderbutton = self.driver.find_element_by_id("management-main-menu").click()
+#         # Test case for deleting a menu
+#         update = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[2]/td[2]/input").send_keys("0")
+#         time.sleep(1)
+#         updatebtn = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[2]/td[8]/button[@id='3']").click()
+#         time.sleep(2)
+#         # go back to manager main page
+#         mainbutton = self.driver.find_element_by_id("mainbtn").click()
+#         time.sleep(2)
+#         # Test case for viewing order page and update an order
+#         orderbutton = self.driver.find_element_by_id("management-main-order").click()
+#         time.sleep(2)
+#         updatedeskno = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@id='order_']/tbody/tr[1]/td[3]/input").send_keys("8")
+#         time.sleep(2)
+#         # DO NOT PUT BUTTON ID HERE, BECAUSE THE ID WILL CHANGE, JUST LOCATE TO THE FIRST BUTTON
+#         updatebtn = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@id='order_']/tbody/tr[1]/td[9]/button").click()
+#         time.sleep(2)
+#         # go back to manager main page
+#         mainbutton = self.driver.find_element_by_id("mainbtn").click()
+#         time.sleep(2)
+#         # Test case: change role for user
+#         userbutton = self.driver.find_element_by_id("management-main-user").click()
+#         time.sleep(1)
+#         selectrole = Select(self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[1]/td[6]/select[@id='user-role']"))
+#         selectrole.select_by_index(1)
+#         time.sleep(1)
+#         rolebtn = self.driver.find_element_by_xpath("//body/div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[1]/td[7]/button").click()
+#         time.sleep(1)
+#         # go back to manager main page
+#         mainbutton = self.driver.find_element_by_id("mainbtn").click()
+#         # Test case: update information for a manager
+#         managerbutton = self.driver.find_element_by_id("management-main-manager").click()
+#         time.sleep(1)
+#         genderupd = self.driver.find_element_by_xpath("//body/div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr/td[3]/input").send_keys("emale")
+#         time.sleep(1)
+#         upbtn = self.driver.find_element_by_xpath("//body/div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr/td[4]/button").click()
+#         time.sleep(1)
+#         # go back to manager main page
+#         mainbutton = self.driver.find_element_by_id("mainbtn").click()
+#         # Test case: create a new store
+#         storebutton = self.driver.find_element_by_id("management-main-store").click()
+#         time.sleep(1)
+#         namestore = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[1]/td[2]/input[@id='status']").send_keys("Store-B")
+#         time.sleep(1)
+#         locstore = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[1]/td[3]/input[@id='status']").send_keys("pit")
+#         time.sleep(1)
+#         selectm = Select(self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[1]/td[4]/select[@id='manager']"))
+#         selectm.select_by_index(1)
+#         time.sleep(1)
+#         createstore = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[1]/td[5]/button[@class='waves-effect waves-light btn']").click()
+#         time.sleep(1)
+#         # go back to manager main page
+#         mainbutton = self.driver.find_element_by_id("mainbtn").click()
+#         # Test case: Add an employee to a store
+#         ebutton = self.driver.find_element_by_id("management-main-employee").click()
+#         eselect = Select(self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[2]/td[1]/select[@id='manager']"))
+#         eselect.select_by_index(1)
+#         sselect = Select(self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[2]/td[2]/select[@id='store']"))
+#         sselect.select_by_index(1)
+#         btn = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='record-table']/table[@class='striped']/tbody/tr[2]/td[3]/button[@class='waves-effect waves-light btn']").click
+#         # go back to manager main page
+#         mainbutton = self.driver.find_element_by_id("mainbtn").click()
+#         # log out
+#         logoutbutton = self.driver.find_element_by_id("logout").click()
 
 
  
