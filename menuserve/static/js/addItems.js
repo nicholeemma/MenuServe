@@ -103,7 +103,7 @@ $('.deleteBtn').each((i, elm) =>
     }               )
 
 }}).fail(function (xhr, status, errorThrown) {
-                alert("Sorry, there was a problem!");
+                alert("Sorry, there was a problem! Did you choose a store and choose a menu?");
                 console.log("Error: " + errorThrown);
                 console.log("Status: " + status);
             });
