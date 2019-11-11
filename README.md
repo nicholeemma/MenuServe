@@ -5,8 +5,7 @@
 
 ## I would like to use 1 grace day for this homework5.
 Reference:
-https://www.cnblogs.com/dreamer-fish/p/5477178.html
-https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Django/Authentication
+https://docs.djangoproject.com/en/2.2/topics/testing/overview/#running-tests
 1. enabledhostnames:
 "http://hw5jiayueyamenuserve.azurewebsites.net"
 

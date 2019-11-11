@@ -4,7 +4,7 @@
                 
         {%block headerbutton%}
                 <form method="post" action="/">
-                    <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="logout" >
+                    <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="mainbtn" >
                         Main
                     </a>
                 </form>
@@ -194,7 +194,7 @@
                     <td>
                         <form action="#" method="POST">
                                 {% csrf_token %}
-                            <button class="waves-effect waves-light btn" name = "MenuDelete" id="{{ menu.id }}" value="{{ menu.id }}" type="submit">
+                            <button class="waves-effect waves-light btn" name = "MenuDelete" id="{{ menu.id }}delete" value="{{ menu.id }}" type="submit">
                                 Delete
                             </button>
                                                              

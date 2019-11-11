@@ -79,16 +79,22 @@ img .menu_pic{
 #loginfo{
   color: #4db6ac; font-size: 18px; 
 }
-#management-main-btn1{
+#management-main-menu{
   width:70%; margin-bottom: 5%;
 }
-#management-main-btn2{
+#management-main-employee{
   width:70%; margin-bottom: 5%;
 }
-#management-main-btn3{
+#management-main-order{
   width:70%; margin-bottom: 5%;
 }
-#management-main-btn4{
+#management-main-user{
+  width:70%; margin-bottom: 5%;
+}
+#management-main-manager{
+  width:70%; margin-bottom: 5%;
+}
+#management-main-store{
   width:70%; margin-bottom: 5%;
 }
 #registrationbtn{
