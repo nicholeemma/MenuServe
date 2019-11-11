@@ -1,8 +1,11 @@
-from django.test import TestCase
+from django.test import TestCase, LiveServerTestCase
 
 # Create your tests here.
 from .models import Menu, Store, Employee, Manager, Order
 from django.contrib.auth.models import User
+import time
+from selenium import webdriver
+from selenium.webdriver.support.ui import Select
 
 class MenuserveTestCase(TestCase):
     def setUp(self):
@@ -46,6 +49,53 @@ class MenuserveTestCase(TestCase):
         store_ = Store(location="Pitts11", store_manager=manager_, name="happy1")
         store_.save()
         t_employee.e_store.add(store_)
+
+
+
+class FrontEndTest(LiveServerTestCase):
+    
+    def setUp(self):
+        self.user = User.objects.create_user(username='jaco', email='jacob@…', password='top_secret')
+    def test_login(self):
+
+        self.driver = webdriver.Chrome()
+        self.driver.get("http://localhost:8100/accounts/login/")
+        time.sleep(5)
+        username = self.driver.find_element_by_id("id_username").send_keys("nichole")
+        pwd = self.driver.find_element_by_id("id_password").send_keys("123")
+        loginbutton = self.driver.find_element_by_id("loginbtn").click()
+        time.sleep(5)
+        desk_no = self.driver.find_element_by_id("desk_no").send_keys("12")
+        select_store = Select(self.driver.ﬁnd_element_by_id("store"))
+        select_store.select_by_index(1)
+        select_menu = Select(self.driver.ﬁnd_element_by_id("menu"))
+        select_menu.select_by_index(1)
+        amount = self.driver.find_element_by_id("amount").send_keys("2")
+        loginbutton = self.driver.find_element_by_id("orderbtn").click()
+        
+        self.assertEqual(2, order.amount)
+    # def test_order(self):
+    #     self.driver = webdriver.Chrome()
+    #     self.driver.get("http://localhost:8100/Order/")
+    #     time.sleep(2)
+    #     desk_no = self.driver.find_element_by_id("desk_no").send_keys("12")
+    #     select_store = Select(self.driver.ﬁnd_element_by_id("store"))
+    #     select_store.select_by_index(1)
+    #     select_menu = Select(self.driver.ﬁnd_element_by_id("menu"))
+    #     select_menu.select_by_index(1)
+    #     amount = self.driver.find_element_by_id("amount").send_keys("2")
+    #     loginbutton = self.driver.find_element_by_id("orderbtn").click()
+    #     order = Order(desk_no="12")
+    #     self.assertEqual(2, order.amount)
+
+    # driver = webdriver.Chrome('/path/to/chromedriver')  # Optional argument, if not specified will search path.
+    # driver.get('http://www.google.com/');
+    # time.sleep(5) # Let the user actually see something!
+    # search_box = driver.find_element_by_name('q')
+    # search_box.send_keys('ChromeDriver')
+    # search_box.submit()
+    #  # Let the user actually see something!
+    # driver.quit()
         
     
 
