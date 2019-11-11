@@ -1,5 +1,4 @@
 from django.test import TestCase, LiveServerTestCase
-
 # Create your tests here.
 from .models import Menu, Store, Employee, Manager, Order
 from django.contrib.auth.models import User
