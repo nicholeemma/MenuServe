@@ -57,9 +57,9 @@ class FrontEndTest(LiveServerTestCase):
         self.user = User.objects.create_user(username='jaco', email='jacob@…', password='top_secret')
     def test_login(self):
 
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome(executable_path=r"C:\course\Web application\chromedriver_win32\chromedriver.exe")
         # self.live_server_url+
-        self.driver.get(executable_path=r"C:\course\\Web application\\chromedriver_win32\\chromedriver.exe")
+        self.driver.get("http://localhost:8100/accounts/login/")
         # Test case for log in
         time.sleep(2)
         username = self.driver.find_element_by_id("id_username").send_keys("cmuwebapps-manager")
