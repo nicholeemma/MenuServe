@@ -47,6 +47,9 @@ steps:
 
 - script: |
     pushd '$(projectRoot)'
+    python manage.py makemigrations menuserve
+    python manage.py makemigrations
+    python manage.py migrate
     python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
   displayName: 'Run tests'
 
