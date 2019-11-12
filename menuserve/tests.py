@@ -59,7 +59,7 @@ class FrontEndTest(LiveServerTestCase):
 
         self.driver = webdriver.Chrome()
         # self.live_server_url+
-        self.driver.get(executable_path=r"C:\course\Web application\chromedriver_win32\chromedriver.exe")
+        self.driver.get(executable_path=r"C:\\course\Web application\\chromedriver_win32\\chromedriver.exe")
         # Test case for log in
         time.sleep(2)
         username = self.driver.find_element_by_id("id_username").send_keys("cmuwebapps-manager")
