@@ -103,7 +103,7 @@ DATABASES = {
     'default' :{
         'ENGINE':'django.db.backends.postgresql',
         # 'NAME': os.environ['DBNAME'],
-        'NAME': 'menuserve',
+        'NAME': 'menu1',
         # 'HOST': os.environ['DBHOST'],
         # 'USER': os.environ['DBUSER'],
         # 'PASSWORD':os.environ['DBPASS'],

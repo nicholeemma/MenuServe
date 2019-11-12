@@ -141,6 +141,7 @@ class FrontEndTest(LiveServerTestCase):
         mainbutton = self.driver.find_element_by_id("mainbtn").click()
         # log out
         logoutbutton = self.driver.find_element_by_id("logout").click()
+    
 
 
  
