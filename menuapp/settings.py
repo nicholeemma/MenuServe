@@ -165,12 +165,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # ROOT_URLCONF = '/'
 
-# makemigrations requires this for some reason or it errors
-# Just set to the default value
-MENUSERVE_APPLICATION_MODEL = 'menuserve.Application'
+# # makemigrations requires this for some reason or it errors
+# # Just set to the default value
+# MENUSERVE_APPLICATION_MODEL = 'menuserve.Application'
 
-# # tell django where to put the oauth2 migrations
-MIGRATION_MODULES = {
-   # key: app name, value: a fully qualified package name, not the usual `app_label.something_else`
-  'menuserve': 'menuapp.db_migrations.menuserve',
-}
+# # # tell django where to put the oauth2 migrations
+# MIGRATION_MODULES = {
+#    # key: app name, value: a fully qualified package name, not the usual `app_label.something_else`
+#   'menuserve': 'menuapp.migrations.menuserve',
+# }
