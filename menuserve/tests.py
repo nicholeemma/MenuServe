@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 import time
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
+from django.test.utils import override_settings
 
 class MenuserveTestCase(TestCase):
     def setUp(self):
@@ -56,8 +57,8 @@ class FrontEndTest(LiveServerTestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='jaco', email='jacob@…', password='top_secret')
     def test_login(self):
-
-        self.driver = webdriver.Chrome(executable_path=r"C:\course\Web application\jiayueya\menuserve\chromedriver.exe")
+        # executable_path=r"C:\course\Web application\jiayueya\menuserve\chromedriver.exe"
+        self.driver = webdriver.Chrome()
         # self.live_server_url+
         self.driver.get("http://localhost:8100/accounts/login/")
         # Test case for log in
