@@ -69,8 +69,7 @@ steps:
 
 - script: |
     git checkout hw6_deployment
-    git push
-    https://jiayueya:$(gitPassword)@hw6jiayueyamenuserve.scm.azurewebsites.net:443/hw6jiayueyamenuserve.git hw6_deployment:master
-    displayName: "Push to Azure"
+    git push https://jiayueya:$(gitPassword)@hw6jiayueyamenuserve.scm.azurewebsites.net:443/hw6jiayueyamenuserve.git hw6_deployment:master
+    displayName: 'Push to Azure'
 
  
