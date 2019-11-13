@@ -9,11 +9,12 @@ from django.test.utils import override_settings
 import os
 
 # def setUp():
-#     self.user = User.objects.create_user(username='jacob', email='jacob@…', password='top_secret')
-#     self.user.save()
-#     menu = Menu.objects.create(name_of_cuisine="hellodish", id_for_dish="12", price=9, classification="seafood", description="des")
-#     menu.save()
-#     manager = Manager.objects.create(manageruser = self.user,gender="female")
+#     self.client = Client
+#     test_user = User.objects.create_user(username='jacob', email='jacob@…', password='top_secret')
+#     test_user.save()
+#     test_menu = Menu.objects.create(name_of_cuisine="hellodish", id_for_dish="12", price=9, classification="seafood", description="des")
+#     test_menu.save()
+#     test_manager = Manager.objects.create(manageruser = test_user,gender="female")
 #     manager.save()
 #     store = Store.objects.create(location="pis",name="store-a",store_manager=manager)
 #     store.save()
@@ -66,15 +67,15 @@ class MenuserveTestCase(TestCase):
 
 class FrontEndTest(LiveServerTestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver")
-        cls.driver.implicitly_wait(5)
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.quit()
-        super().tearDownClass()
+    # @classmethod
+    # def setUpClass(cls):
+    #     super().setUpClass()
+    #     cls.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver")
+    #     cls.driver.implicitly_wait(5)
+    # @classmethod
+    # def tearDownClass(cls):
+    #     cls.driver.quit()
+    #     super().tearDownClass()
 
     # def setUp(self):
     #     setUp()
@@ -82,7 +83,7 @@ class FrontEndTest(LiveServerTestCase):
     def test_login(self):
         # executable_path=r"C:\course\Web application\jiayueya\menuserve\chromedriver.exe"
         # self.driver = webdriver.Chrome()
-       
+        self.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver")
         # self.driver.get('%s' % (self.live_server_url))
         # register = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='row']/div[@id='menu_right_col']/form/a[@id='registrationbtn'][1]").click()
 
