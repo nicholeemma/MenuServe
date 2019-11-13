@@ -12,7 +12,11 @@ from django.contrib.contenttypes.models import ContentType
 
 import os
 
+
 def setUp():
+    '''
+    Data set up for front end test
+    '''
     
     test_user = User.objects.create_user(username='cmuwebapps-manager', email='jacob@…', password='WebAppsIsTheBestCourse',is_superuser=True,is_staff=True)
     test_user.save()
@@ -120,7 +124,9 @@ class FrontEndTest(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver")
+        options = webdriver.ChromeOptions()
+        options.add_argument('user-agent = Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36')
+        cls.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver.exe")
         cls.driver.implicitly_wait(5)
     @classmethod
     def tearDownClass(cls):
@@ -133,12 +139,13 @@ class FrontEndTest(LiveServerTestCase):
     @override_settings(DEBUG=True)
     def test_login(self):
         
-        # self.driver = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        options.add_argument('user-agent = Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36')
         self.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver.exe")
         self.driver.get('%s%s' % (self.live_server_url,'/accounts/login/'))
         # register = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='row']/div[@id='menu_right_col']/form/a[@id='registrationbtn'][1]").click()
 
-        # self.driver.get("http://localhost:8100/accounts/login/")
+       
         # Test case for log in
         time.sleep(2)
         username = self.driver.find_element_by_id("id_username").send_keys("cmuwebapps-manager")
