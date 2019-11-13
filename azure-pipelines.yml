@@ -51,7 +51,7 @@ steps:
     export DBUSER=$(DBUSER)
     export DBNAME=$(DBNAME)
     export DBPASS=$(DBPASS)
-    chmod 777 menuserve/chromedriver.exe
+    chmod 777 menuserve/chromedriver
     pushd '$(projectRoot)'
     python manage.py makemigrations menuserve
     python manage.py makemigrations
