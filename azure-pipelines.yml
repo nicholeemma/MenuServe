@@ -43,7 +43,7 @@ steps:
     python -m pip install --upgrade pip setuptools wheel
     pip install -r requirements.txt
     pip install unittest-xml-reporting
-    pip install chromedriver_installer
+   
   displayName: 'Install prerequisites'
 
 - script: |
