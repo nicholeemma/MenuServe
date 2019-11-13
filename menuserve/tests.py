@@ -138,7 +138,7 @@ class FrontEndTest(LiveServerTestCase):
         # self.user = User.objects.create_user(username='jaco', email='jacob@…', password='top_secret')
     @override_settings(DEBUG=True)
     def test_login(self):
-        
+        #test
         options = webdriver.ChromeOptions()
         options.add_argument('user-agent = Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36')
         self.driver = webdriver.Chrome(chrome_options=options,executable_path=os.getcwd() + "/menuserve/chromedriver.exe")
