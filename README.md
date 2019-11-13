@@ -3,7 +3,7 @@
 
 ## *Serverl things to notice*
 
-## I would like to use 1 grace day for this homework5.
+## I would like to use 2 grace days for this homework5.
 Reference:
 https://docs.djangoproject.com/en/2.2/topics/testing/overview/#running-tests
 1. enabledhostnames:
