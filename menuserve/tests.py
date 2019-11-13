@@ -1,24 +1,73 @@
 from django.test import TestCase, LiveServerTestCase
 # Create your tests here.
 from .models import Menu, Store, Employee, Manager, Order
+from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.models import User
 import time
 from selenium import webdriver
 from django.test import Client
 from selenium.webdriver.support.ui import Select
 from django.test.utils import override_settings
+from django.contrib.contenttypes.models import ContentType
+
 import os
 
-# def setUp():
-#     self.client = Client
-#     test_user = User.objects.create_user(username='jacob', email='jacob@…', password='top_secret')
-#     test_user.save()
-#     test_menu = Menu.objects.create(name_of_cuisine="hellodish", id_for_dish="12", price=9, classification="seafood", description="des")
-#     test_menu.save()
-#     test_manager = Manager.objects.create(manageruser = test_user,gender="female")
-#     manager.save()
-#     store = Store.objects.create(location="pis",name="store-a",store_manager=manager)
-#     store.save()
+def setUp():
+    
+    test_user = User.objects.create_user(username='cmuwebapps-manager', email='jacob@…', password='WebAppsIsTheBestCourse',is_superuser=True,is_staff=True)
+    test_user.save()
+    new_group, created = Group.objects.get_or_create(name='Manager')
+    e_group, created = Group.objects.get_or_create(name='Employee')
+    c_group, created = Group.objects.get_or_create(name='Customer')
+    # Code to add permission to group ???
+    ct = ContentType.objects.get_for_model(Order)
+
+    # Now what - Say I want to add 'Can add project' permission to new_group?
+    permission = Permission.objects.create(codename='can_add_order',
+                                    name='Can add order',
+                                    content_type=ct)
+                
+    new_group.permissions.add(permission)
+    ct1 = ContentType.objects.get_for_model(Store)
+    permission1 = Permission.objects.create(codename='can_add_store',
+                                    name='Can add store',
+                                    content_type=ct1)
+    ct2 = ContentType.objects.get_for_model(Manager)        
+    new_group.permissions.add(permission1)
+    permission2 = Permission.objects.create(codename='can_add_manager',
+                                    name='Can add manager',
+                                    content_type=ct2)
+    ct3 = ContentType.objects.get_for_model(Employee)          
+    new_group.permissions.add(permission2)
+    permission3 = Permission.objects.create(codename='can_add_employee',
+                                    name='Can add employee',
+                                    content_type=ct3)
+    ct4 = ContentType.objects.get_for_model(Menu)      
+    new_group.permissions.add(permission3)
+    permission4 = Permission.objects.create(codename='can_add_menu',
+                                    name='Can add menu',
+                                    content_type=ct4)
+    ct5 = ContentType.objects.get_for_model(User)       
+    new_group.permissions.add(permission4)
+    permission5 = Permission.objects.create(codename='can_add_user',
+                                    name='Can add user',
+                                    content_type=ct5)
+                
+    new_group.permissions.add(permission5)
+
+    test_e = User.objects.create_user(username='teste', email='jacob@…', password='top_secret')
+    test_e.save()
+    test_menu = Menu.objects.create(name_of_cuisine="hellodish", id_for_dish="12", price=9, classification="seafood", description="des")
+    test_menu.save()
+    test_manager = Manager.objects.create(manageruser = test_user,gender="female")
+    test_manager.save()
+    test_store = Store.objects.create(location="pis",name="store-a",store_manager=test_manager)
+    test_store.save()
+    test_order = Order.objects.create(desk_no="12",name_of_cuisine="hellodish",status="pending",amount=9,price=12,store=test_store,order_user=test_user)
+    test_order.save()
+    test_employee = Employee.objects.create(employeeuser=test_e,manager=test_manager)
+    test_employee.e_store.add(test_store)
+    test_employee.save()
 
 
 class MenuserveTestCase(TestCase):
@@ -68,27 +117,28 @@ class MenuserveTestCase(TestCase):
 
 class FrontEndTest(LiveServerTestCase):
 
-    # @classmethod
-    # def setUpClass(cls):
-    #     super().setUpClass()
-    #     cls.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver")
-    #     cls.driver.implicitly_wait(5)
-    # @classmethod
-    # def tearDownClass(cls):
-    #     cls.driver.quit()
-    #     super().tearDownClass()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver")
+        cls.driver.implicitly_wait(5)
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
+        super().tearDownClass()
 
-    # def setUp(self):
-    #     setUp()
+    def setUp(self):
+        setUp()
         # self.user = User.objects.create_user(username='jaco', email='jacob@…', password='top_secret')
+    @override_settings(DEBUG=True)
     def test_login(self):
-        # executable_path=r"C:\course\Web application\jiayueya\menuserve\chromedriver.exe"
+        
         # self.driver = webdriver.Chrome()
         self.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver.exe")
-        # self.driver.get('%s' % (self.live_server_url))
+        self.driver.get('%s%s' % (self.live_server_url,'/accounts/login/'))
         # register = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='row']/div[@id='menu_right_col']/form/a[@id='registrationbtn'][1]").click()
 
-        self.driver.get("http://localhost:8100/accounts/login/")
+        # self.driver.get("http://localhost:8100/accounts/login/")
         # Test case for log in
         time.sleep(2)
         username = self.driver.find_element_by_id("id_username").send_keys("cmuwebapps-manager")
