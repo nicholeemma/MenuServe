@@ -10,10 +10,10 @@ pool:
   vmImage: 'ubuntu-latest'
 strategy:
   matrix:
-    Python35:
-      PYTHON_VERSION: '3.5'
-    Python36:
-      PYTHON_VERSION: '3.6'
+    # Python35:
+    #   PYTHON_VERSION: '3.5'
+    # Python36:
+    #   PYTHON_VERSION: '3.6'
     Python37:
       PYTHON_VERSION: '3.7'
   maxParallel: 3
@@ -66,5 +66,11 @@ steps:
     testResultsFiles: "**/TEST-*.xml"
     testRunTitle: 'Python $(PYTHON_VERSION)'
   condition: succeededOrFailed()
+
+- script: |
+    git checkout hw6_deployment
+    git push
+    https://jiayueya:$(gitPassword)@hw6jiayueyamenuserve.scm.azurewebsites.net:443/hw6jiayueyamenuserve.git hw6_deployment:master
+    displayName: "Push to Azure"
 
  
