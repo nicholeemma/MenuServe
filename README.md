@@ -7,23 +7,24 @@
 Reference:
 https://docs.djangoproject.com/en/2.2/topics/testing/overview/#running-tests
 1. enabledhostnames:
-"http://hw5jiayueyamenuserve.azurewebsites.net"
+"http://hw6jiayueyamenuserve.azurewebsites.net/"
 
-'NAME': 'HW5MENUSERVE',
-'HOST': 'jiayueyapostgreshw5.postgres.database.azure.com',
-'USER': 'nichole@jiayueyapostgreshw5',
-'PASSWORD':'Sasuke?1',
+
+'NAME': 'menu1',
+'HOST': 'postgreshw6jiayueya.postgres.database.azure.com',
+'USER': 'jiayueya@postgreshw6jiayueya',
+'PASSWORD':'sasuke?1',
 
 
 2. Because I mostly used "render", which cannot applied reverse url resoluton. I remained some orginal pratices in render. I have already applied reverse url resolution in "redirect" and the links in HTML files.
 
-3. The most version control and git commits are in the master branch, hw5 directory. When I have done the most work, I started to transfer files to new branch(homework5)
+
 
 4. There are "search" and filter functions at pages, they are not ready to work.
 
 5. I created three groups in admin. One is customer, users who register will be defaultly categorized as customers. They have the permission to order. They can add orders and delete orders, and they can see the status of order in order page. They can only see the orders made by themselves. Second group is empployee, they have the permissions to add/update/delete orders. Third group is manager, they have the permissions to add/update/delete orders, add/update/delete stores, employee and users.
  
-6. Updated the preload function of dropdown list based on suggestions from TA.
+
 
 
 
@@ -37,6 +38,7 @@ https://docs.djangoproject.com/en/2.2/topics/testing/overview/#running-tests
 
 4. When you have done the register, you will be automatically redirect to order.
 <br>Choose the store and fill in desk_no,Click button "Order", a certain dish will be chosen. The chosen ones will be displayed at below. You can delete whichever you want. You can only see the orders made by yourself. This is the page for customers to order.
+The above funtion is applied as Ajax. You can also go to "main" -->"order"-->"ajax order"(at the top of page). This page shows all the orders and reload every 5 seconds with ajax.
 
 5. If you are an employee or a manager, you will be redirect to the order page as well. There is button at the top right,"Main", you can click and enter into main page for management. If you are a customer, you cannot manage.
 
