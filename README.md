@@ -20,9 +20,9 @@ https://docs.djangoproject.com/en/2.2/topics/testing/overview/#running-tests
 
 
 
-4. There are "search" and filter functions at pages, they are not ready to work.
+3. There are "search" and filter functions at pages, they are not ready to work.
 
-5. I created three groups in admin. One is customer, users who register will be defaultly categorized as customers. They have the permission to order. They can add orders and delete orders, and they can see the status of order in order page. They can only see the orders made by themselves. Second group is empployee, they have the permissions to add/update/delete orders. Third group is manager, they have the permissions to add/update/delete orders, add/update/delete stores, employee and users.
+4. I created three groups in admin. One is customer, users who register will be defaultly categorized as customers. They have the permission to order. They can add orders and delete orders, and they can see the status of order in order page. They can only see the orders made by themselves. Second group is empployee, they have the permissions to add/update/delete orders. Third group is manager, they have the permissions to add/update/delete orders, add/update/delete stores, employee and users.
  
 
 
