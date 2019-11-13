@@ -6,6 +6,18 @@ import time
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from django.test.utils import override_settings
+import os
+
+# def setUp():
+#     self.user = User.objects.create_user(username='jacob', email='jacob@…', password='top_secret')
+#     self.user.save()
+#     menu = Menu.objects.create(name_of_cuisine="hellodish", id_for_dish="12", price=9, classification="seafood", description="des")
+#     menu.save()
+#     manager = Manager.objects.create(manageruser = self.user,gender="female")
+#     manager.save()
+#     store = Store.objects.create(location="pis",name="store-a",store_manager=manager)
+#     store.save()
+
 
 class MenuserveTestCase(TestCase):
     def setUp(self):
@@ -53,13 +65,27 @@ class MenuserveTestCase(TestCase):
 
 
 class FrontEndTest(LiveServerTestCase):
-    
-    def setUp(self):
-        self.user = User.objects.create_user(username='jaco', email='jacob@…', password='top_secret')
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.driver = webdriver.Chrome(os.getcwd() + "/menuserve/chromedriver")
+        cls.driver.implicitly_wait(5)
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
+        super().tearDownClass()
+
+    # def setUp(self):
+    #     setUp()
+        # self.user = User.objects.create_user(username='jaco', email='jacob@…', password='top_secret')
     def test_login(self):
         # executable_path=r"C:\course\Web application\jiayueya\menuserve\chromedriver.exe"
-        self.driver = webdriver.Chrome()
-        # self.live_server_url+
+        # self.driver = webdriver.Chrome()
+       
+        # self.driver.get('%s' % (self.live_server_url))
+        # register = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='row']/div[@id='menu_right_col']/form/a[@id='registrationbtn'][1]").click()
+
         self.driver.get("http://localhost:8100/accounts/login/")
         # Test case for log in
         time.sleep(2)
