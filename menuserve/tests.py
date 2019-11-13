@@ -4,6 +4,7 @@ from .models import Menu, Store, Employee, Manager, Order
 from django.contrib.auth.models import User
 import time
 from selenium import webdriver
+from django.test import Client
 from selenium.webdriver.support.ui import Select
 from django.test.utils import override_settings
 import os
@@ -83,7 +84,7 @@ class FrontEndTest(LiveServerTestCase):
     def test_login(self):
         # executable_path=r"C:\course\Web application\jiayueya\menuserve\chromedriver.exe"
         # self.driver = webdriver.Chrome()
-        self.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver")
+        self.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve")
         # self.driver.get('%s' % (self.live_server_url))
         # register = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='row']/div[@id='menu_right_col']/form/a[@id='registrationbtn'][1]").click()
 
