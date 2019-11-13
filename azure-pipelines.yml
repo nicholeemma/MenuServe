@@ -47,6 +47,10 @@ steps:
   displayName: 'Install prerequisites'
 
 - script: |
+    export DBHOST=$(DBHOST)
+    export DBUSER=$(DBUSER)
+    export DBNAME=$(DBNAME)
+    export DBPASS=$(DBPASS)
     pushd '$(projectRoot)'
     python manage.py makemigrations menuserve
     python manage.py makemigrations
