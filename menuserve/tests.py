@@ -69,7 +69,7 @@ class FrontEndTest(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.driver = webdriver.Chrome(os.getcwd() + "/menuserve/chromedriver")
+        cls.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver")
         cls.driver.implicitly_wait(5)
     @classmethod
     def tearDownClass(cls):
