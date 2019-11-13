@@ -84,7 +84,7 @@ class FrontEndTest(LiveServerTestCase):
     def test_login(self):
         # executable_path=r"C:\course\Web application\jiayueya\menuserve\chromedriver.exe"
         # self.driver = webdriver.Chrome()
-        self.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver.ext")
+        self.driver = webdriver.Chrome(executable_path=os.getcwd() + "/menuserve/chromedriver.exe")
         # self.driver.get('%s' % (self.live_server_url))
         # register = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='row']/div[@id='menu_right_col']/form/a[@id='registrationbtn'][1]").click()
 
