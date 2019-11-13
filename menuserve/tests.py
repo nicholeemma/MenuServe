@@ -126,7 +126,7 @@ class FrontEndTest(LiveServerTestCase):
         super().setUpClass()
         options = webdriver.ChromeOptions()
         options.add_argument('user-agent = Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36')
-        cls.driver = webdriver.Chrome(chrome_options=options,executable_path=os.getcwd() + "/menuserve/chromedriver.exe")
+        cls.driver = webdriver.Chrome(chrome_options=options,executable_path=os.getcwd() + "\\menuserve\\chromedriver.exe")
         cls.driver.implicitly_wait(5)
     @classmethod
     def tearDownClass(cls):
@@ -141,7 +141,7 @@ class FrontEndTest(LiveServerTestCase):
         
         options = webdriver.ChromeOptions()
         options.add_argument('user-agent = Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36')
-        self.driver = webdriver.Chrome(chrome_options=options,executable_path=os.getcwd() + "/menuserve/chromedriver.exe")
+        self.driver = webdriver.Chrome(chrome_options=options,executable_path=os.getcwd() + "\\menuserve\\chromedriver.exe")
         self.driver.get('%s%s' % (self.live_server_url,'/accounts/login/'))
         # register = self.driver.find_element_by_xpath("//div[@id='maincontainer']/div[@class='general-container']/div[@class='row']/div[@id='menu_right_col']/form/a[@id='registrationbtn'][1]").click()
 
