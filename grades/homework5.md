@@ -31,7 +31,7 @@ Commit graded: *6d3937c39fddca2ea30f6c1c2ffbc33682b9345e*
 
 ***
 
-### Total score: 82.0/100
+### Total score: 100.0/100
 
 ***
 
