@@ -1,3 +1,2 @@
-You should use this repository for all your homework and in-class work
-within 17-437 / 17-637.  We will provide a different Git repository for
-your course final project.
+Menuserve(Web application) is my course project for 17-437 / 17-637.  
+The final version is in hw6_deployment branch.
