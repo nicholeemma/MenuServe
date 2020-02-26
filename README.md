@@ -1,6 +1,12 @@
-Menuserve(Web application) is my course project for 17-437 / 17-637.  
-The website link:<BR>
-<b>http://menuservejiayueyaapp.azurewebsites.net/<b>
+# Menuserve(Web application) 
+is my independent course project for 17-437 / 17-637 at Carnegie Mellon University.  
+## Attention
+If you are having this course right now, please do not copy paste my code directly, or you will get failed.
+<br>
+The website link:
+<BR>
+  <b>http://menuservejiayueyaapp.azurewebsites.net/</b>
+<br>
 The final version of source code is in hw6_deployment branch. More readme and instructions can be found in hw6_deployment branch.
   
 I created three groups in admin. 
@@ -25,8 +31,8 @@ I have created a manager account initially. If you want its credentials, please 
 <br>Choose the store and fill in desk_no,Click button "Order", a certain dish will be chosen. The chosen ones will be displayed at below. You can delete whichever you want. You can only see the orders made by yourself. This is the page for customers to order.
 The above funtion is applied as Ajax. You can also go to "main" -->"order"-->"ajax order"(at the top of page). This page shows all the orders and reload every 5 seconds with ajax.
 For checking Ajax function:
-Add orders here: http://hw6jiayueyamenuserve.azurewebsites.net/Order/
-Page will reload automatically: http://hw6jiayueyamenuserve.azurewebsites.net/Submitted-Order-ajax/   show the orders made last 5 seconds
+Add orders here: http://menuservejiayueyaapp.azurewebsites.net//Order/
+Page will reload automatically: http://menuservejiayueyaapp.azurewebsites.net/Submitted-Order-ajax/   show the orders made last 5 seconds
 
 5. If you are an employee or a manager, you will be redirect to the order page as well. There is button at the top right,"Main", you can click and enter into main page for management. If you are a customer, you cannot manage.
 
