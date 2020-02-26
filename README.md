@@ -3,12 +3,21 @@ is my independent course project for 17-437 / 17-637 at Carnegie Mellon Universi
 ## Attention
 If you are having this course right now, please do not copy paste my code directly, or you will get failed.
 <br>
-The website link:
+## Link & Code
+
 <BR>
   <b>http://menuservejiayueyaapp.azurewebsites.net/</b>
 <br>
 The final version of source code is in hw6_deployment branch. More readme and instructions can be found in hw6_deployment branch.
+## Features
+  - Registration and Login
+  - Authentication (Accessibility of functions is role-based)
+  - Menu management (Update, delete, add) (Support image uploading)
+  - Employee management (Manager, employee, store information management) (The relationship between employees and stores is many to many)
+  - Order Management
+  - View orders (Automatic refreshing)
   
+  <br>
 I created three groups in admin. 
 <br>
 One is customer, users who register will be defaultly categorized as customers. They have the permission to order. They can add orders and delete orders, and they can see the status of order in order page. They can only see the orders made by themselves. 
@@ -19,7 +28,7 @@ Third group is manager, they have the permissions to add/update/delete orders, a
 I have created a manager account initially. If you want its credentials, please email me (jiayueya@andrew.cmu.edu).
  
 
-## *Using the webiste*
+## Instructions
 
 1. You can first log in with the superuser account. You are entitled to add(update/delete) menu, add(update/delete) store, add(update/delete) user, add(update/delete) employee. You can first go to manageuser page, change some roles of users, and add them to manager, employee and assign store to them. (First create manager, then store, then employee)
 
@@ -48,3 +57,11 @@ Manager group and Manager class are different things.
 
 9. How to create employees. 
 <br>First, in manager-user page, change the role of a user into employee.
+
+## Technology
+
+- Python (Django MVC framework)
+- Postgres for Database
+- HTML, CSS(Bootstrap), JavaScript, JQuery(Ajax)
+- CI/CD tool, Azure
+- Git
