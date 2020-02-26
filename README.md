@@ -1,6 +1,8 @@
 # Menuserve(Web application) 
-is my independent course project for 17-437 / 17-637 at Carnegie Mellon University.  
-## Attention
+is my independent course project for 17-437 / 17-637 at Carnegie Mellon University. 
+<br>
+It is basically a restaurant information management system for customers to order and for managers to manage employees.
+## Attention!!!
 If you are having this course right now, please do not copy paste my code directly, or you will get failed.
 <br>
 ## Link & Code
@@ -9,7 +11,9 @@ If you are having this course right now, please do not copy paste my code direct
   <b>http://menuservejiayueyaapp.azurewebsites.net/</b>
 <br>
 The final version of source code is in hw6_deployment branch. More readme and instructions can be found in hw6_deployment branch.
-## Features
+  <br>
+  
+## Instructions
   - Registration and Login
   - Authentication (Accessibility of functions is role-based)
   - Menu management (Update, delete, add) (Support image uploading)
