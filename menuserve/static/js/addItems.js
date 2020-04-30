@@ -12,10 +12,10 @@ $.ajaxSetup({
     }
 });
 
-function addItems() {
+function addItems(menuid) {
     console.log('add items js triggered!')
     console.log("this is the  id")
-
+    console.log(menuid)
   
     var data = {};
     var desk_no = document.getElementById("desk_no").value;
@@ -28,8 +28,9 @@ function addItems() {
     var storeselectid = storeselect.options[storeselect.selectedIndex].value;
     var  menuselect=document.getElementById("menu");
            
-    var meuselectid = menuselect.options[menuselect.selectedIndex].value;
+    // var meuselectid = menuselect.options[menuselect.selectedIndex].value;
 
+    var meuselectid = menuid
     console.log(meuselectid, storeselectid)
     // var store: $("select[name=store_select]").val();
     //     name_of_cuisine: $(this).siblings().filter($("select[name=menu_select]")).val(),

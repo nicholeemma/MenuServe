@@ -17,7 +17,7 @@
         {% block content %}
         {% csrf_token %}
         <p>
-            Picture display for menus, click here to <button type="button" onclick="hide()">hide</button>
+            Picture display for the menu, click here to <b  style="cursor:pointer" type="button" onclick="hide()">hide</b>
         </p>
                         <div class="container-pic" id="container-pic1">
                                 {% for menu in menus %}
@@ -38,71 +38,104 @@
                                
                                 <br>
         <p class="error_msg">{{show}}</p>
-          <table>
-              <thead>
-                  <tr>
+
+        <table>
+            <thead>
+                <th>
+                    Desk No
+                </th>
+                <th>
+                    Store No
+                </th>
+            </thead>
+            
+            <tbody>
+        <td>
+          
+            <input type="text" id="desk_no" class="taskName" name="desk_no" required>
+
+        </td>
+        <td>
+    
+            <select id="store" style="cursor:pointer" class="select-management" name="store_select" required>
+                <option class="disabled" value="">Choose a store</option>
+            {% for store in stores %}
+                <option class="" value="{{ store.id }}" id="{{ store.id }}">{{ store.name }}</option>
+            {% endfor %}
+            </select>
+
+        </td> 
+        </tbody>
+        </table>
+          <table class="container-pic">
+                 <thead>
+                 <tr>
+
                       <th>
                           Cuisine_ID
                       </th>
-                      <!-- <th>
-                          Desk_no
-                      </th>
+
                       <th>
-                          Store
-                      </th> -->
-                      <th>
-                        name_of_cuisine
+                          Name_of_cuisine
                       </th>
                       
                       <th>
-                          price
+                          Price
+                      </th>
+
+                      <th>
+                          Description
+                      </th>
+
+                      <th>
+                          Amount
                       </th>
                       <th>
-                          description
+                          Action
                       </th>
-                      <!-- <th>
-                            amount
-                        </th> -->
-                        <!-- <th>
-                            action
-                        </th> -->
+
                   </tr>
                   </thead>
+
                   <tbody>
                   {% for menu in menus %}
                   <tr>
-                      <form action="#" method="POST">
-                                <td>
-                                    {{menu.id}}
-                                </td>
+                     
+                        <td>
+                            {{menu.id}}
+                        </td>
                                 
                         <td>
-                      <label >
-                          {{menu.name_of_cuisine}}
-                      </label>
+                            <label >
+                                {{menu.name_of_cuisine}}
+                            </label>
                         </td>
+
                         <td>
                             <label >
                                         {{menu.price}}
                             </label>
                         </td>
+
                         <td>
-                                <label>
-                                            {{menu.description}}
-                                </label>
+                            <label>
+                                        {{menu.description}}
+                            </label>
                         </td>
                        
-                        <!-- <td>
-                                {% csrf_token %}
-                                <button class="waves-effect waves-light btn" name = "OrderMenu" id="{{ menu.id }}" value="{{ menu.id }}" type="submit">Order</button>
-                        </td> -->
-                    </form>
+                        <td>
+                            <input type="text" id="amount" class="taskName" name="amount" value="1"> 
+                        </td>
+                        <td>
+                            <button id="orderbtn" type="submit" class="waves-effect waves-light btn" onclick="addItems(  {{menu.id}})" name = "OrderMenu">Order</button>
+                        </td>
+                  
                   </tr> 
                   {% endfor %}
                  
                 </tbody>
           </table>
-ORDER HERE
+<!-- ORDER HERE
 <table>
     <thead>
         <tr>
@@ -114,33 +147,35 @@ ORDER HERE
     </thead>
     <tbody>
             <div id = "content">
-                    <!-- {% url 'add_order' %} -->
-                    <!-- action="{% url 'add_order' %}" method="post" -->
-        <!-- <form  accept-charset="utf-8"> -->
+                  
         <tr>
         <td>
-            <!-- {% csrf_token %} -->
+            
             <input type="text" id="desk_no" class="taskName" name="desk_no" required>
+
         </td>
         <td>
-        <!-- {% csrf_token %} -->
-            <select id="store" class="select-management" name="store_select" required>
+        
+            <select id="store" style="cursor:pointer" class="select-management" name="store_select" required>
                 <option class="disabled" value="">Choose a store</option>
             {% for store in stores %}
                 <option class="" value="{{ store.id }}" id="{{ store.id }}">{{ store.name }}</option>
             {% endfor %}
             </select>
+
         </td> 
         
         <td>
                
-                    <select id="menu" class="select-management" name="menu_select" required>
-                        <option class="disabled" value="">Choose a menu</option>
-                    {% for menu in menus %}
-                        <option class="" value="{{ menu.id }}" id="{{ menu.id }}">{{ menu.name_of_cuisine }}</option>
-                    {% endfor %}
-                    </select>
-                </td>  
+            <select id="menu" style="cursor:pointer" class="select-management" name="menu_select" required>
+                <option class="disabled" value="">Choose a menu</option>
+            {% for menu in menus %}
+                <option class="" value="{{ menu.id }}" id="{{ menu.id }}">{{ menu.name_of_cuisine }}</option>
+            {% endfor %}
+            </select>
+
+        </td>  
+
         <td>
             
             <input type="text" id="amount" class="taskName" name="amount" value="1"> 
@@ -148,15 +183,14 @@ ORDER HERE
         
         <td>
         
-        <!-- <button type="button" class="btn btn-primary" data-id="comment_button">Comment</button> -->
-        <!--  -->
+      
         <button id="orderbtn" type="submit" class="waves-effect waves-light btn" onclick="addItems()" name = "OrderMenu">Order</button>
         </td>
         </tr>
-        <!-- </form> -->
+        
         </div>
     </tbody>       
-</table>     
+</table>      -->
   
 What you have ordered 
 
@@ -172,7 +206,7 @@ What you have ordered
             <th>amount</th>
 
             <th>price</th>
-<!--<th>time</th>-->
+
             <th>store</th>
 
             <th>desk</th>
@@ -235,7 +269,7 @@ What you have ordered
             
             <td>
                
-                    <button class="waves-effect waves-light btn deleteBtn" data-id="${id}">Remove</button>
+                    <button class="waves-effect waves-light btn deleteBtn" onclick="deleteOrders(this)" data-id="{{order.id}}">Remove</button>
    
                 
                 <!-- <i name="remove_order" id={{order.id}}></i> -->
