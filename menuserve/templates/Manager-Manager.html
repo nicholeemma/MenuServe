@@ -39,7 +39,7 @@
             </div>
             <div class="col s4">
                 <p id="loginfo">
-                    Hi, Nichole. Start to manage  managers now.
+                    Hi, {{request.user}}. Start to manage  managers now.
                    </p>
                    {% csrf_token %}
                 <p class="error_msg">{{show}}</p>

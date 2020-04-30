@@ -34,7 +34,7 @@
             </div>
             <div class="col s4">
                 <p id="loginfo">
-                    Hi, Nichole. Start to manage employees now.
+                    Hi, {{request.user}}. Start to manage employees now.
                 </p>
                  {% csrf_token %}
                 <p class="error_msg">{{show}}</p>
