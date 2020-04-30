@@ -8,13 +8,17 @@
         <form method="post" action="/">
                         
             <a href="{% url 'index' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a>
+            {% if request.user.is_superuser %}
             <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="mainbtn" >Main</a>
+            {% endif %}
         </form>
 {% endblock %}
 
         {% block content %}
         {% csrf_token %}
-        
+        <p>
+            Picture display for menus, click here to hide
+        </p>
                         <div class="container-pic">
                                 {% for menu in menus %}
                                 <div class="single-container-pic-order" style="float: right">
