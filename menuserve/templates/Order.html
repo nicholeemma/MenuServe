@@ -17,9 +17,9 @@
         {% block content %}
         {% csrf_token %}
         <p>
-            Picture display for menus, click here to hide
+            Picture display for menus, click here to <button type="button" onclick="hide()">hide</button>
         </p>
-                        <div class="container-pic">
+                        <div class="container-pic" id="container-pic1">
                                 {% for menu in menus %}
                                 <div class="single-container-pic-order" style="float: right">
                                         {% load static %}
@@ -32,7 +32,8 @@
                                                 {{menu.name_of_cuisine}}
                                             </div>
                                         </div> 
-                                </div>{% endfor%}
+                                </div>
+                                {% endfor%}
                         </div>
                                
                                 <br>
