@@ -19,9 +19,9 @@ function addItems(menuid) {
   
     var data = {};
     var desk_no = document.getElementById("desk_no").value;
-    var amount = document.getElementById("amount").value;
+    //amount = 1;
     console.log(desk_no);
-    console.log(amount);
+    // console.log(amount);
     // desk_no: $("input[name=desk_no]").val(),
     var  storeselect=document.getElementById("store");
               
@@ -38,7 +38,7 @@ function addItems(menuid) {
     data['desk_no'] = desk_no;
     data['store'] = storeselectid;
     data['name_of_cuisine'] = meuselectid;
-    data['amount'] = amount;
+    data['amount'] = 1;
     data['status'] = "pending";
     console.log("data to be sent to server: " + data);
 
@@ -74,7 +74,7 @@ $.ajax({
             </td>
             <td>${name_of_cuisine}
             </td>
-            <td>${amount}
+            <td>1
             </td>
             <td>
             ${price}
