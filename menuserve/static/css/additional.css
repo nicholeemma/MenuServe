@@ -1,6 +1,14 @@
 /*Reference: 
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_fade
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar2*/
+
+#searchline {
+  width: 70%;
+}
+#btn-search {
+  float:right;
+  margin-top: 5px;
+}
 .deleteBtn{
   color: red
 }

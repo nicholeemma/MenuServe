@@ -103,12 +103,12 @@ DATABASES = {
     'default' :{
         'ENGINE':'django.db.backends.postgresql',
         # 'NAME': os.environ['DBNAME'],
-        'NAME': 'menu1',
+        'NAME': 'dbmenuserve',
         # 'HOST': os.environ['DBHOST'],
         # 'USER': os.environ['DBUSER'],
         # 'PASSWORD':os.environ['DBPASS'],
-        'HOST': 'postgreshw6jiayueya.postgres.database.azure.com',
-        'USER': 'jiayueya@postgreshw6jiayueya',
+        'HOST': 'menuservepostgresql.postgres.database.azure.com',
+        'USER': 'jiayueya@menuservepostgresql',
         'PASSWORD':'sasuke?1',
         'OPTIONS':{
             'sslmode':'require'
