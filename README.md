@@ -1,33 +1,40 @@
-
-### Name: Jiayue Yang   Course: 17637 Web Application
-
-## *Serverl things to notice*
-
-## I would like to use 2 grace days for this homework6.
-Reference:
-https://docs.djangoproject.com/en/2.2/topics/testing/overview/#running-tests
-1. enabledhostnames:
-"http://hw6jiayueyamenuserve.azurewebsites.net/"
-
-
-'NAME': 'menu1',
-'HOST': 'postgreshw6jiayueya.postgres.database.azure.com',
-'USER': 'jiayueya@postgreshw6jiayueya',
-'PASSWORD':'sasuke?1',
-
-
-2. Because I mostly used "render", which cannot applied reverse url resoluton. I remained some orginal pratices in render. I have already applied reverse url resolution in "redirect" and the links in HTML files.
-
-3. There are "search" and filter functions at pages, they are not ready to work.
-
-4. I created three groups in admin. 
+# Menuserve(Web application) 
+is my independent course project for 17-437 / 17-637 at Carnegie Mellon University. 
 <br>
-One is customer, users who register will be defaultly categorized as customers. They have the permission to order. They can add orders and delete orders, and they can see the status of order in order page. They can only see the orders made by themselves. Second group is empployee, they have the permissions to add/update/delete orders. Third group is manager, they have the permissions to add/update/delete orders, add/update/delete stores, employee and users.
+It is basically a restaurant information management system for customers to order and for managers to manage employees.
+## Attention!!!
+If you are having this course right now, please do not copy paste my code directly, or you will get failed.
+<br>
+## Link & Code
+
+<BR>
+  <b>http://menuservejiayueyaapp.azurewebsites.net/</b>
+<br>
+The final version of source code is in hw6_deployment branch. More readme and instructions can be found in hw6_deployment branch.
+  <br>
+  
+## Instructions
+  - Registration and Login
+  - Authentication (Accessibility of functions is role-based)
+  - Menu management (Update, delete, add) (Support image uploading)
+  - Employee management (Manager, employee, store information management) (The relationship between employees and stores is many to many)
+  - Order Management
+  - View orders (Automatic refreshing)
+  
+  <br>
+I created three groups in admin. 
+<br>
+One is customer, users who register will be defaultly categorized as customers. They have the permission to order. They can add orders and delete orders, and they can see the status of order in order page. They can only see the orders made by themselves. 
+<br>
+Second group is employee, they have the permissions to add/update/delete orders. 
+<br>
+Third group is manager, they have the permissions to add/update/delete orders, add/update/delete stores, employee and users.
+I have created a manager account initially. If you want its credentials, please email me (jiayueya@andrew.cmu.edu).
  
 
-## *Using the webiste*
+## Instructions
 
-1. You can first log in with the superuser account (Name:cmuwebapps-manager, Password:WebAppsIsTheBestCourse). You are entitled to add(update/delete) menu, add(update/delete) store, add(update/delete) user, add(update/delete) employee. You can first go to manageuser page, change some roles of users, and add them to manager, employee and assign store to them. (First create manager, then store, then employee)
+1. You can first log in with the superuser account. You are entitled to add(update/delete) menu, add(update/delete) store, add(update/delete) user, add(update/delete) employee. You can first go to manageuser page, change some roles of users, and add them to manager, employee and assign store to them. (First create manager, then store, then employee)
 
 2. In main page, you are supposed to see the pictures of menus, when the mouse moves over the pictures, the according prices will show up. The newly added pictures will be shown here as well. This is the page for visitors, who are not logged in yet.
 
@@ -37,8 +44,8 @@ One is customer, users who register will be defaultly categorized as customers. 
 <br>Choose the store and fill in desk_no,Click button "Order", a certain dish will be chosen. The chosen ones will be displayed at below. You can delete whichever you want. You can only see the orders made by yourself. This is the page for customers to order.
 The above funtion is applied as Ajax. You can also go to "main" -->"order"-->"ajax order"(at the top of page). This page shows all the orders and reload every 5 seconds with ajax.
 For checking Ajax function:
-Add orders here: http://hw6jiayueyamenuserve.azurewebsites.net/Order/
-Page will reload automatically: http://hw6jiayueyamenuserve.azurewebsites.net/Submitted-Order-ajax/   show the orders made last 5 seconds
+Add orders here: http://menuservejiayueyaapp.azurewebsites.net//Order/
+Page will reload automatically: http://menuservejiayueyaapp.azurewebsites.net/Submitted-Order-ajax/   show the orders made last 5 seconds
 
 5. If you are an employee or a manager, you will be redirect to the order page as well. There is button at the top right,"Main", you can click and enter into main page for management. If you are a customer, you cannot manage.
 
@@ -54,10 +61,11 @@ Manager group and Manager class are different things.
 
 9. How to create employees. 
 <br>First, in manager-user page, change the role of a user into employee.
-At manager-employee page, you will be all users in the "employee" group you can add a new employee or add an existing employee to another existing store. The details will be shown at below.
 
-10. The order of adding records is firstly adding a manager, then store, then adding employee. The creation of orders can be made after menu records exist.
+## Technology
 
-11. The relationship between managers and stores is one manager can many stores, but one store can only have one manager. The employee can have many stores, but one manager. One record of menu can have many orders.
-
-12. Clicking "log out" button can log out.
+- Python (Django MVC framework)
+- Postgres for Database
+- HTML, CSS(Bootstrap), JavaScript, JQuery(Ajax)
+- CI/CD tool, Azure
+- Git
