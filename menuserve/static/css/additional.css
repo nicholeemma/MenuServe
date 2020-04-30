@@ -77,8 +77,12 @@ img .menu_pic{
   color: #4db6ac; font-size: 24px;text-align: center;
 }
 #logout{
-  float: right; margin-right: 5%;margin-top: 0.5%;
+  float: right; margin-right: 2%;margin-top: 0.5%;
 }
+#mainbtn{
+  float: right; margin-right: 2%;margin-top: 0.5%;
+}
+
 #main1{
  
     float: right; margin-right: 5%;margin-top: 0.5%;

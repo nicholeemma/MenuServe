@@ -30,11 +30,10 @@
             <header class="menu-page-header">
        
                 <div class="grid-example col s12" id="welcomeheadline">
-                    Hi,{{request.user}}
-                      {% block headerbutton %}
-                        {% endblock %}   
-                    Welcome to the Moonlight Restaurant
-                   
+                   {% block headerbutton %}
+                   {% endblock %}   
+                   Hi,{{request.user}}   
+                   Welcome to the Moonlight Restaurant
                 </div>
         
         </header>
