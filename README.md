@@ -2,8 +2,7 @@
 is my independent course project for 17-437 / 17-637 at Carnegie Mellon University. 
 <br>
 It is basically a restaurant information management system for customers to order and for managers to manage employees.
-## Attention!!!
-If you are having this course right now, please do not copy paste my code directly, or you will get failed.
+
 <br>
 ## Link & Code
 
@@ -13,6 +12,14 @@ If you are having this course right now, please do not copy paste my code direct
 The final version of source code is in hw6_deployment branch. More readme and instructions can be found in hw6_deployment branch.
   <br>
   
+## Technology
+
+- Python (Django MVC framework)
+- Postgres for Database
+- HTML, CSS(Bootstrap), JavaScript, JQuery(Ajax)
+- CI/CD tool, Azure
+- Git
+
 ## Instructions
   - Registration and Login
   - Authentication (Accessibility of functions is role-based)
@@ -62,10 +69,8 @@ Manager group and Manager class are different things.
 9. How to create employees. 
 <br>First, in manager-user page, change the role of a user into employee.
 
-## Technology
 
-- Python (Django MVC framework)
-- Postgres for Database
-- HTML, CSS(Bootstrap), JavaScript, JQuery(Ajax)
-- CI/CD tool, Azure
-- Git
+
+
+## Attention!!!
+If you are having this course right now, please do not copy paste my code directly, or you will get failed.
