@@ -7,7 +7,7 @@
            
             <a href="{% url 'index' %}" class="waves-effect waves-light btn" id="logout" >Log Out</a>
             <a href="{% url 'managermain' %}" class="waves-effect waves-light btn" id="mainbtn" >Main</a>
-            <a href="{% url 'manageorder_ajax' %}" class="waves-effect waves-light btn" id="ajax" >Ajax order</a>
+            
         </form>
         {% endblock %}
         
@@ -16,61 +16,28 @@
                 <p class="error_msg">{{show}}</p>
        
             <p id="headlineofmanagement">
+                <a href="{% url 'manageorder_ajax' %}" class="waves-effect waves-light btn" id="ajax" >View all orders</a>
                 <b>
                 Records of Orders
               </b>
+              <br>
               </p>
-<!--
-          <div class="row" id="table-margin-top">
-            <div class="col s4">
-                <form class="search-bar-management">
-                    <input type="text" name="search" value="Search cuisine here" >
-        
-                </form>
-            </div>
-            <div class="col s2">
-            <form >
-                <select class="select-management" required>
-                      <option >Completed</option>
-                      <option >Pending</option>
-                </select>
-            </form>
-            </div>
-            <div class="col s2">
-            <form >
-                <select class="select-management" required>
-                     <option >Store-A</option>
-                     <option >Store-B</option>
-                     <option >Store-C</option>
-                     <option >Store-D</option>
-                </select>
-            </form>
-            </div>
-            <div class="col s4">
-                <p id="loginfo" >
-                    Hi, Jess. Start to manage orders now.
-                   </p>
-                   {% csrf_token %}
-                <p class="error_msg">{{show}}</p>
-                    
-            </div>
-        </div>
-    -->
+
             <div class="record-table">
         <table class="striped" id="order_">
             <thead>
               <tr>
-                  <th>Order No.</th>
-                  <th>CustomerID</th>
-                  <th>Desk No.</th>
-                  <th>Name of Cuisine</th>
-                  <th>Amount</th>
-                  <th>Status</th>
+                  <th class="tb-s">Order No.</th>
+                  <th class="tb-s">CustomerID</th>
+                  <th class="tb-s">Desk No.</th>
+                  <th class="tb-b">Name of Cuisine</th>
+                  <th class="tb-s">Amount</th>
+                  <th class="tb-b">Status</th>
                   
-                  <th>Price</th>
-                  <th>Store</th>
-                  <th>Action</th>
-                  <th>Action</th>
+                  <th class="tb-s">Price</th>
+                  <th class="tb-s">Store</th>
+                  <th class="tb-s">Action</th>
+                  <th class="tb-s">Action</th>
               </tr>
             </thead>
     

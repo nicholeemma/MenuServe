@@ -60,12 +60,27 @@ img .menu_pic{
   height: 45%; margin-bottom: 5%; margin-top:5%;
 }
 .record-table{
-  overflow-y: scroll; margin-bottom: 5%;
+  /* overflow-y: scroll;  */
+  margin-bottom: 5%;
 }
 .table-margin-top{
   margin-top:3%;
 }
-
+.tb-m{
+  width: 30%;
+}
+#btn-search-employee{
+  float: right;
+}
+#ip-searchcontent-employee{
+  width: 60%;
+}
+#btn-select-store{
+  float: right;
+}
+#select-employee {
+  width: 60%;
+}
 .select-drop-down-box{
   display:table; width: 30%; float:right; height: 5%;
   color: gray; margin-left: 2%;
@@ -127,6 +142,15 @@ img .menu_pic{
     overflow-y: scroll;
     height: 500px;
        
+}
+.tb-s {
+  width: 8%;
+}
+.tb-b {
+  width: 14%;
+}
+#ajax {
+  float: right;
 }
 .single-container-pic{
     
