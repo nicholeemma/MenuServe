@@ -1,4 +1,4 @@
-# Menuserve(Web application) 
+# MenuServe(Web application) 
 is my independent course project for 17-437 / 17-637 at Carnegie Mellon University. 
 <br>
 It is basically a restaurant information management system for customers to order and for managers to manage employees.
@@ -61,9 +61,7 @@ Third group is manager, they have the permissions to add/update/delete orders, a
 
 3. How to create managers.  
 
-   <br>First, in [Manager-user](http://menuservejiayueyaapp.azurewebsites.net/Manager-User/)
-
-   , change the role of a user into manager class. At [Manager-manager](http://menuservejiayueyaapp.azurewebsites.net/Manager-Manager/ )
+   First, in [Manager-user](http://menuservejiayueyaapp.azurewebsites.net/Manager-User/), change the role of a user into manager class. At [Manager-manager](http://menuservejiayueyaapp.azurewebsites.net/Manager-Manager/ )
 
     you will see all users in the "manager" group, enter in the gender, and click "Add", after that a manager is created successfully.  Manager group and Manager class are different things.
 
@@ -75,16 +73,14 @@ Third group is manager, they have the permissions to add/update/delete orders, a
 
    A store can only have one manager, one manager can manage multiple stores.
 
-6. How to create employees. <br>
+6. How to create employees. 
 
-    In manager-user page, change the role of a user into employee. Then go to [manager-employee](http://menuservejiayueyaapp.azurewebsites.net/Manager-Employee/ )
-
-   ,you will see names from employee group, you have to assign a manager and a store to this employee, after that an employee is successfully added to the restaurant. You cannot add an existing employee second time or error message will show up. After adding, the information will show up below, you can change manager or delete this employee from restaurant. In addition, an employee can serve multiple stores, so you can add a store or remove a store to an assigned employee.
+    In manager-user page, change the role of a user into employee. Then go to [manager-employee](http://menuservejiayueyaapp.azurewebsites.net/Manager-Employee/ ),you will see names from employee group, you have to assign a manager and a store to this employee, after that an employee is successfully added to the restaurant. You cannot add an existing employee second time or error message will show up. After adding, the information will show up below, you can change manager or delete this employee from restaurant. In addition, an employee can serve multiple stores, so you can add a store or remove a store to an assigned employee.
 
 7. Click "Registration" , you can register as a customer. When the register is done, your default role is customer. You can view the menu and order.
 
 8. When you have done the register, you will be automatically redirect to order.
-  <br>Choose the store and fill in desk_no, order whatever dish you want. The chosen ones will be displayed at below using Ajax without refreshing. You can delete whichever you want. You can only see the orders made by yourself. This is the page for customers to order.
+  Choose the store and fill in desk_no, order whatever dish you want. The chosen ones will be displayed at below using Ajax without refreshing. You can delete whichever you want. You can only see the orders made by yourself. This is the page for customers to order.
 
 9. If you are an employee or a manager. You can see all the submitted orders. You can also go to "main" -->"order"-->"ajax order"(at the top of page). This page shows all the orders and reload every 5 seconds with ajax.
   For checking Ajax function:
