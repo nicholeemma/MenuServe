@@ -4,7 +4,8 @@ is my independent course project for 17-437 / 17-637 at Carnegie Mellon Universi
 It is basically a restaurant information management system for customers to order and for managers to manage employees.
 
 <br>
-## Link, Code
+
+## Link
 
 <BR>
   <b>http://menuservejiayueyaapp.azurewebsites.net/</b>
