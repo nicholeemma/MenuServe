@@ -9,3 +9,7 @@ function hide() {
 
 
 }
+
+function instruct() {
+    window.open("https://github.com/nicholeemma/MenuServe");
+}
