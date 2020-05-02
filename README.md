@@ -10,7 +10,7 @@ It is basically a restaurant information management system for customers to orde
   <b>http://menuservejiayueyaapp.azurewebsites.net/</b>
 <br>
 The final version of source code is in hw6_deployment branch. More readme and instructions can be found in hw6_deployment branch.
-  <br>
+ <br>
 
 ## Technology
 
@@ -29,7 +29,7 @@ The final version of source code is in hw6_deployment branch. More readme and in
 
   - Employee management (Manager, employee, store information management)
 
-    <br> (The relationship between employees and stores is many to many)
+     (The relationship between employees and stores is many to many)
 
   - Order Management
 
