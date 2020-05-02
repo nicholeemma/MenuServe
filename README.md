@@ -53,23 +53,17 @@ Third group is manager, they have the permissions to add/update/delete orders, a
 
 2. You can first log in with the superuser account. 
 
-   <br>(I have pre-created a manager account for testing. The username is *superuser*, password is *superuser*.) 
+   (I have pre-created a manager account for testing. The username is *superuser*, password is *superuser*.) 
 
-   <br>You are entitled to add(update/delete) menu, add(update/delete) store, add(update/delete) user, add(update/delete) employee. <br>When you are logged in as a manager(superuser), you can see a "main" button at the right top. (Customers won't be able to see this buttion)You can go to 
+   You are entitled to add(update/delete) menu, add(update/delete) store, add(update/delete) user, add(update/delete) employee.
 
-   [All-user]: http://menuservejiayueyaapp.azurewebsites.net/Manager-User/
-
-   , change some roles of users, and add them to manager, employee and assign store to them. (First create manager, then store, then employee)
+   When you are logged in as a manager(superuser), you can see a "main" button at the right top. (Customers won't be able to see this button) You can go to [All-User](http://menuservejiayueyaapp.azurewebsites.net/Manager-User/), change some roles of users, and add them to manager, employee and assign store to them. (First create manager, then store, then employee)
 
 3. How to create managers.  
 
-   <br>First, in 
+   <br>First, in [Manager-user](http://menuservejiayueyaapp.azurewebsites.net/Manager-User/)
 
-   [manager-user]: http://menuservejiayueyaapp.azurewebsites.net/Manager-User/
-
-   , change the role of a user into manager class. At 
-
-   [manager-manager]: http://menuservejiayueyaapp.azurewebsites.net/Manager-Manager/
+   , change the role of a user into manager class. At [Manager-manager](http://menuservejiayueyaapp.azurewebsites.net/Manager-Manager/ )
 
     you will see all users in the "manager" group, enter in the gender, and click "Add", after that a manager is created successfully.  Manager group and Manager class are different things.
 
@@ -77,19 +71,13 @@ Third group is manager, they have the permissions to add/update/delete orders, a
 
 5. How to create store
 
-   In 
-
-   [Manager-store]: http://menuservejiayueyaapp.azurewebsites.net/Manager-Store/
-
-   , fill in name, location and assign a manager to this store.
+   In [Manager-store](http://menuservejiayueyaapp.azurewebsites.net/Manager-Store/ ), fill in name, location and assign a manager to this store.
 
    A store can only have one manager, one manager can manage multiple stores.
 
 6. How to create employees. <br>
 
-    In manager-user page, change the role of a user into employee. Then go to 
-
-   [manager-employee]: http://menuservejiayueyaapp.azurewebsites.net/Manager-Employee/
+    In manager-user page, change the role of a user into employee. Then go to [manager-employee](http://menuservejiayueyaapp.azurewebsites.net/Manager-Employee/ )
 
    ,you will see names from employee group, you have to assign a manager and a store to this employee, after that an employee is successfully added to the restaurant. You cannot add an existing employee second time or error message will show up. After adding, the information will show up below, you can change manager or delete this employee from restaurant. In addition, an employee can serve multiple stores, so you can add a store or remove a store to an assigned employee.
 
@@ -108,8 +96,6 @@ Third group is manager, they have the permissions to add/update/delete orders, a
 11. For the order page, employee or the manager will only be seen the orders made from the stores they are belong to. If the employ or the manager has not assigned a store, it will show mistakes.
 
     
-
-
 
 
 ## Attention!!!
