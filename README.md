@@ -11,63 +11,103 @@ It is basically a restaurant information management system for customers to orde
 <br>
 The final version of source code is in hw6_deployment branch. More readme and instructions can be found in hw6_deployment branch.
   <br>
-  
+
 ## Technology
 
 - Python (Django MVC framework)
-- Postgres for Database
+- Postgres as Database
 - HTML, CSS(Bootstrap), JavaScript, JQuery(Ajax)
-- CI/CD tool, Azure
+- CI/CD tool, Azure deployment
 - Git
 
-## Instructions
+## Main Functions
   - Registration and Login
+
   - Authentication (Accessibility of functions is role-based)
+
   - Menu management (Update, delete, add) (Support image uploading)
-  - Employee management (Manager, employee, store information management) (The relationship between employees and stores is many to many)
+
+  - Employee management (Manager, employee, store information management)
+
+    <br> (The relationship between employees and stores is many to many)
+
   - Order Management
+
   - View orders (Automatic refreshing)
-  
+
+  - Input checking (illegal input will render error message)
+
   <br>
 I created three groups in admin. 
 <br>
-One is customer, users who register will be defaultly categorized as customers. They have the permission to order. They can add orders and delete orders, and they can see the status of order in order page. They can only see the orders made by themselves. 
+One is customer, users who register will be default categorized as customers. They have the permission to order. They can add orders and delete orders, and they can see the status of order in order page. They can only see the orders made by themselves. 
 <br>
 Second group is employee, they have the permissions to add/update/delete orders. 
 <br>
 Third group is manager, they have the permissions to add/update/delete orders, add/update/delete stores, employee and users.
-I have created a manager account initially. If you want its credentials, please email me (jiayueya@andrew.cmu.edu).
- 
+
 
 ## Instructions
 
-1. You can first log in with the superuser account. You are entitled to add(update/delete) menu, add(update/delete) store, add(update/delete) user, add(update/delete) employee. You can first go to manageuser page, change some roles of users, and add them to manager, employee and assign store to them. (First create manager, then store, then employee)
+1. In main page, you are supposed to see the pictures of menus, when the mouse moves over the pictures, the according prices will show up. The newly added pictures will be shown here as well. This is the page for visitors, who are not logged in yet.
 
-2. In main page, you are supposed to see the pictures of menus, when the mouse moves over the pictures, the according prices will show up. The newly added pictures will be shown here as well. This is the page for visitors, who are not logged in yet.
+2. You can first log in with the superuser account. 
 
-3. Click "Registration" , you can register as a customer. When the register is done, your default role is customer.
+   <br>(I have pre-created a manager account for testing. The username is *superuser*, password is *superuser*.) 
 
-4. When you have done the register, you will be automatically redirect to order.
-<br>Choose the store and fill in desk_no,Click button "Order", a certain dish will be chosen. The chosen ones will be displayed at below. You can delete whichever you want. You can only see the orders made by yourself. This is the page for customers to order.
-The above funtion is applied as Ajax. You can also go to "main" -->"order"-->"ajax order"(at the top of page). This page shows all the orders and reload every 5 seconds with ajax.
-For checking Ajax function:
-Add orders here: http://menuservejiayueyaapp.azurewebsites.net//Order/
-Page will reload automatically: http://menuservejiayueyaapp.azurewebsites.net/Submitted-Order-ajax/   show the orders made last 5 seconds
+   <br>You are entitled to add(update/delete) menu, add(update/delete) store, add(update/delete) user, add(update/delete) employee. <br>When you are logged in as a manager(superuser), you can see a "main" button at the right top. (Customers won't be able to see this buttion)You can go to 
 
-5. If you are an employee or a manager, you will be redirect to the order page as well. There is button at the top right,"Main", you can click and enter into main page for management. If you are a customer, you cannot manage.
+   [All-user]: http://menuservejiayueyaapp.azurewebsites.net/Manager-User/
 
-6. In manager-main page, there are menu, employee, manager and store buttons. Click each of them, will lead you to the according page to manage. The page is for managers.
+   , change some roles of users, and add them to manager, employee and assign store to them. (First create manager, then store, then employee)
 
-7. For the menu page, you can enter in information and add a dish. You can upload a picture, the picture itself and url will show up. The added dish will be shown up at below, meanwhile you can edit the record of dishes and delete one by one. Attention: the drag down box will be filled in as well, otherwise the page will render mistake alert in red.
+3. How to create managers.  
 
-8. For the order page, employee or the manager will only be seen the orders made from the stores they are belong to. If the employ or the manager has not assigned a store, it will show mistakes.
+   <br>First, in 
 
-8. How to create managers. 
-<br>First, in manager-user page, change the role of a user into manager. At manager-manager page, you will be all users in the "manager" group, enter in the gender, and click "Add". 
-Manager group and Manager class are different things.
+   [manager-user]: http://menuservejiayueyaapp.azurewebsites.net/Manager-User/
 
-9. How to create employees. 
-<br>First, in manager-user page, change the role of a user into employee.
+   , change the role of a user into manager class. At 
+
+   [manager-manager]: http://menuservejiayueyaapp.azurewebsites.net/Manager-Manager/
+
+    you will see all users in the "manager" group, enter in the gender, and click "Add", after that a manager is created successfully.  Manager group and Manager class are different things.
+
+4. In manager-main page, there are menu, employee, manager and store buttons. Click each of them, will lead you to the according page to manage. The page is for managers.
+
+5. How to create store
+
+   In 
+
+   [Manager-store]: http://menuservejiayueyaapp.azurewebsites.net/Manager-Store/
+
+   , fill in name, location and assign a manager to this store.
+
+   A store can only have one manager, one manager can manage multiple stores.
+
+6. How to create employees. <br>
+
+    In manager-user page, change the role of a user into employee. Then go to 
+
+   [manager-employee]: http://menuservejiayueyaapp.azurewebsites.net/Manager-Employee/
+
+   ,you will see names from employee group, you have to assign a manager and a store to this employee, after that an employee is successfully added to the restaurant. You cannot add an existing employee second time or error message will show up. After adding, the information will show up below, you can change manager or delete this employee from restaurant. In addition, an employee can serve multiple stores, so you can add a store or remove a store to an assigned employee.
+
+7. Click "Registration" , you can register as a customer. When the register is done, your default role is customer. You can view the menu and order.
+
+8. When you have done the register, you will be automatically redirect to order.
+  <br>Choose the store and fill in desk_no, order whatever dish you want. The chosen ones will be displayed at below using Ajax without refreshing. You can delete whichever you want. You can only see the orders made by yourself. This is the page for customers to order.
+
+9. If you are an employee or a manager. You can see all the submitted orders. You can also go to "main" -->"order"-->"ajax order"(at the top of page). This page shows all the orders and reload every 5 seconds with ajax.
+  For checking Ajax function:
+  Add orders here: http://menuservejiayueyaapp.azurewebsites.net/Order/
+  Page will reload automatically: http://menuservejiayueyaapp.azurewebsites.net/Submitted-Order-ajax/   show the orders made last 5 seconds
+
+10. For the menu page, you can enter in information and add a dish. You can upload a picture, the picture itself and the url will show up. The added dish will be shown up at below, meanwhile you can edit the record of dishes and delete one by one. Attention: the drag down box will be filled in as well, otherwise the page will render mistake alert in red.
+
+11. For the order page, employee or the manager will only be seen the orders made from the stores they are belong to. If the employ or the manager has not assigned a store, it will show mistakes.
+
+    
 
 
 
