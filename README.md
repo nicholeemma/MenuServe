@@ -4,12 +4,12 @@ is my independent course project for 17-437 / 17-637 at Carnegie Mellon Universi
 It is basically a restaurant information management system for customers to order and for managers to manage employees.
 
 <br>
-## Link & Code
+## Link, Code
 
 <BR>
   <b>http://menuservejiayueyaapp.azurewebsites.net/</b>
 <br>
-The final version of source code is in hw6_deployment branch. More readme and instructions can be found in hw6_deployment branch.
+The final version of source code is in [deployment](https://github.com/nicholeemma/MenuServe/tree/deployment) branch. 
  <br>
 
 ## Technology
